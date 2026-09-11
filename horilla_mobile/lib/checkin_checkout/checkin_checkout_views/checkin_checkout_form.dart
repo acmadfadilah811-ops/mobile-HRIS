@@ -109,6 +109,24 @@ class _CheckInCheckOutFormPageState extends State<CheckInCheckOutFormPage> {
         getLoginEmployeeRecord(),
         getCheckIn(),
       ]);
+      // The server (via getCheckIn() above) is the authority on whether the
+      // employee is actually clocked in -- the locally cached
+      // `clockCheckedIn` flag (set by _loadClockState() from
+      // SharedPreferences) can go stale whenever the app's local storage
+      // gets out of sync with reality: app reinstalled, storage cleared,
+      // the process killed mid-session without a clean clock-out, etc.
+      // Previously the server response (`clockIn`) was only used below to
+      // seed the stopwatch display, never to correct `clockCheckedIn`
+      // itself -- so a stale "false" left the Clock In button showing even
+      // though the employee (and the server) still considered them clocked
+      // in, with no way to reach Clock Out. Reconcile it here.
+      bool serverCheckedIn = clockIn != null && clockIn != 'false';
+      if (serverCheckedIn != clockCheckedIn) {
+        clockCheckedIn = serverCheckedIn;
+        final prefs = await SharedPreferences.getInstance();
+        await prefs.setBool('clockCheckedIn', serverCheckedIn);
+      }
+
       // Initialize stopwatch with server duration if checked in
       accumulatedDuration = await _loadAccumulatedDuration();
       if (clockIn != 'false' && duration != null) {
