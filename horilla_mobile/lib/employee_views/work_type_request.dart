@@ -518,7 +518,7 @@ class _WorkTypeRequestPageState extends State<WorkTypeRequestPage> {
                     Image.asset(imagePath),
                     const SizedBox(height: 16),
                     const Text(
-                      "WorkType Approved Successfully",
+                      "Tipe Kerja Berhasil Disetujui",
                       style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
@@ -561,7 +561,7 @@ class _WorkTypeRequestPageState extends State<WorkTypeRequestPage> {
                     Image.asset(imagePath),
                     const SizedBox(height: 16),
                     const Text(
-                      "WorkType Updated Successfully",
+                      "Tipe Kerja Berhasil Diperbarui",
                       style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
@@ -604,7 +604,7 @@ class _WorkTypeRequestPageState extends State<WorkTypeRequestPage> {
                     Image.asset(imagePath),
                     const SizedBox(height: 16),
                     const Text(
-                      "WorkType Rejected Successfully",
+                      "Tipe Kerja Berhasil Ditolak",
                       style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
@@ -778,7 +778,7 @@ class _WorkTypeRequestPageState extends State<WorkTypeRequestPage> {
                     Image.asset(imagePath),
                     const SizedBox(height: 16),
                     const Text(
-                      "WorkType Created Successfully",
+                      "Tipe Kerja Berhasil Dibuat",
                       style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
@@ -821,7 +821,7 @@ class _WorkTypeRequestPageState extends State<WorkTypeRequestPage> {
                     Image.asset(imagePath),
                     const SizedBox(height: 16),
                     const Text(
-                      "WorkType Deleted Successfully",
+                      "Tipe Kerja Berhasil Dihapus",
                       style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
@@ -864,7 +864,7 @@ class _WorkTypeRequestPageState extends State<WorkTypeRequestPage> {
                     Image.asset(imagePath),
                     const SizedBox(height: 16),
                     const Text(
-                      "WorkType Updated Successfully",
+                      "Tipe Kerja Berhasil Diperbarui",
                       style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
@@ -940,7 +940,7 @@ class _WorkTypeRequestPageState extends State<WorkTypeRequestPage> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       const Text(
-                        "Edit WorkType",
+                        "Edit Tipe Kerja",
                         style: TextStyle(
                             fontWeight: FontWeight.bold,
                             color: Colors.black,
@@ -975,7 +975,7 @@ class _WorkTypeRequestPageState extends State<WorkTypeRequestPage> {
                               height:
                               MediaQuery.of(context).size.height * 0.03),
                           const Text(
-                            'Employee',
+                            'Karyawan',
                             style: TextStyle(color: Colors.black),
                           ),
                           SizedBox(
@@ -985,7 +985,7 @@ class _WorkTypeRequestPageState extends State<WorkTypeRequestPage> {
                             textFieldConfiguration: TextFieldConfiguration(
                               controller: _typeAheadEditController,
                               decoration: InputDecoration(
-                                labelText: 'Search Employee',
+                                labelText: 'Cari Karyawan',
                                 contentPadding: const EdgeInsets.symmetric(
                                     horizontal: 10.0),
                                 labelStyle: TextStyle(color: Colors.grey[350]),
@@ -1015,7 +1015,7 @@ class _WorkTypeRequestPageState extends State<WorkTypeRequestPage> {
                             noItemsFoundBuilder: (context) => const Padding(
                               padding: EdgeInsets.all(8.0),
                               child: Text(
-                                'No Employees Found',
+                                'Karyawan Tidak Ditemukan',
                                 style: TextStyle(fontSize: 16),
                               ),
                             ),
@@ -1039,7 +1039,7 @@ class _WorkTypeRequestPageState extends State<WorkTypeRequestPage> {
                               height:
                               MediaQuery.of(context).size.height * 0.03),
                           const Text(
-                            'Requesting Work Type',
+                            'Permintaan Tipe Kerja',
                             style: TextStyle(color: Colors.black),
                           ),
                           SizedBox(
@@ -1049,7 +1049,7 @@ class _WorkTypeRequestPageState extends State<WorkTypeRequestPage> {
                             textFieldConfiguration: TextFieldConfiguration(
                               controller: _typeAheadEditWorkTypeController,
                               decoration: InputDecoration(
-                                labelText: 'Search Work Type',
+                                labelText: 'Cari Tipe Kerja',
                                 contentPadding: const EdgeInsets.symmetric(
                                     horizontal: 10.0),
                                 labelStyle: TextStyle(color: Colors.grey[350]),
@@ -1081,7 +1081,7 @@ class _WorkTypeRequestPageState extends State<WorkTypeRequestPage> {
                             noItemsFoundBuilder: (context) => const Padding(
                               padding: EdgeInsets.all(8.0),
                               child: Text(
-                                'No WorkTypes Found',
+                                'Tipe Kerja Tidak Ditemukan',
                                 style: TextStyle(fontSize: 16),
                               ),
                             ),
@@ -1130,10 +1130,10 @@ class _WorkTypeRequestPageState extends State<WorkTypeRequestPage> {
                             },
                             decoration: InputDecoration(
                               border: const OutlineInputBorder(),
-                              labelText: 'Choose a Requested Date',
+                              labelText: 'Pilih Tanggal Diminta',
                               labelStyle: TextStyle(color: Colors.grey[350]),
                               errorText: _validateRequestedDate
-                                  ? 'Please Choose a Requested date'
+                                  ? 'Silakan pilih Tanggal Diminta'
                                   : null,
                               contentPadding:
                               const EdgeInsets.symmetric(horizontal: 10.0),
@@ -1168,10 +1168,10 @@ class _WorkTypeRequestPageState extends State<WorkTypeRequestPage> {
                             },
                             decoration: InputDecoration(
                               border: const OutlineInputBorder(),
-                              labelText: 'Choose a Requested Till',
+                              labelText: 'Pilih Diminta Sampai',
                               labelStyle: TextStyle(color: Colors.grey[350]),
                               errorText: _validateRequestedTill
-                                  ? 'Please Choose a Requested Till'
+                                  ? 'Silakan pilih Diminta Sampai'
                                   : null,
                               contentPadding:
                               const EdgeInsets.symmetric(horizontal: 10.0),
@@ -1181,7 +1181,7 @@ class _WorkTypeRequestPageState extends State<WorkTypeRequestPage> {
                               height:
                               MediaQuery.of(context).size.height * 0.03),
                           const Text(
-                            'Description',
+                            'Deskripsi',
                             style: TextStyle(color: Colors.black),
                           ),
                           SizedBox(
@@ -1190,13 +1190,13 @@ class _WorkTypeRequestPageState extends State<WorkTypeRequestPage> {
                           TextField(
                             controller: descriptionSelect,
                             decoration: InputDecoration(
-                              labelText: "Description",
+                              labelText: "Deskripsi",
                               labelStyle: TextStyle(color: Colors.grey[350]),
                               border: const OutlineInputBorder(),
                               contentPadding:
                               const EdgeInsets.symmetric(horizontal: 10.0),
                               errorText: _validateDescription
-                                  ? 'Description cannot be empty'
+                                  ? 'Deskripsi tidak boleh kosong'
                                   : null,
                             ),
                             onChanged: (newValue) {
@@ -1273,7 +1273,7 @@ class _WorkTypeRequestPageState extends State<WorkTypeRequestPage> {
                             ),
                           ),
                         ),
-                        child: const Text('Save',
+                        child: const Text('Simpan',
                             style: TextStyle(color: Colors.white)),
                       ),
                     ),
@@ -1306,7 +1306,7 @@ class _WorkTypeRequestPageState extends State<WorkTypeRequestPage> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       const Text(
-                        "Add WorkType",
+                        "Tambah Tipe Kerja",
                         style: TextStyle(
                             fontWeight: FontWeight.bold,
                             color: Colors.black,
@@ -1341,7 +1341,7 @@ class _WorkTypeRequestPageState extends State<WorkTypeRequestPage> {
                               height:
                               MediaQuery.of(context).size.height * 0.03),
                           const Text(
-                            'Employee',
+                            'Karyawan',
                             style: TextStyle(color: Colors.black),
                           ),
                           SizedBox(
@@ -1351,7 +1351,7 @@ class _WorkTypeRequestPageState extends State<WorkTypeRequestPage> {
                             textFieldConfiguration: TextFieldConfiguration(
                               controller: _typeCreateAheadController,
                               decoration: InputDecoration(
-                                labelText: 'Search Employee',
+                                labelText: 'Cari Karyawan',
                                 labelStyle: TextStyle(color: Colors.grey[350]),
                                 border: const OutlineInputBorder(),
                                 contentPadding: const EdgeInsets.symmetric(
@@ -1381,7 +1381,7 @@ class _WorkTypeRequestPageState extends State<WorkTypeRequestPage> {
                             noItemsFoundBuilder: (context) => const Padding(
                               padding: EdgeInsets.all(8.0),
                               child: Text(
-                                'No Employees Found',
+                                'Karyawan Tidak Ditemukan',
                                 style: TextStyle(fontSize: 16),
                               ),
                             ),
@@ -1405,7 +1405,7 @@ class _WorkTypeRequestPageState extends State<WorkTypeRequestPage> {
                               height:
                               MediaQuery.of(context).size.height * 0.03),
                           const Text(
-                            'Requesting Work Type',
+                            'Permintaan Tipe Kerja',
                             style: TextStyle(color: Colors.black),
                           ),
                           SizedBox(
@@ -1415,13 +1415,13 @@ class _WorkTypeRequestPageState extends State<WorkTypeRequestPage> {
                             textFieldConfiguration: TextFieldConfiguration(
                               controller: _typeAheadCreateWorkTypeController,
                               decoration: InputDecoration(
-                                labelText: 'Search Requesting Work Type',
+                                labelText: 'Cari Permintaan Tipe Kerja',
                                 labelStyle: TextStyle(color: Colors.grey[350]),
                                 border: const OutlineInputBorder(),
                                 contentPadding: const EdgeInsets.symmetric(
                                     horizontal: 10.0),
                                 errorText: _validateWorkType
-                                    ? 'Please Select a Requesting Work Type'
+                                    ? 'Silakan pilih Permintaan Tipe Kerja'
                                     : null,
                               ),
                             ),
@@ -1450,7 +1450,7 @@ class _WorkTypeRequestPageState extends State<WorkTypeRequestPage> {
                             noItemsFoundBuilder: (context) => const Padding(
                               padding: EdgeInsets.all(8.0),
                               child: Text(
-                                'No Requesting WorkTypes Found',
+                                'Permintaan Tipe Kerja Tidak Ditemukan',
                                 style: TextStyle(fontSize: 16),
                               ),
                             ),
@@ -1499,14 +1499,14 @@ class _WorkTypeRequestPageState extends State<WorkTypeRequestPage> {
                             },
                             decoration: InputDecoration(
                               border: const OutlineInputBorder(),
-                              labelText: 'Choose Requested date',
+                              labelText: 'Pilih Tanggal Diminta',
                               labelStyle: TextStyle(color: Colors.grey[350]),
                               contentPadding:
                               const EdgeInsets.symmetric(horizontal: 10.0),
                               errorText: _validateRequestedDate
-                                  ? 'Please select a Requested date'
+                                  ? 'Silakan pilih Tanggal Diminta'
                                   : null,
-                              hintText: 'Select a Requested Date',
+                              hintText: 'Pilih Tanggal Diminta',
                             ),
                           ),
                           SizedBox(
@@ -1538,21 +1538,21 @@ class _WorkTypeRequestPageState extends State<WorkTypeRequestPage> {
                             },
                             decoration: InputDecoration(
                               border: const OutlineInputBorder(),
-                              labelText: 'Choose Requested Till',
+                              labelText: 'Pilih Diminta Sampai',
                               labelStyle: TextStyle(color: Colors.grey[350]),
                               contentPadding:
                               const EdgeInsets.symmetric(horizontal: 10.0),
                               errorText: _validateRequestedTill
-                                  ? 'Please select a Requested Till'
+                                  ? 'Silakan pilih Diminta Sampai'
                                   : null,
-                              hintText: 'Select a Requested Till',
+                              hintText: 'Pilih Diminta Sampai',
                             ),
                           ),
                           SizedBox(
                               height:
                               MediaQuery.of(context).size.height * 0.03),
                           const Text(
-                            'Description',
+                            'Deskripsi',
                             style: TextStyle(color: Colors.black),
                           ),
                           SizedBox(
@@ -1561,13 +1561,13 @@ class _WorkTypeRequestPageState extends State<WorkTypeRequestPage> {
                           TextField(
                             controller: descriptionSelect,
                             decoration: InputDecoration(
-                              labelText: "Description",
+                              labelText: "Deskripsi",
                               labelStyle: TextStyle(color: Colors.grey[350]),
                               border: const OutlineInputBorder(),
                               contentPadding:
                               const EdgeInsets.symmetric(horizontal: 10.0),
                               errorText: _validateDescription
-                                  ? 'Description cannot be empty'
+                                  ? 'Deskripsi tidak boleh kosong'
                                   : null,
                             ),
                             onChanged: (newValue) {
@@ -1693,7 +1693,7 @@ class _WorkTypeRequestPageState extends State<WorkTypeRequestPage> {
                             ),
                           ),
                         ),
-                        child: const Text('Save',
+                        child: const Text('Simpan',
                             style: TextStyle(color: Colors.white)),
                       ),
                     ),
@@ -1846,7 +1846,7 @@ class _WorkTypeRequestPageState extends State<WorkTypeRequestPage> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            'Work Type',
+                            'Tipe Kerja',
                             style: TextStyle(color: Colors.grey.shade700),
                           ),
                           Flexible(
@@ -1864,7 +1864,7 @@ class _WorkTypeRequestPageState extends State<WorkTypeRequestPage> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            'Previous work type',
+                            'Tipe kerja sebelumnya',
                             style: TextStyle(color: Colors.grey.shade700),
                           ),
                           Flexible(
@@ -1882,7 +1882,7 @@ class _WorkTypeRequestPageState extends State<WorkTypeRequestPage> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            'Requested date',
+                            'Tanggal Diminta',
                             style: TextStyle(color: Colors.grey.shade700),
                           ),
                           Flexible(
@@ -1900,7 +1900,7 @@ class _WorkTypeRequestPageState extends State<WorkTypeRequestPage> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            'Requested till',
+                            'Diminta Sampai',
                             style: TextStyle(color: Colors.grey.shade700),
                           ),
                           Flexible(
@@ -1918,12 +1918,12 @@ class _WorkTypeRequestPageState extends State<WorkTypeRequestPage> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            'Is permanent work type',
+                            'Tipe kerja permanen',
                             style: TextStyle(color: Colors.grey.shade700),
                           ),
                           Flexible(
                             child: Text(
-                              record['is_permanent_work_type'] ? 'Yes' : 'No',
+                              record['is_permanent_work_type'] ? 'Ya' : 'Tidak',
                               overflow: TextOverflow.ellipsis,
                               maxLines: 1,
                               textAlign: TextAlign.end,
@@ -1959,7 +1959,7 @@ class _WorkTypeRequestPageState extends State<WorkTypeRequestPage> {
                                           MainAxisAlignment.spaceBetween,
                                           children: [
                                             const Text(
-                                              "Confirmation",
+                                              "Konfirmasi",
                                               style: TextStyle(
                                                   fontWeight: FontWeight.bold,
                                                   color: Colors.black),
@@ -1979,7 +1979,7 @@ class _WorkTypeRequestPageState extends State<WorkTypeRequestPage> {
                                               0.1,
                                           child: const Center(
                                             child: Text(
-                                              "Are you sure you want to Reject this WorkType Request?",
+                                              "Apakah Anda yakin ingin menolak Permintaan Tipe Kerja ini?",
                                               style: TextStyle(
                                                   fontWeight: FontWeight.bold,
                                                   color: Colors.black,
@@ -2028,7 +2028,7 @@ class _WorkTypeRequestPageState extends State<WorkTypeRequestPage> {
                                                   ),
                                                 ),
                                               ),
-                                              child: const Text("Continue",
+                                              child: const Text("Lanjutkan",
                                                   style: TextStyle(
                                                       color: Colors.white)),
                                             ),
@@ -2081,7 +2081,7 @@ class _WorkTypeRequestPageState extends State<WorkTypeRequestPage> {
                                           MainAxisAlignment.spaceBetween,
                                           children: [
                                             const Text(
-                                              "Confirmation",
+                                              "Konfirmasi",
                                               style: TextStyle(
                                                   fontWeight: FontWeight.bold,
                                                   color: Colors.black),
@@ -2101,7 +2101,7 @@ class _WorkTypeRequestPageState extends State<WorkTypeRequestPage> {
                                               0.1,
                                           child: const Center(
                                             child: Text(
-                                              "Are you sure you want to Approve this WorkType Request?",
+                                              "Apakah Anda yakin ingin menyetujui Permintaan Tipe Kerja ini?",
                                               style: TextStyle(
                                                   fontWeight: FontWeight.bold,
                                                   color: Colors.black,
@@ -2148,7 +2148,7 @@ class _WorkTypeRequestPageState extends State<WorkTypeRequestPage> {
                                                   ),
                                                 ),
                                               ),
-                                              child: const Text("Continue",
+                                              child: const Text("Lanjutkan",
                                                   style: TextStyle(
                                                       color: Colors.white)),
                                             ),
@@ -2206,7 +2206,7 @@ class _WorkTypeRequestPageState extends State<WorkTypeRequestPage> {
                                           MainAxisAlignment.spaceBetween,
                                           children: [
                                             const Text(
-                                              "Confirmation",
+                                              "Konfirmasi",
                                               style: TextStyle(
                                                   fontWeight: FontWeight.bold,
                                                   color: Colors.black),
@@ -2226,7 +2226,7 @@ class _WorkTypeRequestPageState extends State<WorkTypeRequestPage> {
                                               0.1,
                                           child: const Center(
                                             child: Text(
-                                              "Are you sure you want to Reject this WorkType Request?",
+                                              "Apakah Anda yakin ingin menolak Permintaan Tipe Kerja ini?",
                                               style: TextStyle(
                                                   fontWeight: FontWeight.bold,
                                                   color: Colors.black,
@@ -2276,7 +2276,7 @@ class _WorkTypeRequestPageState extends State<WorkTypeRequestPage> {
                                                   ),
                                                 ),
                                               ),
-                                              child: const Text("Continue",
+                                              child: const Text("Lanjutkan",
                                                   style: TextStyle(
                                                       color: Colors.white)),
                                             ),
@@ -2574,7 +2574,7 @@ class _WorkTypeRequestPageState extends State<WorkTypeRequestPage> {
                                                   .spaceBetween,
                                               children: [
                                                 const Text(
-                                                  "Confirmation",
+                                                  "Konfirmasi",
                                                   style: TextStyle(
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.black,
@@ -2596,7 +2596,7 @@ class _WorkTypeRequestPageState extends State<WorkTypeRequestPage> {
                                                   0.1,
                                               child: const Center(
                                                 child: Text(
-                                                  "Are you sure you want to delete this work type request?",
+                                                  "Apakah Anda yakin ingin menghapus permintaan tipe kerja ini?",
                                                   style: TextStyle(
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.black,
@@ -2644,7 +2644,7 @@ class _WorkTypeRequestPageState extends State<WorkTypeRequestPage> {
                                                     ),
                                                   ),
                                                   child: const Text(
-                                                    "Continue",
+                                                    "Lanjutkan",
                                                     style: TextStyle(
                                                         color: Colors.white),
                                                   ),
@@ -2679,7 +2679,7 @@ class _WorkTypeRequestPageState extends State<WorkTypeRequestPage> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text('Requested Work Type',
+                            Text('Tipe Kerja yang Diminta',
                                 style: TextStyle(color: Colors.grey.shade700)),
                             Flexible(
                               child: Text(
@@ -2695,7 +2695,7 @@ class _WorkTypeRequestPageState extends State<WorkTypeRequestPage> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text('Previous/Current Work Type',
+                            Text('Tipe Kerja Sebelumnya/Saat Ini',
                                 style: TextStyle(color: Colors.grey.shade700)),
                             Flexible(
                               child: Text(
@@ -2711,7 +2711,7 @@ class _WorkTypeRequestPageState extends State<WorkTypeRequestPage> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text('Requested Date',
+                            Text('Tanggal Diminta',
                                 style: TextStyle(color: Colors.grey.shade700)),
                             Flexible(
                               child: Text(
@@ -2727,7 +2727,7 @@ class _WorkTypeRequestPageState extends State<WorkTypeRequestPage> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text('Requested Till',
+                            Text('Diminta Sampai',
                                 style: TextStyle(color: Colors.grey.shade700)),
                             Flexible(
                               child: Text(
@@ -2764,7 +2764,7 @@ class _WorkTypeRequestPageState extends State<WorkTypeRequestPage> {
                                                         .spaceBetween,
                                                     children: [
                                                       const Text(
-                                                        "Confirmation",
+                                                        "Konfirmasi",
                                                         style: TextStyle(
                                                             fontWeight:
                                                             FontWeight.bold,
@@ -2789,7 +2789,7 @@ class _WorkTypeRequestPageState extends State<WorkTypeRequestPage> {
                                                         0.1,
                                                     child: const Center(
                                                       child: Text(
-                                                        "Are you sure you want to Reject this WorkType Request?",
+                                                        "Apakah Anda yakin ingin menolak Permintaan Tipe Kerja ini?",
                                                         style: TextStyle(
                                                             fontWeight:
                                                             FontWeight.bold,
@@ -2844,7 +2844,7 @@ class _WorkTypeRequestPageState extends State<WorkTypeRequestPage> {
                                                           ),
                                                         ),
                                                         child: const Text(
-                                                            "Continue",
+                                                            "Lanjutkan",
                                                             style: TextStyle(
                                                                 color: Colors
                                                                     .white)),
@@ -2900,7 +2900,7 @@ class _WorkTypeRequestPageState extends State<WorkTypeRequestPage> {
                                                         .spaceBetween,
                                                     children: [
                                                       const Text(
-                                                        "Confirmation",
+                                                        "Konfirmasi",
                                                         style: TextStyle(
                                                             fontWeight:
                                                             FontWeight.bold,
@@ -2925,7 +2925,7 @@ class _WorkTypeRequestPageState extends State<WorkTypeRequestPage> {
                                                         0.1,
                                                     child: const Center(
                                                       child: Text(
-                                                        "Are you sure you want to Approve this WorkType Request?",
+                                                        "Apakah Anda yakin ingin menyetujui Permintaan Tipe Kerja ini?",
                                                         style: TextStyle(
                                                             fontWeight:
                                                             FontWeight.bold,
@@ -2980,7 +2980,7 @@ class _WorkTypeRequestPageState extends State<WorkTypeRequestPage> {
                                                           ),
                                                         ),
                                                         child: const Text(
-                                                            "Continue",
+                                                            "Lanjutkan",
                                                             style: TextStyle(
                                                                 color: Colors
                                                                     .white)),
@@ -3043,7 +3043,7 @@ class _WorkTypeRequestPageState extends State<WorkTypeRequestPage> {
                                                         .spaceBetween,
                                                     children: [
                                                       const Text(
-                                                        "Confirmation",
+                                                        "Konfirmasi",
                                                         style: TextStyle(
                                                             fontWeight:
                                                             FontWeight.bold,
@@ -3068,7 +3068,7 @@ class _WorkTypeRequestPageState extends State<WorkTypeRequestPage> {
                                                         0.1,
                                                     child: const Center(
                                                       child: Text(
-                                                        "Are you sure you want to Reject this WorkType Request?",
+                                                        "Apakah Anda yakin ingin menolak Permintaan Tipe Kerja ini?",
                                                         style: TextStyle(
                                                             fontWeight:
                                                             FontWeight.bold,
@@ -3123,7 +3123,7 @@ class _WorkTypeRequestPageState extends State<WorkTypeRequestPage> {
                                                           ),
                                                         ),
                                                         child: const Text(
-                                                            "Continue",
+                                                            "Lanjutkan",
                                                             style: TextStyle(
                                                                 color: Colors
                                                                     .white)),
@@ -3298,7 +3298,7 @@ class _WorkTypeRequestPageState extends State<WorkTypeRequestPage> {
         forceMaterialTransparency: true,
         automaticallyImplyLeading: false,
         backgroundColor: Colors.white,
-        title: const Text('Work Type Request',
+        title: const Text('Permintaan Tipe Kerja',
             style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold)),
         actions: [
           Padding(
@@ -3336,7 +3336,7 @@ class _WorkTypeRequestPageState extends State<WorkTypeRequestPage> {
                           side: const BorderSide(color: Colors.red),
                         ),
                       ),
-                      child: const Text('CREATE',
+                      child: const Text('BUAT',
                           style: TextStyle(color: Colors.red)),
                     ),
                   ),
@@ -3496,7 +3496,7 @@ class _WorkTypeRequestPageState extends State<WorkTypeRequestPage> {
                   ),
                   SizedBox(height: 20),
                   Text(
-                    "There are no records to display",
+                    "Tidak ada data untuk ditampilkan",
                     style: TextStyle(
                       fontSize: 16.0,
                       color: Colors.black,

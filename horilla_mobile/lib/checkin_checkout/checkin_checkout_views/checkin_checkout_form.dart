@@ -66,7 +66,7 @@ class _CheckInCheckOutFormPageState extends State<CheckInCheckOutFormPage> {
   void initState() {
     super.initState();
     fetchToken();
-    swipeDirection = 'Swipe to Check-In';
+    swipeDirection = 'Geser untuk Masuk';
     _initializeData();
     if (clockCheckedIn) {
       getCheckIn().then((_) {
@@ -146,7 +146,7 @@ class _CheckInCheckOutFormPageState extends State<CheckInCheckOutFormPage> {
     } catch (e) {
       print('Error initializing data: $e');
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Failed to initialize data: $e')),
+        SnackBar(content: Text('Gagal menginisialisasi data: $e')),
       );
     }
   }
@@ -167,9 +167,9 @@ class _CheckInCheckOutFormPageState extends State<CheckInCheckOutFormPage> {
             _locationSnackBarShown = true;
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
-                content: const Text('Location services are disabled. Please enable them.'),
+                content: const Text('Layanan lokasi dinonaktifkan. Silakan aktifkan layanan lokasi.'),
                 action: SnackBarAction(
-                  label: 'Enable',
+                  label: 'Aktifkan',
                   onPressed: () {
                     Geolocator.openLocationSettings();
                   },
@@ -185,7 +185,7 @@ class _CheckInCheckOutFormPageState extends State<CheckInCheckOutFormPage> {
           permission = await Geolocator.requestPermission();
           if (permission == LocationPermission.denied) {
             ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(content: Text('Location permissions are denied.')),
+              const SnackBar(content: Text('Izin lokasi ditolak.')),
             );
             return;
           }
@@ -194,9 +194,9 @@ class _CheckInCheckOutFormPageState extends State<CheckInCheckOutFormPage> {
         if (permission == LocationPermission.deniedForever) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
-              content: const Text('Location permissions are permanently denied.'),
+              content: const Text('Izin lokasi ditolak secara permanen.'),
               action: SnackBarAction(
-                label: 'Settings',
+                label: 'Pengaturan',
                 onPressed: () {
                   AppSettings.openAppSettings();
                 },
@@ -216,7 +216,7 @@ class _CheckInCheckOutFormPageState extends State<CheckInCheckOutFormPage> {
       } catch (e) {
         print('Error fetching location: $e');
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Failed to get location: $e')),
+          SnackBar(content: Text('Gagal mendapatkan lokasi: $e')),
         );
       }
     }
@@ -246,7 +246,7 @@ class _CheckInCheckOutFormPageState extends State<CheckInCheckOutFormPage> {
           }
           stopwatchManager.startStopwatch(initialTime: clockInTime);
           _saveClockState(clockCheckedIn, 1, checkInFormattedTime.toString());
-          swipeDirection = 'Swipe to Check-out';
+          swipeDirection = 'Geser untuk Keluar';
         });
       });
     } else {
@@ -265,7 +265,7 @@ class _CheckInCheckOutFormPageState extends State<CheckInCheckOutFormPage> {
         clockInTime = Duration(hours: hours, minutes: minutes, seconds: seconds);
         elapsedTime = clockInTime;
       }
-      swipeDirection = 'Swipe to Check-In';
+      swipeDirection = 'Geser untuk Masuk';
     }
   }
 
@@ -526,7 +526,7 @@ class _CheckInCheckOutFormPageState extends State<CheckInCheckOutFormPage> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: const Text('Check-in Failed'),
+          title: const Text('Check-in Gagal'),
           content: Text(errorMessage),
           actions: <Widget>[
             TextButton(
@@ -632,7 +632,7 @@ class _CheckInCheckOutFormPageState extends State<CheckInCheckOutFormPage> {
                   const Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text('Clock In', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20)),
+                      Text('Masuk', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20)),
                       Text('00:00:00', style: TextStyle(color: Colors.white)),
                     ],
                   ),
@@ -666,7 +666,7 @@ class _CheckInCheckOutFormPageState extends State<CheckInCheckOutFormPage> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          const Text('Clocked In: Today at ', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 15)),
+                          const Text('Waktu Masuk: Hari ini pukul ', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 15)),
                           Text(
                             checkInFormattedTime ?? DateFormat('h:mm').format(DateTime.now()) + (DateTime.now().hour < 12 ? ' AM' : ' PM'),
                             style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 15),
@@ -691,7 +691,7 @@ class _CheckInCheckOutFormPageState extends State<CheckInCheckOutFormPage> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      const Text('Clock Out', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20)),
+                      const Text('Keluar', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20)),
                       Text(elapsedTimeString, style: const TextStyle(color: Colors.white)),
                     ],
                   ),
@@ -791,12 +791,12 @@ class _CheckInCheckOutFormPageState extends State<CheckInCheckOutFormPage> {
             if (details.primaryDelta! < 0) {
               setState(() {
                 clockCheckedIn = true;
-                swipeDirection = 'Swipe to Check-In';
+                swipeDirection = 'Geser untuk Masuk';
               });
             } else if (details.primaryDelta! > 0) {
               setState(() {
                 clockCheckedIn = true;
-                swipeDirection = 'Swipe to Check-out';
+                swipeDirection = 'Geser untuk Keluar';
               });
             }
           },
@@ -834,7 +834,7 @@ class _CheckInCheckOutFormPageState extends State<CheckInCheckOutFormPage> {
                     const Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text('Clock In', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20)),
+                        Text('Masuk', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20)),
                         Text('00:00:00', style: TextStyle(color: Colors.white)),
                       ],
                     ),
@@ -875,7 +875,7 @@ class _CheckInCheckOutFormPageState extends State<CheckInCheckOutFormPage> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            const Text('Clocked In: Today at ', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 15)),
+                            const Text('Waktu Masuk: Hari ini pukul ', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 15)),
                             Text(
                               checkInFormattedTime ?? DateFormat('h:mm').format(DateTime.now()) + (DateTime.now().hour < 12 ? ' AM' : ' PM'),
                               style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 15),
@@ -901,7 +901,7 @@ class _CheckInCheckOutFormPageState extends State<CheckInCheckOutFormPage> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      const Text('Clock Out', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20)),
+                      const Text('Keluar', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20)),
                       Text(elapsedTimeString, style: const TextStyle(color: Colors.white)),
                     ],
                   ),
@@ -1010,7 +1010,7 @@ class _CheckInCheckOutFormPageState extends State<CheckInCheckOutFormPage> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          const Text('Department'),
+                          const Text('Departemen'),
                           Text(requestsEmpMyDepartment),
                         ],
                       ),
@@ -1020,7 +1020,7 @@ class _CheckInCheckOutFormPageState extends State<CheckInCheckOutFormPage> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          const Text('Check-In'),
+                          const Text('Waktu Masuk'),
                           Text('$checkInFormattedTime'),
                         ],
                       ),
@@ -1055,7 +1055,7 @@ class _CheckInCheckOutFormPageState extends State<CheckInCheckOutFormPage> {
                     if (!_locationUnavailableSnackBarShown && geo_fencing == true) {
                       _locationUnavailableSnackBarShown = true;
                       ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text('Location unavailable. Cannot proceed.')),
+                        const SnackBar(content: Text('Lokasi tidak tersedia. Tidak dapat melanjutkan.')),
                       );
                     }
                     _isProcessingDrag = false;
@@ -1083,7 +1083,7 @@ class _CheckInCheckOutFormPageState extends State<CheckInCheckOutFormPage> {
                         clockCheckBool = false;
                         DateTime now = DateTime.now();
                         checkOutFormattedTime = DateFormat('h:mm a').format(now);
-                        swipeDirection = 'Swipe to Check-In';
+                        swipeDirection = 'Geser untuk Masuk';
                         _saveClockState(
                             clockCheckedIn, 2, checkOutFormattedTime.toString());
                       });
@@ -1128,7 +1128,7 @@ class _CheckInCheckOutFormPageState extends State<CheckInCheckOutFormPage> {
                           } catch (e) {}
                         } else {}
 
-                        swipeDirection = 'Swipe to Check-out';
+                        swipeDirection = 'Geser untuk Keluar';
                       });
                     }
                   }
@@ -1141,7 +1141,7 @@ class _CheckInCheckOutFormPageState extends State<CheckInCheckOutFormPage> {
                     if (!_locationUnavailableSnackBarShown) {
                       _locationUnavailableSnackBarShown = true;
                       ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text('Location unavailable. Cannot proceed.')),
+                        const SnackBar(content: Text('Lokasi tidak tersedia. Tidak dapat melanjutkan.')),
                       );
                     }
                     _isProcessingDrag = false;
@@ -1175,7 +1175,7 @@ class _CheckInCheckOutFormPageState extends State<CheckInCheckOutFormPage> {
                         clockCheckBool = false;
                         DateTime now = DateTime.now();
                         checkOutFormattedTime = DateFormat('h:mm a').format(now);
-                        swipeDirection = 'Swipe to Check-In';
+                        swipeDirection = 'Geser untuk Masuk';
                         _saveClockState(clockCheckedIn, 2, checkOutFormattedTime.toString());
                       });
                     } else {
@@ -1228,7 +1228,7 @@ class _CheckInCheckOutFormPageState extends State<CheckInCheckOutFormPage> {
                           } catch (e) {}
                         } else {}
 
-                        swipeDirection = 'Swipe to Check-out';
+                        swipeDirection = 'Geser untuk Keluar';
                       });
                     } else {
                       String errorMessage = getErrorMessage(response_geofence.body);
@@ -1253,7 +1253,7 @@ class _CheckInCheckOutFormPageState extends State<CheckInCheckOutFormPage> {
                       clockCheckBool = false;
                       DateTime now = DateTime.now();
                       checkOutFormattedTime = DateFormat('h:mm a').format(now);
-                      swipeDirection = 'Swipe to Check-In';
+                      swipeDirection = 'Geser untuk Masuk';
                       _saveClockState(
                           clockCheckedIn, 2, checkOutFormattedTime.toString());
                     });
@@ -1286,7 +1286,7 @@ class _CheckInCheckOutFormPageState extends State<CheckInCheckOutFormPage> {
                         } catch (e) {}
                       } else {}
 
-                      swipeDirection = 'Swipe to Check-out';
+                      swipeDirection = 'Geser untuk Keluar';
                     });
                   }
                 }

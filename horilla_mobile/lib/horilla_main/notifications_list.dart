@@ -200,7 +200,7 @@ class _NotificationsListState extends State<NotificationsList> {
       appBar: AppBar(
         backgroundColor: Colors.white,
         title:
-        const Text('Notifications', style: TextStyle(color: Colors.black)),
+        const Text('Notifikasi', style: TextStyle(color: Colors.black)),
         automaticallyImplyLeading: false,
         actions: [
           Padding(
@@ -222,7 +222,7 @@ class _NotificationsListState extends State<NotificationsList> {
                 ),
               ),
               child: const Text(
-                'Clear all',
+                'Hapus semua',
                 style: TextStyle(color: Colors.red),
               ),
             ),
@@ -296,7 +296,7 @@ class _NotificationsListState extends State<NotificationsList> {
                 ),
                 const SizedBox(height: 20),
                 Text(
-                  "There are no notification records to display",
+                  "Tidak ada catatan notifikasi untuk ditampilkan",
                   style: TextStyle(
                       fontSize:
                       MediaQuery.of(context).size.width * 0.0357,
@@ -379,7 +379,7 @@ class _NotificationsListState extends State<NotificationsList> {
                   ),
                 ),
                 subtitle: Text(
-                  '$timeAgo by User $user',
+                  '$timeAgo oleh Pengguna $user',
                   style: TextStyle(
                       fontSize: MediaQuery.of(context).size.width * 0.035,
                       fontWeight: FontWeight.bold,

@@ -152,7 +152,7 @@ void _showNotification() async {
   await flutterLocalNotificationsPlugin.show(
     newNotificationList['id'],
     newNotificationList['verb'],
-    '$timeAgo by User',
+    '$timeAgo oleh Pengguna',
     platformChannelSpecifics,
     payload: 'your_payload',
   );
@@ -326,7 +326,7 @@ class LoginApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Login Page',
+      title: 'StarFoto HR',
       navigatorKey: navigatorKey,
       home: FutureBuilderPage(),
       routes: {

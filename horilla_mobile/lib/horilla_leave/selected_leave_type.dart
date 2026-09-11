@@ -172,7 +172,7 @@ class _SelectedLeaveType extends State<SelectedLeaveType> {
                     Image.asset(imagePath),
                     const SizedBox(height: 16),
                     const Text(
-                      "Leave Assigned Successfully",
+                      "Cuti Berhasil Diberikan",
                       style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
@@ -498,7 +498,7 @@ class _SelectedLeaveType extends State<SelectedLeaveType> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       const Text(
-                        'Period In',
+                        'Periode Dalam',
                         style:
                         TextStyle(fontSize: 16.0, color: Colors.grey),
                       ),
@@ -519,7 +519,7 @@ class _SelectedLeaveType extends State<SelectedLeaveType> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       const Text(
-                        'Count',
+                        'Jumlah',
                         style:
                         TextStyle(fontSize: 16.0, color: Colors.grey),
                       ),
@@ -540,7 +540,7 @@ class _SelectedLeaveType extends State<SelectedLeaveType> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       const Text(
-                        'Total Days',
+                        'Total Hari',
                         style:
                         TextStyle(fontSize: 16.0, color: Colors.grey),
                       ),
@@ -582,7 +582,7 @@ class _SelectedLeaveType extends State<SelectedLeaveType> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       const Text(
-                        'Carryforward Type',
+                        'Tipe Pengalihan',
                         style:
                         TextStyle(fontSize: 16.0, color: Colors.grey),
                       ),
@@ -603,7 +603,7 @@ class _SelectedLeaveType extends State<SelectedLeaveType> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       const Text(
-                        'Is Paid',
+                        'Berbayar',
                         style:
                         TextStyle(fontSize: 16.0, color: Colors.grey),
                       ),
@@ -622,7 +622,7 @@ class _SelectedLeaveType extends State<SelectedLeaveType> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       const Text(
-                        'Require Approval',
+                        'Perlu Persetujuan',
                         style:
                         TextStyle(fontSize: 16.0, color: Colors.grey),
                       ),
@@ -643,7 +643,7 @@ class _SelectedLeaveType extends State<SelectedLeaveType> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       const Text(
-                        'Require Attachment',
+                        'Perlu Lampiran',
                         style:
                         TextStyle(fontSize: 16.0, color: Colors.grey),
                       ),
@@ -692,7 +692,7 @@ class _SelectedLeaveType extends State<SelectedLeaveType> {
                                                   .spaceBetween,
                                               children: [
                                                 const Text(
-                                                  "Assign Leave",
+                                                  "Berikan Cuti",
                                                   style: TextStyle(
                                                     fontWeight:
                                                     FontWeight.bold,
@@ -874,7 +874,7 @@ class _SelectedLeaveType extends State<SelectedLeaveType> {
                                                     ),
                                                   ),
                                                   child: const Text(
-                                                    'Assign',
+                                                    'Berikan',
                                                     style: TextStyle(
                                                         color:
                                                         Colors.white),
@@ -904,7 +904,7 @@ class _SelectedLeaveType extends State<SelectedLeaveType> {
                                   horizontal: 50, vertical: 12),
                             ),
                             child: const Text(
-                              'Assign',
+                              'Berikan',
                               style: TextStyle(
                                   fontSize: 18, color: Colors.white),
                             ),
@@ -951,7 +951,7 @@ class _SelectedLeaveType extends State<SelectedLeaveType> {
               );
             } else if (snapshot.hasError) {
               // Handle errors here if needed
-              return const Center(child: Text('Error loading permissions.'));
+              return const Center(child: Text('Gagal memuat izin.'));
             } else {
               return ListView(
                 padding: const EdgeInsets.all(0),
@@ -971,7 +971,7 @@ class _SelectedLeaveType extends State<SelectedLeaveType> {
                   ),
                   permissionLeaveOverviewCheck
                       ? ListTile(
-                    title: const Text('Overview'),
+                    title: const Text('Ringkasan'),
                     onTap: () {
                       Navigator.pushNamed(context, '/leave_overview');
                     },
@@ -980,7 +980,7 @@ class _SelectedLeaveType extends State<SelectedLeaveType> {
 
                   permissionMyLeaveRequestCheck
                       ? ListTile(
-                    title: const Text('My Leave Request'),
+                    title: const Text('Permintaan Cuti Saya'),
                     onTap: () {
                       Navigator.pushNamed(context, '/my_leave_request');
                     },
@@ -989,7 +989,7 @@ class _SelectedLeaveType extends State<SelectedLeaveType> {
 
                   permissionLeaveRequestCheck
                       ? ListTile(
-                    title: const Text('Leave Request'),
+                    title: const Text('Permintaan Cuti'),
                     onTap: () {
                       Navigator.pushNamed(context, '/leave_request');
                     },
@@ -998,7 +998,7 @@ class _SelectedLeaveType extends State<SelectedLeaveType> {
 
                   permissionLeaveTypeCheck
                       ? ListTile(
-                    title: const Text('Leave Type'),
+                    title: const Text('Tipe Cuti'),
                     onTap: () {
                       Navigator.pushNamed(context, '/leave_types');
                     },
@@ -1007,7 +1007,7 @@ class _SelectedLeaveType extends State<SelectedLeaveType> {
 
                   permissionLeaveAllocationCheck
                       ? ListTile(
-                    title: const Text('Leave Allocation Request'),
+                    title: const Text('Permintaan Alokasi Cuti'),
                     onTap: () {
                       Navigator.pushNamed(
                           context, '/leave_allocation_request');
@@ -1017,7 +1017,7 @@ class _SelectedLeaveType extends State<SelectedLeaveType> {
 
                   permissionLeaveAssignCheck
                       ? ListTile(
-                    title: const Text('All Assigned Leave'),
+                    title: const Text('Semua Cuti Diberikan'),
                     onTap: () {
                       Navigator.pushNamed(context, '/all_assigned_leave');
                     },

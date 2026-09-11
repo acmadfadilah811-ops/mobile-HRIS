@@ -161,7 +161,7 @@ class _MyAttendanceViews extends State<MyAttendanceViews>
       appBar: AppBar(
         backgroundColor: Colors.white,
         automaticallyImplyLeading: false,
-        title: const Text('My Attendances',
+        title: const Text('Kehadiran Saya',
             style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold)),
         actions: const [],
       ),
@@ -266,11 +266,11 @@ class _MyAttendanceViews extends State<MyAttendanceViews>
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    'Fields',
+                    'Bidang',
                     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
                   ),
                   Text(
-                    'Request',
+                    'Permintaan',
                     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
                   ),
                 ],
@@ -282,7 +282,7 @@ class _MyAttendanceViews extends State<MyAttendanceViews>
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    'Date',
+                    'Tanggal',
                     style: TextStyle(color: Colors.grey.shade700),
                   ),
                   Text(attendanceDate,
@@ -296,7 +296,7 @@ class _MyAttendanceViews extends State<MyAttendanceViews>
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    'Check-In',
+                    'Waktu Masuk',
                     style: TextStyle(color: Colors.grey.shade700),
                   ),
                   Text(attendanceClockIn,
@@ -310,7 +310,7 @@ class _MyAttendanceViews extends State<MyAttendanceViews>
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    'Check-Out',
+                    'Waktu Keluar',
                     style: TextStyle(color: Colors.grey.shade700),
                   ),
                   Text(attendanceClockOut,
@@ -337,7 +337,7 @@ class _MyAttendanceViews extends State<MyAttendanceViews>
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    'Minimum Hour',
+                    'Jam Minimum',
                     style: TextStyle(color: Colors.grey.shade700),
                   ),
                   Text(minimumHour,
@@ -351,7 +351,7 @@ class _MyAttendanceViews extends State<MyAttendanceViews>
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    'Check-In Date',
+                    'Tanggal Masuk',
                     style: TextStyle(color: Colors.grey.shade700),
                   ),
                   Text(attendanceClockInDate,
@@ -365,7 +365,7 @@ class _MyAttendanceViews extends State<MyAttendanceViews>
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    'Check-Out Date',
+                    'Tanggal Keluar',
                     style: TextStyle(color: Colors.grey.shade700),
                   ),
                   Text(attendanceClockOutDate,
@@ -379,7 +379,7 @@ class _MyAttendanceViews extends State<MyAttendanceViews>
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    'At Work',
+                    'Sedang Bekerja',
                     style: TextStyle(color: Colors.grey.shade700),
                   ),
                   Text(attendanceWorkedHour,

@@ -174,7 +174,7 @@ class _AttendanceRequest extends State<AttendanceRequest>
                     Image.asset(imagePath),
                     const SizedBox(height: 16),
                     const Text(
-                      "Attendance Created Successfully",
+                      "Kehadiran Berhasil Dibuat",
                       style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
@@ -217,7 +217,7 @@ class _AttendanceRequest extends State<AttendanceRequest>
                     Image.asset(imagePath),
                     const SizedBox(height: 16),
                     const Text(
-                      "Attendance Approved Successfully",
+                      "Kehadiran Berhasil Disetujui",
                       style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
@@ -260,7 +260,7 @@ class _AttendanceRequest extends State<AttendanceRequest>
                     Image.asset(imagePath),
                     const SizedBox(height: 16),
                     const Text(
-                      "Attendance Rejected Successfully",
+                      "Kehadiran Berhasil Ditolak",
                       style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
@@ -414,7 +414,7 @@ class _AttendanceRequest extends State<AttendanceRequest>
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       const Text(
-                        "Add Attendance",
+                        "Tambah Kehadiran",
                         style: TextStyle(
                             fontWeight: FontWeight.bold, color: Colors.black),
                       ),
@@ -447,7 +447,7 @@ class _AttendanceRequest extends State<AttendanceRequest>
                               height:
                                   MediaQuery.of(context).size.height * 0.03),
                           const Text(
-                            'Employee',
+                            'Karyawan',
                             style: TextStyle(color: Colors.black),
                           ),
                           SizedBox(
@@ -457,7 +457,7 @@ class _AttendanceRequest extends State<AttendanceRequest>
                             textFieldConfiguration: TextFieldConfiguration(
                               controller: _typeAheadController,
                               decoration: InputDecoration(
-                                labelText: 'Search Employee',
+                                labelText: 'Cari Karyawan',
                                 border: const OutlineInputBorder(),
                                 labelStyle: TextStyle(color: Colors.grey[350]),
                                 contentPadding: const EdgeInsets.symmetric(
@@ -490,7 +490,7 @@ class _AttendanceRequest extends State<AttendanceRequest>
                             noItemsFoundBuilder: (context) => const Padding(
                               padding: EdgeInsets.all(8.0),
                               child: Text(
-                                'No Employees Found',
+                                'Karyawan Tidak Ditemukan',
                                 style: TextStyle(fontSize: 16),
                               ),
                             ),
@@ -538,7 +538,7 @@ class _AttendanceRequest extends State<AttendanceRequest>
                               }
                             },
                             decoration: InputDecoration(
-                              labelText: "Attendance Date",
+                              labelText: "Tanggal Kehadiran",
                               labelStyle: TextStyle(color: Colors.grey[350]),
                               border: const OutlineInputBorder(),
                               errorText: _validateDate
@@ -562,7 +562,7 @@ class _AttendanceRequest extends State<AttendanceRequest>
                             textFieldConfiguration: TextFieldConfiguration(
                               controller: _typeAheadCreateShiftController,
                               decoration: InputDecoration(
-                                labelText: 'Search Shift',
+                                labelText: 'Cari Shift',
                                 errorText: _validateShift
                                     ? 'Please select a Shift'
                                     : null,
@@ -595,7 +595,7 @@ class _AttendanceRequest extends State<AttendanceRequest>
                             noItemsFoundBuilder: (context) => const Padding(
                               padding: EdgeInsets.all(8.0),
                               child: Text(
-                                'No Shift Found',
+                                'Shift Tidak Ditemukan',
                                 style: TextStyle(fontSize: 16),
                               ),
                             ),
@@ -619,7 +619,7 @@ class _AttendanceRequest extends State<AttendanceRequest>
                               height:
                                   MediaQuery.of(context).size.height * 0.03),
                           const Text(
-                            "Work Type ",
+                            "Tipe Kerja ",
                             style: TextStyle(color: Colors.black),
                           ),
                           SizedBox(
@@ -629,11 +629,11 @@ class _AttendanceRequest extends State<AttendanceRequest>
                             textFieldConfiguration: TextFieldConfiguration(
                               controller: _typeAheadCreateWorkTypeController,
                               decoration: InputDecoration(
-                                labelText: 'Search Shift',
+                                labelText: 'Cari Shift',
                                 labelStyle: TextStyle(color: Colors.grey[350]),
                                 border: const OutlineInputBorder(),
                                 errorText: _validateWorkType
-                                    ? 'Please select a Work Type'
+                                    ? 'Silakan pilih Tipe Kerja'
                                     : null,
                                 contentPadding: const EdgeInsets.symmetric(
                                     horizontal: 10.0),
@@ -663,7 +663,7 @@ class _AttendanceRequest extends State<AttendanceRequest>
                             noItemsFoundBuilder: (context) => const Padding(
                               padding: EdgeInsets.all(8.0),
                               child: Text(
-                                'No Shift Found',
+                                'Shift Tidak Ditemukan',
                                 style: TextStyle(fontSize: 16),
                               ),
                             ),
@@ -720,7 +720,7 @@ class _AttendanceRequest extends State<AttendanceRequest>
                                         }
                                       },
                                       decoration: InputDecoration(
-                                        labelText: "Check-In Date",
+                                        labelText: "Tanggal Masuk",
                                         errorText: _validateCheckInDate
                                             ? 'Please Choose Check-In Date'
                                             : null,
@@ -743,7 +743,7 @@ class _AttendanceRequest extends State<AttendanceRequest>
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     const Text(
-                                      'Check-In',
+                                      'Waktu Masuk',
                                       style: TextStyle(color: Colors.black),
                                     ),
                                     SizedBox(
@@ -833,7 +833,7 @@ class _AttendanceRequest extends State<AttendanceRequest>
                                         }
                                       },
                                       decoration: InputDecoration(
-                                        labelText: "Check-Out Date",
+                                        labelText: "Tanggal Keluar",
                                         errorText: _validateCheckoutDate
                                             ? 'Please Choose a Check-Out Date'
                                             : null,
@@ -856,7 +856,7 @@ class _AttendanceRequest extends State<AttendanceRequest>
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     const Text(
-                                      'Check-Out',
+                                      'Waktu Keluar',
                                       style: TextStyle(color: Colors.black),
                                     ),
                                     SizedBox(
@@ -919,7 +919,7 @@ class _AttendanceRequest extends State<AttendanceRequest>
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     const Text(
-                                      'Working Hours',
+                                      'Jam Kerja',
                                       style: TextStyle(color: Colors.black),
                                     ),
                                     SizedBox(
@@ -962,7 +962,7 @@ class _AttendanceRequest extends State<AttendanceRequest>
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     const Text(
-                                      'Minimum Hour',
+                                      'Jam Minimum',
                                       style: TextStyle(color: Colors.black),
                                     ),
                                     SizedBox(
@@ -1251,7 +1251,7 @@ class _AttendanceRequest extends State<AttendanceRequest>
                             ),
                           ),
                         ),
-                        child: const Text('Save',
+                        child: const Text('Simpan',
                             style: TextStyle(color: Colors.white)),
                       ),
                     ),
@@ -1666,7 +1666,7 @@ class _AttendanceRequest extends State<AttendanceRequest>
             },
           ),
           title: const Text(
-            'Attendance Requests',
+            'Permintaan Kehadiran',
             style: TextStyle(
               fontWeight: FontWeight.bold,
             ),
@@ -1718,7 +1718,7 @@ class _AttendanceRequest extends State<AttendanceRequest>
                           side: const BorderSide(color: Colors.red),
                         ),
                       ),
-                      child: const Text('CREATE',
+                      child: const Text('BUAT',
                           style: TextStyle(color: Colors.red)),
                     ),
                   ),
@@ -1749,7 +1749,7 @@ class _AttendanceRequest extends State<AttendanceRequest>
                         // Only "Overview" has a permission check
                         _drawerPermissionOverview
                             ? ListTile(
-                                title: const Text('Overview'),
+                                title: const Text('Ringkasan'),
                                 onTap: () {
                                   Navigator.pushNamed(
                                       context, '/attendance_overview');
@@ -1759,20 +1759,20 @@ class _AttendanceRequest extends State<AttendanceRequest>
 
                         // All other menu items are always visible
                         ListTile(
-                          title: const Text('Attendance'),
+                          title: const Text('Kehadiran'),
                           onTap: () {
                             Navigator.pushNamed(
                                 context, '/attendance_attendance');
                           },
                         ),
                         ListTile(
-                          title: const Text('Attendance Request'),
+                          title: const Text('Permintaan Kehadiran'),
                           onTap: () {
                             Navigator.pushNamed(context, '/attendance_request');
                           },
                         ),
                         ListTile(
-                          title: const Text('Hour Account'),
+                          title: const Text('Akun Jam Kerja'),
                           onTap: () {
                             Navigator.pushNamed(
                                 context, '/employee_hour_account');
@@ -1897,7 +1897,7 @@ class _AttendanceRequest extends State<AttendanceRequest>
                       ),
                       child: const TextField(
                         decoration: InputDecoration(
-                          hintText: 'Search',
+                          hintText: 'Cari',
                           border: InputBorder.none,
                           prefixIcon: Icon(Icons.search),
                           contentPadding: EdgeInsets.symmetric(
@@ -1919,10 +1919,10 @@ class _AttendanceRequest extends State<AttendanceRequest>
           isScrollable: true,
           tabs: [
             Tab(
-              text: 'Requested Attendances ($allRequestAttendance)',
+              text: 'Permintaan Kehadiran ($allRequestAttendance)',
             ),
             Tab(
-              text: 'All Attendances ($myRequestAttendance)',
+              text: 'Semua Kehadiran ($myRequestAttendance)',
             ),
           ],
         ),
@@ -1978,7 +1978,7 @@ class _AttendanceRequest extends State<AttendanceRequest>
                             });
                           },
                           decoration: InputDecoration(
-                            hintText: 'Search',
+                            hintText: 'Cari',
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(8.0),
                               borderSide: BorderSide.none,
@@ -2011,10 +2011,10 @@ class _AttendanceRequest extends State<AttendanceRequest>
               isScrollable: true,
               tabs: [
                 Tab(
-                  text: 'Requested Attendances ($allRequestAttendance)',
+                  text: 'Permintaan Kehadiran ($allRequestAttendance)',
                 ),
                 Tab(
-                  text: 'All Attendances ($myRequestAttendance)',
+                  text: 'Semua Kehadiran ($myRequestAttendance)',
                 ),
               ],
             ),
@@ -2036,7 +2036,7 @@ class _AttendanceRequest extends State<AttendanceRequest>
                                 SizedBox(height: 20),
                                 Center(
                                   child: Text(
-                                    "There are no attendance records to display",
+                                    "Tidak ada data kehadiran untuk ditampilkan",
                                     style: TextStyle(
                                         fontSize: 16.0,
                                         color: Colors.black,
@@ -2065,7 +2065,7 @@ class _AttendanceRequest extends State<AttendanceRequest>
                                 SizedBox(height: 20),
                                 Center(
                                   child: Text(
-                                    "There are no attendance records to display",
+                                    "Tidak ada data kehadiran untuk ditampilkan",
                                     style: TextStyle(
                                         fontSize: 16.0,
                                         color: Colors.black,
@@ -2412,7 +2412,7 @@ class _AttendanceRequest extends State<AttendanceRequest>
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            'Date',
+                            'Tanggal',
                             style: TextStyle(color: Colors.grey.shade700),
                           ),
                           Text('${record['attendance_date'] ?? 'None'}'),
@@ -2422,7 +2422,7 @@ class _AttendanceRequest extends State<AttendanceRequest>
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            'Check-In',
+                            'Waktu Masuk',
                             style: TextStyle(color: Colors.grey.shade700),
                           ),
                           Text('${record['attendance_clock_in'] ?? 'None'}'),
@@ -2432,7 +2432,7 @@ class _AttendanceRequest extends State<AttendanceRequest>
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            'Check-Out',
+                            'Waktu Keluar',
                             style: TextStyle(color: Colors.grey.shade700),
                           ),
                           Text('${record['attendance_clock_out'] ?? 'None'}'),
@@ -2452,7 +2452,7 @@ class _AttendanceRequest extends State<AttendanceRequest>
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            'Minimum Hour',
+                            'Jam Minimum',
                             style: TextStyle(color: Colors.grey.shade700),
                           ),
                           Text('${record['minimum_hour'] ?? 'None'}'),
@@ -2484,7 +2484,7 @@ class _AttendanceRequest extends State<AttendanceRequest>
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            'At Work',
+                            'Sedang Bekerja',
                             style: TextStyle(color: Colors.grey.shade700),
                           ),
                           Text('${record['attendance_worked_hour'] ?? 'None'}'),
@@ -2516,7 +2516,7 @@ class _AttendanceRequest extends State<AttendanceRequest>
                                           MainAxisAlignment.spaceBetween,
                                       children: [
                                         const Text(
-                                          "Confirmation",
+                                          "Konfirmasi",
                                           style: TextStyle(
                                               fontWeight: FontWeight.bold,
                                               color: Colors.black),
@@ -2535,7 +2535,7 @@ class _AttendanceRequest extends State<AttendanceRequest>
                                               0.1,
                                       child: const Center(
                                         child: Text(
-                                          "Are you sure you want to Reject this request?",
+                                          "Apakah Anda yakin ingin menolak permintaan ini?",
                                           style: TextStyle(
                                               fontWeight: FontWeight.bold,
                                               color: Colors.black,
@@ -2568,7 +2568,7 @@ class _AttendanceRequest extends State<AttendanceRequest>
                                               ),
                                             ),
                                           ),
-                                          child: const Text("Continue",
+                                          child: const Text("Lanjutkan",
                                               style: TextStyle(
                                                   color: Colors.white)),
                                         ),
@@ -2591,7 +2591,7 @@ class _AttendanceRequest extends State<AttendanceRequest>
                               ),
                             ),
                             child: const Text(
-                              "Reject",
+                              "Tolak",
                               style:
                                   TextStyle(fontSize: 18, color: Colors.white),
                             ),
@@ -2610,7 +2610,7 @@ class _AttendanceRequest extends State<AttendanceRequest>
                                           MainAxisAlignment.spaceBetween,
                                       children: [
                                         const Text(
-                                          "Confirmation",
+                                          "Konfirmasi",
                                           style: TextStyle(
                                               fontWeight: FontWeight.bold,
                                               color: Colors.black),
@@ -2629,7 +2629,7 @@ class _AttendanceRequest extends State<AttendanceRequest>
                                               0.1,
                                       child: const Center(
                                         child: Text(
-                                          "Are you sure you want to Approve this Attendance?",
+                                          "Apakah Anda yakin ingin menyetujui kehadiran ini?",
                                           style: TextStyle(
                                               fontWeight: FontWeight.bold,
                                               color: Colors.black,
@@ -2659,7 +2659,7 @@ class _AttendanceRequest extends State<AttendanceRequest>
                                               ),
                                             ),
                                           ),
-                                          child: const Text("Approve",
+                                          child: const Text("Setujui",
                                               style: TextStyle(
                                                   color: Colors.white)),
                                         ),
@@ -2682,7 +2682,7 @@ class _AttendanceRequest extends State<AttendanceRequest>
                               ),
                             ),
                             child: const Text(
-                              "Approve",
+                              "Setujui",
                               style:
                                   TextStyle(fontSize: 18, color: Colors.white),
                             ),
@@ -2799,7 +2799,7 @@ class _AttendanceRequest extends State<AttendanceRequest>
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        'Date',
+                        'Tanggal',
                         style: TextStyle(color: Colors.grey.shade700),
                       ),
                       Text('${record['attendance_date'] ?? 'None'}'),
@@ -2809,7 +2809,7 @@ class _AttendanceRequest extends State<AttendanceRequest>
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        'Check-In',
+                        'Waktu Masuk',
                         style: TextStyle(color: Colors.grey.shade700),
                       ),
                       Text('${record['attendance_clock_in'] ?? 'None'}'),
@@ -2845,7 +2845,7 @@ class _AttendanceRequest extends State<AttendanceRequest>
                                             MainAxisAlignment.spaceBetween,
                                         children: [
                                           const Text(
-                                            "Confirmation",
+                                            "Konfirmasi",
                                             style: TextStyle(
                                                 fontWeight: FontWeight.bold,
                                                 color: Colors.black),
@@ -2864,7 +2864,7 @@ class _AttendanceRequest extends State<AttendanceRequest>
                                                 0.1,
                                         child: const Center(
                                           child: Text(
-                                            "Are you sure you want to Reject this Attendance?",
+                                            "Apakah Anda yakin ingin menolak kehadiran ini?",
                                             style: TextStyle(
                                                 fontWeight: FontWeight.bold,
                                                 color: Colors.black,
@@ -2897,7 +2897,7 @@ class _AttendanceRequest extends State<AttendanceRequest>
                                                 ),
                                               ),
                                             ),
-                                            child: const Text("Continue",
+                                            child: const Text("Lanjutkan",
                                                 style: TextStyle(
                                                     color: Colors.white)),
                                           ),
@@ -2920,7 +2920,7 @@ class _AttendanceRequest extends State<AttendanceRequest>
                                 ),
                               ),
                               child: const Text(
-                                "Reject",
+                                "Tolak",
                                 style: TextStyle(
                                     fontSize: 18, color: Colors.white),
                               ),
@@ -2941,7 +2941,7 @@ class _AttendanceRequest extends State<AttendanceRequest>
                                             MainAxisAlignment.spaceBetween,
                                         children: [
                                           const Text(
-                                            "Confirmation",
+                                            "Konfirmasi",
                                             style: TextStyle(
                                                 fontWeight: FontWeight.bold,
                                                 color: Colors.black),
@@ -2960,7 +2960,7 @@ class _AttendanceRequest extends State<AttendanceRequest>
                                                 0.1,
                                         child: const Center(
                                           child: Text(
-                                            "Are you sure you want to Approve this Attendance?",
+                                            "Apakah Anda yakin ingin menyetujui kehadiran ini?",
                                             style: TextStyle(
                                                 fontWeight: FontWeight.bold,
                                                 color: Colors.black,
@@ -2994,7 +2994,7 @@ class _AttendanceRequest extends State<AttendanceRequest>
                                                 ),
                                               ),
                                             ),
-                                            child: const Text("Continue",
+                                            child: const Text("Lanjutkan",
                                                 style: TextStyle(
                                                     color: Colors.white)),
                                           ),
@@ -3017,7 +3017,7 @@ class _AttendanceRequest extends State<AttendanceRequest>
                                 ),
                               ),
                               child: const Text(
-                                "Approve",
+                                "Setujui",
                                 style: TextStyle(
                                     fontSize: 18, color: Colors.white),
                               ),
@@ -3139,7 +3139,7 @@ class _AttendanceRequest extends State<AttendanceRequest>
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      'Date',
+                      'Tanggal',
                       style: TextStyle(color: Colors.grey.shade700),
                     ),
                     Text('${record['attendance_date'] ?? 'None'}'),
@@ -3149,7 +3149,7 @@ class _AttendanceRequest extends State<AttendanceRequest>
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      'Check-In',
+                      'Waktu Masuk',
                       style: TextStyle(color: Colors.grey.shade700),
                     ),
                     Text('${record['attendance_clock_in'] ?? 'None'}'),
@@ -3208,7 +3208,7 @@ class _AttendanceRequest extends State<AttendanceRequest>
                                 MediaQuery.of(context).size.height * 0.01),
                       ),
                       child: const Text(
-                        "View Request",
+                        "Lihat Permintaan",
                         style: TextStyle(fontSize: 18, color: Colors.red),
                       ),
                     ),

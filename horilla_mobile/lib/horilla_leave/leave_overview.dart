@@ -318,7 +318,7 @@ class _LeaveOverview extends State<LeaveOverview>
         ),
         title: const Row(
           children: [
-            Text('Leave Overview',
+            Text('Ringkasan Cuti',
                 style: TextStyle(
                   fontSize: 23.0,
                   fontWeight: FontWeight.bold,
@@ -369,8 +369,8 @@ class _LeaveOverview extends State<LeaveOverview>
                       itemCount: 2,
                       itemBuilder: (context, index) {
                         String headerText = index == 0
-                            ? 'NEW\nREQUEST\n'
-                            : 'APPROVED\nREQUEST\n';
+                            ? 'PERMINTAAN\nBARU\n'
+                            : 'PERMINTAAN\nDISETUJUI\n';
                         String valueText = index == 0
                             ? ' $newRequestsCount'
                             : ' $newApprovedRequestsCount';
@@ -407,7 +407,7 @@ class _LeaveOverview extends State<LeaveOverview>
                       children: [
                         Flexible(
                           child: Text(
-                            'On Leave',
+                            'Sedang Cuti',
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize:
@@ -491,7 +491,7 @@ class _LeaveOverview extends State<LeaveOverview>
                                 ),
                                 SizedBox(height: 20),
                                 Text(
-                                  'No Leave request for today',
+                                  'Tidak ada permintaan cuti hari ini',
                                   style: TextStyle(
                                     fontWeight: FontWeight.bold,
                                     fontSize: 18,
@@ -569,7 +569,7 @@ class _LeaveOverview extends State<LeaveOverview>
                 ],
               );
             } else if (snapshot.hasError) {
-              return const Center(child: Text('Error loading permissions.'));
+              return const Center(child: Text('Gagal memuat izin.'));
             } else {
               return ListView(
                 padding: const EdgeInsets.all(0),
@@ -589,7 +589,7 @@ class _LeaveOverview extends State<LeaveOverview>
                   ),
                   permissionLeaveOverviewCheck
                       ? ListTile(
-                    title: const Text('Overview'),
+                    title: const Text('Ringkasan'),
                     onTap: () {
                       Navigator.pushNamed(context, '/leave_overview');
                     },
@@ -598,7 +598,7 @@ class _LeaveOverview extends State<LeaveOverview>
 
                   permissionMyLeaveRequestCheck
                       ? ListTile(
-                    title: const Text('My Leave Request'),
+                    title: const Text('Permintaan Cuti Saya'),
                     onTap: () {
                       Navigator.pushNamed(context, '/my_leave_request');
                     },
@@ -607,7 +607,7 @@ class _LeaveOverview extends State<LeaveOverview>
 
                   permissionLeaveRequestCheck
                       ? ListTile(
-                    title: const Text('Leave Request'),
+                    title: const Text('Permintaan Cuti'),
                     onTap: () {
                       Navigator.pushNamed(context, '/leave_request');
                     },
@@ -616,7 +616,7 @@ class _LeaveOverview extends State<LeaveOverview>
 
                   permissionLeaveTypeCheck
                       ? ListTile(
-                    title: const Text('Leave Type'),
+                    title: const Text('Tipe Cuti'),
                     onTap: () {
                       Navigator.pushNamed(context, '/leave_types');
                     },
@@ -625,7 +625,7 @@ class _LeaveOverview extends State<LeaveOverview>
 
                   permissionLeaveAllocationCheck
                       ? ListTile(
-                    title: const Text('Leave Allocation Request'),
+                    title: const Text('Permintaan Alokasi Cuti'),
                     onTap: () {
                       Navigator.pushNamed(
                           context, '/leave_allocation_request');
@@ -635,7 +635,7 @@ class _LeaveOverview extends State<LeaveOverview>
 
                   permissionLeaveAssignCheck
                       ? ListTile(
-                    title: const Text('All Assigned Leave'),
+                    title: const Text('Semua Cuti Diberikan'),
                     onTap: () {
                       Navigator.pushNamed(context, '/all_assigned_leave');
                     },

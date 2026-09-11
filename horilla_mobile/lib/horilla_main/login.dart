@@ -19,7 +19,8 @@ class _LoginPageState extends State<LoginPage> {
   var isDeviceConnected = false;
   bool isAlertSet = false;
   bool _passwordVisible = false;
-  final TextEditingController serverController = TextEditingController();
+  final TextEditingController serverController =
+      TextEditingController(text: 'https://hr.starphotoadvertising.com');
   final TextEditingController usernameController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   double horizontalMargin = 0.0;
@@ -95,7 +96,7 @@ class _LoginPageState extends State<LoginPage> {
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
-            content: Text('Invalid email or password'),
+            content: Text('Email atau kata sandi tidak valid'),
             backgroundColor: Colors.red,
           ),
         );
@@ -103,7 +104,7 @@ class _LoginPageState extends State<LoginPage> {
     } on TimeoutException {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
-          content: Text('Connection timeout'),
+          content: Text('Batas waktu koneksi habis'),
           backgroundColor: Colors.red,
         ),
       );
@@ -111,7 +112,7 @@ class _LoginPageState extends State<LoginPage> {
       print(e);
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
-          content: Text('Invalid server address'),
+          content: Text('Alamat server tidak valid'),
           backgroundColor: Colors.red,
         ),
       );
@@ -203,7 +204,7 @@ class _LoginPageState extends State<LoginPage> {
                       child: Column(
                         children: <Widget>[
                           const Text(
-                            'Sign In',
+                            'Masuk',
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 20,
@@ -211,7 +212,7 @@ class _LoginPageState extends State<LoginPage> {
                           ),
                           SizedBox(height: MediaQuery.of(context).size.height * 0.02),
                           _buildTextFormField(
-                            'Server Address',
+                            'Alamat Server',
                             serverController,
                             false,
                           ),
@@ -223,7 +224,7 @@ class _LoginPageState extends State<LoginPage> {
                           ),
                           SizedBox(height: MediaQuery.of(context).size.height * 0.02),
                           _buildTextFormField(
-                            'Password',
+                            'Kata Sandi',
                             passwordController,
                             true,
                             _passwordVisible,
@@ -248,7 +249,7 @@ class _LoginPageState extends State<LoginPage> {
                               child: const Padding(
                                 padding: EdgeInsets.symmetric(vertical: 10.0),
                                 child: Text(
-                                  'Sign In',
+                                  'Masuk',
                                   style: TextStyle(
                                     fontWeight: FontWeight.bold,
                                     fontSize: 20,

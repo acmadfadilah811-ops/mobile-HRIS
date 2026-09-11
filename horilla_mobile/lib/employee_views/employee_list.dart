@@ -317,7 +317,7 @@ class _EmployeeListPageState extends State<EmployeeListPage> {
         forceMaterialTransparency: true,
         backgroundColor: Colors.white,
         automaticallyImplyLeading: false,
-        title: const Text('Employees', style: TextStyle(color: Colors.black)),
+        title: const Text('Karyawan', style: TextStyle(color: Colors.black)),
         actions: const [],
       ),
       body: Stack(
@@ -348,7 +348,7 @@ class _EmployeeListPageState extends State<EmployeeListPage> {
                               child: TextField(
                                 enabled: false,
                                 decoration: InputDecoration(
-                                  hintText: 'Loading...',
+                                  hintText: 'Memuat...',
                                   hintStyle: TextStyle(
                                       color: Colors.grey.shade400,
                                       fontSize: 14),
@@ -438,7 +438,7 @@ class _EmployeeListPageState extends State<EmployeeListPage> {
                                 });
                               },
                               decoration: InputDecoration(
-                                hintText: 'Search',
+                                hintText: 'Cari',
                                 border: OutlineInputBorder(
                                   borderRadius:
                                   BorderRadius.circular(8.0),
@@ -479,7 +479,7 @@ class _EmployeeListPageState extends State<EmployeeListPage> {
                           ),
                           SizedBox(height: 20),
                           Text(
-                            "There are no employee records to display",
+                            "Tidak ada data karyawan untuk ditampilkan",
                             style: TextStyle(
                               fontSize: 16.0,
                               color: Colors.black,

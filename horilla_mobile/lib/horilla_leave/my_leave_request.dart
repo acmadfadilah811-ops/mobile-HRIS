@@ -27,9 +27,9 @@ class _MyLeaveRequest extends State<MyLeaveRequest>
   final List<Widget> bottomBarPages = [];
   Map<String, String> leaveItemsIdMap = {};
   Map<String, dynamic> breakdownMaps = {
-    'full_day': 'Full Day',
-    'second_half': 'Second Half',
-    'first_half': 'First Half',
+    'full_day': 'Hari Penuh',
+    'second_half': 'Paruh Kedua',
+    'first_half': 'Paruh Pertama',
   };
   var leaveItems = [''];
   var startBreakdown = [''];
@@ -85,11 +85,11 @@ class _MyLeaveRequest extends State<MyLeaveRequest>
 
   String _getBreakdown(String breakdownValue) {
     final breakdownMap = {
-      'full_day': 'Full Day',
-      'second_half': 'Second Half',
-      'first_half': 'First Half',
+      'full_day': 'Hari Penuh',
+      'second_half': 'Paruh Kedua',
+      'first_half': 'Paruh Pertama',
     };
-    return breakdownMap[breakdownValue] ?? 'Unknown';
+    return breakdownMap[breakdownValue] ?? 'Tidak Diketahui';
   }
 
   String encodeFile(File file) {
@@ -137,8 +137,8 @@ class _MyLeaveRequest extends State<MyLeaveRequest>
     currentPage = 1;
     getMyAllLeaveRequestFirstPage();
     _scrollController.addListener(_scrollListener);
-    startDateSelect.text = "Select Start Date";
-    endDateSelect.text = "Select End Date";
+    startDateSelect.text = "Pilih Tanggal Mulai";
+    endDateSelect.text = "Pilih Tanggal Selesai";
     _tabController = TabController(length: 5, vsync: this);
     startBreakdown.clear();
     getMyLeaveRequest();
@@ -475,7 +475,7 @@ class _MyLeaveRequest extends State<MyLeaveRequest>
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       const Text(
-                        "Add Leave",
+                        "Tambah Cuti",
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           color: Colors.black,
@@ -514,7 +514,7 @@ class _MyLeaveRequest extends State<MyLeaveRequest>
                               height:
                               MediaQuery.of(context).size.height * 0.03),
                           const Text(
-                            "Leave Type",
+                            "Jenis Cuti",
                             style: TextStyle(color: Colors.black),
                           ),
                           SizedBox(
@@ -542,13 +542,13 @@ class _MyLeaveRequest extends State<MyLeaveRequest>
                                 leaveTypeId = newValue!;
                               });
                             },
-                            disabledHint: const Text('Leave type pre-filled'),
+                            disabledHint: const Text('Jenis cuti terisi otomatis'),
                             isExpanded: true,
                           ),
                           SizedBox(
                               height:
                               MediaQuery.of(context).size.height * 0.03),
-                          const Text("Start Date",
+                          const Text("Tanggal Mulai",
                               style: TextStyle(color: Colors.black)),
                           SizedBox(
                               height:
@@ -572,20 +572,20 @@ class _MyLeaveRequest extends State<MyLeaveRequest>
                               }
                             },
                             decoration: InputDecoration(
-                              labelText: "Start Date",
+                              labelText: "Tanggal Mulai",
                               labelStyle: TextStyle(color: Colors.grey[350]),
                               border: const OutlineInputBorder(),
                               contentPadding:
                               const EdgeInsets.symmetric(horizontal: 10.0),
                               errorText: _validateDate
-                                  ? 'Please select a start date'
+                                  ? 'Silakan pilih tanggal mulai'
                                   : null,
                             ),
                           ),
                           SizedBox(
                               height:
                               MediaQuery.of(context).size.height * 0.03),
-                          const Text("Start Date Breakdown",
+                          const Text("Rincian Tanggal Mulai",
                               style: TextStyle(color: Colors.black)),
                           SizedBox(
                               height:
@@ -612,10 +612,10 @@ class _MyLeaveRequest extends State<MyLeaveRequest>
                               dropdownDecoratorProps: DropDownDecoratorProps(
                                 dropdownSearchDecoration: InputDecoration(
                                   errorText: _validateStartDateBreakdown
-                                      ? 'Please select a Start Date Breakdown'
+                                      ? 'Silakan pilih Rincian Tanggal Mulai'
                                       : null,
                                   border: const OutlineInputBorder(),
-                                  labelText: "Start Date Breakdown",
+                                  labelText: "Rincian Tanggal Mulai",
                                   labelStyle:
                                   TextStyle(color: Colors.grey[350]),
                                   contentPadding:
@@ -631,7 +631,7 @@ class _MyLeaveRequest extends State<MyLeaveRequest>
                           SizedBox(
                               height:
                               MediaQuery.of(context).size.height * 0.03),
-                          const Text("End Date",
+                          const Text("Tanggal Selesai",
                               style: TextStyle(color: Colors.black)),
                           SizedBox(
                               height:
@@ -654,20 +654,20 @@ class _MyLeaveRequest extends State<MyLeaveRequest>
                               }
                             },
                             decoration: InputDecoration(
-                              labelText: "End Date",
+                              labelText: "Tanggal Selesai",
                               labelStyle: TextStyle(color: Colors.grey[350]),
                               border: const OutlineInputBorder(),
                               contentPadding:
                               const EdgeInsets.symmetric(horizontal: 10.0),
                               errorText: _validateEndDate
-                                  ? 'Please select an end date'
+                                  ? 'Silakan pilih tanggal selesai'
                                   : null,
                             ),
                           ),
                           SizedBox(
                               height:
                               MediaQuery.of(context).size.height * 0.03),
-                          const Text("End Date Breakdown",
+                          const Text("Rincian Tanggal Selesai",
                               style: TextStyle(color: Colors.black)),
                           SizedBox(
                               height:
@@ -693,10 +693,10 @@ class _MyLeaveRequest extends State<MyLeaveRequest>
                               dropdownDecoratorProps: DropDownDecoratorProps(
                                 dropdownSearchDecoration: InputDecoration(
                                   errorText: _validateEndDateBreakdown
-                                      ? 'Please select an End Date Breakdown'
+                                      ? 'Silakan pilih Rincian Tanggal Selesai'
                                       : null,
                                   border: const OutlineInputBorder(),
-                                  labelText: "End Date Breakdown",
+                                  labelText: "Rincian Tanggal Selesai",
                                   labelStyle:
                                   TextStyle(color: Colors.grey[350]),
                                   contentPadding:
@@ -712,7 +712,7 @@ class _MyLeaveRequest extends State<MyLeaveRequest>
                           SizedBox(
                               height:
                               MediaQuery.of(context).size.height * 0.03),
-                          const Text("Description",
+                          const Text("Deskripsi",
                               style: TextStyle(color: Colors.black)),
                           SizedBox(
                               height:
@@ -720,13 +720,13 @@ class _MyLeaveRequest extends State<MyLeaveRequest>
                           TextField(
                             controller: descriptionSelect,
                             decoration: InputDecoration(
-                              labelText: "Description",
+                              labelText: "Deskripsi",
                               labelStyle: TextStyle(color: Colors.grey[350]),
                               border: const OutlineInputBorder(),
                               contentPadding:
                               const EdgeInsets.symmetric(horizontal: 10.0),
                               errorText: _validateDescription
-                                  ? 'Description cannot be empty'
+                                  ? 'Deskripsi tidak boleh kosong'
                                   : null,
                             ),
                             onChanged: (newValue) {
@@ -882,7 +882,7 @@ class _MyLeaveRequest extends State<MyLeaveRequest>
                           ),
                         ),
                         child:
-                        const Text('Save', style: TextStyle(color: Colors.white)),
+                        const Text('Simpan', style: TextStyle(color: Colors.white)),
                       ),
                     ),
                   ],
@@ -916,7 +916,7 @@ class _MyLeaveRequest extends State<MyLeaveRequest>
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       const Text(
-                        "Add Leave",
+                        "Tambah Cuti",
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           color: Colors.black,
@@ -951,7 +951,7 @@ class _MyLeaveRequest extends State<MyLeaveRequest>
                           SizedBox(
                               height:
                               MediaQuery.of(context).size.height * 0.03),
-                          const Text("Leave Type",
+                          const Text("Jenis Cuti",
                               style: TextStyle(color: Colors.black)),
                           SizedBox(
                               height:
@@ -960,13 +960,13 @@ class _MyLeaveRequest extends State<MyLeaveRequest>
                             textFieldConfiguration: TextFieldConfiguration(
                               controller: _typeAheadEditController,
                               decoration: InputDecoration(
-                                labelText: 'Choose a Leave Type',
+                                labelText: 'Pilih Jenis Cuti',
                                 labelStyle: TextStyle(color: Colors.grey[350]),
                                 border: const OutlineInputBorder(),
                                 contentPadding:
                                 const EdgeInsets.symmetric(horizontal: 10.0),
                                 errorText: _validateLeaveType
-                                    ? 'Please select a leave type'
+                                    ? 'Silakan pilih jenis cuti'
                                     : null,
                               ),
                             ),
@@ -993,7 +993,7 @@ class _MyLeaveRequest extends State<MyLeaveRequest>
                             noItemsFoundBuilder: (context) => const Padding(
                               padding: EdgeInsets.all(8.0),
                               child: Text(
-                                'No Leave Types Found',
+                                'Jenis Cuti Tidak Ditemukan',
                                 style: TextStyle(fontSize: 16),
                               ),
                             ),
@@ -1014,7 +1014,7 @@ class _MyLeaveRequest extends State<MyLeaveRequest>
                           SizedBox(
                               height:
                               MediaQuery.of(context).size.height * 0.03),
-                          const Text("Start Date",
+                          const Text("Tanggal Mulai",
                               style: TextStyle(color: Colors.black)),
                           SizedBox(
                               height:
@@ -1038,20 +1038,20 @@ class _MyLeaveRequest extends State<MyLeaveRequest>
                               }
                             },
                             decoration: InputDecoration(
-                              labelText: "Start Date",
+                              labelText: "Tanggal Mulai",
                               labelStyle: TextStyle(color: Colors.grey[350]),
                               border: const OutlineInputBorder(),
                               contentPadding:
                               const EdgeInsets.symmetric(horizontal: 10.0),
                               errorText: _validateDate
-                                  ? 'Please select a start date'
+                                  ? 'Silakan pilih tanggal mulai'
                                   : null,
                             ),
                           ),
                           SizedBox(
                               height:
                               MediaQuery.of(context).size.height * 0.03),
-                          const Text("Start Date Breakdown",
+                          const Text("Rincian Tanggal Mulai",
                               style: TextStyle(color: Colors.black)),
                           SizedBox(
                               height:
@@ -1078,10 +1078,10 @@ class _MyLeaveRequest extends State<MyLeaveRequest>
                               dropdownDecoratorProps: DropDownDecoratorProps(
                                 dropdownSearchDecoration: InputDecoration(
                                   errorText: _validateStartDateBreakdown
-                                      ? 'Please select a Start Date Breakdown'
+                                      ? 'Silakan pilih Rincian Tanggal Mulai'
                                       : null,
                                   border: const OutlineInputBorder(),
-                                  labelText: "Start Date Breakdown",
+                                  labelText: "Rincian Tanggal Mulai",
                                   labelStyle:
                                   TextStyle(color: Colors.grey[350]),
                                   contentPadding:
@@ -1097,7 +1097,7 @@ class _MyLeaveRequest extends State<MyLeaveRequest>
                           SizedBox(
                               height:
                               MediaQuery.of(context).size.height * 0.03),
-                          const Text("End Date",
+                          const Text("Tanggal Selesai",
                               style: TextStyle(color: Colors.black)),
                           SizedBox(
                               height:
@@ -1120,20 +1120,20 @@ class _MyLeaveRequest extends State<MyLeaveRequest>
                               }
                             },
                             decoration: InputDecoration(
-                              labelText: "End Date",
+                              labelText: "Tanggal Selesai",
                               labelStyle: TextStyle(color: Colors.grey[350]),
                               border: const OutlineInputBorder(),
                               contentPadding:
                               const EdgeInsets.symmetric(horizontal: 10.0),
                               errorText: _validateEndDate
-                                  ? 'Please select an end date'
+                                  ? 'Silakan pilih tanggal selesai'
                                   : null,
                             ),
                           ),
                           SizedBox(
                               height:
                               MediaQuery.of(context).size.height * 0.03),
-                          const Text("End Date Breakdown",
+                          const Text("Rincian Tanggal Selesai",
                               style: TextStyle(color: Colors.black)),
                           SizedBox(
                               height:
@@ -1159,10 +1159,10 @@ class _MyLeaveRequest extends State<MyLeaveRequest>
                               dropdownDecoratorProps: DropDownDecoratorProps(
                                 dropdownSearchDecoration: InputDecoration(
                                   errorText: _validateEndDateBreakdown
-                                      ? 'Please select an End Date Breakdown'
+                                      ? 'Silakan pilih Rincian Tanggal Selesai'
                                       : null,
                                   border: const OutlineInputBorder(),
-                                  labelText: "End Date Breakdown",
+                                  labelText: "Rincian Tanggal Selesai",
                                   labelStyle:
                                   TextStyle(color: Colors.grey[350]),
                                   contentPadding:
@@ -1178,7 +1178,7 @@ class _MyLeaveRequest extends State<MyLeaveRequest>
                           SizedBox(
                               height:
                               MediaQuery.of(context).size.height * 0.03),
-                          const Text("Description",
+                          const Text("Deskripsi",
                               style: TextStyle(color: Colors.black)),
                           SizedBox(
                               height:
@@ -1186,13 +1186,13 @@ class _MyLeaveRequest extends State<MyLeaveRequest>
                           TextField(
                             controller: descriptionSelect,
                             decoration: InputDecoration(
-                              labelText: "Description",
+                              labelText: "Deskripsi",
                               labelStyle: TextStyle(color: Colors.grey[350]),
                               border: const OutlineInputBorder(),
                               contentPadding:
                               const EdgeInsets.symmetric(horizontal: 10.0),
                               errorText: _validateDescription
-                                  ? 'Description cannot be empty'
+                                  ? 'Deskripsi tidak boleh kosong'
                                   : null,
                             ),
                             onChanged: (newValue) {
@@ -1367,7 +1367,7 @@ class _MyLeaveRequest extends State<MyLeaveRequest>
                           ),
                         ),
                         child:
-                        const Text('Save', style: TextStyle(color: Colors.white)),
+                        const Text('Simpan', style: TextStyle(color: Colors.white)),
                       ),
                     ),
                   ],
@@ -1408,7 +1408,7 @@ class _MyLeaveRequest extends State<MyLeaveRequest>
                     Image.asset(imagePath),
                     const SizedBox(height: 16),
                     const Text(
-                      "Leave Created Successfully",
+                      "Cuti Berhasil Dibuat",
                       style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
@@ -1451,7 +1451,7 @@ class _MyLeaveRequest extends State<MyLeaveRequest>
                     Image.asset(imagePath),
                     const SizedBox(height: 16),
                     const Text(
-                      "Leave Deleted Successfully",
+                      "Cuti Berhasil Dihapus",
                       style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
@@ -1494,7 +1494,7 @@ class _MyLeaveRequest extends State<MyLeaveRequest>
                     Image.asset(imagePath),
                     const SizedBox(height: 16),
                     const Text(
-                      "Leave Cancelled Successfully",
+                      "Cuti Berhasil Dibatalkan",
                       style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
@@ -1537,7 +1537,7 @@ class _MyLeaveRequest extends State<MyLeaveRequest>
                     Image.asset(imagePath),
                     const SizedBox(height: 16),
                     const Text(
-                      "Leave Updated Successfully",
+                      "Cuti Berhasil Diperbarui",
                       style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
@@ -1576,7 +1576,7 @@ class _MyLeaveRequest extends State<MyLeaveRequest>
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         const Text(
-                          "Edit Leave",
+                          "Edit Cuti",
                           style: TextStyle(
                               fontSize: 21,
                               fontWeight: FontWeight.bold,
@@ -1609,7 +1609,7 @@ class _MyLeaveRequest extends State<MyLeaveRequest>
                               ),
                             SizedBox(
                                 height: MediaQuery.of(context).size.height * 0.03),
-                            const Text("Leave Type",
+                            const Text("Jenis Cuti",
                                 style: TextStyle(color: Colors.black)),
                             SizedBox(
                                 height: MediaQuery.of(context).size.height * 0.01),
@@ -1617,13 +1617,13 @@ class _MyLeaveRequest extends State<MyLeaveRequest>
                               textFieldConfiguration: TextFieldConfiguration(
                                 controller: _typeAheadEditController,
                                 decoration: InputDecoration(
-                                  labelText: 'Choose a Leave Type',
+                                  labelText: 'Pilih Jenis Cuti',
                                   labelStyle: TextStyle(color: Colors.grey[350]),
                                   border: const OutlineInputBorder(),
                                   contentPadding:
                                   const EdgeInsets.symmetric(horizontal: 10.0),
                                   errorText: _validateLeaveType
-                                      ? 'Please select a leave type'
+                                      ? 'Silakan pilih jenis cuti'
                                       : null,
                                 ),
                               ),
@@ -1650,7 +1650,7 @@ class _MyLeaveRequest extends State<MyLeaveRequest>
                               noItemsFoundBuilder: (context) => const Padding(
                                 padding: EdgeInsets.all(8.0),
                                 child: Text(
-                                  'No Leave Types Found',
+                                  'Jenis Cuti Tidak Ditemukan',
                                   style: TextStyle(fontSize: 16),
                                 ),
                               ),
@@ -1670,7 +1670,7 @@ class _MyLeaveRequest extends State<MyLeaveRequest>
                             ),
                             SizedBox(
                                 height: MediaQuery.of(context).size.height * 0.03),
-                            const Text("Start Date",
+                            const Text("Tanggal Mulai",
                                 style: TextStyle(color: Colors.black)),
                             SizedBox(
                                 height: MediaQuery.of(context).size.height * 0.01),
@@ -1680,15 +1680,15 @@ class _MyLeaveRequest extends State<MyLeaveRequest>
                                 readOnly: true,
                                 controller: startDateInput,
                                 decoration: InputDecoration(
-                                  labelText: "Start Date",
+                                  labelText: "Tanggal Mulai",
                                   labelStyle: TextStyle(color: Colors.grey[350]),
                                   border: const OutlineInputBorder(),
                                   errorText: _validateDate
-                                      ? 'Please select a start date'
+                                      ? 'Silakan pilih tanggal mulai'
                                       : null,
                                   contentPadding:
                                   const EdgeInsets.symmetric(horizontal: 10.0),
-                                  hintText: "Select Date",
+                                  hintText: "Pilih Tanggal",
                                 ),
                                 onTap: () async {
                                   final selectedDate = await showCustomDatePicker(
@@ -1728,7 +1728,7 @@ class _MyLeaveRequest extends State<MyLeaveRequest>
                             ),
                             SizedBox(
                                 height: MediaQuery.of(context).size.height * 0.03),
-                            const Text("End Date", style: TextStyle(color: Colors.black)),
+                            const Text("Tanggal Selesai", style: TextStyle(color: Colors.black)),
                             SizedBox(
                                 height: MediaQuery.of(context).size.height * 0.01),
                             Padding(
@@ -1739,13 +1739,13 @@ class _MyLeaveRequest extends State<MyLeaveRequest>
                                 decoration: InputDecoration(
                                   border: const OutlineInputBorder(),
                                   errorText: _validateEndDate
-                                      ? 'Please select an end date'
+                                      ? 'Silakan pilih tanggal selesai'
                                       : null,
-                                  labelText: "End Date",
+                                  labelText: "Tanggal Selesai",
                                   labelStyle: TextStyle(color: Colors.grey[350]),
                                   contentPadding:
                                   const EdgeInsets.symmetric(horizontal: 10.0),
-                                  hintText: "Select Date",
+                                  hintText: "Pilih Tanggal",
                                 ),
                                 onTap: () async {
                                   final selectedDate = await showCustomDatePicker(
@@ -1764,7 +1764,7 @@ class _MyLeaveRequest extends State<MyLeaveRequest>
                             ),
                             SizedBox(
                                 height: MediaQuery.of(context).size.height * 0.03),
-                            const Text("End Date Breakdown",
+                            const Text("Rincian Tanggal Selesai",
                                 style: TextStyle(color: Colors.black)),
                             SizedBox(
                                 height: MediaQuery.of(context).size.height * 0.01),
@@ -1785,7 +1785,7 @@ class _MyLeaveRequest extends State<MyLeaveRequest>
                             ),
                             SizedBox(
                                 height: MediaQuery.of(context).size.height * 0.03),
-                            const Text("Description",
+                            const Text("Deskripsi",
                                 style: TextStyle(color: Colors.black)),
                             SizedBox(
                                 height: MediaQuery.of(context).size.height * 0.01),
@@ -1799,7 +1799,7 @@ class _MyLeaveRequest extends State<MyLeaveRequest>
                                   contentPadding:
                                   const EdgeInsets.symmetric(horizontal: 10.0),
                                   errorText: _validateDescription
-                                      ? 'Description cannot be empty'
+                                      ? 'Deskripsi tidak boleh kosong'
                                       : null,
                                 ),
                                 onChanged: (newValue) {
@@ -1844,7 +1844,7 @@ class _MyLeaveRequest extends State<MyLeaveRequest>
                                       }
                                     },
                                     child: const Text(
-                                      'View Attachment',
+                                      'Lihat Lampiran',
                                       style: TextStyle(
                                         decoration: TextDecoration.underline,
                                         color: Colors.blue,
@@ -1962,7 +1962,7 @@ class _MyLeaveRequest extends State<MyLeaveRequest>
                             ),
                           ),
                           child:
-                          const Text('Save', style: TextStyle(color: Colors.white)),
+                          const Text('Simpan', style: TextStyle(color: Colors.white)),
                         ),
                       ),
                     ],
@@ -1987,7 +1987,7 @@ class _MyLeaveRequest extends State<MyLeaveRequest>
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
-          content: Text('No image selected'),
+          content: Text('Belum ada gambar dipilih'),
           backgroundColor: Colors.red,
         ),
       );
@@ -2201,7 +2201,7 @@ class _MyLeaveRequest extends State<MyLeaveRequest>
       } else if (errorJson.containsKey("non_field_errors")) {
         _errorMessage = errorJson["non_field_errors"].join(", ");
       } else if (errorJson.containsKey("attachment")) {
-        _errorMessage = "Attachment field is required";
+        _errorMessage = "Kolom lampiran wajib diisi";
       } else {
         _errorMessage = "An unknown error occurred.";
       }
@@ -2279,7 +2279,7 @@ class _MyLeaveRequest extends State<MyLeaveRequest>
         } else if (errorJson.containsKey("leave_type_id")) {
           _errorMessage = errorJson["leave_type_id"].join(", ");
         } else if (errorJson.containsKey("attachment")) {
-          _errorMessage = "Attachment field is required";
+          _errorMessage = "Kolom lampiran wajib diisi";
         } else if (errorJson.containsKey("non_field_errors")) {
           _errorMessage = errorJson["non_field_errors"].join(", ");
         }
@@ -2466,7 +2466,7 @@ class _MyLeaveRequest extends State<MyLeaveRequest>
           },
         ),
         automaticallyImplyLeading: false,
-        title: const Text('My Leave Request',
+        title: const Text('Permintaan Cuti Saya',
             style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black)),
         actions: [
           Padding(
@@ -2508,7 +2508,7 @@ class _MyLeaveRequest extends State<MyLeaveRequest>
                         side: const BorderSide(color: Colors.red),
                       ),
                     ),
-                    child: const Text('CREATE', style: TextStyle(color: Colors.red)),
+                    child: const Text('BUAT', style: TextStyle(color: Colors.red)),
                   ),
                 ),
                 // ),
@@ -2538,7 +2538,7 @@ class _MyLeaveRequest extends State<MyLeaveRequest>
                 child: Row(
                   children: [
                     myRequests.isEmpty
-                        ? const Text('No leaves')
+                        ? const Text('Tidak ada cuti')
                         : GridView.builder(
                       shrinkWrap: true,
                       scrollDirection: Axis.horizontal,
@@ -2573,11 +2573,11 @@ class _MyLeaveRequest extends State<MyLeaveRequest>
                     unselectedLabelColor: Colors.grey,
                     isScrollable: true,
                     tabs: [
-                      Tab(text: 'All ($allMyRequestsCount)'),
-                      Tab(text: 'Requested ($requestedCount)'),
-                      Tab(text: 'Approved ($approvedCount)'),
-                      Tab(text: 'Cancelled ($cancelledCount)'),
-                      Tab(text: 'Rejected ($rejectedCount)'),
+                      Tab(text: 'Semua ($allMyRequestsCount)'),
+                      Tab(text: 'Diminta ($requestedCount)'),
+                      Tab(text: 'Disetujui ($approvedCount)'),
+                      Tab(text: 'Dibatalkan ($cancelledCount)'),
+                      Tab(text: 'Ditolak ($rejectedCount)'),
                     ],
                   ),
                   // ),
@@ -2604,7 +2604,7 @@ class _MyLeaveRequest extends State<MyLeaveRequest>
                                 ),
                                 SizedBox(height: 20),
                                 Text(
-                                  "There are no Leave records to display",
+                                  "Tidak ada data cuti untuk ditampilkan",
                                   style: TextStyle(
                                       fontSize: 16.0,
                                       color: Colors.black,
@@ -2628,7 +2628,7 @@ class _MyLeaveRequest extends State<MyLeaveRequest>
                                 ),
                                 SizedBox(height: 20),
                                 Text(
-                                  "There are no Leave records to display",
+                                  "Tidak ada data cuti untuk ditampilkan",
                                   style: TextStyle(
                                       fontSize: 16.0,
                                       color: Colors.black,
@@ -2655,7 +2655,7 @@ class _MyLeaveRequest extends State<MyLeaveRequest>
                                 ),
                                 SizedBox(height: 20),
                                 Text(
-                                  "There are no Leave records to display",
+                                  "Tidak ada data cuti untuk ditampilkan",
                                   style: TextStyle(
                                       fontSize: 16.0,
                                       color: Colors.black,
@@ -2682,7 +2682,7 @@ class _MyLeaveRequest extends State<MyLeaveRequest>
                                 ),
                                 SizedBox(height: 20),
                                 Text(
-                                  "There are no Leave records to display",
+                                  "Tidak ada data cuti untuk ditampilkan",
                                   style: TextStyle(
                                       fontSize: 16.0,
                                       color: Colors.black,
@@ -2709,7 +2709,7 @@ class _MyLeaveRequest extends State<MyLeaveRequest>
                                 ),
                                 SizedBox(height: 20),
                                 Text(
-                                  "There are no Leave records to display",
+                                  "Tidak ada data cuti untuk ditampilkan",
                                   style: TextStyle(
                                       fontSize: 16.0,
                                       color: Colors.black,
@@ -2763,7 +2763,7 @@ class _MyLeaveRequest extends State<MyLeaveRequest>
                 ],
               );
             } else if (snapshot.hasError) {
-              return const Center(child: Text('Error loading permissions.'));
+              return const Center(child: Text('Gagal memuat izin.'));
             } else {
               return ListView(
                 padding: const EdgeInsets.all(0),
@@ -2783,7 +2783,7 @@ class _MyLeaveRequest extends State<MyLeaveRequest>
                   ),
                   permissionLeaveOverviewCheck
                       ? ListTile(
-                    title: const Text('Overview'),
+                    title: const Text('Ringkasan'),
                     onTap: () {
                       Navigator.pushNamed(context, '/leave_overview');
                     },
@@ -2792,7 +2792,7 @@ class _MyLeaveRequest extends State<MyLeaveRequest>
 
                   permissionMyLeaveRequestCheck
                       ? ListTile(
-                    title: const Text('My Leave Request'),
+                    title: const Text('Permintaan Cuti Saya'),
                     onTap: () {
                       Navigator.pushNamed(context, '/my_leave_request');
                     },
@@ -2801,7 +2801,7 @@ class _MyLeaveRequest extends State<MyLeaveRequest>
 
                   permissionLeaveRequestCheck
                       ? ListTile(
-                    title: const Text('Leave Request'),
+                    title: const Text('Permintaan Cuti'),
                     onTap: () {
                       Navigator.pushNamed(context, '/leave_request');
                     },
@@ -2810,7 +2810,7 @@ class _MyLeaveRequest extends State<MyLeaveRequest>
 
                   permissionLeaveTypeCheck
                       ? ListTile(
-                    title: const Text('Leave Type'),
+                    title: const Text('Jenis Cuti'),
                     onTap: () {
                       Navigator.pushNamed(context, '/leave_types');
                     },
@@ -2819,7 +2819,7 @@ class _MyLeaveRequest extends State<MyLeaveRequest>
 
                   permissionLeaveAllocationCheck
                       ? ListTile(
-                    title: const Text('Leave Allocation Request'),
+                    title: const Text('Permintaan Alokasi Cuti'),
                     onTap: () {
                       Navigator.pushNamed(
                           context, '/leave_allocation_request');
@@ -2829,7 +2829,7 @@ class _MyLeaveRequest extends State<MyLeaveRequest>
 
                   permissionLeaveAssignCheck
                       ? ListTile(
-                    title: const Text('All Assigned Leave'),
+                    title: const Text('Semua Cuti Ditugaskan'),
                     onTap: () {
                       Navigator.pushNamed(context, '/all_assigned_leave');
                     },
@@ -3013,11 +3013,11 @@ class _MyLeaveRequest extends State<MyLeaveRequest>
                   unselectedLabelColor: Colors.grey,
                   isScrollable: true,
                   tabs: const [
-                    Tab(text: 'All'),
-                    Tab(text: 'Requested'),
-                    Tab(text: 'Approved'),
-                    Tab(text: 'Cancelled'),
-                    Tab(text: 'Rejected'),
+                    Tab(text: 'Semua'),
+                    Tab(text: 'Diminta'),
+                    Tab(text: 'Disetujui'),
+                    Tab(text: 'Dibatalkan'),
+                    Tab(text: 'Ditolak'),
                   ],
                 ),
                 SizedBox(height: MediaQuery.of(context).size.height * 0.02),
@@ -3296,7 +3296,7 @@ class _MyLeaveRequest extends State<MyLeaveRequest>
                           MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              'Start Date',
+                              'Tanggal Mulai',
                               style:
                               TextStyle(color: Colors.grey.shade700),
                             ),
@@ -3308,7 +3308,7 @@ class _MyLeaveRequest extends State<MyLeaveRequest>
                           MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              'Start Date Breakdown',
+                              'Rincian Tanggal Mulai',
                               style:
                               TextStyle(color: Colors.grey.shade700),
                             ),
@@ -3321,7 +3321,7 @@ class _MyLeaveRequest extends State<MyLeaveRequest>
                           MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              'End Date',
+                              'Tanggal Selesai',
                               style:
                               TextStyle(color: Colors.grey.shade700),
                             ),
@@ -3333,7 +3333,7 @@ class _MyLeaveRequest extends State<MyLeaveRequest>
                           MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              'End Date Breakdown',
+                              'Rincian Tanggal Selesai',
                               style:
                               TextStyle(color: Colors.grey.shade700),
                             ),
@@ -3346,7 +3346,7 @@ class _MyLeaveRequest extends State<MyLeaveRequest>
                           MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              'Requested Days',
+                              'Jumlah Hari yang Diminta',
                               style:
                               TextStyle(color: Colors.grey.shade700),
                             ),
@@ -3359,7 +3359,7 @@ class _MyLeaveRequest extends State<MyLeaveRequest>
                           MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              'Description',
+                              'Deskripsi',
                               style:
                               TextStyle(color: Colors.grey.shade700),
                             ),
@@ -3389,7 +3389,7 @@ class _MyLeaveRequest extends State<MyLeaveRequest>
                             MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
-                                'Attachment',
+                                'Lampiran',
                                 style: TextStyle(
                                     color: Colors.grey.shade700),
                               ),
@@ -3418,7 +3418,7 @@ class _MyLeaveRequest extends State<MyLeaveRequest>
                                   }
                                 },
                                 child: const Text(
-                                  'View Attachment',
+                                  'Lihat Lampiran',
                                   style: TextStyle(
                                     decoration: TextDecoration.underline,
                                     color: Colors.blue,
@@ -3428,7 +3428,7 @@ class _MyLeaveRequest extends State<MyLeaveRequest>
                             ],
                           ),
                       ]
-                          : [const Text('No current requests available')],
+                          : [const Text('Tidak ada permintaan saat ini')],
                     ),
                   ),
                 ),
@@ -3598,7 +3598,7 @@ class _MyLeaveRequest extends State<MyLeaveRequest>
                                             MainAxisAlignment.spaceBetween,
                                             children: [
                                               const Text(
-                                                "Confirmation",
+                                                "Konfirmasi",
                                                 style: TextStyle(
                                                   fontWeight: FontWeight.bold,
                                                   color: Colors.black,
@@ -3659,7 +3659,7 @@ class _MyLeaveRequest extends State<MyLeaveRequest>
                                                   ),
                                                 ),
                                                 child: const Text(
-                                                  "Continue",
+                                                  "Lanjutkan",
                                                   style: TextStyle(
                                                       color: Colors.white),
                                                 ),
@@ -3681,7 +3681,7 @@ class _MyLeaveRequest extends State<MyLeaveRequest>
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text('Start Date',
+                      Text('Tanggal Mulai',
                           style: TextStyle(color: Colors.grey.shade700)),
                       Text('${record['start_date']}'),
                     ],
@@ -3689,7 +3689,7 @@ class _MyLeaveRequest extends State<MyLeaveRequest>
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text('End Date',
+                      Text('Tanggal Selesai',
                           style: TextStyle(color: Colors.grey.shade700)),
                       Text('${record['end_date']}'),
                     ],
@@ -3697,7 +3697,7 @@ class _MyLeaveRequest extends State<MyLeaveRequest>
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text('Requested Days',
+                      Text('Jumlah Hari yang Diminta',
                           style: TextStyle(color: Colors.grey.shade700)),
                       Text('${record['requested_days']}'),
                     ],
@@ -3811,7 +3811,7 @@ class _MyLeaveRequest extends State<MyLeaveRequest>
                                                 horizontal: 50, vertical: 12),
                                           ),
                                           child: const Text(
-                                            "Cancel",
+                                            "Batal",
                                             style: TextStyle(
                                                 fontSize: 18,
                                                 color: Colors.white),
@@ -3838,7 +3838,7 @@ class _MyLeaveRequest extends State<MyLeaveRequest>
                                   horizontal: 50, vertical: 12),
                             ),
                             child: const Text(
-                              'Cancel',
+                              'Batal',
                               style:
                               TextStyle(fontSize: 18, color: Colors.grey),
                             ),
@@ -4002,7 +4002,7 @@ class _MyLeaveRequest extends State<MyLeaveRequest>
                               const Padding(
                                 padding: EdgeInsets.only(left: 20.0),
                                 child: Text(
-                                  'Available Leave',
+                                  'Cuti Tersedia',
                                   style: TextStyle(
                                     fontWeight: FontWeight.normal,
                                     fontSize: 14.0,
@@ -4033,7 +4033,7 @@ class _MyLeaveRequest extends State<MyLeaveRequest>
                                 child: Padding(
                                   padding: EdgeInsets.only(left: 20.0),
                                   child: Text(
-                                    'Carryforward Leave',
+                                    'Cuti Terbawa',
                                     style: TextStyle(
                                       fontWeight: FontWeight.normal,
                                       fontSize: 14.0,
@@ -4064,7 +4064,7 @@ class _MyLeaveRequest extends State<MyLeaveRequest>
                               const Padding(
                                 padding: EdgeInsets.only(left: 20.0),
                                 child: Text(
-                                  'Total Leaves',
+                                  'Total Cuti',
                                   style: TextStyle(
                                     fontWeight: FontWeight.normal,
                                     fontSize: 14.0,
@@ -4175,15 +4175,15 @@ class StateInfo {
 StateInfo _getStateInfo(String state) {
   switch (state) {
     case 'requested':
-      return StateInfo(Colors.yellow[700]!, 'Requested');
+      return StateInfo(Colors.yellow[700]!, 'Diminta');
     case 'approved':
-      return StateInfo(Colors.green, 'Approved');
+      return StateInfo(Colors.green, 'Disetujui');
     case 'cancelled':
-      return StateInfo(Colors.red, 'Cancelled');
+      return StateInfo(Colors.red, 'Dibatalkan');
     case 'rejected':
-      return StateInfo(Colors.orange[700]!, 'Rejected');
+      return StateInfo(Colors.orange[700]!, 'Ditolak');
     default:
-      return StateInfo(Colors.black, 'Unknown');
+      return StateInfo(Colors.black, 'Tidak Diketahui');
   }
 }
 
@@ -4202,7 +4202,7 @@ class ImageViewer extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
-        title: const Text('Image Viewer'),
+        title: const Text('Penampil Gambar'),
         automaticallyImplyLeading: false,
       ),
       body: Center(
@@ -4214,7 +4214,7 @@ class ImageViewer extends StatelessWidget {
           },
           errorBuilder: (context, error, stackTrace) {
             return const Text(
-              'Error loading image',
+              'Gagal memuat gambar',
               style: TextStyle(color: Colors.red),
             );
           },
@@ -4224,13 +4224,13 @@ class ImageViewer extends StatelessWidget {
           File(imagePath),
           errorBuilder: (context, error, stackTrace) {
             return const Text(
-              'Error loading image',
+              'Gagal memuat gambar',
               style: TextStyle(color: Colors.red),
             );
           },
         )
             : const Text(
-          'Image not found',
+          'Gambar tidak ditemukan',
           style: TextStyle(color: Colors.red),
         ),
       ),

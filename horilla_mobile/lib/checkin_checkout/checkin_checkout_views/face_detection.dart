@@ -70,7 +70,7 @@ class _FaceScannerState extends State<FaceScanner> with SingleTickerProviderStat
     } catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Initialization failed: $e')),
+          SnackBar(content: Text('Gagal inisialisasi: $e')),
         );
       }
     }
@@ -86,7 +86,7 @@ class _FaceScannerState extends State<FaceScanner> with SingleTickerProviderStat
     } catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Camera initialization failed: $e')),
+          SnackBar(content: Text('Gagal inisialisasi kamera: $e')),
         );
       }
     }
@@ -180,12 +180,12 @@ class _FaceScannerState extends State<FaceScanner> with SingleTickerProviderStat
     showDialog(
       context: context,
       builder: (ctx) => AlertDialog(
-        title: const Text("Employee Image Not Set"),
-        content: const Text("Setup a New FaceImage?"),
+        title: const Text("Foto Karyawan Belum Diatur"),
+        content: const Text("Atur Foto Wajah Baru?"),
         actions: [
           TextButton(
             onPressed: () => Navigator.of(ctx).pop(),
-            child: const Text("No"),
+            child: const Text("Tidak"),
           ),
           TextButton(
             onPressed: () async {
@@ -198,7 +198,7 @@ class _FaceScannerState extends State<FaceScanner> with SingleTickerProviderStat
                 );
               }
             },
-            child: const Text("Yes"),
+            child: const Text("Ya"),
           ),
         ],
       ),
@@ -236,7 +236,7 @@ class _FaceScannerState extends State<FaceScanner> with SingleTickerProviderStat
         debugPrint('Face detection error: $e');
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text('Face detection error. Please try again.')),
+            const SnackBar(content: Text('Kesalahan deteksi wajah. Silakan coba lagi.')),
           );
         }
       } finally {
@@ -250,8 +250,8 @@ class _FaceScannerState extends State<FaceScanner> with SingleTickerProviderStat
       context: context,
       barrierDismissible: false,
       builder: (ctx) => AlertDialog(
-        title: const Text("Incorrect Face"),
-        content: const Text("The detected face does not match. Please try again."),
+        title: const Text("Wajah Tidak Cocok"),
+        content: const Text("Wajah yang terdeteksi tidak cocok. Silakan coba lagi."),
         actions: [
           TextButton(
             onPressed: () {
@@ -280,7 +280,7 @@ class _FaceScannerState extends State<FaceScanner> with SingleTickerProviderStat
 
     if (geoFencing && widget.userLocation == null) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Location unavailable. Cannot proceed.')),
+        const SnackBar(content: Text('Lokasi tidak tersedia. Tidak dapat melanjutkan.')),
       );
       return;
     }
@@ -317,7 +317,7 @@ class _FaceScannerState extends State<FaceScanner> with SingleTickerProviderStat
     } catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Network error: $e')),
+          SnackBar(content: Text('Kesalahan jaringan: $e')),
         );
       }
     }
@@ -326,9 +326,9 @@ class _FaceScannerState extends State<FaceScanner> with SingleTickerProviderStat
   String getErrorMessage(String responseBody) {
     try {
       final Map decoded = json.decode(responseBody);
-      return decoded['message'] ?? 'Unknown error occurred';
+      return decoded['message'] ?? 'Terjadi kesalahan tidak diketahui';
     } catch (e) {
-      return 'Error parsing server response';
+      return 'Gagal memproses respon server';
     }
   }
 
@@ -336,7 +336,7 @@ class _FaceScannerState extends State<FaceScanner> with SingleTickerProviderStat
     showDialog(
       context: context,
       builder: (ctx) => AlertDialog(
-        title: const Text('Check-in Failed'),
+        title: const Text('Check-in Gagal'),
         content: Text(errorMessage),
         actions: [
           TextButton(
@@ -408,7 +408,7 @@ class _FaceScannerState extends State<FaceScanner> with SingleTickerProviderStat
                   ),
                   const SizedBox(height: 20),
                   const Text(
-                    'Detecting Faces...',
+                    'Mendeteksi Wajah...',
                     style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold),
                   ),
                 ],
@@ -427,7 +427,7 @@ class _FaceScannerState extends State<FaceScanner> with SingleTickerProviderStat
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        title: const Text('Face Detection'),
+        title: const Text('Deteksi Wajah'),
         backgroundColor: Colors.red,
         elevation: 0,
       ),

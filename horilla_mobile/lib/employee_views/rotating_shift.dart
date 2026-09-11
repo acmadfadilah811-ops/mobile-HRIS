@@ -578,7 +578,7 @@ class _WorkTypeRequestPageState extends State<RotatingShiftPage> {
                     Image.asset(imagePath),
                     const SizedBox(height: 16),
                     const Text(
-                      "Shift Created Successfully",
+                      "Shift Berhasil Dibuat",
                       style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
@@ -621,7 +621,7 @@ class _WorkTypeRequestPageState extends State<RotatingShiftPage> {
                     Image.asset(imagePath),
                     const SizedBox(height: 16),
                     const Text(
-                      "Shift Deleted Successfully",
+                      "Shift Berhasil Dihapus",
                       style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
@@ -664,7 +664,7 @@ class _WorkTypeRequestPageState extends State<RotatingShiftPage> {
                     Image.asset(imagePath),
                     const SizedBox(height: 16),
                     const Text(
-                      "Shift Updated Successfully",
+                      "Shift Berhasil Diperbarui",
                       style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
@@ -723,9 +723,9 @@ class _WorkTypeRequestPageState extends State<RotatingShiftPage> {
     TextEditingController rotateDayController = TextEditingController(
         text: (record['rotate_after_day'] ?? '0').toString());
     final List<DropdownMenuItem<String>> basedOnItems = [
-      const DropdownMenuItem(value: 'monthly', child: Text('Monthly')),
-      const DropdownMenuItem(value: 'weekly', child: Text('Weekly')),
-      const DropdownMenuItem(value: 'after', child: Text('After')),
+      const DropdownMenuItem(value: 'monthly', child: Text('Bulanan')),
+      const DropdownMenuItem(value: 'weekly', child: Text('Mingguan')),
+      const DropdownMenuItem(value: 'after', child: Text('Setelah')),
     ];
     String selectedBasedOnValue = record['based_on'] ?? 'monthly';
     _typeAheadEditController.text = widget.selectedEmployeeFullName;
@@ -743,7 +743,7 @@ class _WorkTypeRequestPageState extends State<RotatingShiftPage> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       const Text(
-                        "Edit Rotating Shift",
+                        "Edit Shift Bergilir",
                         style: TextStyle(
                             fontWeight: FontWeight.bold,
                             color: Colors.black,
@@ -778,7 +778,7 @@ class _WorkTypeRequestPageState extends State<RotatingShiftPage> {
                               height:
                               MediaQuery.of(context).size.height * 0.03),
                           const Text(
-                            'Employee',
+                            'Karyawan',
                             style: TextStyle(color: Colors.black),
                           ),
                           SizedBox(
@@ -788,7 +788,7 @@ class _WorkTypeRequestPageState extends State<RotatingShiftPage> {
                             textFieldConfiguration: TextFieldConfiguration(
                               controller: _typeAheadEditController,
                               decoration: InputDecoration(
-                                labelText: 'Search Employee',
+                                labelText: 'Cari Karyawan',
                                 labelStyle: TextStyle(color: Colors.grey[350]),
                                 contentPadding: const EdgeInsets.symmetric(
                                     horizontal: 10.0),
@@ -818,7 +818,7 @@ class _WorkTypeRequestPageState extends State<RotatingShiftPage> {
                             noItemsFoundBuilder: (context) => const Padding(
                               padding: EdgeInsets.all(8.0),
                               child: Text(
-                                'No Employees Found',
+                                'Karyawan Tidak Ditemukan',
                                 style: TextStyle(fontSize: 16),
                               ),
                             ),
@@ -842,7 +842,7 @@ class _WorkTypeRequestPageState extends State<RotatingShiftPage> {
                               height:
                               MediaQuery.of(context).size.height * 0.03),
                           const Text(
-                            'Rotating Shift',
+                            'Shift Bergilir',
                             style: TextStyle(color: Colors.black),
                           ),
                           SizedBox(
@@ -852,7 +852,7 @@ class _WorkTypeRequestPageState extends State<RotatingShiftPage> {
                             textFieldConfiguration: TextFieldConfiguration(
                               controller: _typeAheadEditRotatingShiftController,
                               decoration: InputDecoration(
-                                labelText: 'Search Rotating Shift',
+                                labelText: 'Cari Shift Bergilir',
                                 labelStyle: TextStyle(color: Colors.grey[350]),
                                 contentPadding: const EdgeInsets.symmetric(
                                     horizontal: 10.0),
@@ -884,7 +884,7 @@ class _WorkTypeRequestPageState extends State<RotatingShiftPage> {
                             noItemsFoundBuilder: (context) => const Padding(
                               padding: EdgeInsets.all(8.0),
                               child: Text(
-                                'No Shift Found',
+                                'Shift Tidak Ditemukan',
                                 style: TextStyle(fontSize: 16),
                               ),
                             ),
@@ -908,7 +908,7 @@ class _WorkTypeRequestPageState extends State<RotatingShiftPage> {
                               height:
                               MediaQuery.of(context).size.height * 0.03),
                           const Text(
-                            "Start Date",
+                            "Tanggal Mulai",
                             style: TextStyle(color: Colors.black),
                           ),
                           SizedBox(
@@ -933,12 +933,12 @@ class _WorkTypeRequestPageState extends State<RotatingShiftPage> {
                             },
                             decoration: InputDecoration(
                               border: const OutlineInputBorder(),
-                              labelText: 'Select a Start Date',
+                              labelText: 'Pilih Tanggal Mulai',
                               labelStyle: TextStyle(color: Colors.grey[350]),
                               contentPadding:
                               const EdgeInsets.symmetric(horizontal: 10.0),
                               errorText: _validateRequestedDate
-                                  ? 'Please select a Start Date'
+                                  ? 'Silakan pilih Tanggal Mulai'
                                   : null,
                             ),
                           ),
@@ -946,7 +946,7 @@ class _WorkTypeRequestPageState extends State<RotatingShiftPage> {
                               height:
                               MediaQuery.of(context).size.height * 0.03),
                           const Text(
-                            "Based On",
+                            "Berdasarkan",
                             style: TextStyle(color: Colors.black),
                           ),
                           SizedBox(
@@ -966,7 +966,7 @@ class _WorkTypeRequestPageState extends State<RotatingShiftPage> {
                             },
                             decoration: InputDecoration(
                               border: const OutlineInputBorder(),
-                              labelText: 'Choose Based On',
+                              labelText: 'Pilih Berdasarkan',
                               labelStyle: TextStyle(color: Colors.grey[350]),
                               contentPadding:
                               const EdgeInsets.symmetric(horizontal: 10.0),
@@ -976,7 +976,7 @@ class _WorkTypeRequestPageState extends State<RotatingShiftPage> {
                               height:
                               MediaQuery.of(context).size.height * 0.03),
                           const Text(
-                            "Rotate After Day",
+                            "Bergilir Setelah (Hari)",
                             style: TextStyle(color: Colors.black),
                           ),
                           SizedBox(
@@ -987,7 +987,7 @@ class _WorkTypeRequestPageState extends State<RotatingShiftPage> {
                             keyboardType: TextInputType.number,
                             decoration: InputDecoration(
                               border: const OutlineInputBorder(),
-                              labelText: 'Rotate After Day',
+                              labelText: 'Bergilir Setelah (Hari)',
                               labelStyle: TextStyle(color: Colors.grey[350]),
                               contentPadding: const EdgeInsets.symmetric(
                                   vertical: 10.0, horizontal: 10.0),
@@ -1086,7 +1086,7 @@ class _WorkTypeRequestPageState extends State<RotatingShiftPage> {
                             ),
                           ),
                         ),
-                        child: const Text('Save',
+                        child: const Text('Simpan',
                             style: TextStyle(color: Colors.white)),
                       ),
                     ),
@@ -1107,9 +1107,9 @@ class _WorkTypeRequestPageState extends State<RotatingShiftPage> {
   void _showCreateRotatingShift(
       BuildContext context, selectedEmployeeFullName, selectedEmployerId) {
     final List<DropdownMenuItem<String>> basedOnItems = [
-      const DropdownMenuItem(value: 'monthly', child: Text('Monthly')),
-      const DropdownMenuItem(value: 'weekly', child: Text('Weekly')),
-      const DropdownMenuItem(value: 'after', child: Text('After')),
+      const DropdownMenuItem(value: 'monthly', child: Text('Bulanan')),
+      const DropdownMenuItem(value: 'weekly', child: Text('Mingguan')),
+      const DropdownMenuItem(value: 'after', child: Text('Setelah')),
     ];
     _typeAheadAddRotatingController.text = widget.selectedEmployeeFullName;
     showDialog(
@@ -1124,7 +1124,7 @@ class _WorkTypeRequestPageState extends State<RotatingShiftPage> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       const Text(
-                        "Add Rotating Shift",
+                        "Tambah Shift Bergilir",
                         style: TextStyle(
                             fontWeight: FontWeight.bold,
                             color: Colors.black,
@@ -1159,7 +1159,7 @@ class _WorkTypeRequestPageState extends State<RotatingShiftPage> {
                               height:
                               MediaQuery.of(context).size.height * 0.03),
                           const Text(
-                            'Employee',
+                            'Karyawan',
                             style: TextStyle(color: Colors.black),
                           ),
                           SizedBox(
@@ -1169,7 +1169,7 @@ class _WorkTypeRequestPageState extends State<RotatingShiftPage> {
                             textFieldConfiguration: TextFieldConfiguration(
                               controller: _typeAheadAddRotatingController,
                               decoration: InputDecoration(
-                                labelText: 'Search Employee',
+                                labelText: 'Cari Karyawan',
                                 labelStyle: TextStyle(color: Colors.grey[350]),
                                 border: const OutlineInputBorder(),
                                 contentPadding: const EdgeInsets.symmetric(
@@ -1199,7 +1199,7 @@ class _WorkTypeRequestPageState extends State<RotatingShiftPage> {
                             noItemsFoundBuilder: (context) => const Padding(
                               padding: EdgeInsets.all(8.0),
                               child: Text(
-                                'No Employees Found',
+                                'Karyawan Tidak Ditemukan',
                                 style: TextStyle(fontSize: 16),
                               ),
                             ),
@@ -1223,7 +1223,7 @@ class _WorkTypeRequestPageState extends State<RotatingShiftPage> {
                               height:
                               MediaQuery.of(context).size.height * 0.03),
                           const Text(
-                            'Rotating Shift',
+                            'Shift Bergilir',
                             style: TextStyle(color: Colors.black),
                           ),
                           SizedBox(
@@ -1234,13 +1234,13 @@ class _WorkTypeRequestPageState extends State<RotatingShiftPage> {
                               controller:
                               _typeAheadCreateRotatingShiftController,
                               decoration: InputDecoration(
-                                labelText: 'Search Rotating Shift',
+                                labelText: 'Cari Shift Bergilir',
                                 labelStyle: TextStyle(color: Colors.grey[350]),
                                 border: const OutlineInputBorder(),
                                 contentPadding: const EdgeInsets.symmetric(
                                     horizontal: 10.0),
                                 errorText: _validateRotateShift
-                                    ? 'Please Select a Rotating Shift'
+                                    ? 'Silakan pilih Shift Bergilir'
                                     : null,
                               ),
                             ),
@@ -1269,7 +1269,7 @@ class _WorkTypeRequestPageState extends State<RotatingShiftPage> {
                             noItemsFoundBuilder: (context) => const Padding(
                               padding: EdgeInsets.all(8.0),
                               child: Text(
-                                'No Rotating Shift Found',
+                                'Shift Bergilir Tidak Ditemukan',
                                 style: TextStyle(fontSize: 16),
                               ),
                             ),
@@ -1293,7 +1293,7 @@ class _WorkTypeRequestPageState extends State<RotatingShiftPage> {
                               height:
                               MediaQuery.of(context).size.height * 0.03),
                           const Text(
-                            "Start Date",
+                            "Tanggal Mulai",
                             style: TextStyle(color: Colors.black),
                           ),
                           SizedBox(
@@ -1318,21 +1318,21 @@ class _WorkTypeRequestPageState extends State<RotatingShiftPage> {
                             },
                             decoration: InputDecoration(
                               border: const OutlineInputBorder(),
-                              labelText: 'Select Start Date',
+                              labelText: 'Pilih Tanggal Mulai',
                               labelStyle: TextStyle(color: Colors.grey[350]),
                               errorText: _validateRequestedDate
                                   ? 'Please select a Start date'
                                   : null,
                               contentPadding:
                               const EdgeInsets.symmetric(horizontal: 10.0),
-                              hintText: 'Select a Start Date',
+                              hintText: 'Pilih Tanggal Mulai',
                             ),
                           ),
                           SizedBox(
                               height:
                               MediaQuery.of(context).size.height * 0.03),
                           const Text(
-                            "Based On",
+                            "Berdasarkan",
                             style: TextStyle(color: Colors.black),
                           ),
                           SizedBox(
@@ -1352,21 +1352,21 @@ class _WorkTypeRequestPageState extends State<RotatingShiftPage> {
                             },
                             decoration: InputDecoration(
                               border: const OutlineInputBorder(),
-                              labelText: 'Select Based On',
+                              labelText: 'Pilih Berdasarkan',
                               labelStyle: TextStyle(color: Colors.grey[350]),
                               errorText: _validateBasedOn
-                                  ? 'Please select a Based On'
+                                  ? 'Silakan pilih Berdasarkan'
                                   : null,
                               contentPadding:
                               const EdgeInsets.symmetric(horizontal: 10.0),
-                              hintText: 'Select a Based On',
+                              hintText: 'Pilih Berdasarkan',
                             ),
                           ),
                           SizedBox(
                               height:
                               MediaQuery.of(context).size.height * 0.03),
                           const Text(
-                            "Rotate After Day",
+                            "Bergilir Setelah (Hari)",
                             style: TextStyle(color: Colors.black),
                           ),
                           SizedBox(
@@ -1377,12 +1377,12 @@ class _WorkTypeRequestPageState extends State<RotatingShiftPage> {
                             keyboardType: TextInputType.number,
                             decoration: InputDecoration(
                               border: const OutlineInputBorder(),
-                              labelText: 'Rotate After Day',
+                              labelText: 'Bergilir Setelah (Hari)',
                               labelStyle: TextStyle(color: Colors.grey[350]),
                               errorText: _validateRotateDay
-                                  ? 'Please select a Rotate After Day'
+                                  ? 'Silakan pilih Bergilir Setelah (Hari)'
                                   : null,
-                              hintText: 'Select a Rotate After Day',
+                              hintText: 'Pilih Bergilir Setelah (Hari)',
                               contentPadding: const EdgeInsets.symmetric(
                                   vertical: 10.0, horizontal: 10.0),
                               suffixIcon: IntrinsicHeight(
@@ -1555,7 +1555,7 @@ class _WorkTypeRequestPageState extends State<RotatingShiftPage> {
                             ),
                           ),
                         ),
-                        child: const Text('Save',
+                        child: const Text('Simpan',
                             style: TextStyle(color: Colors.white)),
                       ),
                     ),
@@ -1705,7 +1705,7 @@ class _WorkTypeRequestPageState extends State<RotatingShiftPage> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            'Title',
+                            'Judul',
                             style: TextStyle(color: Colors.grey.shade700),
                           ),
                           Flexible(
@@ -1721,7 +1721,7 @@ class _WorkTypeRequestPageState extends State<RotatingShiftPage> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            'Based On',
+                            'Berdasarkan',
                             style: TextStyle(color: Colors.grey.shade700),
                           ),
                           Text('${record['based_on'] ?? 'None'}'),
@@ -1731,7 +1731,7 @@ class _WorkTypeRequestPageState extends State<RotatingShiftPage> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            'Start Date',
+                            'Tanggal Mulai',
                             style: TextStyle(color: Colors.grey.shade700),
                           ),
                           Text('${record['start_date'] ?? 'None'}'),
@@ -1741,7 +1741,7 @@ class _WorkTypeRequestPageState extends State<RotatingShiftPage> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            'Current Shift',
+                            'Shift Saat Ini',
                             style: TextStyle(color: Colors.grey.shade700),
                           ),
                           Text('${record['current_shift_name'] ?? 'None'}'),
@@ -1751,7 +1751,7 @@ class _WorkTypeRequestPageState extends State<RotatingShiftPage> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            'Next Shift',
+                            'Shift Berikutnya',
                             style: TextStyle(color: Colors.grey.shade700),
                           ),
                           Text('${record['next_shift_name'] ?? 'None'}'),
@@ -1761,7 +1761,7 @@ class _WorkTypeRequestPageState extends State<RotatingShiftPage> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            'Next Change Date',
+                            'Tanggal Perubahan Berikutnya',
                             style: TextStyle(color: Colors.grey.shade700),
                           ),
                           Text('${record['next_change_date'] ?? 'None'}'),
@@ -1941,7 +1941,7 @@ class _WorkTypeRequestPageState extends State<RotatingShiftPage> {
                                         MainAxisAlignment.spaceBetween,
                                         children: [
                                           const Text(
-                                            "Confirmation",
+                                            "Konfirmasi",
                                             style: TextStyle(
                                               fontWeight: FontWeight.bold,
                                               color: Colors.black,
@@ -1961,7 +1961,7 @@ class _WorkTypeRequestPageState extends State<RotatingShiftPage> {
                                             0.1,
                                         child: const Center(
                                           child: Text(
-                                            "Are you sure you want to delete this Rotating Shift?",
+                                            "Apakah Anda yakin ingin menghapus Shift Bergilir ini?",
                                             style: TextStyle(
                                               fontWeight: FontWeight.bold,
                                               color: Colors.black,
@@ -1997,7 +1997,7 @@ class _WorkTypeRequestPageState extends State<RotatingShiftPage> {
                                               ),
                                             ),
                                             child: const Text(
-                                              "Continue",
+                                              "Lanjutkan",
                                               style:
                                               TextStyle(color: Colors.white),
                                             ),
@@ -2023,7 +2023,7 @@ class _WorkTypeRequestPageState extends State<RotatingShiftPage> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          const Text('Title',
+                          const Text('Judul',
                               style: TextStyle(
                                   color: Colors.grey,
                                   fontWeight: FontWeight.bold)),
@@ -2041,7 +2041,7 @@ class _WorkTypeRequestPageState extends State<RotatingShiftPage> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          const Text('Start Date',
+                          const Text('Tanggal Mulai',
                               style: TextStyle(
                                   color: Colors.grey,
                                   fontWeight: FontWeight.bold)),
@@ -2056,7 +2056,7 @@ class _WorkTypeRequestPageState extends State<RotatingShiftPage> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          const Text('Current Shift',
+                          const Text('Shift Saat Ini',
                               style: TextStyle(
                                   color: Colors.grey,
                                   fontWeight: FontWeight.bold)),
@@ -2071,7 +2071,7 @@ class _WorkTypeRequestPageState extends State<RotatingShiftPage> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          const Text('Next Switch',
+                          const Text('Pergantian Berikutnya',
                               style: TextStyle(
                                   color: Colors.grey,
                                   fontWeight: FontWeight.bold)),
@@ -2086,7 +2086,7 @@ class _WorkTypeRequestPageState extends State<RotatingShiftPage> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          const Text('Next Shift',
+                          const Text('Shift Berikutnya',
                               style: TextStyle(
                                   color: Colors.grey,
                                   fontWeight: FontWeight.bold)),
@@ -2122,7 +2122,7 @@ class _WorkTypeRequestPageState extends State<RotatingShiftPage> {
         forceMaterialTransparency: true,
         automaticallyImplyLeading: false,
         backgroundColor: Colors.white,
-        title: const Text('Rotating Shift',
+        title: const Text('Shift Bergilir',
             style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold)),
       ),
       body: _isShimmerVisible
@@ -2275,7 +2275,7 @@ class _WorkTypeRequestPageState extends State<RotatingShiftPage> {
                   ),
                   SizedBox(height: 20),
                   Text(
-                    "There are no records to display",
+                    "Tidak ada data untuk ditampilkan",
                     style: TextStyle(
                       fontSize: 16.0,
                       color: Colors.black,

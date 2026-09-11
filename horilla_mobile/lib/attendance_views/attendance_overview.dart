@@ -363,7 +363,7 @@ class _AttendanceOverviewState extends State<AttendanceOverview>
           },
         ),
         title: const Text(
-          'Attendance Overview',
+          'Ringkasan Kehadiran',
           style: TextStyle(
             fontWeight: FontWeight.bold,
           ),
@@ -394,7 +394,7 @@ class _AttendanceOverviewState extends State<AttendanceOverview>
                     children: [
                       _drawerPermissionOverview
                           ? ListTile(
-                              title: const Text('Overview'),
+                              title: const Text('Ringkasan'),
                               onTap: () {
                                 Navigator.pushNamed(
                                     context, '/attendance_overview');
@@ -402,20 +402,20 @@ class _AttendanceOverviewState extends State<AttendanceOverview>
                             )
                           : const SizedBox.shrink(),
                       ListTile(
-                        title: const Text('Attendance'),
+                        title: const Text('Kehadiran'),
                         onTap: () {
                           Navigator.pushNamed(
                               context, '/attendance_attendance');
                         },
                       ),
                       ListTile(
-                        title: const Text('Attendance Request'),
+                        title: const Text('Permintaan Kehadiran'),
                         onTap: () {
                           Navigator.pushNamed(context, '/attendance_request');
                         },
                       ),
                       ListTile(
-                        title: const Text('Hour Account'),
+                        title: const Text('Akun Jam Kerja'),
                         onTap: () {
                           Navigator.pushNamed(
                               context, '/employee_hour_account');
@@ -543,8 +543,8 @@ class _AttendanceOverviewState extends State<AttendanceOverview>
                   itemCount: 2,
                   itemBuilder: (context, index) {
                     String text = index == 0
-                        ? '\nTODAY\'S\n ATTENDANCE\n$todayAttendance %'
-                        : '\nOFFLINE\nEMPLOYEES\n$offlineEmpCount';
+                        ? '\nKEHADIRAN\nHARI INI\n$todayAttendance %'
+                        : '\nKARYAWAN\nOFFLINE\n$offlineEmpCount';
                     return Container(
                       padding: const EdgeInsets.all(8.0),
                       decoration: BoxDecoration(
@@ -605,8 +605,8 @@ class _AttendanceOverviewState extends State<AttendanceOverview>
                   labelStyle: TextStyle(
                       fontWeight: FontWeight.bold, fontSize: fontSize * 1.2),
                   tabs: [
-                    Tab(text: 'Overtime Validate ($overtimeValidate)'),
-                    Tab(text: 'Non Validated ($nonValidated)'),
+                    Tab(text: 'Validasi Lembur ($overtimeValidate)'),
+                    Tab(text: 'Belum Divalidasi ($nonValidated)'),
                   ],
                 ),
                 SizedBox(
@@ -726,8 +726,8 @@ class _AttendanceOverviewState extends State<AttendanceOverview>
                     itemCount: 2,
                     itemBuilder: (context, index) {
                       String headerText = index == 0
-                          ? 'TODAY\'S\nATTENDANCE\n'
-                          : 'OFFLINE\nEMPLOYEES\n';
+                          ? 'KEHADIRAN\nHARI INI\n'
+                          : 'KARYAWAN\nOFFLINE\n';
                       String valueText = index == 0
                           ? ' $todayAttendance'
                           : ' $offlineEmpCount';
@@ -762,7 +762,7 @@ class _AttendanceOverviewState extends State<AttendanceOverview>
                         children: [
                           Flexible(
                             child: Text(
-                              'Offline Employees',
+                              'Karyawan Offline',
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 fontSize: deviceWidth * 0.06,
@@ -843,7 +843,7 @@ class _AttendanceOverviewState extends State<AttendanceOverview>
                                         ),
                                         SizedBox(height: 20),
                                         Text(
-                                          'There are no offline employees to display',
+                                          'Tidak ada karyawan offline untuk ditampilkan',
                                           style: TextStyle(
                                             fontWeight: FontWeight.bold,
                                             fontSize: 18,
@@ -888,8 +888,8 @@ class _AttendanceOverviewState extends State<AttendanceOverview>
                   labelStyle: const TextStyle(
                       fontWeight: FontWeight.bold, fontSize: 17),
                   tabs: [
-                    Tab(text: 'Overtime Validate ($overtimeValidate)'),
-                    Tab(text: 'Non Validated ($nonValidated)'),
+                    Tab(text: 'Validasi Lembur ($overtimeValidate)'),
+                    Tab(text: 'Belum Divalidasi ($nonValidated)'),
                   ],
                 ),
                 SizedBox(
@@ -909,7 +909,7 @@ class _AttendanceOverviewState extends State<AttendanceOverview>
                                   ),
                                   SizedBox(height: 20),
                                   Text(
-                                    "There are no attendance records to display",
+                                    "Tidak ada data kehadiran untuk ditampilkan",
                                     style: TextStyle(
                                         fontSize: 16.0,
                                         color: Colors.black,
@@ -932,7 +932,7 @@ class _AttendanceOverviewState extends State<AttendanceOverview>
                                   ),
                                   SizedBox(height: 20),
                                   Text(
-                                    "There are no attendance records to display",
+                                    "Tidak ada data kehadiran untuk ditampilkan",
                                     style: TextStyle(
                                         fontSize: 16.0,
                                         color: Colors.black,
@@ -1171,7 +1171,7 @@ void _showEmailDialog(
                         color: Colors.black,
                       ),
                       decoration: const InputDecoration(
-                        labelText: 'Select Template',
+                        labelText: 'Pilih Templat',
                         border: OutlineInputBorder(),
                       ),
                       value: selectedTemplate,
@@ -1210,7 +1210,7 @@ void _showEmailDialog(
                     SizedBox(height: MediaQuery.of(context).size.height * 0.03),
                     TextField(
                       decoration: const InputDecoration(
-                        labelText: 'Subject',
+                        labelText: 'Subjek',
                         border: OutlineInputBorder(),
                       ),
                       onChanged: (value) {
@@ -1224,7 +1224,7 @@ void _showEmailDialog(
                     // Editable HTML field with the persistent controller
                     TextField(
                       decoration: const InputDecoration(
-                        labelText: 'Edit Body Content',
+                        labelText: 'Edit Isi Konten',
                         border: OutlineInputBorder(),
                       ),
                       maxLines: null,
@@ -1247,7 +1247,7 @@ void _showEmailDialog(
             actions: [
               TextButton(
                 child: const Text(
-                  'Send',
+                  'Kirim',
                   style: TextStyle(color: Colors.red),
                 ),
                 onPressed: () async {
@@ -1506,7 +1506,7 @@ Widget buildOvertimeValidate(
                                       MainAxisAlignment.spaceBetween,
                                   children: [
                                     const Text(
-                                      'Attendance Date',
+                                      'Tanggal Kehadiran',
                                       style: TextStyle(
                                         color: Colors.grey,
                                         fontWeight: FontWeight.bold,
@@ -1523,7 +1523,7 @@ Widget buildOvertimeValidate(
                                       MainAxisAlignment.spaceBetween,
                                   children: [
                                     const Text(
-                                      'Check In',
+                                      'Waktu Masuk',
                                       style: TextStyle(
                                         color: Colors.grey,
                                         fontWeight: FontWeight.bold,
@@ -1541,7 +1541,7 @@ Widget buildOvertimeValidate(
                                       MainAxisAlignment.spaceBetween,
                                   children: [
                                     const Text(
-                                      'Check In Date',
+                                      'Tanggal Masuk',
                                       style: TextStyle(
                                         color: Colors.grey,
                                         fontWeight: FontWeight.bold,
@@ -1559,7 +1559,7 @@ Widget buildOvertimeValidate(
                                       MainAxisAlignment.spaceBetween,
                                   children: [
                                     const Text(
-                                      'Check Out ',
+                                      'Waktu Keluar ',
                                       style: TextStyle(
                                         color: Colors.grey,
                                         fontWeight: FontWeight.bold,
@@ -1577,7 +1577,7 @@ Widget buildOvertimeValidate(
                                       MainAxisAlignment.spaceBetween,
                                   children: [
                                     const Text(
-                                      'Check Out Date',
+                                      'Tanggal Keluar',
                                       style: TextStyle(
                                         color: Colors.grey,
                                         fontWeight: FontWeight.bold,
@@ -1612,7 +1612,7 @@ Widget buildOvertimeValidate(
                                       MainAxisAlignment.spaceBetween,
                                   children: [
                                     const Text(
-                                      'Work Type',
+                                      'Tipe Kerja',
                                       style: TextStyle(
                                         color: Colors.grey,
                                         fontWeight: FontWeight.bold,
@@ -1632,7 +1632,7 @@ Widget buildOvertimeValidate(
                                       MainAxisAlignment.spaceBetween,
                                   children: [
                                     const Text(
-                                      'At Work',
+                                      'Sedang Bekerja',
                                       style: TextStyle(
                                         color: Colors.grey,
                                         fontWeight: FontWeight.bold,
@@ -1650,7 +1650,7 @@ Widget buildOvertimeValidate(
                                       MainAxisAlignment.spaceBetween,
                                   children: [
                                     const Text(
-                                      'Min Hour',
+                                      'Jam Min',
                                       style: TextStyle(
                                         color: Colors.grey,
                                         fontWeight: FontWeight.bold,
@@ -1784,21 +1784,21 @@ Widget buildOvertimeValidate(
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              const Text('Date'),
+                              const Text('Tanggal'),
                               Text('${record['attendance_date']}'),
                             ],
                           ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              const Text('Check-In'),
+                              const Text('Waktu Masuk'),
                               Text('${record['attendance_clock_in_date']}'),
                             ],
                           ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              const Text('Check-Out'),
+                              const Text('Waktu Keluar'),
                               Text('${record['attendance_clock_out_date']}'),
                             ],
                           ),
@@ -1982,7 +1982,7 @@ Widget buildNonValidatedAttendance(
                                       MainAxisAlignment.spaceBetween,
                                   children: [
                                     const Text(
-                                      'Attendance Date',
+                                      'Tanggal Kehadiran',
                                       style: TextStyle(
                                         color: Colors.grey,
                                         fontWeight: FontWeight.bold,
@@ -1999,7 +1999,7 @@ Widget buildNonValidatedAttendance(
                                       MainAxisAlignment.spaceBetween,
                                   children: [
                                     const Text(
-                                      'Check In',
+                                      'Waktu Masuk',
                                       style: TextStyle(
                                         color: Colors.grey,
                                         fontWeight: FontWeight.bold,
@@ -2017,7 +2017,7 @@ Widget buildNonValidatedAttendance(
                                       MainAxisAlignment.spaceBetween,
                                   children: [
                                     const Text(
-                                      'Check In Date',
+                                      'Tanggal Masuk',
                                       style: TextStyle(
                                         color: Colors.grey,
                                         fontWeight: FontWeight.bold,
@@ -2035,7 +2035,7 @@ Widget buildNonValidatedAttendance(
                                       MainAxisAlignment.spaceBetween,
                                   children: [
                                     const Text(
-                                      'Check Out ',
+                                      'Waktu Keluar ',
                                       style: TextStyle(
                                         color: Colors.grey,
                                         fontWeight: FontWeight.bold,
@@ -2053,7 +2053,7 @@ Widget buildNonValidatedAttendance(
                                       MainAxisAlignment.spaceBetween,
                                   children: [
                                     const Text(
-                                      'Check Out Date',
+                                      'Tanggal Keluar',
                                       style: TextStyle(
                                         color: Colors.grey,
                                         fontWeight: FontWeight.bold,
@@ -2088,7 +2088,7 @@ Widget buildNonValidatedAttendance(
                                       MainAxisAlignment.spaceBetween,
                                   children: [
                                     const Text(
-                                      'Work Type',
+                                      'Tipe Kerja',
                                       style: TextStyle(
                                         color: Colors.grey,
                                         fontWeight: FontWeight.bold,
@@ -2105,7 +2105,7 @@ Widget buildNonValidatedAttendance(
                                       MainAxisAlignment.spaceBetween,
                                   children: [
                                     const Text(
-                                      'At Work',
+                                      'Sedang Bekerja',
                                       style: TextStyle(
                                         color: Colors.grey,
                                         fontWeight: FontWeight.bold,
@@ -2123,7 +2123,7 @@ Widget buildNonValidatedAttendance(
                                       MainAxisAlignment.spaceBetween,
                                   children: [
                                     const Text(
-                                      'Min Hour',
+                                      'Jam Min',
                                       style: TextStyle(
                                         color: Colors.grey,
                                         fontWeight: FontWeight.bold,
@@ -2257,21 +2257,21 @@ Widget buildNonValidatedAttendance(
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              const Text('Date'),
+                              const Text('Tanggal'),
                               Text('${record['attendance_date']}'),
                             ],
                           ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              const Text('Check-In'),
+                              const Text('Waktu Masuk'),
                               Text('${record['attendance_clock_in_date']}'),
                             ],
                           ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              const Text('Check-Out'),
+                              const Text('Waktu Keluar'),
                               Text('${record['attendance_clock_out_date']}'),
                             ],
                           ),

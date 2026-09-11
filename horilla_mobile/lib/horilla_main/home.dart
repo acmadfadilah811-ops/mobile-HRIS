@@ -709,7 +709,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                         width: 180, height: 180, fit: BoxFit.cover),
                     const SizedBox(height: 16),
                     const Text(
-                      "Values Marked Successfully",
+                      "Pengaturan Berhasil Disimpan",
                       style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
@@ -747,7 +747,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        "Notifications",
+                        "Notifikasi",
                         style: TextStyle(
                           fontSize: MediaQuery.of(context).size.width * 0.05,
                           fontWeight: FontWeight.bold,
@@ -779,7 +779,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                                 size:
                                 MediaQuery.of(context).size.width * 0.0357),
                             label: Text(
-                              'Mark as Read',
+                              'Tandai sudah dibaca',
                               style: TextStyle(
                                   color: Colors.red,
                                   fontWeight: FontWeight.bold,
@@ -798,7 +798,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                                 size:
                                 MediaQuery.of(context).size.width * 0.0357),
                             label: Text(
-                              'Clear all',
+                              'Hapus semua',
                               style: TextStyle(
                                   color: Colors.red,
                                   fontWeight: FontWeight.bold,
@@ -860,7 +860,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                                           .height *
                                           0.0205),
                                   Text(
-                                    "There are no notification records to display",
+                                    "Tidak ada catatan notifikasi untuk ditampilkan",
                                     style: TextStyle(
                                       fontSize: MediaQuery.of(context)
                                           .size
@@ -923,7 +923,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                           elevation: 0,
                         ),
                         child: Text(
-                          'View all notifications',
+                          'Lihat semua notifikasi',
                           style: TextStyle(
                               color: Colors.white,
                               fontSize:
@@ -1003,7 +1003,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                         ),
                         const SizedBox(height: 4.0),
                         Text(
-                          '$timeAgo by User $user',
+                          '$timeAgo oleh Pengguna $user',
                           style: TextStyle(
                               fontSize:
                               MediaQuery.of(context).size.width * 0.0268),
@@ -1044,7 +1044,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
         forceMaterialTransparency: true,
         backgroundColor: Colors.white,
         title: const Text(
-          'Modules',
+          'Modul',
           style: TextStyle(
             fontWeight: FontWeight.bold,
           ),
@@ -1098,12 +1098,12 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                       return StatefulBuilder(
                         builder: (context, setState) {
                           return AlertDialog(
-                            title: const Text('Settings'),
+                            title: const Text('Pengaturan'),
                             content: Column(
                               mainAxisSize: MainAxisSize.min,
                               children: [
                                 SwitchListTile(
-                                  title: const Text('Face Detection'),
+                                  title: const Text('Deteksi Wajah'),
                                   value: tempFaceDetection,
                                   onChanged: (val) {
                                     setState(() {
@@ -1150,7 +1150,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                             actions: [
                               TextButton(
                                 onPressed: () => Navigator.pop(context),
-                                child: const Text('Cancel'),
+                                child: const Text('Batal'),
                               ),
                               TextButton(
                                 onPressed: () async {
@@ -1350,9 +1350,9 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
             Card(
               child: ListTile(
                 leading: const Icon(Icons.people),
-                title: const Text('Employees'),
+                title: const Text('Karyawan'),
                 subtitle: Text(
-                  'View and manage all your employees.',
+                  'Lihat dan kelola semua karyawan Anda.',
                   style: TextStyle(color: Colors.grey.shade700),
                 ),
                 trailing: const Icon(Icons.keyboard_arrow_right),
@@ -1365,9 +1365,9 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
             Card(
               child: ListTile(
                 leading: const Icon(Icons.checklist_rtl),
-                title: const Text('Attendances'),
+                title: const Text('Kehadiran'),
                 subtitle: Text(
-                  'Record and view employee information.',
+                  'Catat dan lihat riwayat kehadiran karyawan.',
                   style: TextStyle(color: Colors.grey.shade700),
                 ),
                 trailing: const Icon(Icons.keyboard_arrow_right),
@@ -1395,9 +1395,9 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                 },
                 child: ListTile(
                   leading: const Icon(Icons.calendar_month_outlined),
-                  title: const Text('Leaves'),
+                  title: const Text('Cuti'),
                   subtitle: Text(
-                    'Record and view Leave information',
+                    'Catat dan lihat informasi cuti',
                     style: TextStyle(color: Colors.grey.shade700),
                   ),
                   trailing: const Icon(Icons.keyboard_arrow_right),
@@ -1480,11 +1480,11 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         backgroundColor: Colors.red,
-        content: const Text('Please check your internet connectivity',
+        content: const Text('Silakan periksa koneksi internet Anda',
             style: TextStyle(color: Colors.white)),
         action: SnackBarAction(
           backgroundColor: Colors.red,
-          label: 'close',
+          label: 'Tutup',
           textColor: Colors.white,
           onPressed: () async {
             setState(() => isAlertSet = false);

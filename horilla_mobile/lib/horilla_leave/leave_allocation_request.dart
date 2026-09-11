@@ -337,7 +337,7 @@ class _LeaveAllocationRequest extends State<LeaveAllocationRequest>
                     Image.asset(imagePath),
                     const SizedBox(height: 16),
                     const Text(
-                      "Allocation Created Successfully",
+                      "Alokasi Berhasil Dibuat",
                       style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
@@ -380,7 +380,7 @@ class _LeaveAllocationRequest extends State<LeaveAllocationRequest>
                     Image.asset(imagePath),
                     const SizedBox(height: 16),
                     const Text(
-                      "Allocation Deleted Successfully",
+                      "Alokasi Berhasil Dihapus",
                       style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
@@ -423,7 +423,7 @@ class _LeaveAllocationRequest extends State<LeaveAllocationRequest>
                     Image.asset(imagePath),
                     const SizedBox(height: 16),
                     const Text(
-                      "Allocation Approved Successfully",
+                      "Alokasi Berhasil Disetujui",
                       style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
@@ -466,7 +466,7 @@ class _LeaveAllocationRequest extends State<LeaveAllocationRequest>
                     Image.asset(imagePath),
                     const SizedBox(height: 16),
                     const Text(
-                      "Allocation Rejected Successfully",
+                      "Alokasi Berhasil Ditolak",
                       style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
@@ -509,7 +509,7 @@ class _LeaveAllocationRequest extends State<LeaveAllocationRequest>
                     Image.asset(imagePath),
                     const SizedBox(height: 16),
                     const Text(
-                      "Allocation Updated Successfully",
+                      "Alokasi Berhasil Diperbarui",
                       style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
@@ -741,7 +741,7 @@ class _LeaveAllocationRequest extends State<LeaveAllocationRequest>
                   title: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      const Text("Edit Allocation",
+                      const Text("Edit Alokasi",
                           style: TextStyle(
                               fontSize: 21,
                               fontWeight: FontWeight.bold,
@@ -775,7 +775,7 @@ class _LeaveAllocationRequest extends State<LeaveAllocationRequest>
                               height:
                               MediaQuery.of(context).size.height * 0.03),
                           const Text(
-                            "Leave Type",
+                            "Jenis Cuti",
                           ),
                           SizedBox(
                               height:
@@ -784,13 +784,13 @@ class _LeaveAllocationRequest extends State<LeaveAllocationRequest>
                             textFieldConfiguration: TextFieldConfiguration(
                               controller: _typeAheadEditController,
                               decoration: InputDecoration(
-                                labelText: 'Choose a Leave Type',
+                                labelText: 'Pilih Jenis Cuti',
                                 labelStyle: TextStyle(color: Colors.grey[350]),
                                 border: const OutlineInputBorder(),
                                 contentPadding: const EdgeInsets.symmetric(
                                     horizontal: 10.0),
                                 errorText: _validateLeaveType
-                                    ? 'Please select a leave type'
+                                    ? 'Silakan pilih jenis cuti'
                                     : null,
                               ),
                             ),
@@ -818,7 +818,7 @@ class _LeaveAllocationRequest extends State<LeaveAllocationRequest>
                             noItemsFoundBuilder: (context) => const Padding(
                               padding: EdgeInsets.all(8.0),
                               child: Text(
-                                'No Leave Types Found',
+                                'Jenis Cuti Tidak Ditemukan',
                                 style: TextStyle(fontSize: 16),
                               ),
                             ),
@@ -843,7 +843,7 @@ class _LeaveAllocationRequest extends State<LeaveAllocationRequest>
                               MediaQuery.of(context).size.height * 0.03),
                           const Padding(
                             padding: EdgeInsets.all(4.0),
-                            child: Text("Employee"),
+                            child: Text("Karyawan"),
                           ),
                           SizedBox(
                               height:
@@ -852,13 +852,13 @@ class _LeaveAllocationRequest extends State<LeaveAllocationRequest>
                             textFieldConfiguration: TextFieldConfiguration(
                               controller: _typeEditEmployeeController,
                               decoration: InputDecoration(
-                                labelText: 'Search Employee',
+                                labelText: 'Cari Karyawan',
                                 labelStyle: TextStyle(color: Colors.grey[350]),
                                 contentPadding: const EdgeInsets.symmetric(
                                     horizontal: 10.0),
                                 border: const OutlineInputBorder(),
                                 errorText: _validateEmployee
-                                    ? 'Please Select an Employee'
+                                    ? 'Silakan Pilih Karyawan'
                                     : null,
                               ),
                             ),
@@ -885,7 +885,7 @@ class _LeaveAllocationRequest extends State<LeaveAllocationRequest>
                             noItemsFoundBuilder: (context) => const Padding(
                               padding: EdgeInsets.all(8.0),
                               child: Text(
-                                'No Employees Found',
+                                'Karyawan Tidak Ditemukan',
                                 style: TextStyle(fontSize: 16),
                               ),
                             ),
@@ -909,7 +909,7 @@ class _LeaveAllocationRequest extends State<LeaveAllocationRequest>
                               height:
                               MediaQuery.of(context).size.height * 0.03),
                           const Text(
-                            "Requested Days",
+                            "Jumlah Hari yang Diminta",
                             style: TextStyle(color: Colors.black),
                           ),
                           SizedBox(
@@ -922,10 +922,10 @@ class _LeaveAllocationRequest extends State<LeaveAllocationRequest>
                               border: const OutlineInputBorder(),
                               contentPadding: const EdgeInsets.symmetric(
                                   vertical: 10.0, horizontal: 10.0),
-                              labelText: 'Requested Days',
+                              labelText: 'Jumlah Hari yang Diminta',
                               labelStyle: TextStyle(color: Colors.grey[350]),
                               errorText: _validateDays
-                                  ? 'Please enter Requested Days'
+                                  ? 'Silakan masukkan Jumlah Hari yang Diminta'
                                   : null,
                               suffixIcon: IntrinsicHeight(
                                 child: Column(
@@ -978,7 +978,7 @@ class _LeaveAllocationRequest extends State<LeaveAllocationRequest>
                               MediaQuery.of(context).size.height * 0.03),
                           const Padding(
                             padding: EdgeInsets.all(4.0),
-                            child: Text("Description"),
+                            child: Text("Deskripsi"),
                           ),
                           SizedBox(
                               height:
@@ -992,7 +992,7 @@ class _LeaveAllocationRequest extends State<LeaveAllocationRequest>
                                 contentPadding: const EdgeInsets.symmetric(
                                     horizontal: 10.0),
                                 errorText: _validateDescription
-                                    ? 'Description cannot be empty'
+                                    ? 'Deskripsi tidak boleh kosong'
                                     : null,
                               ),
                               onChanged: (newValue) {
@@ -1038,7 +1038,7 @@ class _LeaveAllocationRequest extends State<LeaveAllocationRequest>
                                     }
                                   },
                                   child: const Text(
-                                    'View Attachment',
+                                    'Lihat Lampiran',
                                     style: TextStyle(
                                       decoration: TextDecoration.underline,
                                       color: Colors.blue,
@@ -1070,7 +1070,7 @@ class _LeaveAllocationRequest extends State<LeaveAllocationRequest>
                               contentPadding:
                               const EdgeInsets.symmetric(horizontal: 5.0),
                               errorText: _validateAttachment
-                                  ? 'Attachment is not given'
+                                  ? 'Lampiran belum disertakan'
                                   : null,
                             ),
                             readOnly: true,
@@ -1140,7 +1140,7 @@ class _LeaveAllocationRequest extends State<LeaveAllocationRequest>
                             ),
                           ),
                         ),
-                        child: const Text('Save',
+                        child: const Text('Simpan',
                             style: TextStyle(color: Colors.white)),
                       ),
                     ),
@@ -1175,7 +1175,7 @@ class _LeaveAllocationRequest extends State<LeaveAllocationRequest>
           title: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Text("Edit Allocation",
+              const Text("Edit Alokasi",
                   style: TextStyle(
                       fontSize: 21,
                       fontWeight: FontWeight.bold,
@@ -1208,20 +1208,20 @@ class _LeaveAllocationRequest extends State<LeaveAllocationRequest>
                     ),
                   SizedBox(height: MediaQuery.of(context).size.height * 0.03),
                   const Text(
-                    "Leave Type",
+                    "Jenis Cuti",
                   ),
                   SizedBox(height: MediaQuery.of(context).size.height * 0.01),
                   TypeAheadField<String>(
                     textFieldConfiguration: TextFieldConfiguration(
                       controller: _typeAheadEditController,
                       decoration: InputDecoration(
-                        labelText: 'Choose a Leave Type',
+                        labelText: 'Pilih Jenis Cuti',
                         labelStyle: TextStyle(color: Colors.grey[350]),
                         border: const OutlineInputBorder(),
                         contentPadding:
                         const EdgeInsets.symmetric(horizontal: 10.0),
                         errorText: _validateLeaveType
-                            ? 'Please select a leave type'
+                            ? 'Silakan pilih jenis cuti'
                             : null,
                       ),
                     ),
@@ -1249,7 +1249,7 @@ class _LeaveAllocationRequest extends State<LeaveAllocationRequest>
                     noItemsFoundBuilder: (context) => const Padding(
                       padding: EdgeInsets.all(8.0),
                       child: Text(
-                        'No Leave Types Found',
+                        'Jenis Cuti Tidak Ditemukan',
                         style: TextStyle(fontSize: 16),
                       ),
                     ),
@@ -1271,7 +1271,7 @@ class _LeaveAllocationRequest extends State<LeaveAllocationRequest>
                   SizedBox(height: MediaQuery.of(context).size.height * 0.03),
                   const Padding(
                     padding: EdgeInsets.all(4.0),
-                    child: Text("Requested Days"),
+                    child: Text("Jumlah Hari yang Diminta"),
                   ),
                   SizedBox(height: MediaQuery.of(context).size.height * 0.01),
                   TextField(
@@ -1281,10 +1281,10 @@ class _LeaveAllocationRequest extends State<LeaveAllocationRequest>
                       border: const OutlineInputBorder(),
                       contentPadding: const EdgeInsets.symmetric(
                           vertical: 10.0, horizontal: 10.0),
-                      labelText: 'Requested Days',
+                      labelText: 'Jumlah Hari yang Diminta',
                       labelStyle: TextStyle(color: Colors.grey[350]),
                       errorText:
-                      _validateDays ? 'Please enter Requested Days' : null,
+                      _validateDays ? 'Silakan masukkan Jumlah Hari yang Diminta' : null,
                       suffixIcon: IntrinsicHeight(
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -1333,7 +1333,7 @@ class _LeaveAllocationRequest extends State<LeaveAllocationRequest>
                   SizedBox(height: MediaQuery.of(context).size.height * 0.03),
                   const Padding(
                     padding: EdgeInsets.all(4.0),
-                    child: Text("Description"),
+                    child: Text("Deskripsi"),
                   ),
                   SizedBox(height: MediaQuery.of(context).size.height * 0.01),
                   Padding(
@@ -1345,7 +1345,7 @@ class _LeaveAllocationRequest extends State<LeaveAllocationRequest>
                         contentPadding:
                         const EdgeInsets.symmetric(horizontal: 10.0),
                         errorText: _validateDescriptions
-                            ? 'Description cannot be empty'
+                            ? 'Deskripsi tidak boleh kosong'
                             : null,
                       ),
                       onChanged: (newValue) {
@@ -1388,7 +1388,7 @@ class _LeaveAllocationRequest extends State<LeaveAllocationRequest>
                             }
                           },
                           child: const Text(
-                            'View Attachment',
+                            'Lihat Lampiran',
                             style: TextStyle(
                               decoration: TextDecoration.underline,
                               color: Colors.blue,
@@ -1420,7 +1420,7 @@ class _LeaveAllocationRequest extends State<LeaveAllocationRequest>
                       contentPadding:
                       const EdgeInsets.symmetric(horizontal: 5.0),
                       errorText: _validateAttachment
-                          ? 'Attachment is not given'
+                          ? 'Lampiran belum disertakan'
                           : null,
                     ),
                     readOnly: true,
@@ -1471,7 +1471,7 @@ class _LeaveAllocationRequest extends State<LeaveAllocationRequest>
                   ),
                 ),
                 child:
-                const Text('Save', style: TextStyle(color: Colors.white)),
+                const Text('Simpan', style: TextStyle(color: Colors.white)),
               ),
             ),
           ],
@@ -1489,7 +1489,7 @@ class _LeaveAllocationRequest extends State<LeaveAllocationRequest>
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
-          content: Text('No image selected'),
+          content: Text('Belum ada gambar dipilih'),
           backgroundColor: Colors.red,
         ),
       );
@@ -1877,7 +1877,7 @@ class _LeaveAllocationRequest extends State<LeaveAllocationRequest>
                   title: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      const Text('Add Allocation',
+                      const Text('Tambah Alokasi',
                           style: TextStyle(
                               fontWeight: FontWeight.bold,
                               color: Colors.black)),
@@ -1908,7 +1908,7 @@ class _LeaveAllocationRequest extends State<LeaveAllocationRequest>
                             ),
                           SizedBox(
                               height: MediaQuery.of(context).size.width * 0.03),
-                          const Text("Leave Type"),
+                          const Text("Jenis Cuti"),
                           SizedBox(
                               height:
                               MediaQuery.of(context).size.height * 0.01),
@@ -1916,13 +1916,13 @@ class _LeaveAllocationRequest extends State<LeaveAllocationRequest>
                             textFieldConfiguration: TextFieldConfiguration(
                               controller: _typeAheadAddController,
                               decoration: InputDecoration(
-                                labelText: 'Choose a Leave Type',
+                                labelText: 'Pilih Jenis Cuti',
                                 labelStyle: TextStyle(color: Colors.grey[350]),
                                 border: const OutlineInputBorder(),
                                 contentPadding: const EdgeInsets.symmetric(
                                     horizontal: 10.0),
                                 errorText: _validateLeaveType
-                                    ? 'Please select a leave type'
+                                    ? 'Silakan pilih jenis cuti'
                                     : null,
                               ),
                             ),
@@ -1950,7 +1950,7 @@ class _LeaveAllocationRequest extends State<LeaveAllocationRequest>
                             noItemsFoundBuilder: (context) => const Padding(
                               padding: EdgeInsets.all(8.0),
                               child: Text(
-                                'No Leave Types Found',
+                                'Jenis Cuti Tidak Ditemukan',
                                 style: TextStyle(fontSize: 16),
                               ),
                             ),
@@ -1975,7 +1975,7 @@ class _LeaveAllocationRequest extends State<LeaveAllocationRequest>
                               MediaQuery.of(context).size.height * 0.03),
                           const Padding(
                             padding: EdgeInsets.all(4.0),
-                            child: Text("Employee"),
+                            child: Text("Karyawan"),
                           ),
                           SizedBox(
                               height:
@@ -1984,13 +1984,13 @@ class _LeaveAllocationRequest extends State<LeaveAllocationRequest>
                             textFieldConfiguration: TextFieldConfiguration(
                               controller: _typeAddEmployeeController,
                               decoration: InputDecoration(
-                                labelText: 'Search Employee',
+                                labelText: 'Cari Karyawan',
                                 labelStyle: TextStyle(color: Colors.grey[350]),
                                 contentPadding: const EdgeInsets.symmetric(
                                     horizontal: 10.0),
                                 border: const OutlineInputBorder(),
                                 errorText: _validateEmployee
-                                    ? 'Please Select an Employee'
+                                    ? 'Silakan Pilih Karyawan'
                                     : null,
                               ),
                             ),
@@ -2017,7 +2017,7 @@ class _LeaveAllocationRequest extends State<LeaveAllocationRequest>
                             noItemsFoundBuilder: (context) => const Padding(
                               padding: EdgeInsets.all(8.0),
                               child: Text(
-                                'No Employees Found',
+                                'Karyawan Tidak Ditemukan',
                                 style: TextStyle(fontSize: 16),
                               ),
                             ),
@@ -2041,7 +2041,7 @@ class _LeaveAllocationRequest extends State<LeaveAllocationRequest>
                               height:
                               MediaQuery.of(context).size.height * 0.03),
                           const Text(
-                            "Requested Days",
+                            "Jumlah Hari yang Diminta",
                             style: TextStyle(color: Colors.black),
                           ),
                           SizedBox(
@@ -2054,10 +2054,10 @@ class _LeaveAllocationRequest extends State<LeaveAllocationRequest>
                               border: const OutlineInputBorder(),
                               contentPadding: const EdgeInsets.symmetric(
                                   vertical: 10.0, horizontal: 10.0),
-                              labelText: 'Requested Days',
+                              labelText: 'Jumlah Hari yang Diminta',
                               labelStyle: TextStyle(color: Colors.grey[350]),
                               errorText: _validateDays
-                                  ? 'Please enter Requested Days'
+                                  ? 'Silakan masukkan Jumlah Hari yang Diminta'
                                   : null,
                               suffixIcon: IntrinsicHeight(
                                 child: Column(
@@ -2108,7 +2108,7 @@ class _LeaveAllocationRequest extends State<LeaveAllocationRequest>
                           SizedBox(
                               height:
                               MediaQuery.of(context).size.height * 0.03),
-                          const Text("Description"),
+                          const Text("Deskripsi"),
                           SizedBox(
                               height:
                               MediaQuery.of(context).size.height * 0.01),
@@ -2116,12 +2116,12 @@ class _LeaveAllocationRequest extends State<LeaveAllocationRequest>
                             controller: allocationDescription,
                             decoration: InputDecoration(
                               border: const OutlineInputBorder(),
-                              labelText: "Description",
+                              labelText: "Deskripsi",
                               labelStyle: TextStyle(color: Colors.grey[350]),
                               contentPadding:
                               const EdgeInsets.symmetric(horizontal: 10.0),
                               errorText: _validateAllocateDescriptions
-                                  ? 'Description cannot be empty'
+                                  ? 'Deskripsi tidak boleh kosong'
                                   : null,
                             ),
                             onChanged: (newValue) {
@@ -2156,7 +2156,7 @@ class _LeaveAllocationRequest extends State<LeaveAllocationRequest>
                               contentPadding:
                               const EdgeInsets.symmetric(horizontal: 5.0),
                               errorText: _validateAttachment
-                                  ? 'Attachment is not given'
+                                  ? 'Lampiran belum disertakan'
                                   : null,
                               suffixIcon: _fileNameController.text.isNotEmpty
                                   ? IconButton(
@@ -2273,7 +2273,7 @@ class _LeaveAllocationRequest extends State<LeaveAllocationRequest>
                           ),
                         ),
                         child: const Text(
-                          "Save",
+                          "Simpan",
                           style: TextStyle(color: Colors.white),
                         ),
                       ),
@@ -2297,12 +2297,12 @@ class _LeaveAllocationRequest extends State<LeaveAllocationRequest>
     List<Widget> tabs = [];
     if (allocationCheck) {
       tabs = [
-        Tab(text: 'Leave allocation request(${allRequests.length})'),
-        Tab(text: 'My leave allocation(${myAllRequests.length})'),
+        Tab(text: 'Permintaan alokasi cuti(${allRequests.length})'),
+        Tab(text: 'Alokasi cuti saya(${myAllRequests.length})'),
       ];
     } else {
       tabs = [
-        Tab(text: 'My leave allocation(${myAllRequests.length})'),
+        Tab(text: 'Alokasi cuti saya(${myAllRequests.length})'),
       ];
     }
     if (!allocationCheck) {
@@ -2325,7 +2325,7 @@ class _LeaveAllocationRequest extends State<LeaveAllocationRequest>
           title: const Row(
             children: [
               Text(
-                'Allocation',
+                'Alokasi',
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                 ),
@@ -2366,7 +2366,7 @@ class _LeaveAllocationRequest extends State<LeaveAllocationRequest>
                   side: const BorderSide(color: Colors.red),
                 ),
                 child:
-                const Text('CREATE', style: TextStyle(color: Colors.red)),
+                const Text('BUAT', style: TextStyle(color: Colors.red)),
               ),
             ),
           ],
@@ -2405,7 +2405,7 @@ class _LeaveAllocationRequest extends State<LeaveAllocationRequest>
                   ],
                 );
               } else if (snapshot.hasError) {
-                return const Center(child: Text('Error loading permissions.'));
+                return const Center(child: Text('Gagal memuat izin.'));
               } else {
                 return ListView(
                   padding: const EdgeInsets.all(0),
@@ -2425,7 +2425,7 @@ class _LeaveAllocationRequest extends State<LeaveAllocationRequest>
                     ),
                     permissionLeaveOverviewCheck
                         ? ListTile(
-                      title: const Text('Overview'),
+                      title: const Text('Ringkasan'),
                       onTap: () {
                         Navigator.pushNamed(context, '/leave_overview');
                       },
@@ -2434,7 +2434,7 @@ class _LeaveAllocationRequest extends State<LeaveAllocationRequest>
 
                     permissionMyLeaveRequestCheck
                         ? ListTile(
-                      title: const Text('My Leave Request'),
+                      title: const Text('Permintaan Cuti Saya'),
                       onTap: () {
                         Navigator.pushNamed(context, '/my_leave_request');
                       },
@@ -2443,7 +2443,7 @@ class _LeaveAllocationRequest extends State<LeaveAllocationRequest>
 
                     permissionLeaveRequestCheck
                         ? ListTile(
-                      title: const Text('Leave Request'),
+                      title: const Text('Permintaan Cuti'),
                       onTap: () {
                         Navigator.pushNamed(context, '/leave_request');
                       },
@@ -2452,7 +2452,7 @@ class _LeaveAllocationRequest extends State<LeaveAllocationRequest>
 
                     permissionLeaveTypeCheck
                         ? ListTile(
-                      title: const Text('Leave Type'),
+                      title: const Text('Jenis Cuti'),
                       onTap: () {
                         Navigator.pushNamed(context, '/leave_types');
                       },
@@ -2461,7 +2461,7 @@ class _LeaveAllocationRequest extends State<LeaveAllocationRequest>
 
                     permissionLeaveAllocationCheck
                         ? ListTile(
-                      title: const Text('Leave Allocation Request'),
+                      title: const Text('Permintaan Alokasi Cuti'),
                       onTap: () {
                         Navigator.pushNamed(
                             context, '/leave_allocation_request');
@@ -2471,7 +2471,7 @@ class _LeaveAllocationRequest extends State<LeaveAllocationRequest>
 
                     permissionLeaveAssignCheck
                         ? ListTile(
-                      title: const Text('All Assigned Leave'),
+                      title: const Text('Semua Cuti Ditugaskan'),
                       onTap: () {
                         Navigator.pushNamed(
                             context, '/all_assigned_leave');
@@ -2573,8 +2573,8 @@ class _LeaveAllocationRequest extends State<LeaveAllocationRequest>
     List<Widget> tabViews = [];
     if (allocationCheck) {
       tabs = [
-        Tab(text: 'Leave allocation request(${allRequests.length})'),
-        Tab(text: 'My leave allocation(${myAllRequests.length})'),
+        Tab(text: 'Permintaan alokasi cuti(${allRequests.length})'),
+        Tab(text: 'Alokasi cuti saya(${myAllRequests.length})'),
       ];
       tabViews = [
         buildTabContent(allRequests),
@@ -2582,7 +2582,7 @@ class _LeaveAllocationRequest extends State<LeaveAllocationRequest>
       ];
     } else {
       tabs = [
-        Tab(text: 'My leave allocation(${myAllRequests.length})'),
+        Tab(text: 'Alokasi cuti saya(${myAllRequests.length})'),
       ];
       tabViews = [
         buildTabContents(myAllRequests),
@@ -2609,7 +2609,7 @@ class _LeaveAllocationRequest extends State<LeaveAllocationRequest>
                       ),
                       child: const TextField(
                         decoration: InputDecoration(
-                          hintText: 'Search',
+                          hintText: 'Cari',
                           border: InputBorder.none,
                           prefixIcon: Icon(Icons.search),
                           contentPadding: EdgeInsets.symmetric(
@@ -2647,8 +2647,8 @@ class _LeaveAllocationRequest extends State<LeaveAllocationRequest>
 
     if (allocationCheck) {
       tabs = [
-        Tab(text: 'Leave allocation request($leaveAllocationRequestCount)'),
-        Tab(text: 'My leave allocation($myLeaveAllocationCount)'),
+        Tab(text: 'Permintaan alokasi cuti($leaveAllocationRequestCount)'),
+        Tab(text: 'Alokasi cuti saya($myLeaveAllocationCount)'),
       ];
       tabViews = [
         leaveAllocationRequestCount == 0
@@ -2667,7 +2667,7 @@ class _LeaveAllocationRequest extends State<LeaveAllocationRequest>
                     ),
                     SizedBox(height: 20),
                     Text(
-                      "There are no records to display",
+                      "Tidak ada data untuk ditampilkan",
                       style: TextStyle(
                           fontSize: 16.0,
                           color: Colors.black,
@@ -2696,7 +2696,7 @@ class _LeaveAllocationRequest extends State<LeaveAllocationRequest>
                     ),
                     SizedBox(height: 20),
                     Text(
-                      "There are no records to display",
+                      "Tidak ada data untuk ditampilkan",
                       style: TextStyle(
                           fontSize: 16.0,
                           color: Colors.black,
@@ -2712,7 +2712,7 @@ class _LeaveAllocationRequest extends State<LeaveAllocationRequest>
       ];
     } else {
       tabs = [
-        Tab(text: 'My leave allocation(${myAllRequests.length})'),
+        Tab(text: 'Alokasi cuti saya(${myAllRequests.length})'),
       ];
       tabViews = [
         myLeaveAllocationCount == 0
@@ -2731,7 +2731,7 @@ class _LeaveAllocationRequest extends State<LeaveAllocationRequest>
                     ),
                     SizedBox(height: 20),
                     Text(
-                      "There are no records to display",
+                      "Tidak ada data untuk ditampilkan",
                       style: TextStyle(
                           fontSize: 16.0,
                           color: Colors.black,
@@ -2769,7 +2769,7 @@ class _LeaveAllocationRequest extends State<LeaveAllocationRequest>
                             });
                           },
                           decoration: InputDecoration(
-                            hintText: 'Search',
+                            hintText: 'Cari',
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(8.0),
                               borderSide: BorderSide.none,
@@ -3013,7 +3013,7 @@ class _LeaveAllocationRequest extends State<LeaveAllocationRequest>
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
-                                'Requested days',
+                                'Jumlah hari diminta',
                                 style: TextStyle(color: Colors.grey.shade700),
                               ),
                               Text('${record['requested_days'] ?? "None"}'),
@@ -3023,7 +3023,7 @@ class _LeaveAllocationRequest extends State<LeaveAllocationRequest>
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
-                                'Leave Type',
+                                'Jenis Cuti',
                                 style: TextStyle(color: Colors.grey.shade700),
                               ),
                               Text('${record['leave_type_id']['name'] ?? "None"}'),
@@ -3033,7 +3033,7 @@ class _LeaveAllocationRequest extends State<LeaveAllocationRequest>
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
-                                'Description',
+                                'Deskripsi',
                                 style: TextStyle(color: Colors.grey.shade700),
                               ),
                             ],
@@ -3089,7 +3089,7 @@ class _LeaveAllocationRequest extends State<LeaveAllocationRequest>
                                     }
                                   },
                                   child: const Text(
-                                    'View Attachment',
+                                    'Lihat Lampiran',
                                     style: TextStyle(
                                       decoration: TextDecoration.underline,
                                       color: Colors.blue,
@@ -3271,7 +3271,7 @@ class _LeaveAllocationRequest extends State<LeaveAllocationRequest>
                                           MainAxisAlignment.spaceBetween,
                                           children: [
                                             const Text(
-                                              "Confirmation",
+                                              "Konfirmasi",
                                               style: TextStyle(
                                                 fontWeight: FontWeight.bold,
                                                 color: Colors.black,
@@ -3330,7 +3330,7 @@ class _LeaveAllocationRequest extends State<LeaveAllocationRequest>
                                                 ),
                                               ),
                                               child: const Text(
-                                                "Continue",
+                                                "Lanjutkan",
                                                 style: TextStyle(
                                                     color: Colors.white),
                                               ),
@@ -3352,7 +3352,7 @@ class _LeaveAllocationRequest extends State<LeaveAllocationRequest>
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text('Requested Days',
+                      Text('Jumlah Hari yang Diminta',
                           style: TextStyle(color: Colors.grey.shade700)),
                       Text('${record['requested_days']}'),
                     ],
@@ -3360,7 +3360,7 @@ class _LeaveAllocationRequest extends State<LeaveAllocationRequest>
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text('Leave Type',
+                      Text('Jenis Cuti',
                           style: TextStyle(color: Colors.grey.shade700)),
                       Text('${record['leave_type_id']['name']}'),
                     ],
@@ -3594,7 +3594,7 @@ class _LeaveAllocationRequest extends State<LeaveAllocationRequest>
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            'Leave Type',
+                            'Jenis Cuti',
                             style: TextStyle(color: Colors.grey.shade700),
                           ),
                           Text('${record['leave_type_id']['name']}'),
@@ -3604,7 +3604,7 @@ class _LeaveAllocationRequest extends State<LeaveAllocationRequest>
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            'Requested days',
+                            'Jumlah hari diminta',
                             style: TextStyle(color: Colors.grey.shade700),
                           ),
                           Text('${record['requested_days']}'),
@@ -3614,7 +3614,7 @@ class _LeaveAllocationRequest extends State<LeaveAllocationRequest>
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            'Description',
+                            'Deskripsi',
                             style: TextStyle(color: Colors.grey.shade700),
                           ),
                         ],
@@ -3672,7 +3672,7 @@ class _LeaveAllocationRequest extends State<LeaveAllocationRequest>
                                 }
                               },
                               child: const Text(
-                                'View Attachment',
+                                'Lihat Lampiran',
                                 style: TextStyle(
                                   decoration: TextDecoration.underline,
                                   color: Colors.blue,
@@ -3701,7 +3701,7 @@ class _LeaveAllocationRequest extends State<LeaveAllocationRequest>
                                           MainAxisAlignment.spaceBetween,
                                           children: [
                                             const Text(
-                                              "Confirmation",
+                                              "Konfirmasi",
                                               style: TextStyle(
                                                   fontWeight: FontWeight.bold,
                                                   color: Colors.black),
@@ -3759,7 +3759,7 @@ class _LeaveAllocationRequest extends State<LeaveAllocationRequest>
                                                   ),
                                                 ),
                                               ),
-                                              child: const Text("Continue",
+                                              child: const Text("Lanjutkan",
                                                   style: TextStyle(
                                                       color: Colors.white)),
                                             ),
@@ -3776,7 +3776,7 @@ class _LeaveAllocationRequest extends State<LeaveAllocationRequest>
                                   ),
                                 ),
                                 child: const Text(
-                                  'Reject',
+                                  'Tolak',
                                   style: TextStyle(
                                       fontSize: 14, color: Colors.white),
                                 ),
@@ -3799,7 +3799,7 @@ class _LeaveAllocationRequest extends State<LeaveAllocationRequest>
                                           MainAxisAlignment.spaceBetween,
                                           children: [
                                             const Text(
-                                              "Confirmation",
+                                              "Konfirmasi",
                                               style: TextStyle(
                                                   fontWeight: FontWeight.bold,
                                                   color: Colors.black),
@@ -3851,7 +3851,7 @@ class _LeaveAllocationRequest extends State<LeaveAllocationRequest>
                                                   ),
                                                 ),
                                               ),
-                                              child: const Text("Approve",
+                                              child: const Text("Setujui",
                                                   style: TextStyle(
                                                       color: Colors.white)),
                                             ),
@@ -3872,7 +3872,7 @@ class _LeaveAllocationRequest extends State<LeaveAllocationRequest>
                                   ),
                                 ),
                                 child: const Text(
-                                  'Approve',
+                                  'Setujui',
                                   style: TextStyle(
                                       fontSize: 14, color: Colors.white),
                                 ),
@@ -4059,7 +4059,7 @@ class _LeaveAllocationRequest extends State<LeaveAllocationRequest>
                                             MainAxisAlignment.spaceBetween,
                                             children: [
                                               const Text(
-                                                "Confirmation",
+                                                "Konfirmasi",
                                                 style: TextStyle(
                                                   fontWeight: FontWeight.bold,
                                                   color: Colors.black,
@@ -4119,7 +4119,7 @@ class _LeaveAllocationRequest extends State<LeaveAllocationRequest>
                                                   ),
                                                 ),
                                                 child: const Text(
-                                                  "Continue",
+                                                  "Lanjutkan",
                                                   style: TextStyle(
                                                       color: Colors.white),
                                                 ),
@@ -4141,7 +4141,7 @@ class _LeaveAllocationRequest extends State<LeaveAllocationRequest>
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text('Requested Days',
+                      Text('Jumlah Hari yang Diminta',
                           style: TextStyle(color: Colors.grey.shade700)),
                       Text('${record['requested_days']}'),
                     ],
@@ -4149,7 +4149,7 @@ class _LeaveAllocationRequest extends State<LeaveAllocationRequest>
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text('Leave Type',
+                      Text('Jenis Cuti',
                           style: TextStyle(color: Colors.grey.shade700)),
                       Text('${record['leave_type_id']['name']}'),
                     ],
@@ -4199,7 +4199,7 @@ class _LeaveAllocationRequest extends State<LeaveAllocationRequest>
                                       MainAxisAlignment.spaceBetween,
                                       children: [
                                         const Text(
-                                          "Confirmation",
+                                          "Konfirmasi",
                                           style: TextStyle(
                                               fontWeight: FontWeight.bold,
                                               color: Colors.black),
@@ -4254,7 +4254,7 @@ class _LeaveAllocationRequest extends State<LeaveAllocationRequest>
                                               ),
                                             ),
                                           ),
-                                          child: const Text("Continue",
+                                          child: const Text("Lanjutkan",
                                               style: TextStyle(
                                                   color: Colors.white)),
                                         ),
@@ -4271,7 +4271,7 @@ class _LeaveAllocationRequest extends State<LeaveAllocationRequest>
                               ),
                             ),
                             child: const Text(
-                              'Reject',
+                              'Tolak',
                               style:
                               TextStyle(fontSize: 14, color: Colors.white),
                             ),
@@ -4296,7 +4296,7 @@ class _LeaveAllocationRequest extends State<LeaveAllocationRequest>
                                       MainAxisAlignment.spaceBetween,
                                       children: [
                                         const Text(
-                                          "Confirmation",
+                                          "Konfirmasi",
                                           style: TextStyle(
                                               fontWeight: FontWeight.bold,
                                               color: Colors.black),
@@ -4349,7 +4349,7 @@ class _LeaveAllocationRequest extends State<LeaveAllocationRequest>
                                               ),
                                             ),
                                           ),
-                                          child: const Text("Approve",
+                                          child: const Text("Setujui",
                                               style: TextStyle(
                                                   color: Colors.white)),
                                         ),
@@ -4369,7 +4369,7 @@ class _LeaveAllocationRequest extends State<LeaveAllocationRequest>
                               ),
                             ),
                             child: const Text(
-                              'Approve',
+                              'Setujui',
                               style:
                               TextStyle(fontSize: 14, color: Colors.white),
                             ),
@@ -4398,15 +4398,15 @@ class StateInfo {
 StateInfo _getStateInfo(String state) {
   switch (state) {
     case 'requested':
-      return StateInfo(Colors.yellow[700]!, 'Requested');
+      return StateInfo(Colors.yellow[700]!, 'Diminta');
     case 'approved':
-      return StateInfo(Colors.green, 'Approved');
+      return StateInfo(Colors.green, 'Disetujui');
     case 'cancelled':
-      return StateInfo(Colors.red, 'Cancelled');
+      return StateInfo(Colors.red, 'Dibatalkan');
     case 'rejected':
-      return StateInfo(Colors.orange[700]!, 'Rejected');
+      return StateInfo(Colors.orange[700]!, 'Ditolak');
     default:
-      return StateInfo(Colors.black, 'Unknown');
+      return StateInfo(Colors.black, 'Tidak Diketahui');
   }
 }
 
@@ -4424,7 +4424,7 @@ class ImageViewer extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
-        title: const Text('Image Viewer'),
+        title: const Text('Penampil Gambar'),
         automaticallyImplyLeading: false,
       ),
       body: Center(
@@ -4436,7 +4436,7 @@ class ImageViewer extends StatelessWidget {
           },
           errorBuilder: (context, error, stackTrace) {
             return const Text(
-              'Error loading image',
+              'Gagal memuat gambar',
               style: TextStyle(color: Colors.red),
             );
           },
@@ -4446,13 +4446,13 @@ class ImageViewer extends StatelessWidget {
           File(imagePath),
           errorBuilder: (context, error, stackTrace) {
             return const Text(
-              'Error loading image',
+              'Gagal memuat gambar',
               style: TextStyle(color: Colors.red),
             );
           },
         )
             : const Text(
-          'Image not found',
+          'Gambar tidak ditemukan',
           style: TextStyle(color: Colors.red),
         ),
       ),

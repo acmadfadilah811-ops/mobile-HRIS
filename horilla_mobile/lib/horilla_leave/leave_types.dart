@@ -228,7 +228,7 @@ class _LeaveTypes extends State<LeaveTypes> {
           },
         ),
         automaticallyImplyLeading: false,
-        title: const Text('Leave Types',
+        title: const Text('Tipe Cuti',
             style: TextStyle(
               color: Colors.black,
               fontWeight: FontWeight.bold,
@@ -269,7 +269,7 @@ class _LeaveTypes extends State<LeaveTypes> {
                 ),
                 SizedBox(height: 20),
                 Text(
-                  "There are no Leave type records to display",
+                  "Tidak ada data tipe cuti untuk ditampilkan",
                   style: TextStyle(
                       fontSize: 16.0,
                       color: Colors.black,
@@ -322,7 +322,7 @@ class _LeaveTypes extends State<LeaveTypes> {
                 ],
               );
             } else if (snapshot.hasError) {
-              return const Center(child: Text('Error loading permissions.'));
+              return const Center(child: Text('Gagal memuat izin.'));
             } else {
               return ListView(
                 padding: const EdgeInsets.all(0),
@@ -342,7 +342,7 @@ class _LeaveTypes extends State<LeaveTypes> {
                   ),
                   permissionLeaveOverviewCheck
                       ? ListTile(
-                    title: const Text('Overview'),
+                    title: const Text('Ringkasan'),
                     onTap: () {
                       Navigator.pushNamed(context, '/leave_overview');
                     },
@@ -351,7 +351,7 @@ class _LeaveTypes extends State<LeaveTypes> {
 
                   permissionMyLeaveRequestCheck
                       ? ListTile(
-                    title: const Text('My Leave Request'),
+                    title: const Text('Permintaan Cuti Saya'),
                     onTap: () {
                       Navigator.pushNamed(context, '/my_leave_request');
                     },
@@ -360,7 +360,7 @@ class _LeaveTypes extends State<LeaveTypes> {
 
                   permissionLeaveRequestCheck
                       ? ListTile(
-                    title: const Text('Leave Request'),
+                    title: const Text('Permintaan Cuti'),
                     onTap: () {
                       Navigator.pushNamed(context, '/leave_request');
                     },
@@ -369,7 +369,7 @@ class _LeaveTypes extends State<LeaveTypes> {
 
                   permissionLeaveTypeCheck
                       ? ListTile(
-                    title: const Text('Leave Type'),
+                    title: const Text('Tipe Cuti'),
                     onTap: () {
                       Navigator.pushNamed(context, '/leave_types');
                     },
@@ -378,7 +378,7 @@ class _LeaveTypes extends State<LeaveTypes> {
 
                   permissionLeaveAllocationCheck
                       ? ListTile(
-                    title: const Text('Leave Allocation Request'),
+                    title: const Text('Permintaan Alokasi Cuti'),
                     onTap: () {
                       Navigator.pushNamed(
                           context, '/leave_allocation_request');
@@ -388,7 +388,7 @@ class _LeaveTypes extends State<LeaveTypes> {
 
                   permissionLeaveAssignCheck
                       ? ListTile(
-                    title: const Text('All Assigned Leave'),
+                    title: const Text('Semua Cuti Diberikan'),
                     onTap: () {
                       Navigator.pushNamed(context, '/all_assigned_leave');
                     },

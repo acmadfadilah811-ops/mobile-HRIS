@@ -34,7 +34,7 @@ class _HourAccountFormPageState extends State<HourAccountFormPage> {
   final _controller = NotchBottomBarController(index: -1);
   List<Map<String, dynamic>> requests = [];
   List<String> months = [
-    'Select Month',
+    'Pilih Bulan',
     'January',
     'February',
     'March',
@@ -389,7 +389,7 @@ class _HourAccountFormPageState extends State<HourAccountFormPage> {
       setState(() {
         currentPage = 0;
         getHourAccountRecords();
-        selectedMonth = 'Select Month';
+        selectedMonth = 'Pilih Bulan';
       });
     }
   }
@@ -513,7 +513,7 @@ class _HourAccountFormPageState extends State<HourAccountFormPage> {
                     Image.asset(imagePath),
                     const SizedBox(height: 16),
                     const Text(
-                      "Hour Account Created Successfully",
+                      "Akun Jam Kerja Berhasil Dibuat",
                       style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
@@ -556,7 +556,7 @@ class _HourAccountFormPageState extends State<HourAccountFormPage> {
                     Image.asset(imagePath),
                     const SizedBox(height: 16),
                     const Text(
-                      "Hour Account Deleted Successfully",
+                      "Akun Jam Kerja Berhasil Dihapus",
                       style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
@@ -599,7 +599,7 @@ class _HourAccountFormPageState extends State<HourAccountFormPage> {
                     Image.asset(imagePath),
                     const SizedBox(height: 16),
                     const Text(
-                      "Hour Account Updated Successfully",
+                      "Akun Jam Kerja Berhasil Diperbarui",
                       style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
@@ -682,7 +682,7 @@ class _HourAccountFormPageState extends State<HourAccountFormPage> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     const Text(
-                      "Edit Hour Account",
+                      "Edit Akun Jam Kerja",
                       style: TextStyle(
                           fontSize: 21,
                           fontWeight: FontWeight.bold,
@@ -716,7 +716,7 @@ class _HourAccountFormPageState extends State<HourAccountFormPage> {
                         SizedBox(
                             height: MediaQuery.of(context).size.height * 0.03),
                         const Text(
-                          'Employee',
+                          'Karyawan',
                           style: TextStyle(color: Colors.black),
                         ),
                         SizedBox(
@@ -725,7 +725,7 @@ class _HourAccountFormPageState extends State<HourAccountFormPage> {
                           textFieldConfiguration: TextFieldConfiguration(
                             controller: _typeAheadController,
                             decoration: InputDecoration(
-                              labelText: 'Search Employee',
+                              labelText: 'Cari Karyawan',
                               labelStyle: TextStyle(color: Colors.grey[350]),
                               contentPadding:
                                   const EdgeInsets.symmetric(horizontal: 10.0),
@@ -755,7 +755,7 @@ class _HourAccountFormPageState extends State<HourAccountFormPage> {
                           noItemsFoundBuilder: (context) => const Padding(
                             padding: EdgeInsets.all(8.0),
                             child: Text(
-                              'No Employees Found',
+                              'Karyawan Tidak Ditemukan',
                               style: TextStyle(fontSize: 16),
                             ),
                           ),
@@ -777,7 +777,7 @@ class _HourAccountFormPageState extends State<HourAccountFormPage> {
                         SizedBox(
                             height: MediaQuery.of(context).size.height * 0.03),
                         const Text(
-                          'Month',
+                          'Bulan',
                           style: TextStyle(color: Colors.black),
                         ),
                         SizedBox(
@@ -811,14 +811,14 @@ class _HourAccountFormPageState extends State<HourAccountFormPage> {
                         SizedBox(
                             height: MediaQuery.of(context).size.height * 0.03),
                         const Text(
-                          'Year',
+                          'Tahun',
                           style: TextStyle(color: Colors.black),
                         ),
                         SizedBox(
                             height: MediaQuery.of(context).size.height * 0.01),
                         InputDecorator(
                           decoration: const InputDecoration(
-                            labelText: 'Select Year',
+                            labelText: 'Pilih Tahun',
                             border: OutlineInputBorder(),
                             contentPadding: EdgeInsets.symmetric(
                                 horizontal: 10, vertical: 5),
@@ -843,7 +843,7 @@ class _HourAccountFormPageState extends State<HourAccountFormPage> {
                                   selectedYear = newValue!;
                                 });
                               },
-                              hint: const Text('Select Year'),
+                              hint: const Text('Pilih Tahun'),
                             ),
                           ),
                         ),
@@ -858,7 +858,7 @@ class _HourAccountFormPageState extends State<HourAccountFormPage> {
                                   const Padding(
                                     padding: EdgeInsets.all(2.0),
                                     child: Text(
-                                      'Worked Hours',
+                                      'Jam Kerja',
                                       style: TextStyle(color: Colors.black),
                                     ),
                                   ),
@@ -897,7 +897,7 @@ class _HourAccountFormPageState extends State<HourAccountFormPage> {
                                   const Padding(
                                     padding: EdgeInsets.all(2.0),
                                     child: Text(
-                                      'Pending Hours',
+                                      'Jam Tertunda',
                                       style: TextStyle(color: Colors.black),
                                     ),
                                   ),
@@ -934,7 +934,7 @@ class _HourAccountFormPageState extends State<HourAccountFormPage> {
                         SizedBox(
                             height: MediaQuery.of(context).size.height * 0.02),
                         const Text(
-                          'Overtime',
+                          'Lembur',
                           style: TextStyle(color: Colors.black),
                         ),
                         SizedBox(
@@ -999,7 +999,7 @@ class _HourAccountFormPageState extends State<HourAccountFormPage> {
                           ),
                         ),
                       ),
-                      child: const Text('Save',
+                      child: const Text('Simpan',
                           style: TextStyle(color: Colors.white)),
                     ),
                   ),
@@ -1030,7 +1030,7 @@ class _HourAccountFormPageState extends State<HourAccountFormPage> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     const Text(
-                      "Add Hour Account",
+                      "Tambah Akun Jam Kerja",
                       style: TextStyle(
                           fontSize: 21,
                           fontWeight: FontWeight.bold,
@@ -1064,7 +1064,7 @@ class _HourAccountFormPageState extends State<HourAccountFormPage> {
                         SizedBox(
                             height: MediaQuery.of(context).size.height * 0.03),
                         const Text(
-                          'Employee',
+                          'Karyawan',
                           style: TextStyle(color: Colors.black),
                         ),
                         SizedBox(
@@ -1073,13 +1073,13 @@ class _HourAccountFormPageState extends State<HourAccountFormPage> {
                           textFieldConfiguration: TextFieldConfiguration(
                             controller: _typeAheadCreateController,
                             decoration: InputDecoration(
-                              labelText: 'Search Employee',
+                              labelText: 'Cari Karyawan',
                               labelStyle: TextStyle(color: Colors.grey[350]),
                               contentPadding:
                                   const EdgeInsets.symmetric(horizontal: 10.0),
                               border: const OutlineInputBorder(),
                               errorText: _validateEmployee
-                                  ? 'Please Select an Employee'
+                                  ? 'Silakan pilih Karyawan'
                                   : null,
                             ),
                           ),
@@ -1106,7 +1106,7 @@ class _HourAccountFormPageState extends State<HourAccountFormPage> {
                           noItemsFoundBuilder: (context) => const Padding(
                             padding: EdgeInsets.all(8.0),
                             child: Text(
-                              'No Employees Found',
+                              'Karyawan Tidak Ditemukan',
                               style: TextStyle(fontSize: 16),
                             ),
                           ),
@@ -1128,7 +1128,7 @@ class _HourAccountFormPageState extends State<HourAccountFormPage> {
                         SizedBox(
                             height: MediaQuery.of(context).size.height * 0.03),
                         const Text(
-                          'Month',
+                          'Bulan',
                           style: TextStyle(color: Colors.black),
                         ),
                         SizedBox(
@@ -1139,7 +1139,7 @@ class _HourAccountFormPageState extends State<HourAccountFormPage> {
                             color: Colors.black,
                           ),
                           decoration: InputDecoration(
-                            labelText: 'Select Month',
+                            labelText: 'Pilih Bulan',
                             labelStyle: TextStyle(color: Colors.grey[350]),
                             border: const OutlineInputBorder(),
                             contentPadding: EdgeInsets.symmetric(
@@ -1148,7 +1148,7 @@ class _HourAccountFormPageState extends State<HourAccountFormPage> {
                                 horizontal:
                                     MediaQuery.of(context).size.width * 0.008),
                             errorText:
-                                _validateMonth ? 'Please select a Month' : null,
+                                _validateMonth ? 'Silakan pilih Bulan' : null,
                           ),
                           value: selectedMonth,
                           onChanged: (newValue) {
@@ -1167,21 +1167,21 @@ class _HourAccountFormPageState extends State<HourAccountFormPage> {
                         SizedBox(
                             height: MediaQuery.of(context).size.height * 0.03),
                         const Text(
-                          'Year',
+                          'Tahun',
                           style: TextStyle(color: Colors.black),
                         ),
                         SizedBox(
                             height: MediaQuery.of(context).size.height * 0.01),
                         InputDecorator(
                           decoration: InputDecoration(
-                            labelText: 'Select Year',
+                            labelText: 'Pilih Tahun',
                             // Add a label
                             border: OutlineInputBorder(),
                             // You can customize the border
                             contentPadding: EdgeInsets.symmetric(
                                 horizontal: 10, vertical: 5),
                             errorText:
-                                _validateYear ? 'Please select a Year' : null,
+                                _validateYear ? 'Silakan pilih Tahun' : null,
                           ),
                           child: DropdownButtonHideUnderline(
                             child: DropdownButton<int>(
@@ -1205,7 +1205,7 @@ class _HourAccountFormPageState extends State<HourAccountFormPage> {
                                   _validateYear = false;
                                 });
                               },
-                              hint: const Text('Select Year'),
+                              hint: const Text('Pilih Tahun'),
                             ),
                           ),
                         ),
@@ -1220,7 +1220,7 @@ class _HourAccountFormPageState extends State<HourAccountFormPage> {
                                   const Padding(
                                     padding: EdgeInsets.all(2.0),
                                     child: Text(
-                                      'Worked Hours',
+                                      'Jam Kerja',
                                       style: TextStyle(color: Colors.black),
                                     ),
                                   ),
@@ -1266,7 +1266,7 @@ class _HourAccountFormPageState extends State<HourAccountFormPage> {
                                   const Padding(
                                     padding: EdgeInsets.all(2.0),
                                     child: Text(
-                                      'Pending Hours',
+                                      'Jam Tertunda',
                                       style: TextStyle(color: Colors.black),
                                     ),
                                   ),
@@ -1309,7 +1309,7 @@ class _HourAccountFormPageState extends State<HourAccountFormPage> {
                         SizedBox(
                             height: MediaQuery.of(context).size.height * 0.03),
                         const Text(
-                          'Overtime',
+                          'Lembur',
                           style: TextStyle(color: Colors.black),
                         ),
                         SizedBox(
@@ -1335,7 +1335,7 @@ class _HourAccountFormPageState extends State<HourAccountFormPage> {
                               contentPadding:
                                   const EdgeInsets.symmetric(horizontal: 10.0),
                               errorText: _validateOvertime
-                                  ? 'Please select Overtime'
+                                  ? 'Silakan pilih Lembur'
                                   : null,
                             ),
                           ),
@@ -1459,7 +1459,7 @@ class _HourAccountFormPageState extends State<HourAccountFormPage> {
                           ),
                         ),
                       ),
-                      child: const Text('Save',
+                      child: const Text('Simpan',
                           style: TextStyle(color: Colors.white)),
                     ),
                   ),
@@ -1607,7 +1607,7 @@ class _HourAccountFormPageState extends State<HourAccountFormPage> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            'Month',
+                            'Bulan',
                             style: TextStyle(color: Colors.grey.shade700),
                           ),
                           Text(
@@ -1622,7 +1622,7 @@ class _HourAccountFormPageState extends State<HourAccountFormPage> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            'Year',
+                            'Tahun',
                             style: TextStyle(color: Colors.grey.shade700),
                           ),
                           Text('${record['year'] ?? 'None'}'),
@@ -1632,7 +1632,7 @@ class _HourAccountFormPageState extends State<HourAccountFormPage> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            'Worked Hours',
+                            'Jam Kerja',
                             style: TextStyle(color: Colors.grey.shade700),
                           ),
                           Text('${record['worked_hours'] ?? 'None'}'),
@@ -1642,7 +1642,7 @@ class _HourAccountFormPageState extends State<HourAccountFormPage> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            'Pending Hour',
+                            'Jam Tertunda',
                             style: TextStyle(color: Colors.grey.shade700),
                           ),
                           Text('${record['pending_hours'] ?? 'None'}'),
@@ -1652,7 +1652,7 @@ class _HourAccountFormPageState extends State<HourAccountFormPage> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            'Overtime',
+                            'Lembur',
                             style: TextStyle(color: Colors.grey.shade700),
                           ),
                           Text('${record['overtime'] ?? 'None'}'),
@@ -1831,7 +1831,7 @@ class _HourAccountFormPageState extends State<HourAccountFormPage> {
                                                 MainAxisAlignment.spaceBetween,
                                             children: [
                                               const Text(
-                                                "Confirmation",
+                                                "Konfirmasi",
                                                 style: TextStyle(
                                                   fontWeight: FontWeight.bold,
                                                   color: Colors.black,
@@ -1853,7 +1853,7 @@ class _HourAccountFormPageState extends State<HourAccountFormPage> {
                                                 0.1,
                                             child: const Center(
                                               child: Text(
-                                                "Are you sure you want to delete this hour account?",
+                                                "Apakah Anda yakin ingin menghapus akun jam kerja ini?",
                                                 style: TextStyle(
                                                   fontWeight: FontWeight.bold,
                                                   color: Colors.black,
@@ -1893,7 +1893,7 @@ class _HourAccountFormPageState extends State<HourAccountFormPage> {
                                                   ),
                                                 ),
                                                 child: const Text(
-                                                  "Continue",
+                                                  "Lanjutkan",
                                                   style: TextStyle(
                                                       color: Colors.white),
                                                 ),
@@ -1928,7 +1928,7 @@ class _HourAccountFormPageState extends State<HourAccountFormPage> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text('Month',
+                            Text('Bulan',
                                 style: TextStyle(color: Colors.grey.shade700)),
                             Text(
                               record['month'] != null &&
@@ -1941,7 +1941,7 @@ class _HourAccountFormPageState extends State<HourAccountFormPage> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text('Year',
+                            Text('Tahun',
                                 style: TextStyle(color: Colors.grey.shade700)),
                             Text('${record['year']}'),
                           ],
@@ -1949,7 +1949,7 @@ class _HourAccountFormPageState extends State<HourAccountFormPage> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text('Worked Hours',
+                            Text('Jam Kerja',
                                 style: TextStyle(color: Colors.grey.shade700)),
                             Text('${record['worked_hours']}'),
                           ],
@@ -1980,7 +1980,7 @@ class _HourAccountFormPageState extends State<HourAccountFormPage> {
             _scaffoldKey.currentState?.openDrawer();
           },
         ),
-        title: const Text('Hour Account',
+        title: const Text('Akun Jam Kerja',
             style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold)),
         actions: [
           Padding(
@@ -2022,7 +2022,7 @@ class _HourAccountFormPageState extends State<HourAccountFormPage> {
                           side: const BorderSide(color: Colors.red),
                         ),
                       ),
-                      child: const Text('CREATE',
+                      child: const Text('BUAT',
                           style: TextStyle(color: Colors.red)),
                     ),
                   ),
@@ -2050,24 +2050,24 @@ class _HourAccountFormPageState extends State<HourAccountFormPage> {
                   ),
                   if (permissionOverview)
                     ListTile(
-                      title: const Text('Overview'),
+                      title: const Text('Ringkasan'),
                       onTap: () =>
                           Navigator.pushNamed(context, '/attendance_overview'),
                     ),
                   ListTile(
-                    title: const Text('Attendance'),
+                    title: const Text('Kehadiran'),
                     onTap: () {
                       Navigator.pushNamed(context, '/attendance_attendance');
                     },
                   ),
                   ListTile(
-                    title: const Text('Attendance Request'),
+                    title: const Text('Permintaan Kehadiran'),
                     onTap: () {
                       Navigator.pushNamed(context, '/attendance_request');
                     },
                   ),
                   ListTile(
-                    title: const Text('Hour Account'),
+                    title: const Text('Akun Jam Kerja'),
                     onTap: () {
                       Navigator.pushNamed(context, '/employee_hour_account');
                     },
@@ -2364,7 +2364,7 @@ class _HourAccountFormPageState extends State<HourAccountFormPage> {
                       ),
                       SizedBox(height: 20),
                       Text(
-                        "There are no records to display",
+                        "Tidak ada data untuk ditampilkan",
                         style: TextStyle(
                           fontSize: 16.0,
                           color: Colors.black,

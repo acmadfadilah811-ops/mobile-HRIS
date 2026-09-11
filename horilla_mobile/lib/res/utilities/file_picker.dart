@@ -16,7 +16,7 @@ Future<File?> pickFile(BuildContext context, {int maxSizeInMB = 10}) async {
       final bytes = await file.length();
       if (bytes > maxSizeInMB * 1024 * 1024) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('File size must be less than ${maxSizeInMB}MB')),
+          SnackBar(content: Text('Ukuran file harus kurang dari ${maxSizeInMB}MB')),
         );
         return null;
       }
@@ -25,7 +25,7 @@ Future<File?> pickFile(BuildContext context, {int maxSizeInMB = 10}) async {
     }
   } catch (e) {
     ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text('Error picking file: $e')),
+      SnackBar(content: Text('Gagal memilih file: $e')),
     );
   }
   return null;

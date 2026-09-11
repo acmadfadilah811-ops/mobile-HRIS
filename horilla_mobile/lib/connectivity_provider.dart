@@ -33,7 +33,7 @@ class _ConnectivityBannerState extends State<ConnectivityBanner> {
             width: double.infinity,
             padding: EdgeInsets.all(10),
             child: Text(
-              'No Internet Connection',
+              'Tidak Ada Koneksi Internet',
               style: TextStyle(color: Colors.white),
               textAlign: TextAlign.center,
             ),

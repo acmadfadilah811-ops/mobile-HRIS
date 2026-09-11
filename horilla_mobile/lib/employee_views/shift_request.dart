@@ -548,7 +548,7 @@ class _ShiftRequestPageState extends State<ShiftRequestPage> {
                     Image.asset(imagePath),
                     const SizedBox(height: 16),
                     const Text(
-                      "Shift Request Approved Successfully",
+                      "Permintaan Shift Berhasil Disetujui",
                       style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
@@ -591,7 +591,7 @@ class _ShiftRequestPageState extends State<ShiftRequestPage> {
                     Image.asset(imagePath),
                     const SizedBox(height: 16),
                     const Text(
-                      "Shift Request Rejected Successfully",
+                      "Permintaan Shift Berhasil Ditolak",
                       style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
@@ -689,7 +689,7 @@ class _ShiftRequestPageState extends State<ShiftRequestPage> {
                     Image.asset(imagePath),
                     const SizedBox(height: 16),
                     const Text(
-                      "Shift Created Successfully",
+                      "Shift Berhasil Dibuat",
                       style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
@@ -732,7 +732,7 @@ class _ShiftRequestPageState extends State<ShiftRequestPage> {
                     Image.asset(imagePath),
                     const SizedBox(height: 16),
                     const Text(
-                      "Shift Deleted Successfully",
+                      "Shift Berhasil Dihapus",
                       style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
@@ -775,7 +775,7 @@ class _ShiftRequestPageState extends State<ShiftRequestPage> {
                     Image.asset(imagePath),
                     const SizedBox(height: 16),
                     const Text(
-                      "Shift Updated Successfully",
+                      "Shift Berhasil Diperbarui",
                       style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
@@ -907,7 +907,7 @@ class _ShiftRequestPageState extends State<ShiftRequestPage> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       const Text(
-                        "Edit Shift Request",
+                        "Edit Permintaan Shift",
                         style: TextStyle(
                             fontWeight: FontWeight.bold,
                             color: Colors.black,
@@ -942,7 +942,7 @@ class _ShiftRequestPageState extends State<ShiftRequestPage> {
                               height:
                               MediaQuery.of(context).size.height * 0.03),
                           const Text(
-                            'Employee',
+                            'Karyawan',
                             style: TextStyle(color: Colors.black),
                           ),
                           SizedBox(
@@ -952,7 +952,7 @@ class _ShiftRequestPageState extends State<ShiftRequestPage> {
                             textFieldConfiguration: TextFieldConfiguration(
                               controller: _typeAheadEditController,
                               decoration: InputDecoration(
-                                labelText: 'Search Employee',
+                                labelText: 'Cari Karyawan',
                                 labelStyle: TextStyle(color: Colors.grey[350]),
                                 contentPadding: const EdgeInsets.symmetric(
                                     horizontal: 10.0),
@@ -982,7 +982,7 @@ class _ShiftRequestPageState extends State<ShiftRequestPage> {
                             noItemsFoundBuilder: (context) => const Padding(
                               padding: EdgeInsets.all(8.0),
                               child: Text(
-                                'No Employees Found',
+                                'Karyawan Tidak Ditemukan',
                                 style: TextStyle(fontSize: 16),
                               ),
                             ),
@@ -1006,7 +1006,7 @@ class _ShiftRequestPageState extends State<ShiftRequestPage> {
                               height:
                               MediaQuery.of(context).size.height * 0.03),
                           const Text(
-                            'Requesting Shift',
+                            'Permintaan Shift',
                             style: TextStyle(color: Colors.black),
                           ),
                           SizedBox(
@@ -1016,7 +1016,7 @@ class _ShiftRequestPageState extends State<ShiftRequestPage> {
                             textFieldConfiguration: TextFieldConfiguration(
                               controller: _typeAheadEditShiftController,
                               decoration: InputDecoration(
-                                labelText: 'Search Requesting Shift',
+                                labelText: 'Cari Permintaan Shift',
                                 labelStyle: TextStyle(color: Colors.grey[350]),
                                 contentPadding: const EdgeInsets.symmetric(
                                     horizontal: 10.0),
@@ -1046,7 +1046,7 @@ class _ShiftRequestPageState extends State<ShiftRequestPage> {
                             noItemsFoundBuilder: (context) => const Padding(
                               padding: EdgeInsets.all(8.0),
                               child: Text(
-                                'No Requesting Shift Found',
+                                'Permintaan Shift Tidak Ditemukan',
                                 style: TextStyle(fontSize: 16),
                               ),
                             ),
@@ -1095,10 +1095,10 @@ class _ShiftRequestPageState extends State<ShiftRequestPage> {
                             },
                             decoration: InputDecoration(
                               border: const OutlineInputBorder(),
-                              labelText: 'Select Requested Date',
+                              labelText: 'Pilih Tanggal Diminta',
                               labelStyle: TextStyle(color: Colors.grey[350]),
                               errorText: _validateRequestedDate
-                                  ? 'Please select a Requested Date'
+                                  ? 'Silakan pilih Tanggal Diminta'
                                   : null,
                               contentPadding:
                               const EdgeInsets.symmetric(horizontal: 10.0),
@@ -1133,10 +1133,10 @@ class _ShiftRequestPageState extends State<ShiftRequestPage> {
                             },
                             decoration: InputDecoration(
                               border: const OutlineInputBorder(),
-                              labelText: 'Select Requested Till',
+                              labelText: 'Pilih Diminta Sampai',
                               labelStyle: TextStyle(color: Colors.grey[350]),
                               errorText: _validateRequestedTill
-                                  ? 'Please select a Requested Till'
+                                  ? 'Silakan pilih Diminta Sampai'
                                   : null,
                               contentPadding:
                               const EdgeInsets.symmetric(horizontal: 10.0),
@@ -1146,7 +1146,7 @@ class _ShiftRequestPageState extends State<ShiftRequestPage> {
                               height:
                               MediaQuery.of(context).size.height * 0.03),
                           const Text(
-                            'Description',
+                            'Deskripsi',
                             style: TextStyle(color: Colors.black),
                           ),
                           SizedBox(
@@ -1155,13 +1155,13 @@ class _ShiftRequestPageState extends State<ShiftRequestPage> {
                           TextField(
                             controller: descriptionSelect,
                             decoration: InputDecoration(
-                              labelText: "Description",
+                              labelText: "Deskripsi",
                               labelStyle: TextStyle(color: Colors.grey[350]),
                               border: const OutlineInputBorder(),
                               contentPadding:
                               const EdgeInsets.symmetric(horizontal: 10.0),
                               errorText: _validateDescription
-                                  ? 'Description cannot be empty'
+                                  ? 'Deskripsi tidak boleh kosong'
                                   : null,
                             ),
                             onChanged: (newValue) {
@@ -1238,7 +1238,7 @@ class _ShiftRequestPageState extends State<ShiftRequestPage> {
                             ),
                           ),
                         ),
-                        child: const Text('Save',
+                        child: const Text('Simpan',
                             style: TextStyle(color: Colors.white)),
                       ),
                     ),
@@ -1271,7 +1271,7 @@ class _ShiftRequestPageState extends State<ShiftRequestPage> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       const Text(
-                        "Add Shift Request",
+                        "Tambah Permintaan Shift",
                         style: TextStyle(
                             fontWeight: FontWeight.bold,
                             color: Colors.black,
@@ -1306,7 +1306,7 @@ class _ShiftRequestPageState extends State<ShiftRequestPage> {
                               height:
                               MediaQuery.of(context).size.height * 0.03),
                           const Text(
-                            'Employee',
+                            'Karyawan',
                             style: TextStyle(color: Colors.black),
                           ),
                           SizedBox(
@@ -1316,7 +1316,7 @@ class _ShiftRequestPageState extends State<ShiftRequestPage> {
                             textFieldConfiguration: TextFieldConfiguration(
                               controller: _typeCreateAheadController,
                               decoration: InputDecoration(
-                                labelText: 'Search Employee',
+                                labelText: 'Cari Karyawan',
                                 labelStyle: TextStyle(color: Colors.grey[350]),
                                 border: const OutlineInputBorder(),
                                 contentPadding: const EdgeInsets.symmetric(
@@ -1346,7 +1346,7 @@ class _ShiftRequestPageState extends State<ShiftRequestPage> {
                             noItemsFoundBuilder: (context) => const Padding(
                               padding: EdgeInsets.all(8.0),
                               child: Text(
-                                'No Employees Found',
+                                'Karyawan Tidak Ditemukan',
                                 style: TextStyle(fontSize: 16),
                               ),
                             ),
@@ -1370,7 +1370,7 @@ class _ShiftRequestPageState extends State<ShiftRequestPage> {
                               height:
                               MediaQuery.of(context).size.height * 0.03),
                           const Text(
-                            'Requesting Shift',
+                            'Permintaan Shift',
                             style: TextStyle(color: Colors.black),
                           ),
                           SizedBox(
@@ -1380,12 +1380,12 @@ class _ShiftRequestPageState extends State<ShiftRequestPage> {
                             textFieldConfiguration: TextFieldConfiguration(
                               controller: _typeAheadCreateShiftController,
                               decoration: InputDecoration(
-                                labelText: 'Search a Shift',
+                                labelText: 'Cari Shift',
                                 labelStyle: TextStyle(color: Colors.grey[350]),
                                 contentPadding: const EdgeInsets.symmetric(
                                     horizontal: 10.0),
                                 errorText: _validateShift
-                                    ? 'Please Select a Shift'
+                                    ? 'Silakan pilih Shift'
                                     : null,
                                 border: const OutlineInputBorder(),
                               ),
@@ -1413,7 +1413,7 @@ class _ShiftRequestPageState extends State<ShiftRequestPage> {
                             noItemsFoundBuilder: (context) => const Padding(
                               padding: EdgeInsets.all(8.0),
                               child: Text(
-                                'No Shifts Found',
+                                'Shift Tidak Ditemukan',
                                 style: TextStyle(fontSize: 16),
                               ),
                             ),
@@ -1462,14 +1462,14 @@ class _ShiftRequestPageState extends State<ShiftRequestPage> {
                             },
                             decoration: InputDecoration(
                               border: const OutlineInputBorder(),
-                              labelText: 'Requested Date',
+                              labelText: 'Tanggal Diminta',
                               labelStyle: TextStyle(color: Colors.grey[350]),
                               errorText: _validateRequestedDate
-                                  ? 'Please select a Requested date'
+                                  ? 'Silakan pilih Tanggal Diminta'
                                   : null,
                               contentPadding:
                               const EdgeInsets.symmetric(horizontal: 10.0),
-                              hintText: 'Select a Requested Date',
+                              hintText: 'Pilih Tanggal Diminta',
                             ),
                           ),
                           SizedBox(
@@ -1501,21 +1501,21 @@ class _ShiftRequestPageState extends State<ShiftRequestPage> {
                             },
                             decoration: InputDecoration(
                               border: const OutlineInputBorder(),
-                              labelText: 'Requested Till',
+                              labelText: 'Diminta Sampai',
                               labelStyle: TextStyle(color: Colors.grey[350]),
                               errorText: _validateRequestedTill
-                                  ? 'Please select a Requested Till'
+                                  ? 'Silakan pilih Diminta Sampai'
                                   : null,
                               contentPadding:
                               const EdgeInsets.symmetric(horizontal: 10.0),
-                              hintText: 'Select a Requested Till',
+                              hintText: 'Pilih Diminta Sampai',
                             ),
                           ),
                           SizedBox(
                               height:
                               MediaQuery.of(context).size.height * 0.03),
                           const Text(
-                            'Description',
+                            'Deskripsi',
                             style: TextStyle(color: Colors.black),
                           ),
                           SizedBox(
@@ -1524,13 +1524,13 @@ class _ShiftRequestPageState extends State<ShiftRequestPage> {
                           TextField(
                             controller: descriptionSelect,
                             decoration: InputDecoration(
-                              labelText: "Description",
+                              labelText: "Deskripsi",
                               labelStyle: TextStyle(color: Colors.grey[350]),
                               border: const OutlineInputBorder(),
                               contentPadding:
                               const EdgeInsets.symmetric(horizontal: 10.0),
                               errorText: _validateDescription
-                                  ? 'Description cannot be empty'
+                                  ? 'Deskripsi tidak boleh kosong'
                                   : null,
                             ),
                             onChanged: (newValue) {
@@ -1655,7 +1655,7 @@ class _ShiftRequestPageState extends State<ShiftRequestPage> {
                             ),
                           ),
                         ),
-                        child: const Text('Save',
+                        child: const Text('Simpan',
                             style: TextStyle(color: Colors.white)),
                       ),
                     ),
@@ -1809,7 +1809,7 @@ class _ShiftRequestPageState extends State<ShiftRequestPage> {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Text(
-                                  'Requested shift',
+                                  'Shift yang Diminta',
                                   style: TextStyle(color: Colors.grey.shade700),
                                 ),
                                 Text('${record['shift_name'] ?? 'None'}'),
@@ -1819,7 +1819,7 @@ class _ShiftRequestPageState extends State<ShiftRequestPage> {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Text(
-                                  'Previous shift',
+                                  'Shift sebelumnya',
                                   style: TextStyle(color: Colors.grey.shade700),
                                 ),
                                 Text('${record['previous_shift_name'] ?? 'None'}'),
@@ -1829,7 +1829,7 @@ class _ShiftRequestPageState extends State<ShiftRequestPage> {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Text(
-                                  'Requested date',
+                                  'Tanggal Diminta',
                                   style: TextStyle(color: Colors.grey.shade700),
                                 ),
                                 Text('${record['requested_date'] ?? 'None'}'),
@@ -1839,7 +1839,7 @@ class _ShiftRequestPageState extends State<ShiftRequestPage> {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Text(
-                                  'Requested till',
+                                  'Diminta Sampai',
                                   style: TextStyle(color: Colors.grey.shade700),
                                 ),
                                 Text('${record['requested_till'] ?? 'None'}'),
@@ -1849,7 +1849,7 @@ class _ShiftRequestPageState extends State<ShiftRequestPage> {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Text(
-                                  'Description',
+                                  'Deskripsi',
                                   style: TextStyle(color: Colors.grey.shade700),
                                 ),
                                 Flexible(
@@ -1865,10 +1865,10 @@ class _ShiftRequestPageState extends State<ShiftRequestPage> {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Text(
-                                  'Is permanent shift',
+                                  'Shift permanen',
                                   style: TextStyle(color: Colors.grey.shade700),
                                 ),
-                                Text(record['is_permanent_shift'] ? 'Yes' : 'No'),
+                                Text(record['is_permanent_shift'] ? 'Ya' : 'Tidak'),
                               ],
                             ),
                             SizedBox(
@@ -1897,7 +1897,7 @@ class _ShiftRequestPageState extends State<ShiftRequestPage> {
                                               MainAxisAlignment.spaceBetween,
                                               children: [
                                                 const Text(
-                                                  "Confirmation",
+                                                  "Konfirmasi",
                                                   style: TextStyle(
                                                       fontWeight: FontWeight.bold,
                                                       color: Colors.black),
@@ -1917,7 +1917,7 @@ class _ShiftRequestPageState extends State<ShiftRequestPage> {
                                                   0.1,
                                               child: const Center(
                                                 child: Text(
-                                                  "Are you sure you want to Reject this Shift Request?",
+                                                  "Apakah Anda yakin ingin menolak Permintaan Shift ini?",
                                                   style: TextStyle(
                                                       fontWeight: FontWeight.bold,
                                                       color: Colors.black,
@@ -1963,7 +1963,7 @@ class _ShiftRequestPageState extends State<ShiftRequestPage> {
                                                       ),
                                                     ),
                                                   ),
-                                                  child: const Text("Continue",
+                                                  child: const Text("Lanjutkan",
                                                       style: TextStyle(
                                                           color: Colors.white)),
                                                 ),
@@ -2007,7 +2007,7 @@ class _ShiftRequestPageState extends State<ShiftRequestPage> {
                                               MainAxisAlignment.spaceBetween,
                                               children: [
                                                 const Text(
-                                                  "Confirmation",
+                                                  "Konfirmasi",
                                                   style: TextStyle(
                                                       fontWeight: FontWeight.bold,
                                                       color: Colors.black),
@@ -2027,7 +2027,7 @@ class _ShiftRequestPageState extends State<ShiftRequestPage> {
                                                   0.1,
                                               child: const Center(
                                                 child: Text(
-                                                  "Are you sure you want to Approve this Shift Request?",
+                                                  "Apakah Anda yakin ingin menyetujui Permintaan Shift ini?",
                                                   style: TextStyle(
                                                       fontWeight: FontWeight.bold,
                                                       color: Colors.black,
@@ -2073,7 +2073,7 @@ class _ShiftRequestPageState extends State<ShiftRequestPage> {
                                                       ),
                                                     ),
                                                   ),
-                                                  child: const Text("Continue",
+                                                  child: const Text("Lanjutkan",
                                                       style: TextStyle(
                                                           color: Colors.white)),
                                                 ),
@@ -2121,7 +2121,7 @@ class _ShiftRequestPageState extends State<ShiftRequestPage> {
                                               MainAxisAlignment.spaceBetween,
                                               children: [
                                                 const Text(
-                                                  "Confirmation",
+                                                  "Konfirmasi",
                                                   style: TextStyle(
                                                       fontWeight: FontWeight.bold,
                                                       color: Colors.black),
@@ -2141,7 +2141,7 @@ class _ShiftRequestPageState extends State<ShiftRequestPage> {
                                                   0.1,
                                               child: const Center(
                                                 child: Text(
-                                                  "Are you sure you want to Reject this Shift Request?",
+                                                  "Apakah Anda yakin ingin menolak Permintaan Shift ini?",
                                                   style: TextStyle(
                                                       fontWeight: FontWeight.bold,
                                                       color: Colors.black,
@@ -2186,7 +2186,7 @@ class _ShiftRequestPageState extends State<ShiftRequestPage> {
                                                       ),
                                                     ),
                                                   ),
-                                                  child: const Text("Continue",
+                                                  child: const Text("Lanjutkan",
                                                       style: TextStyle(
                                                           color: Colors.white)),
                                                 ),
@@ -2458,7 +2458,7 @@ class _ShiftRequestPageState extends State<ShiftRequestPage> {
                                         MainAxisAlignment.spaceBetween,
                                         children: [
                                           const Text(
-                                            "Confirmation",
+                                            "Konfirmasi",
                                             style: TextStyle(
                                               fontWeight: FontWeight.bold,
                                               color: Colors.black,
@@ -2478,7 +2478,7 @@ class _ShiftRequestPageState extends State<ShiftRequestPage> {
                                             0.1,
                                         child: const Center(
                                           child: Text(
-                                            "Are you sure you want to delete this Shift Request?",
+                                            "Apakah Anda yakin ingin menghapus Permintaan Shift ini?",
                                             style: TextStyle(
                                               fontWeight: FontWeight.bold,
                                               color: Colors.black,
@@ -2521,7 +2521,7 @@ class _ShiftRequestPageState extends State<ShiftRequestPage> {
                                               ),
                                             ),
                                             child: const Text(
-                                              "Continue",
+                                              "Lanjutkan",
                                               style: TextStyle(
                                                   color: Colors.white),
                                             ),
@@ -2546,7 +2546,7 @@ class _ShiftRequestPageState extends State<ShiftRequestPage> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          const Text('Requested Shift',
+                          const Text('Shift yang Diminta',
                               style: TextStyle(
                                   color: Colors.grey,
                                   fontWeight: FontWeight.bold)),
@@ -2561,7 +2561,7 @@ class _ShiftRequestPageState extends State<ShiftRequestPage> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          const Text('Current Shift',
+                          const Text('Shift Saat Ini',
                               style: TextStyle(
                                   color: Colors.grey,
                                   fontWeight: FontWeight.bold)),
@@ -2576,7 +2576,7 @@ class _ShiftRequestPageState extends State<ShiftRequestPage> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          const Text('Requested Date',
+                          const Text('Tanggal Diminta',
                               style: TextStyle(
                                   color: Colors.grey,
                                   fontWeight: FontWeight.bold)),
@@ -2591,7 +2591,7 @@ class _ShiftRequestPageState extends State<ShiftRequestPage> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          const Text('Requested Till Date',
+                          const Text('Tanggal Diminta Sampai',
                               style: TextStyle(
                                   color: Colors.grey,
                                   fontWeight: FontWeight.bold)),
@@ -2627,7 +2627,7 @@ class _ShiftRequestPageState extends State<ShiftRequestPage> {
                                                   .spaceBetween,
                                               children: [
                                                 const Text(
-                                                  "Confirmation",
+                                                  "Konfirmasi",
                                                   style: TextStyle(
                                                       fontWeight:
                                                       FontWeight.bold,
@@ -2648,7 +2648,7 @@ class _ShiftRequestPageState extends State<ShiftRequestPage> {
                                                   0.1,
                                               child: const Center(
                                                 child: Text(
-                                                  "Are you sure you want to Reject this Shift Request?",
+                                                  "Apakah Anda yakin ingin menolak Permintaan Shift ini?",
                                                   style: TextStyle(
                                                       fontWeight:
                                                       FontWeight.bold,
@@ -2697,7 +2697,7 @@ class _ShiftRequestPageState extends State<ShiftRequestPage> {
                                                       ),
                                                     ),
                                                   ),
-                                                  child: const Text("Continue",
+                                                  child: const Text("Lanjutkan",
                                                       style: TextStyle(
                                                           color: Colors.white)),
                                                 ),
@@ -2746,7 +2746,7 @@ class _ShiftRequestPageState extends State<ShiftRequestPage> {
                                                   .spaceBetween,
                                               children: [
                                                 const Text(
-                                                  "Confirmation",
+                                                  "Konfirmasi",
                                                   style: TextStyle(
                                                       fontWeight:
                                                       FontWeight.bold,
@@ -2767,7 +2767,7 @@ class _ShiftRequestPageState extends State<ShiftRequestPage> {
                                                   0.1,
                                               child: const Center(
                                                 child: Text(
-                                                  "Are you sure you want to Approve this Shift Request?",
+                                                  "Apakah Anda yakin ingin menyetujui Permintaan Shift ini?",
                                                   style: TextStyle(
                                                       fontWeight:
                                                       FontWeight.bold,
@@ -2816,7 +2816,7 @@ class _ShiftRequestPageState extends State<ShiftRequestPage> {
                                                       ),
                                                     ),
                                                   ),
-                                                  child: const Text("Continue",
+                                                  child: const Text("Lanjutkan",
                                                       style: TextStyle(
                                                           color: Colors.white)),
                                                 ),
@@ -2869,7 +2869,7 @@ class _ShiftRequestPageState extends State<ShiftRequestPage> {
                                                   .spaceBetween,
                                               children: [
                                                 const Text(
-                                                  "Confirmation",
+                                                  "Konfirmasi",
                                                   style: TextStyle(
                                                       fontWeight:
                                                       FontWeight.bold,
@@ -2890,7 +2890,7 @@ class _ShiftRequestPageState extends State<ShiftRequestPage> {
                                                   0.1,
                                               child: const Center(
                                                 child: Text(
-                                                  "Are you sure you want to Reject this Shift Request?",
+                                                  "Apakah Anda yakin ingin menolak Permintaan Shift ini?",
                                                   style: TextStyle(
                                                       fontWeight:
                                                       FontWeight.bold,
@@ -2939,7 +2939,7 @@ class _ShiftRequestPageState extends State<ShiftRequestPage> {
                                                       ),
                                                     ),
                                                   ),
-                                                  child: const Text("Continue",
+                                                  child: const Text("Lanjutkan",
                                                       style: TextStyle(
                                                           color: Colors.white)),
                                                 ),
@@ -3092,7 +3092,7 @@ class _ShiftRequestPageState extends State<ShiftRequestPage> {
         forceMaterialTransparency: true,
         automaticallyImplyLeading: false,
         backgroundColor: Colors.white,
-        title: const Text('Shift Request',
+        title: const Text('Permintaan Shift',
             style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold)),
         actions: [
           Padding(
@@ -3289,7 +3289,7 @@ class _ShiftRequestPageState extends State<ShiftRequestPage> {
                   ),
                   SizedBox(height: 20),
                   Text(
-                    "There are no records to display",
+                    "Tidak ada data untuk ditampilkan",
                     style: TextStyle(
                       fontSize: 16.0,
                       color: Colors.black,

@@ -295,7 +295,7 @@ class _MapScreenState extends State<MapScreen> with TickerProviderStateMixin {
                         width: 180, height: 180, fit: BoxFit.cover),
                     const SizedBox(height: 16),
                     const Text(
-                      "Geofence Location Added Successfully",
+                      "Lokasi Geofence Berhasil Ditambahkan",
                       style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
@@ -351,7 +351,7 @@ class _MapScreenState extends State<MapScreen> with TickerProviderStateMixin {
                         width: 180, height: 180, fit: BoxFit.cover),
                     const SizedBox(height: 16),
                     const Text(
-                      "Geofence Location Deleted Successfully",
+                      "Lokasi Geofence Berhasil Dihapus",
                       style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
@@ -407,7 +407,7 @@ class _MapScreenState extends State<MapScreen> with TickerProviderStateMixin {
       appBar: AppBar(
         backgroundColor: Colors.red,
         automaticallyImplyLeading: false,
-        title: const Text('Geofencing Map', style: TextStyle(color: Colors.white)),
+        title: const Text('Peta Geofencing', style: TextStyle(color: Colors.white)),
       ),
       body: Column(
         children: [
@@ -585,7 +585,7 @@ class _MapScreenState extends State<MapScreen> with TickerProviderStateMixin {
                   const SizedBox(height: 8),
                   Row(
                     children: [
-                      const Text('Geofence Radius: '),
+                      const Text('Radius Geofence: '),
                       Expanded(
                         child: Slider(
                           value: _currentRadius,
@@ -634,13 +634,13 @@ class _MapScreenState extends State<MapScreen> with TickerProviderStateMixin {
                           },
                           style: ElevatedButton.styleFrom(
                               backgroundColor: Colors.red),
-                          child: const Text('Delete'),
+                          child: const Text('Hapus'),
                         ),
                       ElevatedButton(
                         onPressed: () async {
                           await showGeofencingSetting(context);
                         },
-                        child: const Text('Save'),
+                        child: const Text('Simpan'),
                       ),
                     ],
                   ),
@@ -689,14 +689,14 @@ class _MapScreenState extends State<MapScreen> with TickerProviderStateMixin {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: const Text("Set Geofencing Location"),
-          content: const Text("Do you want to set this location for Geofencing?"),
+          title: const Text("Atur Lokasi Geofencing"),
+          content: const Text("Apakah Anda ingin menetapkan lokasi ini untuk Geofencing?"),
           actions: [
             TextButton(
               onPressed: () {
                 Navigator.of(context).pop();
               },
-              child: const Text("Cancel"),
+              child: const Text("Batal"),
             ),
             TextButton(
               onPressed: () async {
@@ -710,7 +710,7 @@ class _MapScreenState extends State<MapScreen> with TickerProviderStateMixin {
                   await createGeoFenceLocation();
                 }
               },
-              child: const Text("Confirm"),
+              child: const Text("Konfirmasi"),
             ),
           ],
         );
@@ -725,21 +725,21 @@ class _MapScreenState extends State<MapScreen> with TickerProviderStateMixin {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: const Text("Delete Geofencing Location"),
-          content: const Text("Do you want to delete this location for Geofencing?"),
+          title: const Text("Hapus Lokasi Geofencing"),
+          content: const Text("Apakah Anda ingin menghapus lokasi ini dari Geofencing?"),
           actions: [
             TextButton(
               onPressed: () {
                 Navigator.of(context).pop();
               },
-              child: const Text("Cancel"),
+              child: const Text("Batal"),
             ),
             TextButton(
               onPressed: () async {
                 Navigator.of(context).pop();
                 await deleteGeoFenceLocation();
               },
-              child: const Text("Confirm"),
+              child: const Text("Konfirmasi"),
             ),
           ],
         );

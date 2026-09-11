@@ -198,7 +198,7 @@ class _CameraSetupPageState extends State<CameraSetupPage> {
                   Image.asset("Assets/gif22.gif", width: 180, height: 180, fit: BoxFit.cover),
                   const SizedBox(height: 16),
                   const Text(
-                    "Face Image Uploaded Successfully",
+                    "Foto Wajah Berhasil Diunggah",
                     style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.red),
                   ),
                 ],
@@ -218,7 +218,7 @@ class _CameraSetupPageState extends State<CameraSetupPage> {
     showDialog(
       context: context,
       builder: (dialogContext) => AlertDialog(
-        title: const Text("Error"),
+        title: const Text("Kesalahan"),
         content: Text(errorMessage),
         actions: [
           TextButton(
@@ -264,7 +264,7 @@ class _CameraSetupPageState extends State<CameraSetupPage> {
         backgroundColor: Colors.grey[200],
         appBar: AppBar(
           automaticallyImplyLeading: false,
-          title: const Text('Face Image Capture', style: TextStyle(color: Colors.white)),
+          title: const Text('Pengambilan Foto Wajah', style: TextStyle(color: Colors.white)),
           backgroundColor: Colors.red,
           elevation: 0,
           actions: [
@@ -285,7 +285,7 @@ class _CameraSetupPageState extends State<CameraSetupPage> {
                     height: 400,
                     child: Container(
                       decoration: BoxDecoration(
-                        border: Border.all(color: Colors.red[700]!, width: 3),
+                         border: Border.all(color: Colors.red[700]!, width: 3),
                         borderRadius: BorderRadius.circular(12),
                         boxShadow: [
                           BoxShadow(color: Colors.grey.withOpacity(0.3), spreadRadius: 2, blurRadius: 5),
@@ -299,7 +299,7 @@ class _CameraSetupPageState extends State<CameraSetupPage> {
                           builder: (context, snapshot) {
                             if (snapshot.connectionState == ConnectionState.done) {
                               if (snapshot.hasError || _controller == null || !_isControllerInitialized) {
-                                return const Center(child: Text('Camera Error'));
+                                return const Center(child: Text('Kesalahan Kamera'));
                               }
                               return CameraPreview(_controller!);
                             } else {
@@ -328,7 +328,7 @@ class _CameraSetupPageState extends State<CameraSetupPage> {
                       ElevatedButton.icon(
                         onPressed: _isControllerInitialized ? _takePicture : null,
                         icon: const Icon(Icons.camera_alt, color: Colors.white),
-                        label: const Text('Capture', style: TextStyle(color: Colors.white)),
+                        label: const Text('Ambil Foto', style: TextStyle(color: Colors.white)),
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.green,
                           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
@@ -338,7 +338,7 @@ class _CameraSetupPageState extends State<CameraSetupPage> {
                       ElevatedButton.icon(
                         onPressed: _pickImage,
                         icon: const Icon(Icons.photo_library, color: Colors.white),
-                        label: const Text('Gallery', style: TextStyle(color: Colors.white)),
+                        label: const Text('Galeri', style: TextStyle(color: Colors.white)),
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.blue,
                           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
@@ -350,7 +350,7 @@ class _CameraSetupPageState extends State<CameraSetupPage> {
                       OutlinedButton.icon(
                         onPressed: _retakePicture,
                         icon: const Icon(Icons.refresh, color: Colors.red),
-                        label: const Text('Retake'),
+                        label: const Text('Foto Ulang'),
                         style: OutlinedButton.styleFrom(
                           foregroundColor: Colors.red[700],
                           side: BorderSide(color: Colors.red!),
@@ -361,7 +361,7 @@ class _CameraSetupPageState extends State<CameraSetupPage> {
                       ElevatedButton.icon(
                         onPressed: _submitPicture,
                         icon: const Icon(Icons.check, color: Colors.white),
-                        label: const Text('Submit', style: TextStyle(color: Colors.white)),
+                        label: const Text('Kirim', style: TextStyle(color: Colors.white)),
                         style: ButtonStyle(
                           backgroundColor: MaterialStateProperty.resolveWith((states) {
                             if (states.contains(MaterialState.pressed)) {

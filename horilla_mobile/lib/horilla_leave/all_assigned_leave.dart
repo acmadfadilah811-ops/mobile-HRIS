@@ -305,7 +305,7 @@ class _AllAssignedLeave extends State<AllAssignedLeave> {
                     Image.asset(imagePath),
                     const SizedBox(height: 16),
                     const Text(
-                      "Leave Assigned Successfully",
+                      "Cuti Berhasil Diberikan",
                       style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
@@ -356,7 +356,7 @@ class _AllAssignedLeave extends State<AllAssignedLeave> {
                   title: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      const Text('Assign Leaves'),
+                      const Text('Berikan Cuti'),
                       IconButton(
                         icon: const Icon(Icons.close, color: Colors.grey),
                         onPressed: () {
@@ -378,7 +378,7 @@ class _AllAssignedLeave extends State<AllAssignedLeave> {
                           SizedBox(
                               height:
                               MediaQuery.of(context).size.height * 0.01),
-                          const Text("Leave Type"),
+                          const Text("Tipe Cuti"),
                           MultiSelectDropdown.simpleList(
                             list: leaveItems,
                             initiallySelected: const [],
@@ -421,7 +421,7 @@ class _AllAssignedLeave extends State<AllAssignedLeave> {
                               MediaQuery.of(context).size.height * 0.01),
                           const Padding(
                             padding: EdgeInsets.all(4.0),
-                            child: Text("Employee"),
+                            child: Text("Karyawan"),
                           ),
                           MultiSelectDropdown.simpleList(
                             list: employeeItems,
@@ -512,7 +512,7 @@ class _AllAssignedLeave extends State<AllAssignedLeave> {
                                   ),
                                 ),
                               ),
-                              child: const Text('Save',
+                              child: const Text('Simpan',
                                   style: TextStyle(color: Colors.white)),
                             ),
                           ),
@@ -636,7 +636,7 @@ class _AllAssignedLeave extends State<AllAssignedLeave> {
         title: const Row(
           children: [
             Text(
-              'Assigned Leave',
+              'Cuti Diberikan',
               style: TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
@@ -665,7 +665,7 @@ class _AllAssignedLeave extends State<AllAssignedLeave> {
                 ),
               ),
               child: const Text(
-                'ASSIGN',
+                'BERIKAN',
                 style: TextStyle(color: Colors.red),
               ),
             ),
@@ -705,7 +705,7 @@ class _AllAssignedLeave extends State<AllAssignedLeave> {
                 ],
               );
             } else if (snapshot.hasError) {
-              return const Center(child: Text('Error loading permissions.'));
+              return const Center(child: Text('Gagal memuat izin.'));
             } else {
               return ListView(
                 padding: const EdgeInsets.all(0),
@@ -725,7 +725,7 @@ class _AllAssignedLeave extends State<AllAssignedLeave> {
                   ),
                   permissionLeaveOverviewCheck
                       ? ListTile(
-                    title: const Text('Overview'),
+                    title: const Text('Ringkasan'),
                     onTap: () {
                       Navigator.pushNamed(context, '/leave_overview');
                     },
@@ -734,7 +734,7 @@ class _AllAssignedLeave extends State<AllAssignedLeave> {
 
             permissionMyLeaveRequestCheck
                       ? ListTile(
-                    title: const Text('My Leave Request'),
+                    title: const Text('Permintaan Cuti Saya'),
                     onTap: () {
                       Navigator.pushNamed(context, '/my_leave_request');
                     },
@@ -743,7 +743,7 @@ class _AllAssignedLeave extends State<AllAssignedLeave> {
 
                   permissionLeaveRequestCheck
                       ? ListTile(
-                    title: const Text('Leave Request'),
+                    title: const Text('Permintaan Cuti'),
                     onTap: () {
                       Navigator.pushNamed(context, '/leave_request');
                     },
@@ -752,7 +752,7 @@ class _AllAssignedLeave extends State<AllAssignedLeave> {
 
                   permissionLeaveTypeCheck
                       ? ListTile(
-                    title: const Text('Leave Type'),
+                    title: const Text('Tipe Cuti'),
                     onTap: () {
                       Navigator.pushNamed(context, '/leave_types');
                     },
@@ -761,7 +761,7 @@ class _AllAssignedLeave extends State<AllAssignedLeave> {
 
                   permissionLeaveAllocationCheck
                       ? ListTile(
-                    title: const Text('Leave Allocation Request'),
+                    title: const Text('Permintaan Alokasi Cuti'),
                     onTap: () {
                       Navigator.pushNamed(
                           context, '/leave_allocation_request');
@@ -771,7 +771,7 @@ class _AllAssignedLeave extends State<AllAssignedLeave> {
 
                   permissionLeaveAssignCheck
                       ? ListTile(
-                    title: const Text('All Assigned Leave'),
+                    title: const Text('Semua Cuti Diberikan'),
                     onTap: () {
                       Navigator.pushNamed(context, '/all_assigned_leave');
                     },
@@ -889,7 +889,7 @@ class _AllAssignedLeave extends State<AllAssignedLeave> {
                           ),
                           child: const TextField(
                             decoration: InputDecoration(
-                              hintText: 'Search',
+                              hintText: 'Cari',
                               border: InputBorder.none,
                               prefixIcon: Icon(Icons.search),
                               contentPadding: EdgeInsets.symmetric(
@@ -938,7 +938,7 @@ class _AllAssignedLeave extends State<AllAssignedLeave> {
                             });
                           },
                           decoration: InputDecoration(
-                            hintText: 'Search',
+                            hintText: 'Cari',
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(8.0),
                               borderSide: BorderSide.none,
@@ -1019,7 +1019,7 @@ class _AllAssignedLeave extends State<AllAssignedLeave> {
                           ),
                           child: const TextField(
                             decoration: InputDecoration(
-                              hintText: 'Search',
+                              hintText: 'Cari',
                               border: InputBorder.none,
                               prefixIcon: Icon(Icons.search),
                               contentPadding: EdgeInsets.symmetric(

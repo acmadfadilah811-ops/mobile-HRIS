@@ -1283,7 +1283,7 @@ class _EmployeeFormPageState extends State<EmployeeFormPage>
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
-          content: Text('No image selected'),
+          content: Text('Tidak ada gambar yang dipilih'),
           backgroundColor: Colors.red,
         ),
       );
@@ -1424,7 +1424,7 @@ class _EmployeeFormPageState extends State<EmployeeFormPage>
                               height:
                               MediaQuery.of(context).size.height * 0.03),
                           const Text(
-                            'Badge ID',
+                            'ID Lencana',
                             style: TextStyle(color: Colors.black),
                           ),
                           SizedBox(
@@ -1453,7 +1453,7 @@ class _EmployeeFormPageState extends State<EmployeeFormPage>
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     const Text(
-                                      'First Name',
+                                      'Nama Depan',
                                       style: TextStyle(color: Colors.black),
                                     ),
                                     SizedBox(
@@ -1486,7 +1486,7 @@ class _EmployeeFormPageState extends State<EmployeeFormPage>
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     const Text(
-                                      "Last Name",
+                                      "Nama Belakang",
                                       style: TextStyle(color: Colors.black),
                                     ),
                                     SizedBox(
@@ -1496,7 +1496,7 @@ class _EmployeeFormPageState extends State<EmployeeFormPage>
                                     TextField(
                                       controller: lastNameController,
                                       decoration: InputDecoration(
-                                        labelText: "Last Name",
+                                        labelText: "Nama Belakang",
                                         labelStyle:
                                         TextStyle(color: Colors.grey[350]),
                                         border: const OutlineInputBorder(),
@@ -1556,7 +1556,7 @@ class _EmployeeFormPageState extends State<EmployeeFormPage>
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     const Text(
-                                      "Phone",
+                                      "Telepon",
                                       style: TextStyle(color: Colors.black),
                                     ),
                                     SizedBox(
@@ -1566,7 +1566,7 @@ class _EmployeeFormPageState extends State<EmployeeFormPage>
                                     TextField(
                                       controller: phoneController,
                                       decoration: InputDecoration(
-                                        labelText: "Phone",
+                                        labelText: "Telepon",
                                         labelStyle:
                                         TextStyle(color: Colors.grey[350]),
                                         border: const OutlineInputBorder(),
@@ -1593,7 +1593,7 @@ class _EmployeeFormPageState extends State<EmployeeFormPage>
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     const Text(
-                                      'Date of Birth',
+                                      'Tanggal Lahir',
                                       style: TextStyle(color: Colors.black),
                                     ),
                                     SizedBox(
@@ -1661,15 +1661,15 @@ class _EmployeeFormPageState extends State<EmployeeFormPage>
                                       items: const [
                                         DropdownMenuItem(
                                           value: 'male',
-                                          child: Text('Male'),
+                                          child: Text('Laki-laki'),
                                         ),
                                         DropdownMenuItem(
                                           value: 'female',
-                                          child: Text('Female'),
+                                          child: Text('Perempuan'),
                                         ),
                                         DropdownMenuItem(
                                           value: 'other',
-                                          child: Text('Other'),
+                                          child: Text('Lainnya'),
                                         ),
                                       ],
                                       onChanged: (newValue) {
@@ -1700,7 +1700,7 @@ class _EmployeeFormPageState extends State<EmployeeFormPage>
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     const Text(
-                                      'Qualification',
+                                      'Kualifikasi',
                                       style: TextStyle(color: Colors.black),
                                     ),
                                     SizedBox(
@@ -1764,7 +1764,7 @@ class _EmployeeFormPageState extends State<EmployeeFormPage>
                               height:
                               MediaQuery.of(context).size.height * 0.03),
                           const Text(
-                            'Address',
+                            'Alamat',
                             style: TextStyle(color: Colors.black),
                           ),
                           SizedBox(
@@ -1793,7 +1793,7 @@ class _EmployeeFormPageState extends State<EmployeeFormPage>
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     const Text(
-                                      'City',
+                                      'Kota',
                                       style: TextStyle(color: Colors.black),
                                     ),
                                     SizedBox(
@@ -1826,7 +1826,7 @@ class _EmployeeFormPageState extends State<EmployeeFormPage>
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     const Text(
-                                      "Zip Code",
+                                      "Kode Pos",
                                       style: TextStyle(color: Colors.black),
                                     ),
                                     SizedBox(
@@ -1836,7 +1836,7 @@ class _EmployeeFormPageState extends State<EmployeeFormPage>
                                     TextField(
                                       controller: zipCodeController,
                                       decoration: InputDecoration(
-                                        labelText: "Zip Code",
+                                        labelText: "Kode Pos",
                                         labelStyle:
                                         TextStyle(color: Colors.grey[350]),
                                         border: const OutlineInputBorder(),
@@ -1863,7 +1863,7 @@ class _EmployeeFormPageState extends State<EmployeeFormPage>
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     const Text(
-                                      'Emergency Contact',
+                                      'Kontak Darurat',
                                       style: TextStyle(color: Colors.black),
                                     ),
                                     SizedBox(
@@ -1934,7 +1934,7 @@ class _EmployeeFormPageState extends State<EmployeeFormPage>
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     const Text(
-                                      'Contact Relation',
+                                      'Hubungan Kontak',
                                       style: TextStyle(color: Colors.black),
                                     ),
                                     SizedBox(
@@ -1945,7 +1945,7 @@ class _EmployeeFormPageState extends State<EmployeeFormPage>
                                       controller:
                                       emergencyContactRelationController,
                                       decoration: InputDecoration(
-                                        labelText: "Emergency Contact Relation",
+                                        labelText: "Hubungan Kontak Darurat",
                                         labelStyle:
                                         TextStyle(color: Colors.grey[350]),
                                         border: const OutlineInputBorder(),
@@ -1988,15 +1988,15 @@ class _EmployeeFormPageState extends State<EmployeeFormPage>
                                       items: const [
                                         DropdownMenuItem(
                                           value: 'single',
-                                          child: Text('Single'),
+                                          child: Text('Lajang'),
                                         ),
                                         DropdownMenuItem(
                                           value: 'married',
-                                          child: Text('Married'),
+                                          child: Text('Menikah'),
                                         ),
                                         DropdownMenuItem(
                                           value: 'divorced',
-                                          child: Text('Divorced'),
+                                          child: Text('Cerai'),
                                         ),
                                       ],
                                       onChanged: (newValue) {
@@ -2022,7 +2022,7 @@ class _EmployeeFormPageState extends State<EmployeeFormPage>
                               height:
                               MediaQuery.of(context).size.height * 0.03),
                           const Text(
-                            'Children',
+                            'Anak',
                             style: TextStyle(color: Colors.black),
                           ),
                           SizedBox(
@@ -2107,7 +2107,7 @@ class _EmployeeFormPageState extends State<EmployeeFormPage>
                             ),
                           ),
                         ),
-                        child: const Text('Save',
+                        child: const Text('Simpan',
                             style: TextStyle(color: Colors.white)),
                       ),
                     ),
@@ -2204,7 +2204,7 @@ class _EmployeeFormPageState extends State<EmployeeFormPage>
                               height:
                               MediaQuery.of(context).size.height * 0.03),
                           const Text(
-                            'Department',
+                            'Departemen',
                             style: TextStyle(color: Colors.black),
                           ),
                           SizedBox(
@@ -2214,7 +2214,7 @@ class _EmployeeFormPageState extends State<EmployeeFormPage>
                             textFieldConfiguration: TextFieldConfiguration(
                               controller: departmentController,
                               decoration: InputDecoration(
-                                labelText: 'Search Department',
+                                labelText: 'Cari Departemen',
                                 labelStyle: TextStyle(color: Colors.grey[350]),
                                 contentPadding: const EdgeInsets.symmetric(
                                     horizontal: 10.0),
@@ -2248,7 +2248,7 @@ class _EmployeeFormPageState extends State<EmployeeFormPage>
                             noItemsFoundBuilder: (context) => const Padding(
                               padding: EdgeInsets.all(8.0),
                               child: Text(
-                                'No Department Found',
+                                'Departemen Tidak Ditemukan',
                                 style: TextStyle(fontSize: 16),
                               ),
                             ),
@@ -2280,7 +2280,7 @@ class _EmployeeFormPageState extends State<EmployeeFormPage>
                             textFieldConfiguration: TextFieldConfiguration(
                               controller: jobPositionController,
                               decoration: InputDecoration(
-                                labelText: 'Search Job Position',
+                                labelText: 'Cari Posisi Pekerjaan',
                                 labelStyle: TextStyle(color: Colors.grey[350]),
                                 contentPadding: const EdgeInsets.symmetric(
                                     horizontal: 10.0),
@@ -2314,7 +2314,7 @@ class _EmployeeFormPageState extends State<EmployeeFormPage>
                             noItemsFoundBuilder: (context) => const Padding(
                               padding: EdgeInsets.all(8.0),
                               child: Text(
-                                'No Job Positions Found',
+                                'Posisi Pekerjaan Tidak Ditemukan',
                                 style: TextStyle(fontSize: 16),
                               ),
                             ),
@@ -2336,7 +2336,7 @@ class _EmployeeFormPageState extends State<EmployeeFormPage>
                               height:
                               MediaQuery.of(context).size.height * 0.03),
                           const Text(
-                            'Shift Information',
+                            'Informasi Shift',
                             style: TextStyle(color: Colors.black),
                           ),
                           SizedBox(
@@ -2346,7 +2346,7 @@ class _EmployeeFormPageState extends State<EmployeeFormPage>
                             textFieldConfiguration: TextFieldConfiguration(
                               controller: shiftInfoController,
                               decoration: InputDecoration(
-                                labelText: 'Search Shift',
+                                labelText: 'Cari Shift',
                                 labelStyle: TextStyle(color: Colors.grey[350]),
                                 border: const OutlineInputBorder(),
                                 contentPadding: const EdgeInsets.symmetric(
@@ -2379,7 +2379,7 @@ class _EmployeeFormPageState extends State<EmployeeFormPage>
                             noItemsFoundBuilder: (context) => const Padding(
                               padding: EdgeInsets.all(8.0),
                               child: Text(
-                                'No Shift Information Found',
+                                'Informasi Shift Tidak Ditemukan',
                                 style: TextStyle(fontSize: 16),
                               ),
                             ),
@@ -2411,7 +2411,7 @@ class _EmployeeFormPageState extends State<EmployeeFormPage>
                             textFieldConfiguration: TextFieldConfiguration(
                               controller: workTypeController,
                               decoration: InputDecoration(
-                                labelText: 'Search Work Type',
+                                labelText: 'Cari Tipe Kerja',
                                 labelStyle: TextStyle(color: Colors.grey[350]),
                                 contentPadding: const EdgeInsets.symmetric(
                                     horizontal: 10.0),
@@ -2445,7 +2445,7 @@ class _EmployeeFormPageState extends State<EmployeeFormPage>
                             noItemsFoundBuilder: (context) => const Padding(
                               padding: EdgeInsets.all(8.0),
                               child: Text(
-                                'No WorkTypes Found',
+                                'Tipe Kerja Tidak Ditemukan',
                                 style: TextStyle(fontSize: 16),
                               ),
                             ),
@@ -2467,7 +2467,7 @@ class _EmployeeFormPageState extends State<EmployeeFormPage>
                               height:
                               MediaQuery.of(context).size.height * 0.03),
                           const Text(
-                            'Job Role',
+                            'Peran Pekerjaan',
                             style: TextStyle(color: Colors.black),
                           ),
                           SizedBox(
@@ -2477,7 +2477,7 @@ class _EmployeeFormPageState extends State<EmployeeFormPage>
                             textFieldConfiguration: TextFieldConfiguration(
                               controller: jobRoleController,
                               decoration: InputDecoration(
-                                labelText: 'Search Job Role',
+                                labelText: 'Cari Peran Pekerjaan',
                                 labelStyle: TextStyle(color: Colors.grey[350]),
                                 contentPadding: const EdgeInsets.symmetric(
                                     horizontal: 10.0),
@@ -2511,7 +2511,7 @@ class _EmployeeFormPageState extends State<EmployeeFormPage>
                             noItemsFoundBuilder: (context) => const Padding(
                               padding: EdgeInsets.all(8.0),
                               child: Text(
-                                'No Job Role Found',
+                                'Peran Pekerjaan Tidak Ditemukan',
                                 style: TextStyle(fontSize: 16),
                               ),
                             ),
@@ -2533,7 +2533,7 @@ class _EmployeeFormPageState extends State<EmployeeFormPage>
                               height:
                               MediaQuery.of(context).size.height * 0.03),
                           const Text(
-                            "Work Mail",
+                            "Email Kerja",
                             style: TextStyle(color: Colors.black),
                           ),
                           SizedBox(
@@ -2542,13 +2542,13 @@ class _EmployeeFormPageState extends State<EmployeeFormPage>
                           TextField(
                             controller: workMailController,
                             decoration: InputDecoration(
-                              labelText: "Work Mail",
+                              labelText: "Email Kerja",
                               labelStyle: TextStyle(color: Colors.grey[350]),
                               border: const OutlineInputBorder(),
                               contentPadding:
                               const EdgeInsets.symmetric(horizontal: 10.0),
                               errorText: _validateMail
-                                  ? 'Please Choose a Work Mail'
+                                  ? 'Silakan pilih Email Kerja'
                                   : null,
                             ),
                             onChanged: (newValue) {
@@ -2560,7 +2560,7 @@ class _EmployeeFormPageState extends State<EmployeeFormPage>
                               height:
                               MediaQuery.of(context).size.height * 0.03),
                           const Text(
-                            'Employee Type',
+                            'Tipe Karyawan',
                             style: TextStyle(color: Colors.black),
                           ),
                           SizedBox(
@@ -2570,7 +2570,7 @@ class _EmployeeFormPageState extends State<EmployeeFormPage>
                             textFieldConfiguration: TextFieldConfiguration(
                               controller: employeeTypeController,
                               decoration: InputDecoration(
-                                labelText: 'Employee Type',
+                                labelText: 'Tipe Karyawan',
                                 labelStyle: TextStyle(color: Colors.grey[350]),
                                 contentPadding: const EdgeInsets.symmetric(
                                     horizontal: 10.0),
@@ -2604,7 +2604,7 @@ class _EmployeeFormPageState extends State<EmployeeFormPage>
                             noItemsFoundBuilder: (context) => const Padding(
                               padding: EdgeInsets.all(8.0),
                               child: Text(
-                                'No Employee Type Found',
+                                'Tipe Karyawan Tidak Ditemukan',
                                 style: TextStyle(fontSize: 16),
                               ),
                             ),
@@ -2653,7 +2653,7 @@ class _EmployeeFormPageState extends State<EmployeeFormPage>
                               height:
                               MediaQuery.of(context).size.height * 0.03),
                           const Text(
-                            'Reporting Manager',
+                            'Manajer Pelapor',
                             style: TextStyle(color: Colors.black),
                           ),
                           SizedBox(
@@ -2663,7 +2663,7 @@ class _EmployeeFormPageState extends State<EmployeeFormPage>
                             textFieldConfiguration: TextFieldConfiguration(
                               controller: reportingManagerController,
                               decoration: InputDecoration(
-                                labelText: 'Search Reporting Manager',
+                                labelText: 'Cari Manajer Pelapor',
                                 labelStyle: TextStyle(color: Colors.grey[350]),
                                 contentPadding: const EdgeInsets.symmetric(
                                     horizontal: 10.0),
@@ -2697,7 +2697,7 @@ class _EmployeeFormPageState extends State<EmployeeFormPage>
                             noItemsFoundBuilder: (context) => const Padding(
                               padding: EdgeInsets.all(8.0),
                               child: Text(
-                                'No Reporting Manager Found',
+                                'Manajer Pelapor Tidak Ditemukan',
                                 style: TextStyle(fontSize: 16),
                               ),
                             ),
@@ -2729,7 +2729,7 @@ class _EmployeeFormPageState extends State<EmployeeFormPage>
                             textFieldConfiguration: TextFieldConfiguration(
                               controller: companyController,
                               decoration: InputDecoration(
-                                labelText: 'Search a Company',
+                                labelText: 'Cari Perusahaan',
                                 labelStyle: TextStyle(color: Colors.grey[350]),
                                 contentPadding: const EdgeInsets.symmetric(
                                     horizontal: 10.0),
@@ -2762,7 +2762,7 @@ class _EmployeeFormPageState extends State<EmployeeFormPage>
                             noItemsFoundBuilder: (context) => const Padding(
                               padding: EdgeInsets.all(8.0),
                               child: Text(
-                                'No Company Found',
+                                'Perusahaan Tidak Ditemukan',
                                 style: TextStyle(fontSize: 16),
                               ),
                             ),
@@ -2784,7 +2784,7 @@ class _EmployeeFormPageState extends State<EmployeeFormPage>
                               height:
                               MediaQuery.of(context).size.height * 0.03),
                           const Text(
-                            'Work Location',
+                            'Lokasi Kerja',
                             style: TextStyle(color: Colors.black),
                           ),
                           SizedBox(
@@ -2849,7 +2849,7 @@ class _EmployeeFormPageState extends State<EmployeeFormPage>
                               height:
                               MediaQuery.of(context).size.height * 0.03),
                           const Text(
-                            'End Date',
+                            'Tanggal Berakhir',
                             style: TextStyle(color: Colors.black),
                           ),
                           SizedBox(
@@ -2887,7 +2887,7 @@ class _EmployeeFormPageState extends State<EmployeeFormPage>
                               height:
                               MediaQuery.of(context).size.height * 0.03),
                           const Text(
-                            "Salary Per Hour",
+                            "Gaji Per Jam",
                             style: TextStyle(color: Colors.black),
                           ),
                           SizedBox(
@@ -2896,13 +2896,13 @@ class _EmployeeFormPageState extends State<EmployeeFormPage>
                           TextField(
                             controller: salaryPerHourController,
                             decoration: InputDecoration(
-                              labelText: "Salary Per Hour",
+                              labelText: "Gaji Per Jam",
                               labelStyle: TextStyle(color: Colors.grey[350]),
                               border: const OutlineInputBorder(),
                               contentPadding:
                               const EdgeInsets.symmetric(horizontal: 10.0),
                               errorText: _validateSalaryPerHour
-                                  ? 'Please Add Salary Per Hour'
+                                  ? 'Silakan isi Gaji Per Jam'
                                   : null,
                             ),
                             onChanged: (newValue) {
@@ -2994,7 +2994,7 @@ class _EmployeeFormPageState extends State<EmployeeFormPage>
                             ),
                           ),
                         ),
-                        child: const Text('Save',
+                        child: const Text('Simpan',
                             style: TextStyle(color: Colors.white)),
                       ),
                     ),
@@ -3067,7 +3067,7 @@ class _EmployeeFormPageState extends State<EmployeeFormPage>
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     const Text(
-                                      'Bank Name',
+                                      'Nama Bank',
                                       style: TextStyle(color: Colors.black),
                                     ),
                                     SizedBox(
@@ -3145,7 +3145,7 @@ class _EmployeeFormPageState extends State<EmployeeFormPage>
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     const Text(
-                                      'Branch',
+                                      'Cabang',
                                       style: TextStyle(color: Colors.black),
                                     ),
                                     SizedBox(
@@ -3182,7 +3182,7 @@ class _EmployeeFormPageState extends State<EmployeeFormPage>
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     const Text(
-                                      "Bank Code #1",
+                                      "Kode Bank #1",
                                       style: TextStyle(color: Colors.black),
                                     ),
                                     SizedBox(
@@ -3192,7 +3192,7 @@ class _EmployeeFormPageState extends State<EmployeeFormPage>
                                     TextField(
                                       controller: bankCodeOneController,
                                       decoration: InputDecoration(
-                                        labelText: "Bank Code #1",
+                                        labelText: "Kode Bank #1",
                                         labelStyle:
                                         TextStyle(color: Colors.grey[350]),
                                         border: const OutlineInputBorder(),
@@ -3200,7 +3200,7 @@ class _EmployeeFormPageState extends State<EmployeeFormPage>
                                         const EdgeInsets.symmetric(
                                             horizontal: 10.0),
                                         errorText: _validateBankCodeOne
-                                            ? 'Please Add Bank Code #1'
+                                            ? 'Silakan isi Kode Bank #1'
                                             : null,
                                       ),
                                       onChanged: (newValue) {
@@ -3250,7 +3250,7 @@ class _EmployeeFormPageState extends State<EmployeeFormPage>
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     const Text(
-                                      'City',
+                                      'Kota',
                                       style: TextStyle(color: Colors.black),
                                     ),
                                     SizedBox(
@@ -3287,7 +3287,7 @@ class _EmployeeFormPageState extends State<EmployeeFormPage>
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     const Text(
-                                      "Bank Code #2",
+                                      "Kode Bank #2",
                                       style: TextStyle(color: Colors.black),
                                     ),
                                     SizedBox(
@@ -3297,7 +3297,7 @@ class _EmployeeFormPageState extends State<EmployeeFormPage>
                                     TextField(
                                       controller: bankCodeTwoController,
                                       decoration: InputDecoration(
-                                        labelText: "Bank Code #2",
+                                        labelText: "Kode Bank #2",
                                         labelStyle:
                                         TextStyle(color: Colors.grey[350]),
                                         border: const OutlineInputBorder(),
@@ -3305,7 +3305,7 @@ class _EmployeeFormPageState extends State<EmployeeFormPage>
                                         const EdgeInsets.symmetric(
                                             horizontal: 10.0),
                                         errorText: _validateBankCodeTwo
-                                            ? 'Please Add Bank Code #2'
+                                            ? 'Silakan isi Kode Bank #2'
                                             : null,
                                       ),
                                       onChanged: (newValue) {
@@ -3422,7 +3422,7 @@ class _EmployeeFormPageState extends State<EmployeeFormPage>
                             ),
                           ),
                         ),
-                        child: const Text('Save',
+                        child: const Text('Simpan',
                             style: TextStyle(color: Colors.white)),
                       ),
                     ),
@@ -3445,11 +3445,11 @@ class _EmployeeFormPageState extends State<EmployeeFormPage>
     List<PopupMenuEntry<String>> menuItems = [
       const PopupMenuItem(
         value: 'personal',
-        child: Text('Personal Info'),
+        child: Text('Info Pribadi'),
       ),
       const PopupMenuItem(
         value: 'bank',
-        child: Text('Bank Info'),
+        child: Text('Info Bank'),
       ),
     ];
 
@@ -3458,7 +3458,7 @@ class _EmployeeFormPageState extends State<EmployeeFormPage>
           1,
           const PopupMenuItem(
             value: 'work',
-            child: Text('Work Info'),
+            child: Text('Info Pekerjaan'),
           ));
     }
 
@@ -3647,7 +3647,7 @@ class _EmployeeFormPageState extends State<EmployeeFormPage>
                     Image.asset(imagePath),
                     const SizedBox(height: 16),
                     const Text(
-                      "Information Updated Successfully",
+                      "Informasi Berhasil Diperbarui",
                       style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
@@ -3690,7 +3690,7 @@ class _EmployeeFormPageState extends State<EmployeeFormPage>
                     Image.asset(imagePath),
                     const SizedBox(height: 16),
                     const Text(
-                      "Information Updated Successfully",
+                      "Informasi Berhasil Diperbarui",
                       style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
@@ -3733,7 +3733,7 @@ class _EmployeeFormPageState extends State<EmployeeFormPage>
                     Image.asset(imagePath),
                     const SizedBox(height: 16),
                     const Text(
-                      "Information Updated Successfully",
+                      "Informasi Berhasil Diperbarui",
                       style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
@@ -3869,7 +3869,7 @@ class _EmployeeFormPageState extends State<EmployeeFormPage>
                                                                   size: 15),
                                                             ),
                                                             Text(
-                                                              ' Work Email',
+                                                              ' Email Kerja',
                                                               style: TextStyle(
                                                                 fontSize: 15.0,
                                                                 fontWeight:
@@ -3921,7 +3921,7 @@ class _EmployeeFormPageState extends State<EmployeeFormPage>
                                                           color: Colors.red,
                                                           size: 15),
                                                       Text(
-                                                        '   Work Phone',
+                                                        '   Telepon Kerja',
                                                         style: TextStyle(
                                                           fontSize: 15.0,
                                                           fontWeight:
@@ -4040,7 +4040,7 @@ class _EmployeeFormPageState extends State<EmployeeFormPage>
                                                         color: Colors.red,
                                                         size: 15),
                                                     Text(
-                                                      '   Phone',
+                                                      '   Telepon',
                                                       style: TextStyle(
                                                         fontSize: 15.0,
                                                         fontWeight:
@@ -4100,9 +4100,9 @@ class _EmployeeFormPageState extends State<EmployeeFormPage>
                                     fontSize: 17,
                                   ),
                                   tabs: [
-                                    const Tab(text: 'About'),
+                                    const Tab(text: 'Tentang'),
                                     if (showWorkTypeAndShiftTab)
-                                      const Tab(text: 'Work Type & Shift'),
+                                      const Tab(text: 'Tipe Kerja & Shift'),
                                   ],
                                 ),
                                 SizedBox(
@@ -4320,7 +4320,7 @@ class _EmployeeFormPageState extends State<EmployeeFormPage>
                                                               size: 15),
                                                         ),
                                                         Text(
-                                                          ' Work Email',
+                                                          ' Email Kerja',
                                                           style: TextStyle(
                                                             fontSize: 15.0,
                                                             fontWeight:
@@ -4367,7 +4367,7 @@ class _EmployeeFormPageState extends State<EmployeeFormPage>
                                                       color: Colors.red,
                                                       size: 15),
                                                   Text(
-                                                    '   Work Phone',
+                                                    '   Telepon Kerja',
                                                     style: TextStyle(
                                                       fontSize: 15.0,
                                                       fontWeight:
@@ -4474,7 +4474,7 @@ class _EmployeeFormPageState extends State<EmployeeFormPage>
                                                     color: Colors.red,
                                                     size: 15),
                                                 Text(
-                                                  '   Phone',
+                                                  '   Telepon',
                                                   style: TextStyle(
                                                     fontSize: 15.0,
                                                     fontWeight: FontWeight.bold,
@@ -4529,9 +4529,9 @@ class _EmployeeFormPageState extends State<EmployeeFormPage>
                                     fontSize: 17,
                                   ),
                                   tabs: [
-                                    const Tab(text: 'About'),
+                                    const Tab(text: 'Tentang'),
                                     if (showWorkTypeAndShiftTab)
-                                      const Tab(text: 'Work Type & Shift'),
+                                      const Tab(text: 'Tipe Kerja & Shift'),
                                   ],
                                 ),
                                 SizedBox(
@@ -4773,7 +4773,7 @@ class _EmployeeFormPageState extends State<EmployeeFormPage>
                                           children: [
                                             TextField(
                                               decoration: const InputDecoration(
-                                                labelText: 'Date of Birth',
+                                                labelText: 'Tanggal Lahir',
                                                 labelStyle: TextStyle(
                                                     fontWeight: FontWeight.bold,
                                                     fontSize: 20,
@@ -4788,7 +4788,7 @@ class _EmployeeFormPageState extends State<EmployeeFormPage>
                                             ),
                                             TextField(
                                               decoration: const InputDecoration(
-                                                labelText: 'Gender',
+                                                labelText: 'Jenis Kelamin',
                                                 labelStyle: TextStyle(
                                                     fontWeight: FontWeight.bold,
                                                     fontSize: 20,
@@ -4803,7 +4803,7 @@ class _EmployeeFormPageState extends State<EmployeeFormPage>
                                             ),
                                             TextField(
                                               decoration: const InputDecoration(
-                                                labelText: 'Address',
+                                                labelText: 'Alamat',
                                                 labelStyle: TextStyle(
                                                     fontWeight: FontWeight.bold,
                                                     fontSize: 20,
@@ -4818,7 +4818,7 @@ class _EmployeeFormPageState extends State<EmployeeFormPage>
                                             ),
                                             TextField(
                                               decoration: const InputDecoration(
-                                                labelText: 'Country',
+                                                labelText: 'Negara',
                                                 labelStyle: TextStyle(
                                                     fontWeight: FontWeight.bold,
                                                     fontSize: 20,
@@ -4833,7 +4833,7 @@ class _EmployeeFormPageState extends State<EmployeeFormPage>
                                             ),
                                             TextField(
                                               decoration: const InputDecoration(
-                                                labelText: 'State',
+                                                labelText: 'Provinsi',
                                                 labelStyle: TextStyle(
                                                     fontWeight: FontWeight.bold,
                                                     fontSize: 20,
@@ -4848,7 +4848,7 @@ class _EmployeeFormPageState extends State<EmployeeFormPage>
                                             ),
                                             TextField(
                                               decoration: const InputDecoration(
-                                                labelText: 'City',
+                                                labelText: 'Kota',
                                                 labelStyle: TextStyle(
                                                     fontWeight: FontWeight.bold,
                                                     fontSize: 20,
@@ -4869,7 +4869,7 @@ class _EmployeeFormPageState extends State<EmployeeFormPage>
                                           children: [
                                             TextField(
                                               decoration: const InputDecoration(
-                                                labelText: 'Qualification',
+                                                labelText: 'Kualifikasi',
                                                 labelStyle: TextStyle(
                                                     fontWeight: FontWeight.bold,
                                                     fontSize: 20,
@@ -4885,7 +4885,7 @@ class _EmployeeFormPageState extends State<EmployeeFormPage>
                                             ),
                                             TextField(
                                               decoration: const InputDecoration(
-                                                labelText: 'Experience',
+                                                labelText: 'Pengalaman',
                                                 labelStyle: TextStyle(
                                                     fontWeight: FontWeight.bold,
                                                     fontSize: 20,
@@ -4900,7 +4900,7 @@ class _EmployeeFormPageState extends State<EmployeeFormPage>
                                             ),
                                             TextField(
                                               decoration: const InputDecoration(
-                                                labelText: 'Marital Status',
+                                                labelText: 'Status Pernikahan',
                                                 labelStyle: TextStyle(
                                                     fontWeight: FontWeight.bold,
                                                     fontSize: 20,
@@ -4916,7 +4916,7 @@ class _EmployeeFormPageState extends State<EmployeeFormPage>
                                             ),
                                             TextField(
                                               decoration: const InputDecoration(
-                                                labelText: 'Children',
+                                                labelText: 'Anak',
                                                 labelStyle: TextStyle(
                                                     fontWeight: FontWeight.bold,
                                                     fontSize: 20,
@@ -4931,7 +4931,7 @@ class _EmployeeFormPageState extends State<EmployeeFormPage>
                                             ),
                                             TextField(
                                               decoration: const InputDecoration(
-                                                labelText: 'Emergency Contact',
+                                                labelText: 'Kontak Darurat',
                                                 labelStyle: TextStyle(
                                                     fontWeight: FontWeight.bold,
                                                     fontSize: 20,
@@ -4947,7 +4947,7 @@ class _EmployeeFormPageState extends State<EmployeeFormPage>
                                             ),
                                             TextField(
                                               decoration: const InputDecoration(
-                                                labelText: 'Contact Name',
+                                                labelText: 'Nama Kontak',
                                                 labelStyle: TextStyle(
                                                   fontWeight: FontWeight.bold,
                                                   fontSize: 20,
@@ -5000,7 +5000,7 @@ class _EmployeeFormPageState extends State<EmployeeFormPage>
                                           children: [
                                             TextField(
                                               decoration: const InputDecoration(
-                                                labelText: 'Department',
+                                                labelText: 'Departemen',
                                                 labelStyle: TextStyle(
                                                     fontWeight: FontWeight.bold,
                                                     fontSize: 20,
@@ -5015,7 +5015,7 @@ class _EmployeeFormPageState extends State<EmployeeFormPage>
                                             ),
                                             TextField(
                                               decoration: const InputDecoration(
-                                                labelText: 'Job Position',
+                                                labelText: 'Posisi Pekerjaan',
                                                 labelStyle: TextStyle(
                                                     fontWeight: FontWeight.bold,
                                                     fontSize: 20,
@@ -5030,7 +5030,7 @@ class _EmployeeFormPageState extends State<EmployeeFormPage>
                                             ),
                                             TextField(
                                               decoration: const InputDecoration(
-                                                labelText: 'Shift Information',
+                                                labelText: 'Informasi Shift',
                                                 labelStyle: TextStyle(
                                                     fontWeight: FontWeight.bold,
                                                     fontSize: 20,
@@ -5045,7 +5045,7 @@ class _EmployeeFormPageState extends State<EmployeeFormPage>
                                             ),
                                             TextField(
                                               decoration: const InputDecoration(
-                                                labelText: 'Work Type',
+                                                labelText: 'Tipe Kerja',
                                                 // Original label text
                                                 labelStyle: TextStyle(
                                                     fontWeight: FontWeight.bold,
@@ -5061,7 +5061,7 @@ class _EmployeeFormPageState extends State<EmployeeFormPage>
                                             ),
                                             TextField(
                                               decoration: const InputDecoration(
-                                                labelText: 'Employee Type',
+                                                labelText: 'Tipe Karyawan',
                                                 labelStyle: TextStyle(
                                                     fontWeight: FontWeight.bold,
                                                     fontSize: 20,
@@ -5077,7 +5077,7 @@ class _EmployeeFormPageState extends State<EmployeeFormPage>
                                             ),
                                             TextField(
                                               decoration: const InputDecoration(
-                                                labelText: 'Salary',
+                                                labelText: 'Gaji',
                                                 // Original label text
                                                 labelStyle: TextStyle(
                                                     fontWeight: FontWeight.bold,
@@ -5099,7 +5099,7 @@ class _EmployeeFormPageState extends State<EmployeeFormPage>
                                           children: [
                                             TextField(
                                               decoration: const InputDecoration(
-                                                labelText: 'Reporting Manager',
+                                                labelText: 'Manajer Pelapor',
                                                 labelStyle: TextStyle(
                                                     fontWeight: FontWeight.bold,
                                                     fontSize: 20,
@@ -5115,7 +5115,7 @@ class _EmployeeFormPageState extends State<EmployeeFormPage>
                                             ),
                                             TextField(
                                               decoration: const InputDecoration(
-                                                labelText: 'Company',
+                                                labelText: 'Perusahaan',
                                                 labelStyle: TextStyle(
                                                     fontWeight: FontWeight.bold,
                                                     fontSize: 20,
@@ -5130,7 +5130,7 @@ class _EmployeeFormPageState extends State<EmployeeFormPage>
                                             ),
                                             TextField(
                                               decoration: const InputDecoration(
-                                                labelText: 'Work Location',
+                                                labelText: 'Lokasi Kerja',
                                                 labelStyle: TextStyle(
                                                     fontWeight: FontWeight.bold,
                                                     fontSize: 20,
@@ -5145,7 +5145,7 @@ class _EmployeeFormPageState extends State<EmployeeFormPage>
                                             ),
                                             TextField(
                                               decoration: const InputDecoration(
-                                                labelText: 'Joining Date',
+                                                labelText: 'Tanggal Bergabung',
                                                 labelStyle: TextStyle(
                                                     fontWeight: FontWeight.bold,
                                                     fontSize: 20,
@@ -5160,7 +5160,7 @@ class _EmployeeFormPageState extends State<EmployeeFormPage>
                                             ),
                                             TextField(
                                               decoration: const InputDecoration(
-                                                labelText: 'End Date',
+                                                labelText: 'Tanggal Berakhir',
                                                 labelStyle: TextStyle(
                                                     fontWeight: FontWeight.bold,
                                                     fontSize: 20,
@@ -5175,7 +5175,7 @@ class _EmployeeFormPageState extends State<EmployeeFormPage>
                                             ),
                                             TextField(
                                               decoration: const InputDecoration(
-                                                labelText: 'Tags',
+                                                labelText: 'Tag',
                                                 labelStyle: TextStyle(
                                                     fontWeight: FontWeight.bold,
                                                     fontSize: 20,
@@ -5226,7 +5226,7 @@ class _EmployeeFormPageState extends State<EmployeeFormPage>
                                           children: [
                                             TextField(
                                               decoration: const InputDecoration(
-                                                labelText: 'Bank Name',
+                                                labelText: 'Nama Bank',
                                                 labelStyle: TextStyle(
                                                   fontWeight: FontWeight.bold,
                                                   fontSize: 20,
@@ -5242,7 +5242,7 @@ class _EmployeeFormPageState extends State<EmployeeFormPage>
                                             ),
                                             TextField(
                                               decoration: const InputDecoration(
-                                                labelText: 'Account Number',
+                                                labelText: 'Nomor Rekening',
                                                 labelStyle: TextStyle(
                                                     fontWeight: FontWeight.bold,
                                                     fontSize: 20,
@@ -5258,7 +5258,7 @@ class _EmployeeFormPageState extends State<EmployeeFormPage>
                                             ),
                                             TextField(
                                               decoration: const InputDecoration(
-                                                labelText: 'Branch',
+                                                labelText: 'Cabang',
                                                 labelStyle: TextStyle(
                                                     fontWeight: FontWeight.bold,
                                                     fontSize: 20,
@@ -5279,7 +5279,7 @@ class _EmployeeFormPageState extends State<EmployeeFormPage>
                                           children: [
                                             TextField(
                                               decoration: const InputDecoration(
-                                                labelText: 'Bank Address',
+                                                labelText: 'Alamat Bank',
                                                 labelStyle: TextStyle(
                                                     fontWeight: FontWeight.bold,
                                                     fontSize: 20,
@@ -5294,7 +5294,7 @@ class _EmployeeFormPageState extends State<EmployeeFormPage>
                                             ),
                                             TextField(
                                               decoration: const InputDecoration(
-                                                labelText: 'Country',
+                                                labelText: 'Negara',
                                                 labelStyle: TextStyle(
                                                     fontWeight: FontWeight.bold,
                                                     fontSize: 20,
@@ -5309,7 +5309,7 @@ class _EmployeeFormPageState extends State<EmployeeFormPage>
                                             ),
                                             TextField(
                                               decoration: const InputDecoration(
-                                                labelText: 'State',
+                                                labelText: 'Provinsi',
                                                 labelStyle: TextStyle(
                                                     fontWeight: FontWeight.bold,
                                                     fontSize: 20,
@@ -5391,7 +5391,7 @@ class _EmployeeFormPageState extends State<EmployeeFormPage>
                       padding: EdgeInsets.only(left: 15.0),
                       child: TextField(
                         decoration: InputDecoration(
-                          labelText: 'Work Type Request',
+                          labelText: 'Permintaan Tipe Kerja',
                           labelStyle: TextStyle(
                             fontWeight: FontWeight.bold,
                             color: Colors.black,
@@ -5465,7 +5465,7 @@ class _EmployeeFormPageState extends State<EmployeeFormPage>
                       padding: EdgeInsets.only(left: 15.0),
                       child: TextField(
                         decoration: InputDecoration(
-                          labelText: 'Rotating Work Type',
+                          labelText: 'Tipe Kerja Bergilir',
                           labelStyle: TextStyle(
                             fontWeight: FontWeight.bold,
                             color: Colors.black,
@@ -5539,7 +5539,7 @@ class _EmployeeFormPageState extends State<EmployeeFormPage>
                       padding: EdgeInsets.only(left: 15.0),
                       child: TextField(
                         decoration: InputDecoration(
-                          labelText: 'Shift Request',
+                          labelText: 'Permintaan Shift',
                           labelStyle: TextStyle(
                             fontWeight: FontWeight.bold,
                             // fontSize: 15,
@@ -5614,7 +5614,7 @@ class _EmployeeFormPageState extends State<EmployeeFormPage>
                       padding: EdgeInsets.only(left: 15.0),
                       child: TextField(
                         decoration: InputDecoration(
-                          labelText: 'Rotating Shift',
+                          labelText: 'Shift Bergilir',
                           labelStyle: TextStyle(
                             fontWeight: FontWeight.bold,
                             // fontSize: 15,
