@@ -1,4 +1,4 @@
-package com.cybrosys.horilla_project
+package com.starphotoadvertising.hr
 
 import io.flutter.embedding.android.FlutterActivity
 
