@@ -49,10 +49,21 @@ class _LeaveOverview extends State<LeaveOverview>
   @override
   void initState() {
     super.initState();
-    getAllLeaveRequest();
+    // prefetchData() (data diri sendiri: nama/foto/badge) dan
+    // getAllLeaveRequest() dulu dijalankan bersamaan tanpa saling
+    // menunggu -- kalau getAllLeaveRequest() selesai duluan, daftar
+    // "sedang cuti" ke-render pakai fallback kosong dari
+    // _withSelfEmployee() (nama/badge blank, avatar cuma ikon generik)
+    // karena `arguments` belum terisi. Diurutkan supaya prefetchData()
+    // selesai dulu sebelum daftar cuti diambil.
+    _initializeOverview();
     getBaseUrl();
     fetchToken();
-    prefetchData();
+  }
+
+  Future<void> _initializeOverview() async {
+    await prefetchData();
+    getAllLeaveRequest();
   }
 
   Future<void> fetchToken() async {
@@ -154,7 +165,7 @@ class _LeaveOverview extends State<LeaveOverview>
     });
   }
 
-  void prefetchData() async {
+  Future<void> prefetchData() async {
     final prefs = await SharedPreferences.getInstance();
     var token = prefs.getString("token");
     var typedServerUrl = prefs.getString("typed_url");
