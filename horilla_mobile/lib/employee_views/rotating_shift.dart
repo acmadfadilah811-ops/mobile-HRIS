@@ -4,6 +4,7 @@ import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:animated_notch_bottom_bar/animated_notch_bottom_bar/animated_notch_bottom_bar.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
+import 'package:dropdown_search/dropdown_search.dart';
 import 'package:intl/intl.dart';
 import 'package:shimmer/shimmer.dart';
 
@@ -784,58 +785,51 @@ class _WorkTypeRequestPageState extends State<RotatingShiftPage> {
                           SizedBox(
                               height:
                               MediaQuery.of(context).size.height * 0.01),
-                          TypeAheadField<String>(
-                            textFieldConfiguration: TextFieldConfiguration(
-                              controller: _typeAheadEditController,
-                              decoration: InputDecoration(
-                                labelText: 'Cari Karyawan',
+                          // Ditulis ulang dari TypeAheadField ke DropdownSearch
+                          // (2026-09-12) -- lihat penjelasan lengkap di
+                          // horilla_leave/leave_request.dart (bug bawaan
+                          // flutter_typeahead saat dipakai di dalam showDialog).
+                          DropdownSearch<String>(
+                            items: employeeItems,
+                            selectedItem: createEmployee,
+                            onChanged: (newValue) {
+                              setState(() {
+                                if (newValue != null) {
+                                  createEmployee = newValue;
+                                  selectedEditEmployeeId =
+                                  employeeIdMap[newValue];
+                                }
+                              });
+                            },
+                            dropdownDecoratorProps: DropDownDecoratorProps(
+                              dropdownSearchDecoration: InputDecoration(
+                                border: const OutlineInputBorder(),
+                                labelText: "Cari Karyawan",
                                 labelStyle: TextStyle(color: Colors.grey[350]),
                                 contentPadding: const EdgeInsets.symmetric(
                                     horizontal: 10.0),
-                                border: const OutlineInputBorder(),
                               ),
                             ),
-                            suggestionsCallback: (pattern) {
-                              return employeeItems
-                                  .where((item) => item
-                                  .toLowerCase()
-                                  .contains(pattern.toLowerCase()))
-                                  .toList();
-                            },
-                            itemBuilder: (context, String suggestion) {
-                              return ListTile(
-                                title: Text(suggestion),
-                              );
-                            },
-                            onSuggestionSelected: (String suggestion) {
-                              setState(() {
-                                createEmployee = suggestion;
-                                selectedEditEmployeeId =
-                                employeeIdMap[suggestion];
-                              });
-                              _typeAheadEditController.text = suggestion;
-                            },
-                            noItemsFoundBuilder: (context) => const Padding(
-                              padding: EdgeInsets.all(8.0),
-                              child: Text(
-                                'Karyawan Tidak Ditemukan',
-                                style: TextStyle(fontSize: 16),
-                              ),
-                            ),
-                            errorBuilder: (context, error) => Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Text(
-                                'Error: $error',
-                                style: const TextStyle(fontSize: 16),
-                              ),
-                            ),
-                            hideOnEmpty: true,
-                            hideOnError: false,
-                            suggestionsBoxDecoration: SuggestionsBoxDecoration(
+                            popupProps: PopupProps.menu(
                               constraints: BoxConstraints(
                                   maxHeight:
                                   MediaQuery.of(context).size.height *
-                                      0.23), // Limit height
+                                      0.3),
+                              showSearchBox: true,
+                              searchFieldProps: const TextFieldProps(
+                                decoration: InputDecoration(
+                                  hintText: 'Cari karyawan',
+                                  border: OutlineInputBorder(),
+                                ),
+                              ),
+                              emptyBuilder: (context, searchEntry) =>
+                              const Padding(
+                                padding: EdgeInsets.all(8.0),
+                                child: Text(
+                                  'Karyawan Tidak Ditemukan',
+                                  style: TextStyle(fontSize: 16),
+                                ),
+                              ),
                             ),
                           ),
                           SizedBox(
@@ -848,60 +842,48 @@ class _WorkTypeRequestPageState extends State<RotatingShiftPage> {
                           SizedBox(
                               height:
                               MediaQuery.of(context).size.height * 0.01),
-                          TypeAheadField<String>(
-                            textFieldConfiguration: TextFieldConfiguration(
-                              controller: _typeAheadEditRotatingShiftController,
-                              decoration: InputDecoration(
-                                labelText: 'Cari Shift Bergilir',
+                          DropdownSearch<String>(
+                            items: rotateShiftItems,
+                            selectedItem: editRotatedShift,
+                            onChanged: (newValue) {
+                              setState(() {
+                                if (newValue != null) {
+                                  editRotatedShift = newValue;
+                                  selectedEditRotatedShift =
+                                  rotateShiftIdMap[newValue];
+                                  _validateRotateShift = false;
+                                }
+                              });
+                            },
+                            dropdownDecoratorProps: DropDownDecoratorProps(
+                              dropdownSearchDecoration: InputDecoration(
+                                border: const OutlineInputBorder(),
+                                labelText: "Cari Shift Bergilir",
                                 labelStyle: TextStyle(color: Colors.grey[350]),
                                 contentPadding: const EdgeInsets.symmetric(
                                     horizontal: 10.0),
-                                border: const OutlineInputBorder(),
                               ),
                             ),
-                            suggestionsCallback: (pattern) {
-                              return rotateShiftItems
-                                  .where((item) => item
-                                  .toLowerCase()
-                                  .contains(pattern.toLowerCase()))
-                                  .toList();
-                            },
-                            itemBuilder: (context, String suggestion) {
-                              return ListTile(
-                                title: Text(suggestion),
-                              );
-                            },
-                            onSuggestionSelected: (String suggestion) {
-                              setState(() {
-                                editRotatedShift = suggestion;
-                                selectedEditRotatedShift =
-                                rotateShiftIdMap[suggestion];
-                                _validateRotateShift = false;
-                              });
-                              _typeAheadEditRotatingShiftController.text =
-                                  suggestion;
-                            },
-                            noItemsFoundBuilder: (context) => const Padding(
-                              padding: EdgeInsets.all(8.0),
-                              child: Text(
-                                'Shift Tidak Ditemukan',
-                                style: TextStyle(fontSize: 16),
-                              ),
-                            ),
-                            errorBuilder: (context, error) => Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Text(
-                                'Error: $error',
-                                style: const TextStyle(fontSize: 16),
-                              ),
-                            ),
-                            hideOnEmpty: true,
-                            hideOnError: false,
-                            suggestionsBoxDecoration: SuggestionsBoxDecoration(
+                            popupProps: PopupProps.menu(
                               constraints: BoxConstraints(
                                   maxHeight:
                                   MediaQuery.of(context).size.height *
-                                      0.23), // Limit height
+                                      0.3),
+                              showSearchBox: true,
+                              searchFieldProps: const TextFieldProps(
+                                decoration: InputDecoration(
+                                  hintText: 'Cari shift bergilir',
+                                  border: OutlineInputBorder(),
+                                ),
+                              ),
+                              emptyBuilder: (context, searchEntry) =>
+                              const Padding(
+                                padding: EdgeInsets.all(8.0),
+                                child: Text(
+                                  'Shift Tidak Ditemukan',
+                                  style: TextStyle(fontSize: 16),
+                                ),
+                              ),
                             ),
                           ),
                           SizedBox(
@@ -1165,58 +1147,50 @@ class _WorkTypeRequestPageState extends State<RotatingShiftPage> {
                           SizedBox(
                               height:
                               MediaQuery.of(context).size.height * 0.01),
-                          TypeAheadField<String>(
-                            textFieldConfiguration: TextFieldConfiguration(
-                              controller: _typeAheadAddRotatingController,
-                              decoration: InputDecoration(
-                                labelText: 'Cari Karyawan',
-                                labelStyle: TextStyle(color: Colors.grey[350]),
+                          // Ditulis ulang dari TypeAheadField ke DropdownSearch
+                          // (2026-09-12) -- lihat penjelasan lengkap di
+                          // horilla_leave/leave_request.dart.
+                          DropdownSearch<String>(
+                            items: employeeItems,
+                            selectedItem: createEmployee,
+                            onChanged: (newValue) {
+                              setState(() {
+                                if (newValue != null) {
+                                  createEmployee = newValue;
+                                  selectedCreateEmployeeId =
+                                  employeeIdMap[newValue];
+                                }
+                              });
+                            },
+                            dropdownDecoratorProps: DropDownDecoratorProps(
+                              dropdownSearchDecoration: InputDecoration(
                                 border: const OutlineInputBorder(),
+                                labelText: "Cari Karyawan",
+                                labelStyle: TextStyle(color: Colors.grey[350]),
                                 contentPadding: const EdgeInsets.symmetric(
                                     horizontal: 10.0),
                               ),
                             ),
-                            suggestionsCallback: (pattern) {
-                              return employeeItems
-                                  .where((item) => item
-                                  .toLowerCase()
-                                  .contains(pattern.toLowerCase()))
-                                  .toList();
-                            },
-                            itemBuilder: (context, String suggestion) {
-                              return ListTile(
-                                title: Text(suggestion),
-                              );
-                            },
-                            onSuggestionSelected: (String suggestion) {
-                              setState(() {
-                                createEmployee = suggestion;
-                                selectedCreateEmployeeId =
-                                employeeIdMap[suggestion];
-                              });
-                              _typeAheadAddRotatingController.text = suggestion;
-                            },
-                            noItemsFoundBuilder: (context) => const Padding(
-                              padding: EdgeInsets.all(8.0),
-                              child: Text(
-                                'Karyawan Tidak Ditemukan',
-                                style: TextStyle(fontSize: 16),
-                              ),
-                            ),
-                            errorBuilder: (context, error) => Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Text(
-                                'Error: $error',
-                                style: const TextStyle(fontSize: 16),
-                              ),
-                            ),
-                            hideOnEmpty: true,
-                            hideOnError: false,
-                            suggestionsBoxDecoration: SuggestionsBoxDecoration(
+                            popupProps: PopupProps.menu(
                               constraints: BoxConstraints(
                                   maxHeight:
                                   MediaQuery.of(context).size.height *
-                                      0.23), // Limit height
+                                      0.3),
+                              showSearchBox: true,
+                              searchFieldProps: const TextFieldProps(
+                                decoration: InputDecoration(
+                                  hintText: 'Cari karyawan',
+                                  border: OutlineInputBorder(),
+                                ),
+                              ),
+                              emptyBuilder: (context, searchEntry) =>
+                              const Padding(
+                                padding: EdgeInsets.all(8.0),
+                                child: Text(
+                                  'Karyawan Tidak Ditemukan',
+                                  style: TextStyle(fontSize: 16),
+                                ),
+                              ),
                             ),
                           ),
                           SizedBox(
@@ -1229,64 +1203,51 @@ class _WorkTypeRequestPageState extends State<RotatingShiftPage> {
                           SizedBox(
                               height:
                               MediaQuery.of(context).size.height * 0.01),
-                          TypeAheadField<String>(
-                            textFieldConfiguration: TextFieldConfiguration(
-                              controller:
-                              _typeAheadCreateRotatingShiftController,
-                              decoration: InputDecoration(
-                                labelText: 'Cari Shift Bergilir',
-                                labelStyle: TextStyle(color: Colors.grey[350]),
-                                border: const OutlineInputBorder(),
-                                contentPadding: const EdgeInsets.symmetric(
-                                    horizontal: 10.0),
+                          DropdownSearch<String>(
+                            items: rotateShiftItems,
+                            selectedItem: createRotatedShift,
+                            onChanged: (newValue) {
+                              setState(() {
+                                if (newValue != null) {
+                                  createRotatedShift = newValue;
+                                  selectedCreateRotatedShift =
+                                  rotateShiftIdMap[newValue];
+                                  _validateRotateShift = false;
+                                }
+                              });
+                            },
+                            dropdownDecoratorProps: DropDownDecoratorProps(
+                              dropdownSearchDecoration: InputDecoration(
                                 errorText: _validateRotateShift
                                     ? 'Silakan pilih Shift Bergilir'
                                     : null,
+                                border: const OutlineInputBorder(),
+                                labelText: "Cari Shift Bergilir",
+                                labelStyle: TextStyle(color: Colors.grey[350]),
+                                contentPadding: const EdgeInsets.symmetric(
+                                    horizontal: 10.0),
                               ),
                             ),
-                            suggestionsCallback: (pattern) {
-                              return rotateShiftItems
-                                  .where((item) => item
-                                  .toLowerCase()
-                                  .contains(pattern.toLowerCase()))
-                                  .toList();
-                            },
-                            itemBuilder: (context, String suggestion) {
-                              return ListTile(
-                                title: Text(suggestion),
-                              );
-                            },
-                            onSuggestionSelected: (String suggestion) {
-                              setState(() {
-                                createRotatedShift = suggestion;
-                                selectedCreateRotatedShift =
-                                rotateShiftIdMap[suggestion];
-                                _validateRotateShift = false;
-                              });
-                              _typeAheadCreateRotatingShiftController.text =
-                                  suggestion;
-                            },
-                            noItemsFoundBuilder: (context) => const Padding(
-                              padding: EdgeInsets.all(8.0),
-                              child: Text(
-                                'Shift Bergilir Tidak Ditemukan',
-                                style: TextStyle(fontSize: 16),
-                              ),
-                            ),
-                            errorBuilder: (context, error) => Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Text(
-                                'Error: $error',
-                                style: const TextStyle(fontSize: 16),
-                              ),
-                            ),
-                            hideOnEmpty: true,
-                            hideOnError: false,
-                            suggestionsBoxDecoration: SuggestionsBoxDecoration(
+                            popupProps: PopupProps.menu(
                               constraints: BoxConstraints(
                                   maxHeight:
                                   MediaQuery.of(context).size.height *
-                                      0.23), // Limit height
+                                      0.3),
+                              showSearchBox: true,
+                              searchFieldProps: const TextFieldProps(
+                                decoration: InputDecoration(
+                                  hintText: 'Cari shift bergilir',
+                                  border: OutlineInputBorder(),
+                                ),
+                              ),
+                              emptyBuilder: (context, searchEntry) =>
+                              const Padding(
+                                padding: EdgeInsets.all(8.0),
+                                child: Text(
+                                  'Shift Bergilir Tidak Ditemukan',
+                                  style: TextStyle(fontSize: 16),
+                                ),
+                              ),
                             ),
                           ),
                           SizedBox(

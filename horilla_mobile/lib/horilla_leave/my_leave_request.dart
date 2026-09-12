@@ -459,14 +459,26 @@ class _MyLeaveRequest extends State<MyLeaveRequest>
   _showCreateSelectedDialog(BuildContext context, Map<String, dynamic> record) {
     String leaveTypeName = record['leave_type_id']['name'];
     int leaveTypeId = record['leave_type_id']['id'];
+    // Ditambahkan di sini (bukan di dalam builder StatefulBuilder di bawah)
+    // supaya listener didaftarkan SEKALI per pembukaan dialog, bukan setiap
+    // kali dialog di-render ulang -- sebelumnya tiap render ulang (misal
+    // memilih tanggal, mengetik deskripsi, dll) menambah SATU listener baru
+    // yang tidak pernah dilepas, dan begitu _fileNameController berubah,
+    // semua listener yang menumpuk itu memicu setState() berkali-kali
+    // sekaligus dalam satu frame -- inilah penyebab dropdown "Jenis Cuti"
+    // (dan seluruh dialog) terlihat berkedip.
+    var fileListenerAdded = false;
     showDialog(
       context: context,
       builder: (BuildContext context) {
         return StatefulBuilder(
           builder: (BuildContext context, StateSetter setState) {
-            _fileNameController.addListener(() {
-              setState(() {});
-            });
+            if (!fileListenerAdded) {
+              fileListenerAdded = true;
+              _fileNameController.addListener(() {
+                setState(() {});
+              });
+            }
             return Stack(
               children: [
                 AlertDialog(
@@ -900,14 +912,21 @@ class _MyLeaveRequest extends State<MyLeaveRequest>
   }
 
   _showCreateDialog(BuildContext context) {
+    // Sama seperti _showCreateSelectedDialog: daftarkan listener sekali per
+    // pembukaan dialog, bukan di setiap render ulang (lihat penjelasan lebih
+    // lengkap di sana).
+    var fileListenerAdded = false;
     showDialog(
       context: context,
       builder: (BuildContext context) {
         return StatefulBuilder(
           builder: (BuildContext context, StateSetter setState) {
-            _fileNameController.addListener(() {
-              setState(() {});
-            });
+            if (!fileListenerAdded) {
+              fileListenerAdded = true;
+              _fileNameController.addListener(() {
+                setState(() {});
+              });
+            }
 
             return Stack(
               children: [
@@ -956,59 +975,53 @@ class _MyLeaveRequest extends State<MyLeaveRequest>
                           SizedBox(
                               height:
                               MediaQuery.of(context).size.height * 0.01),
-                          TypeAheadField<String>(
-                            textFieldConfiguration: TextFieldConfiguration(
-                              controller: _typeAheadEditController,
-                              decoration: InputDecoration(
-                                labelText: 'Pilih Jenis Cuti',
-                                labelStyle: TextStyle(color: Colors.grey[350]),
-                                border: const OutlineInputBorder(),
-                                contentPadding:
-                                const EdgeInsets.symmetric(horizontal: 10.0),
+                          // Ditulis ulang dari TypeAheadField ke DropdownSearch
+                          // (2026-09-12) -- lihat penjelasan lengkap di
+                          // leave_request.dart (bug bawaan flutter_typeahead
+                          // saat dipakai di dalam showDialog).
+                          DropdownSearch<String>(
+                            items: leaveItem,
+                            selectedItem: editleaveType,
+                            onChanged: (newValue) {
+                              setState(() {
+                                if (newValue != null) {
+                                  editleaveType = newValue;
+                                  selectedLeaveId = leaveItemsIdMap[newValue];
+                                  _validateLeaveType = false;
+                                }
+                              });
+                            },
+                            dropdownDecoratorProps: DropDownDecoratorProps(
+                              dropdownSearchDecoration: InputDecoration(
                                 errorText: _validateLeaveType
                                     ? 'Silakan pilih jenis cuti'
                                     : null,
+                                border: const OutlineInputBorder(),
+                                labelText: "Pilih Jenis Cuti",
+                                labelStyle: TextStyle(color: Colors.grey[350]),
+                                contentPadding:
+                                const EdgeInsets.symmetric(horizontal: 10.0),
                               ),
                             ),
-                            suggestionsCallback: (pattern) {
-                              return leaveItem
-                                  .where((leaveType) => leaveType
-                                  .toLowerCase()
-                                  .contains(pattern.toLowerCase()))
-                                  .toList();
-                            },
-                            itemBuilder: (context, String suggestion) {
-                              return ListTile(
-                                title: Text(suggestion),
-                              );
-                            },
-                            onSuggestionSelected: (String suggestion) {
-                              setState(() {
-                                _typeAheadEditController.text = suggestion;
-                                editleaveType = suggestion;
-                                selectedLeaveId = leaveItemsIdMap[suggestion];
-                                _validateLeaveType = false;
-                              });
-                            },
-                            noItemsFoundBuilder: (context) => const Padding(
-                              padding: EdgeInsets.all(8.0),
-                              child: Text(
-                                'Jenis Cuti Tidak Ditemukan',
-                                style: TextStyle(fontSize: 16),
-                              ),
-                            ),
-                            errorBuilder: (context, error) => Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Text(
-                                'Error: $error',
-                                style: const TextStyle(fontSize: 16),
-                              ),
-                            ),
-                            hideOnEmpty: true,
-                            hideOnError: false,
-                            suggestionsBoxDecoration: SuggestionsBoxDecoration(
+                            popupProps: PopupProps.menu(
                               constraints: BoxConstraints(
-                                  maxHeight: MediaQuery.of(context).size.height * 0.23), // Limit height
+                                  maxHeight:
+                                  MediaQuery.of(context).size.height * 0.3),
+                              showSearchBox: true,
+                              searchFieldProps: const TextFieldProps(
+                                decoration: InputDecoration(
+                                  hintText: 'Cari jenis cuti',
+                                  border: OutlineInputBorder(),
+                                ),
+                              ),
+                              emptyBuilder: (context, searchEntry) =>
+                              const Padding(
+                                padding: EdgeInsets.all(8.0),
+                                child: Text(
+                                  'Jenis Cuti Tidak Ditemukan',
+                                  style: TextStyle(fontSize: 16),
+                                ),
+                              ),
                             ),
                           ),
                           SizedBox(
@@ -1560,14 +1573,20 @@ class _MyLeaveRequest extends State<MyLeaveRequest>
       List<Map<String, dynamic>> currentRequests) {
     _typeAheadEditController.text = record['leave_type_id']['name'];
     leaveDescription.text = currentRequests[0]['description'];
+    // Sama seperti _showCreateSelectedDialog: daftarkan listener sekali per
+    // pembukaan dialog, bukan di setiap render ulang.
+    var fileListenerAdded = false;
     showDialog(
       context: context,
       builder: (BuildContext context) {
         return StatefulBuilder(
             builder: (BuildContext context, StateSetter setState) {
-              _fileNameController.addListener(() {
-                setState(() {});
-              });
+              if (!fileListenerAdded) {
+                fileListenerAdded = true;
+                _fileNameController.addListener(() {
+                  setState(() {});
+                });
+              }
               return Stack(
                 children: [
                   AlertDialog(
@@ -2490,6 +2509,7 @@ class _MyLeaveRequest extends State<MyLeaveRequest>
 
                         _errorMessage = null;
                         selectedLeaveId = null;
+                        editleaveType = null;
                         editStartDateBreakdown = null;
                         editEndDateBreakdown = null;
                         startDateSelect.clear();

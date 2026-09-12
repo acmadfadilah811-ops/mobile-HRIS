@@ -804,62 +804,62 @@ class _LeaveRequest extends State<LeaveRequest>
                             ),
                             SizedBox(
                                 height: MediaQuery.of(context).size.height * 0.01),
-                            TypeAheadField<String>(
-                              textFieldConfiguration: TextFieldConfiguration(
-                                controller: _typeAheadCreateController,
-                                decoration: InputDecoration(
-                                  labelText: 'Pilih Jenis Cuti',
-                                  labelStyle: TextStyle(color: Colors.grey[350]),
-                                  border: const OutlineInputBorder(),
-                                  contentPadding:
-                                  const EdgeInsets.symmetric(horizontal: 10.0),
+                            // Ditulis ulang dari TypeAheadField ke DropdownSearch
+                            // (2026-09-12) -- widget TypeAheadField dari paket
+                            // flutter_typeahead punya bug bawaan yang dikonfirmasi
+                            // di GitHub: overlay saran bisa salah ukuran/berkedip
+                            // saat dipakai di dalam showDialog karena timing
+                            // animasi buka dialog (150ms) vs kompensasi bawaan
+                            // paket (170ms) gampang meleset kalau ada kerja lain
+                            // (network call, dst) di saat bersamaan. DropdownSearch
+                            // sudah dipakai di form ini juga (field Rincian
+                            // Tanggal) tanpa masalah serupa, jadi disamakan.
+                            DropdownSearch<String>(
+                              items: leaveItem,
+                              selectedItem: editLeaveType,
+                              onChanged: (newValue) {
+                                setState(() {
+                                  if (newValue != null) {
+                                    startDate = null;
+                                    endDate = null;
+                                    editLeaveType = newValue;
+                                    selectedLeaveId = leaveItemsIdMap[newValue];
+                                    _validateLeaveType = false;
+                                  }
+                                });
+                              },
+                              dropdownDecoratorProps: DropDownDecoratorProps(
+                                dropdownSearchDecoration: InputDecoration(
                                   errorText: _validateLeaveType
                                       ? 'Silakan pilih jenis cuti'
                                       : null,
+                                  border: const OutlineInputBorder(),
+                                  labelText: "Pilih Jenis Cuti",
+                                  labelStyle: TextStyle(color: Colors.grey[350]),
+                                  contentPadding: const EdgeInsets.symmetric(
+                                      horizontal: 10.0),
                                 ),
                               ),
-                              suggestionsCallback: (pattern) {
-                                return leaveItem
-                                    .where((leaveType) => leaveType
-                                    .toLowerCase()
-                                    .contains(pattern.toLowerCase()))
-                                    .toList();
-                              },
-                              itemBuilder: (context, String suggestion) {
-                                return ListTile(
-                                  title: Text(suggestion),
-                                );
-                              },
-                              onSuggestionSelected: (String suggestion) {
-                                setState(() {
-                                  startDate = null;
-                                  endDate = null;
-                                  _typeAheadCreateController.text = suggestion;
-                                  editLeaveType = suggestion;
-                                  selectedLeaveId = leaveItemsIdMap[suggestion];
-                                  _validateLeaveType = false;
-                                });
-                              },
-                              noItemsFoundBuilder: (context) => const Padding(
-                                padding: EdgeInsets.all(8.0),
-                                child: Text(
-                                  'Jenis Cuti Tidak Ditemukan',
-                                  style: TextStyle(fontSize: 16),
-                                ),
-                              ),
-                              errorBuilder: (context, error) => Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Text(
-                                  'Error: $error',
-                                  style: const TextStyle(fontSize: 16),
-                                ),
-                              ),
-                              hideOnEmpty: true,
-                              hideOnError: false,
-                              suggestionsBoxDecoration: SuggestionsBoxDecoration(
+                              popupProps: PopupProps.menu(
                                 constraints: BoxConstraints(
-                                    maxHeight: MediaQuery.of(context).size.height *
-                                        0.23), // Limit height
+                                    maxHeight:
+                                    MediaQuery.of(context).size.height *
+                                        0.3),
+                                showSearchBox: true,
+                                searchFieldProps: const TextFieldProps(
+                                  decoration: InputDecoration(
+                                    hintText: 'Cari jenis cuti',
+                                    border: OutlineInputBorder(),
+                                  ),
+                                ),
+                                emptyBuilder: (context, searchEntry) =>
+                                const Padding(
+                                  padding: EdgeInsets.all(8.0),
+                                  child: Text(
+                                    'Jenis Cuti Tidak Ditemukan',
+                                    style: TextStyle(fontSize: 16),
+                                  ),
+                                ),
                               ),
                             ),
                             SizedBox(
@@ -2536,6 +2536,7 @@ class _LeaveRequest extends State<LeaveRequest>
                           selectedEmployee = null;
                           selectedEmployeeId = null;
                           selectedLeaveId = null;
+                          editLeaveType = null;
                           editStartDateBreakdown = null;
                           editEndDateBreakdown = null;
                           isAction = false;
@@ -2556,8 +2557,18 @@ class _LeaveRequest extends State<LeaveRequest>
                           _typeAheadEmployeeCreateController.clear();
                           _typeAheadEmployeeEditController.clear();
                           startDate == null;
-                          getEmployees();
                         });
+                        // getEmployees() dulu dipanggil di sini juga, tepat
+                        // sebelum dialog dibuka -- padahal datanya sudah
+                        // dimuat di initState() dan dimuat ulang lagi begitu
+                        // dialog ditutup (lihat akhir showCreateLeaveDialog).
+                        // Panggilan HTTP + setState yang tidak perlu ini
+                        // berjalan PAS di saat animasi buka dialog
+                        // berlangsung, mengganggu perhitungan waktu 170ms
+                        // bawaan flutter_typeahead untuk mengompensasi
+                        // animasi 150ms showDialog -- inilah penyebab
+                        // dropdown "Jenis Cuti" terlihat berkedip/salah
+                        // ukuran begitu form Tambah Cuti baru dibuka.
                         showCreateLeaveDialog(context);
                       },
                       style: ElevatedButton.styleFrom(

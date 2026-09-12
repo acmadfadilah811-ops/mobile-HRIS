@@ -4,6 +4,7 @@ import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:animated_notch_bottom_bar/animated_notch_bottom_bar/animated_notch_bottom_bar.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
+import 'package:dropdown_search/dropdown_search.dart';
 import 'package:intl/intl.dart';
 import 'package:shimmer/shimmer.dart';
 
@@ -793,58 +794,50 @@ class _RotatingWorkTypePageState extends State<RotatingWorkTypePage> {
                           SizedBox(
                               height:
                               MediaQuery.of(context).size.height * 0.01),
-                          TypeAheadField<String>(
-                            textFieldConfiguration: TextFieldConfiguration(
-                              controller: _typeAheadEditController,
-                              decoration: InputDecoration(
-                                labelText: 'Cari Karyawan',
+                          // Ditulis ulang dari TypeAheadField ke DropdownSearch
+                          // (2026-09-12) -- lihat penjelasan lengkap di
+                          // horilla_leave/leave_request.dart.
+                          DropdownSearch<String>(
+                            items: employeeItems,
+                            selectedItem: editEmployee,
+                            onChanged: (newValue) {
+                              setState(() {
+                                if (newValue != null) {
+                                  editEmployee = newValue;
+                                  selectedEditEmployeeId =
+                                  employeeIdMap[newValue];
+                                }
+                              });
+                            },
+                            dropdownDecoratorProps: DropDownDecoratorProps(
+                              dropdownSearchDecoration: InputDecoration(
+                                border: const OutlineInputBorder(),
+                                labelText: "Cari Karyawan",
                                 labelStyle: TextStyle(color: Colors.grey[350]),
                                 contentPadding: const EdgeInsets.symmetric(
                                     horizontal: 10.0),
-                                border: const OutlineInputBorder(),
                               ),
                             ),
-                            suggestionsCallback: (pattern) {
-                              return employeeItems
-                                  .where((item) => item
-                                  .toLowerCase()
-                                  .contains(pattern.toLowerCase()))
-                                  .toList();
-                            },
-                            itemBuilder: (context, String suggestion) {
-                              return ListTile(
-                                title: Text(suggestion),
-                              );
-                            },
-                            onSuggestionSelected: (String suggestion) {
-                              setState(() {
-                                editEmployee = suggestion;
-                                selectedEditEmployeeId =
-                                employeeIdMap[suggestion];
-                              });
-                              _typeAheadEditController.text = suggestion;
-                            },
-                            noItemsFoundBuilder: (context) => const Padding(
-                              padding: EdgeInsets.all(8.0),
-                              child: Text(
-                                'Karyawan Tidak Ditemukan',
-                                style: TextStyle(fontSize: 16),
-                              ),
-                            ),
-                            errorBuilder: (context, error) => Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Text(
-                                'Error: $error',
-                                style: const TextStyle(fontSize: 16),
-                              ),
-                            ),
-                            hideOnEmpty: true,
-                            hideOnError: false,
-                            suggestionsBoxDecoration: SuggestionsBoxDecoration(
+                            popupProps: PopupProps.menu(
                               constraints: BoxConstraints(
                                   maxHeight:
                                   MediaQuery.of(context).size.height *
-                                      0.23), // Limit height
+                                      0.3),
+                              showSearchBox: true,
+                              searchFieldProps: const TextFieldProps(
+                                decoration: InputDecoration(
+                                  hintText: 'Cari karyawan',
+                                  border: OutlineInputBorder(),
+                                ),
+                              ),
+                              emptyBuilder: (context, searchEntry) =>
+                              const Padding(
+                                padding: EdgeInsets.all(8.0),
+                                child: Text(
+                                  'Karyawan Tidak Ditemukan',
+                                  style: TextStyle(fontSize: 16),
+                                ),
+                              ),
                             ),
                           ),
                           SizedBox(
@@ -857,60 +850,47 @@ class _RotatingWorkTypePageState extends State<RotatingWorkTypePage> {
                           SizedBox(
                               height:
                               MediaQuery.of(context).size.height * 0.01),
-                          TypeAheadField<String>(
-                            textFieldConfiguration: TextFieldConfiguration(
-                              controller:
-                              _typeAheadEditRotatingWorkTypeController,
-                              decoration: InputDecoration(
-                                labelText: 'Cari Permintaan Tipe Kerja',
+                          DropdownSearch<String>(
+                            items: requestedWorkTypeItems,
+                            selectedItem: editRequestedWorkType,
+                            onChanged: (newValue) {
+                              setState(() {
+                                if (newValue != null) {
+                                  editRequestedWorkType = newValue;
+                                  selectedEditRequestedWorkType =
+                                  requestedWorkTypeIdMap[newValue];
+                                }
+                              });
+                            },
+                            dropdownDecoratorProps: DropDownDecoratorProps(
+                              dropdownSearchDecoration: InputDecoration(
+                                border: const OutlineInputBorder(),
+                                labelText: "Cari Permintaan Tipe Kerja",
                                 labelStyle: TextStyle(color: Colors.grey[350]),
                                 contentPadding: const EdgeInsets.symmetric(
                                     horizontal: 10.0),
-                                border: const OutlineInputBorder(),
                               ),
                             ),
-                            suggestionsCallback: (pattern) {
-                              return requestedWorkTypeItems
-                                  .where((item) => item
-                                  .toLowerCase()
-                                  .contains(pattern.toLowerCase()))
-                                  .toList();
-                            },
-                            itemBuilder: (context, String suggestion) {
-                              return ListTile(
-                                title: Text(suggestion),
-                              );
-                            },
-                            onSuggestionSelected: (String suggestion) {
-                              setState(() {
-                                editRequestedWorkType = suggestion;
-                                selectedEditRequestedWorkType =
-                                requestedWorkTypeIdMap[suggestion];
-                              });
-                              _typeAheadEditRotatingWorkTypeController.text =
-                                  suggestion;
-                            },
-                            noItemsFoundBuilder: (context) => const Padding(
-                              padding: EdgeInsets.all(8.0),
-                              child: Text(
-                                'Tipe Kerja Tidak Ditemukan',
-                                style: TextStyle(fontSize: 16),
-                              ),
-                            ),
-                            errorBuilder: (context, error) => Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Text(
-                                'Error: $error',
-                                style: const TextStyle(fontSize: 16),
-                              ),
-                            ),
-                            hideOnEmpty: true,
-                            hideOnError: false,
-                            suggestionsBoxDecoration: SuggestionsBoxDecoration(
+                            popupProps: PopupProps.menu(
                               constraints: BoxConstraints(
                                   maxHeight:
                                   MediaQuery.of(context).size.height *
-                                      0.23), // Limit height
+                                      0.3),
+                              showSearchBox: true,
+                              searchFieldProps: const TextFieldProps(
+                                decoration: InputDecoration(
+                                  hintText: 'Cari tipe kerja',
+                                  border: OutlineInputBorder(),
+                                ),
+                              ),
+                              emptyBuilder: (context, searchEntry) =>
+                              const Padding(
+                                padding: EdgeInsets.all(8.0),
+                                child: Text(
+                                  'Tipe Kerja Tidak Ditemukan',
+                                  style: TextStyle(fontSize: 16),
+                                ),
+                              ),
                             ),
                           ),
                           SizedBox(
@@ -1176,58 +1156,50 @@ class _RotatingWorkTypePageState extends State<RotatingWorkTypePage> {
                           SizedBox(
                               height:
                               MediaQuery.of(context).size.height * 0.01),
-                          TypeAheadField<String>(
-                            textFieldConfiguration: TextFieldConfiguration(
-                              controller: _typeAheadAddRotatingController,
-                              decoration: InputDecoration(
-                                labelText: 'Cari Karyawan',
+                          // Ditulis ulang dari TypeAheadField ke DropdownSearch
+                          // (2026-09-12) -- lihat penjelasan lengkap di
+                          // horilla_leave/leave_request.dart.
+                          DropdownSearch<String>(
+                            items: employeeItems,
+                            selectedItem: createEmployee,
+                            onChanged: (newValue) {
+                              setState(() {
+                                if (newValue != null) {
+                                  createEmployee = newValue;
+                                  selectedCreateEmployeeId =
+                                  employeeIdMap[newValue];
+                                }
+                              });
+                            },
+                            dropdownDecoratorProps: DropDownDecoratorProps(
+                              dropdownSearchDecoration: InputDecoration(
+                                border: const OutlineInputBorder(),
+                                labelText: "Cari Karyawan",
+                                labelStyle: TextStyle(color: Colors.grey[350]),
                                 contentPadding: const EdgeInsets.symmetric(
                                     horizontal: 10.0),
-                                labelStyle: TextStyle(color: Colors.grey[350]),
-                                border: const OutlineInputBorder(),
                               ),
                             ),
-                            suggestionsCallback: (pattern) {
-                              return employeeItems
-                                  .where((item) => item
-                                  .toLowerCase()
-                                  .contains(pattern.toLowerCase()))
-                                  .toList();
-                            },
-                            itemBuilder: (context, String suggestion) {
-                              return ListTile(
-                                title: Text(suggestion),
-                              );
-                            },
-                            onSuggestionSelected: (String suggestion) {
-                              setState(() {
-                                createEmployee = suggestion;
-                                selectedCreateEmployeeId =
-                                employeeIdMap[suggestion];
-                              });
-                              _typeAheadAddRotatingController.text = suggestion;
-                            },
-                            noItemsFoundBuilder: (context) => const Padding(
-                              padding: EdgeInsets.all(8.0),
-                              child: Text(
-                                'Karyawan Tidak Ditemukan',
-                                style: TextStyle(fontSize: 16),
-                              ),
-                            ),
-                            errorBuilder: (context, error) => Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Text(
-                                'Error: $error',
-                                style: const TextStyle(fontSize: 16),
-                              ),
-                            ),
-                            hideOnEmpty: true,
-                            hideOnError: false,
-                            suggestionsBoxDecoration: SuggestionsBoxDecoration(
+                            popupProps: PopupProps.menu(
                               constraints: BoxConstraints(
                                   maxHeight:
                                   MediaQuery.of(context).size.height *
-                                      0.23), // Limit height
+                                      0.3),
+                              showSearchBox: true,
+                              searchFieldProps: const TextFieldProps(
+                                decoration: InputDecoration(
+                                  hintText: 'Cari karyawan',
+                                  border: OutlineInputBorder(),
+                                ),
+                              ),
+                              emptyBuilder: (context, searchEntry) =>
+                              const Padding(
+                                padding: EdgeInsets.all(8.0),
+                                child: Text(
+                                  'Karyawan Tidak Ditemukan',
+                                  style: TextStyle(fontSize: 16),
+                                ),
+                              ),
                             ),
                           ),
                           SizedBox(
@@ -1240,64 +1212,51 @@ class _RotatingWorkTypePageState extends State<RotatingWorkTypePage> {
                           SizedBox(
                               height:
                               MediaQuery.of(context).size.height * 0.01),
-                          TypeAheadField<String>(
-                            textFieldConfiguration: TextFieldConfiguration(
-                              controller:
-                              _typeAheadCreateRotatingWorkTypeController,
-                              decoration: InputDecoration(
-                                labelText: 'Cari Permintaan Tipe Kerja',
-                                labelStyle: TextStyle(color: Colors.grey[350]),
-                                border: const OutlineInputBorder(),
-                                contentPadding: const EdgeInsets.symmetric(
-                                    horizontal: 10.0),
+                          DropdownSearch<String>(
+                            items: requestedWorkTypeItems,
+                            selectedItem: createRotatingWorkType,
+                            onChanged: (newValue) {
+                              setState(() {
+                                if (newValue != null) {
+                                  createRotatingWorkType = newValue;
+                                  selectedCreateRotatingWorkType =
+                                  requestedWorkTypeIdMap[newValue];
+                                  _validateWorkType = false;
+                                }
+                              });
+                            },
+                            dropdownDecoratorProps: DropDownDecoratorProps(
+                              dropdownSearchDecoration: InputDecoration(
                                 errorText: _validateWorkType
                                     ? 'Silakan pilih Permintaan Tipe Kerja'
                                     : null,
+                                border: const OutlineInputBorder(),
+                                labelText: "Cari Permintaan Tipe Kerja",
+                                labelStyle: TextStyle(color: Colors.grey[350]),
+                                contentPadding: const EdgeInsets.symmetric(
+                                    horizontal: 10.0),
                               ),
                             ),
-                            suggestionsCallback: (pattern) {
-                              return requestedWorkTypeItems
-                                  .where((item) => item
-                                  .toLowerCase()
-                                  .contains(pattern.toLowerCase()))
-                                  .toList();
-                            },
-                            itemBuilder: (context, String suggestion) {
-                              return ListTile(
-                                title: Text(suggestion),
-                              );
-                            },
-                            onSuggestionSelected: (String suggestion) {
-                              setState(() {
-                                _typeAheadCreateRotatingWorkTypeController
-                                    .text = suggestion;
-                                createRotatingWorkType = suggestion;
-                                selectedCreateRotatingWorkType =
-                                requestedWorkTypeIdMap[suggestion];
-                                _validateWorkType = false;
-                              });
-                            },
-                            noItemsFoundBuilder: (context) => const Padding(
-                              padding: EdgeInsets.all(8.0),
-                              child: Text(
-                                'Permintaan Tipe Kerja Tidak Ditemukan',
-                                style: TextStyle(fontSize: 16),
-                              ),
-                            ),
-                            errorBuilder: (context, error) => Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Text(
-                                'Error: $error',
-                                style: const TextStyle(fontSize: 16),
-                              ),
-                            ),
-                            hideOnEmpty: true,
-                            hideOnError: false,
-                            suggestionsBoxDecoration: SuggestionsBoxDecoration(
+                            popupProps: PopupProps.menu(
                               constraints: BoxConstraints(
                                   maxHeight:
                                   MediaQuery.of(context).size.height *
-                                      0.23), // Limit height
+                                      0.3),
+                              showSearchBox: true,
+                              searchFieldProps: const TextFieldProps(
+                                decoration: InputDecoration(
+                                  hintText: 'Cari tipe kerja',
+                                  border: OutlineInputBorder(),
+                                ),
+                              ),
+                              emptyBuilder: (context, searchEntry) =>
+                              const Padding(
+                                padding: EdgeInsets.all(8.0),
+                                child: Text(
+                                  'Permintaan Tipe Kerja Tidak Ditemukan',
+                                  style: TextStyle(fontSize: 16),
+                                ),
+                              ),
                             ),
                           ),
                           SizedBox(
