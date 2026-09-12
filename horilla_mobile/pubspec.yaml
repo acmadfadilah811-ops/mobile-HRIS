@@ -86,7 +86,6 @@ dependencies:
   flutter_map_marker_popup: ^6.1.2
   geocoding: ^3.0.0
   image: ^4.3.0
-  google_ml_kit: ^0.20.0
   flutter_face_api: ^7.1.325
 
 dependency_overrides:
