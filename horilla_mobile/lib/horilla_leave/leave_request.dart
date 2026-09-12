@@ -2228,6 +2228,42 @@ class _LeaveRequest extends State<LeaveRequest>
     }
   }
 
+  // /api/leave/user-request (self-service) tidak menyertakan employee_id
+  // sama sekali di tiap baris -- masuk akal untuk endpoint yang memang
+  // selalu tentang diri sendiri -- tapi seluruh tampilan daftar di layar
+  // ini (nama, foto profil, badge) dibangun untuk endpoint manajer lama
+  // yang MENYERTAKAN employee_id, dan membacanya tanpa null-check
+  // (record['employee_id']['full_name'], dst). Baris yang datang dari
+  // endpoint self-service jadi bikin exception saat build widget --
+  // di release build, Flutter menampilkannya sebagai kotak kosong/abu-abu
+  // tanpa pesan error, persis seperti "keterangannya tertutup" yang
+  // dilaporkan. Disisipkan employee_id sintetis dari data diri sendiri
+  // (sudah dimuat oleh prefetchData() ke `arguments`) tepat setelah data
+  // mentahnya di-parse, supaya seluruh kode tampilan yang sudah ada tidak
+  // perlu diubah satu per satu.
+  Map<String, dynamic> _withSelfEmployee(Map<String, dynamic> record) {
+    if (record['employee_id'] == null) {
+      // `arguments` is `late` and only ever assigned inside prefetchData()'s
+      // 200-OK branch -- if that specific call hasn't finished yet, or
+      // failed, reading it here would throw LateInitializationError instead
+      // of just leaving the row's name/photo blank.
+      try {
+        record['employee_id'] = {
+          'full_name': arguments['employee_name'] ?? '',
+          'employee_profile': arguments['employee_profile'],
+          'badge_id': arguments['badge_id'] ?? '',
+        };
+      } catch (e) {
+        record['employee_id'] = {
+          'full_name': '',
+          'employee_profile': null,
+          'badge_id': '',
+        };
+      }
+    }
+    return record;
+  }
+
   Future getAllLeaveRequest({bool reset = false}) async {
     if (reset) {
       currentPage = 1;
@@ -2258,7 +2294,7 @@ class _LeaveRequest extends State<LeaveRequest>
 
       if (response.statusCode == 200) {
         final results = (jsonDecode(response.body)['results'] as List)
-            .map((e) => Map<String, dynamic>.from(e))
+            .map((e) => _withSelfEmployee(Map<String, dynamic>.from(e)))
             .toList();
 
         setState(() {
@@ -2307,7 +2343,7 @@ class _LeaveRequest extends State<LeaveRequest>
       setState(() {
         myAllPagesRequests = List<Map<String, dynamic>>.from(
           jsonDecode(response.body)['results'],
-        );
+        ).map((e) => _withSelfEmployee(e)).toList();
         isLoading = false;
       });
     }
@@ -2336,7 +2372,7 @@ class _LeaveRequest extends State<LeaveRequest>
 
     if (response.statusCode == 200) {
       final results = (jsonDecode(response.body)['results'] as List)
-          .map((e) => Map<String, dynamic>.from(e))
+          .map((e) => _withSelfEmployee(Map<String, dynamic>.from(e)))
           .toList();
 
       if (results.isEmpty) {
@@ -2383,7 +2419,7 @@ class _LeaveRequest extends State<LeaveRequest>
 
     if (response.statusCode == 200) {
       final results = (jsonDecode(response.body)['results'] as List)
-          .map((e) => Map<String, dynamic>.from(e))
+          .map((e) => _withSelfEmployee(Map<String, dynamic>.from(e)))
           .toList();
 
       if (results.isEmpty) {
@@ -2430,7 +2466,7 @@ class _LeaveRequest extends State<LeaveRequest>
 
     if (response.statusCode == 200) {
       final results = (jsonDecode(response.body)['results'] as List)
-          .map((e) => Map<String, dynamic>.from(e))
+          .map((e) => _withSelfEmployee(Map<String, dynamic>.from(e)))
           .toList();
 
       if (results.isEmpty) {
@@ -2477,7 +2513,7 @@ class _LeaveRequest extends State<LeaveRequest>
 
     if (response.statusCode == 200) {
       final results = (jsonDecode(response.body)['results'] as List)
-          .map((e) => Map<String, dynamic>.from(e))
+          .map((e) => _withSelfEmployee(Map<String, dynamic>.from(e)))
           .toList();
 
       if (results.isEmpty) {
