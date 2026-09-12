@@ -59,6 +59,13 @@ class _CheckInCheckOutFormPageState extends State<CheckInCheckOutFormPage> {
   bool _locationSnackBarShown = false;
   bool _locationUnavailableSnackBarShown = false;
   late String getToken = '';
+  // Cache nilai pengaturan yang dulunya dibaca ulang dari SharedPreferences
+  // di SETIAP event onPanUpdate (gesture geser bisa memicu puluhan callback
+  // per detik) -- penyebab lag/macet saat menggeser tombol absen. Nilainya
+  // tidak berubah selama sesi ini, jadi cukup dibaca sekali di
+  // _initializeData() dan dipakai dari sini.
+  bool _cachedFaceDetection = false;
+  bool _cachedGeoFencing = false;
 
 
 
@@ -101,6 +108,8 @@ class _CheckInCheckOutFormPageState extends State<CheckInCheckOutFormPage> {
       final prefs = await SharedPreferences.getInstance();
       prefs.remove('face_detection');
       prefs.setBool("face_detection", face_detection);
+      _cachedFaceDetection = face_detection;
+      _cachedGeoFencing = prefs.getBool("geo_fencing") ?? false;
       await _initializeLocation();
       await Future.wait<void>([
         prefetchData(),
@@ -1045,9 +1054,14 @@ class _CheckInCheckOutFormPageState extends State<CheckInCheckOutFormPage> {
         GestureDetector(
           onPanUpdate: (details) async {
             if (!_isProcessingDrag) {
-              final prefs = await SharedPreferences.getInstance();
-              var face_detection = prefs.getBool("face_detection");
-              var geo_fencing = prefs.getBool("geo_fencing");
+              // Dulu: await SharedPreferences.getInstance() + 2x getBool() DI
+              // SINI -- terpanggil ulang di SETIAP event onPanUpdate (bisa
+              // puluhan kali per detik selama jari bergerak), penyebab
+              // tombol geser terasa lag/macet. Nilainya sudah dibaca sekali
+              // & di-cache di _initializeData(), tidak pernah berubah
+              // selama sesi geser berlangsung.
+              var face_detection = _cachedFaceDetection;
+              var geo_fencing = _cachedGeoFencing;
               if (face_detection == true) {
                 if (details.delta.dx.abs() > details.delta.dy.abs() && details.delta.dx.abs() > 10) {
                   _isProcessingDrag = true;
