@@ -280,14 +280,14 @@ class _LeaveOverview extends State<LeaveOverview>
 
   Future<void> fetchApprovedRequests(String serverUrl, String token,
       String formattedDate, DateTime now) async {
-    // Ringkasan Cuti menampilkan milik diri sendiri, jadi harus lewat
-    // endpoint self-service (/api/leave/user-request/) yang cukup butuh
-    // login biasa -- /api/leave/request/ dibatasi hanya untuk atasan/
-    // pemegang izin manager, sehingga permintaan cuti karyawan biasa
-    // sendiri tidak pernah muncul di situ (selalu 0), padahal datanya
-    // memang benar tersimpan.
+    // /api/leave/request/ dulu ditinggalkan demi /api/leave/user-request/
+    // karena GET-nya menolak siapa pun yang bukan atasan (403) -- sudah
+    // diperbaiki di backend, filtersubordinates() di dalamnya otomatis
+    // mencakup diri sendiri untuk karyawan biasa dan bawahan untuk atasan.
+    // Dikembalikan supaya akun atasan/admin bisa lihat siapa saja di
+    // timnya yang sedang cuti, bukan cuma dirinya sendiri.
     var uri = Uri.parse(
-        '$serverUrl/api/leave/user-request/?from_date=$formattedDate&to_date=$formattedDate&status=approved');
+        '$serverUrl/api/leave/request/?from_date=$formattedDate&to_date=$formattedDate&status=approved');
     var response = await http.get(uri, headers: {
       "Content-Type": "application/json",
       "Authorization": "Bearer $token",
@@ -309,7 +309,7 @@ class _LeaveOverview extends State<LeaveOverview>
   }
 
   Future<void> fetchAllRequests(String serverUrl, String token) async {
-    var uri = Uri.parse('$serverUrl/api/leave/user-request');
+    var uri = Uri.parse('$serverUrl/api/leave/request');
     var response = await http.get(uri, headers: {
       "Content-Type": "application/json",
       "Authorization": "Bearer $token",

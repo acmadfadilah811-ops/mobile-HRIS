@@ -2300,14 +2300,17 @@ class _LeaveRequest extends State<LeaveRequest>
       var token = prefs.getString("token");
       var typedServerUrl = prefs.getString("typed_url");
 
-      // Layar ini (tab Semua/Diminta/Disetujui/Dibatalkan/Ditolak) hanya
-      // dijangkau dari "Ringkasan Cuti" -- ringkasan milik diri sendiri --
-      // jadi harus lewat endpoint self-service (/api/leave/user-request/),
-      // bukan /api/leave/request/ yang dibatasi hanya untuk atasan/pemegang
-      // izin manager (permintaan cuti karyawan biasa tidak pernah muncul
-      // di situ, selalu 0 di semua kategori).
+      // /api/leave/request/ dulu ditinggalkan demi /api/leave/user-request/
+      // karena manager_permission_required("leave.view_leaverequest") di
+      // GET-nya menolak siapa pun yang bukan atasan (403) -- diperbaiki di
+      // backend: filtersubordinates() di dalamnya SUDAH otomatis mencakup
+      // data diri sendiri untuk karyawan biasa, plus bawahan untuk atasan,
+      // jadi endpoint aslinya kini benar untuk KEDUA kasus. Dikembalikan
+      // supaya akun atasan/admin juga bisa lihat data bawahannya di sini
+      // -- /api/leave/user-request/ tidak pernah bisa menampilkan itu
+      // (selalu dan hanya diri sendiri, sesuai desainnya).
       var uri = Uri.parse(
-          '$typedServerUrl/api/leave/user-request?page=$currentPage${searchText.isNotEmpty ? '&search=$searchText' : ''}');
+          '$typedServerUrl/api/leave/request?page=$currentPage${searchText.isNotEmpty ? '&search=$searchText' : ''}');
 
       var response = await http.get(uri, headers: {
         "Content-Type": "application/json",
@@ -2356,7 +2359,7 @@ class _LeaveRequest extends State<LeaveRequest>
     final prefs = await SharedPreferences.getInstance();
     var token = prefs.getString("token");
     var typedServerUrl = prefs.getString("typed_url");
-    var uri = Uri.parse('$typedServerUrl/api/leave/user-request?search=$searchText');
+    var uri = Uri.parse('$typedServerUrl/api/leave/request?search=$searchText');
     var response = await http.get(uri, headers: {
       "Content-Type": "application/json",
       "Authorization": "Bearer $token",
@@ -2385,7 +2388,7 @@ class _LeaveRequest extends State<LeaveRequest>
     if (!hasMoreRequested) return;
 
     var uri = Uri.parse(
-        '$typedServerUrl/api/leave/user-request?status=requested&search=$searchText&page=$currentPage');
+        '$typedServerUrl/api/leave/request?status=requested&search=$searchText&page=$currentPage');
 
     var response = await http.get(uri, headers: {
       "Content-Type": "application/json",
@@ -2432,7 +2435,7 @@ class _LeaveRequest extends State<LeaveRequest>
     if (!hasMoreApproved) return;
 
     var uri = Uri.parse(
-        '$typedServerUrl/api/leave/user-request?status=approved&search=$searchText&page=$currentPage');
+        '$typedServerUrl/api/leave/request?status=approved&search=$searchText&page=$currentPage');
 
     var response = await http.get(uri, headers: {
       "Content-Type": "application/json",
@@ -2479,7 +2482,7 @@ class _LeaveRequest extends State<LeaveRequest>
     if (!hasMoreCancelled) return;
 
     var uri = Uri.parse(
-        '$typedServerUrl/api/leave/user-request?status=cancelled&search=$searchText&page=$currentPage');
+        '$typedServerUrl/api/leave/request?status=cancelled&search=$searchText&page=$currentPage');
 
     var response = await http.get(uri, headers: {
       "Content-Type": "application/json",
@@ -2526,7 +2529,7 @@ class _LeaveRequest extends State<LeaveRequest>
     if (!hasMoreRejected) return;
 
     var uri = Uri.parse(
-        '$typedServerUrl/api/leave/user-request?status=rejected&search=$searchText&page=$currentPage');
+        '$typedServerUrl/api/leave/request?status=rejected&search=$searchText&page=$currentPage');
 
     var response = await http.get(uri, headers: {
       "Content-Type": "application/json",
