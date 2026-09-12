@@ -237,6 +237,36 @@ class _LeaveOverview extends State<LeaveOverview>
     await fetchAllRequests(typedServerUrl, token);
   }
 
+  // /api/leave/user-request (self-service) tidak menyertakan employee_id
+  // di tiap baris -- data di layar ini selalu tentang diri sendiri, jadi
+  // tidak perlu diberi tahu siapa dirinya -- tapi daftar "sedang cuti"
+  // di bawah (nama, foto, badge) dibangun untuk endpoint manajer lama
+  // yang menyertakannya, dan membacanya tanpa null-check. Baris dari
+  // endpoint self-service jadi gagal digambar; di release build tampil
+  // sebagai kotak kosong/abu-abu tanpa pesan error. Disisipkan employee_id
+  // sintetis dari data diri sendiri (arguments, dimuat prefetchData())
+  // supaya kode tampilan yang sudah ada tidak perlu diubah.
+  Map<String, dynamic> _withSelfEmployee(Map<String, dynamic> record) {
+    if (record['employee_id'] == null) {
+      try {
+        record['employee_id'] = {
+          'id': arguments['employee_id'],
+          'full_name': arguments['employee_name'] ?? '',
+          'employee_profile': arguments['employee_profile'],
+          'badge_id': arguments['badge_id'] ?? '',
+        };
+      } catch (e) {
+        record['employee_id'] = {
+          'id': null,
+          'full_name': '',
+          'employee_profile': null,
+          'badge_id': '',
+        };
+      }
+    }
+    return record;
+  }
+
   Future<void> fetchApprovedRequests(String serverUrl, String token,
       String formattedDate, DateTime now) async {
     // Ringkasan Cuti menampilkan milik diri sendiri, jadi harus lewat
@@ -255,7 +285,7 @@ class _LeaveOverview extends State<LeaveOverview>
       setState(() {
         var allRequests = List<Map<String, dynamic>>.from(
           jsonDecode(response.body)['results'],
-        );
+        ).map((e) => _withSelfEmployee(e)).toList();
         requests = allRequests.where((request) {
           return true;
         }).toList();

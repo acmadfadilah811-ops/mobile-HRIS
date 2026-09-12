@@ -2249,12 +2249,14 @@ class _LeaveRequest extends State<LeaveRequest>
       // of just leaving the row's name/photo blank.
       try {
         record['employee_id'] = {
+          'id': arguments['employee_id'],
           'full_name': arguments['employee_name'] ?? '',
           'employee_profile': arguments['employee_profile'],
           'badge_id': arguments['badge_id'] ?? '',
         };
       } catch (e) {
         record['employee_id'] = {
+          'id': null,
           'full_name': '',
           'employee_profile': null,
           'badge_id': '',
@@ -2262,6 +2264,26 @@ class _LeaveRequest extends State<LeaveRequest>
       }
     }
     return record;
+  }
+
+  // Tombol Setujui/Tolak hanya masuk akal untuk permintaan cuti MILIK
+  // ORANG LAIN -- server sendiri sudah menolak self-approval
+  // ("You cannot approve or reject your own request"), tapi tanpa
+  // pengecekan ini di sisi tampilan, tombolnya tetap muncul di daftar
+  // milik diri sendiri dan cuma gagal diam-diam/membingungkan saat
+  // ditekan. Dibandingkan dengan employee_id milik diri sendiri (dari
+  // prefetchData(), atau dari record itu sendiri kalau memang sudah
+  // employee_id asli -- bukan yang disintesis _withSelfEmployee).
+  bool _isOwnRequest(Map<String, dynamic> record) {
+    try {
+      final recordEmployeeId = record['employee_id']?['id'];
+      final myEmployeeId = arguments['employee_id'];
+      return recordEmployeeId != null &&
+          myEmployeeId != null &&
+          recordEmployeeId == myEmployeeId;
+    } catch (e) {
+      return false;
+    }
   }
 
   Future getAllLeaveRequest({bool reset = false}) async {
@@ -3858,7 +3880,8 @@ class _LeaveRequest extends State<LeaveRequest>
                           children: [
                             Visibility(
                               visible: record['status'] != 'rejected' &&
-                                  record['status'] != 'cancelled',
+                                  record['status'] != 'cancelled' &&
+                                  !_isOwnRequest(record),
                               child: ElevatedButton(
                                 onPressed: () {
                                   isSaveClick = true;
@@ -3958,7 +3981,8 @@ class _LeaveRequest extends State<LeaveRequest>
                             ),
                             Visibility(
                               visible: record['status'] != 'rejected' &&
-                                  record['status'] != 'cancelled',
+                                  record['status'] != 'cancelled' &&
+                                  !_isOwnRequest(record),
                               child: ElevatedButton(
                                 onPressed: record['status'] == 'approved' ||
                                     record['status'] == 'cancelled'
@@ -4507,7 +4531,8 @@ class _LeaveRequest extends State<LeaveRequest>
                         children: [
                           Visibility(
                             visible: record['status'] != 'rejected' &&
-                                record['status'] != 'cancelled',
+                                record['status'] != 'cancelled' &&
+                                !_isOwnRequest(record),
                             child: ElevatedButton(
                               onPressed: () {
                                 isSaveClick = true;
@@ -4613,7 +4638,8 @@ class _LeaveRequest extends State<LeaveRequest>
                               width: MediaQuery.of(context).size.width * 0.03),
                           Visibility(
                             visible: record['status'] != 'rejected' &&
-                                record['status'] != 'cancelled',
+                                record['status'] != 'cancelled' &&
+                                !_isOwnRequest(record),
                             child: ElevatedButton(
                               onPressed: record['status'] == 'approved' ||
                                   record['status'] == 'cancelled'
