@@ -1300,8 +1300,22 @@ class _LeaveRequest extends State<LeaveRequest>
     for (var leaveType in leaveTypes) {
       if (leaveType['name'] == createdDetails['leave_type']) {}
     }
-    var request = http.MultipartRequest(
-        'POST', Uri.parse('$typedServerUrl/api/leave/request/'));
+    // Mengajukan cuti untuk diri sendiri harus lewat endpoint self-service
+    // (/api/leave/user-request/), yang cukup butuh login biasa. Endpoint
+    // /api/leave/request/ mensyaratkan hak akses manager (leave.add_leaverequest
+    // atau benar-benar jadi atasan seseorang) -- karyawan biasa selalu ditolak
+    // (403) di situ, tapi UI ini tetap menampilkan animasi "berhasil" karena
+    // body error {"error": "..."} tidak cocok dengan pengecekan field manapun.
+    // Endpoint lama tetap dipakai kalau yang diajukan cuti BUKAN diri sendiri
+    // (atasan mengajukan cuti untuk bawahannya), karena endpoint self-service
+    // selalu memaksa employee_id = diri sendiri di sisi server.
+    var ownEmployeeId = prefs.getInt("employee_id")?.toString();
+    var isSelfRequest = ownEmployeeId != null &&
+        createdDetails['employee_id'].toString() == ownEmployeeId;
+    var requestUrl = isSelfRequest
+        ? '$typedServerUrl/api/leave/user-request/'
+        : '$typedServerUrl/api/leave/request/';
+    var request = http.MultipartRequest('POST', Uri.parse(requestUrl));
     request.fields['employee_id'] = createdDetails['employee_id'].toString();
     request.fields['description'] = createdDetails['description'];
     request.fields['end_date_breakdown'] = createdDetails['end_date_breakdown'];
@@ -1356,6 +1370,8 @@ class _LeaveRequest extends State<LeaveRequest>
           _errorMessage = errorJson["non_field_errors"].join(", ");
         } else if (errorJson.containsKey("leave_type_id")) {
           _errorMessage = "Kolom jenis cuti wajib diisi";
+        } else if (errorJson is Map && errorJson.containsKey("error")) {
+          _errorMessage = errorJson["error"].toString();
         } else {
           _errorMessage = "An unknown error occurred.";
         }

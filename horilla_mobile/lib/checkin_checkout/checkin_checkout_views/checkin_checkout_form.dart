@@ -73,7 +73,7 @@ class _CheckInCheckOutFormPageState extends State<CheckInCheckOutFormPage> {
   void initState() {
     super.initState();
     fetchToken();
-    swipeDirection = 'Geser untuk Masuk';
+    swipeDirection = 'Ketuk untuk Masuk';
     _initializeData();
     if (clockCheckedIn) {
       getCheckIn().then((_) {
@@ -255,7 +255,7 @@ class _CheckInCheckOutFormPageState extends State<CheckInCheckOutFormPage> {
           }
           stopwatchManager.startStopwatch(initialTime: clockInTime);
           _saveClockState(clockCheckedIn, 1, checkInFormattedTime.toString());
-          swipeDirection = 'Geser untuk Keluar';
+          swipeDirection = 'Ketuk untuk Keluar';
         });
       });
     } else {
@@ -274,7 +274,7 @@ class _CheckInCheckOutFormPageState extends State<CheckInCheckOutFormPage> {
         clockInTime = Duration(hours: hours, minutes: minutes, seconds: seconds);
         elapsedTime = clockInTime;
       }
-      swipeDirection = 'Geser untuk Masuk';
+      swipeDirection = 'Ketuk untuk Masuk';
     }
   }
 
@@ -800,12 +800,12 @@ class _CheckInCheckOutFormPageState extends State<CheckInCheckOutFormPage> {
             if (details.primaryDelta! < 0) {
               setState(() {
                 clockCheckedIn = true;
-                swipeDirection = 'Geser untuk Masuk';
+                swipeDirection = 'Ketuk untuk Masuk';
               });
             } else if (details.primaryDelta! > 0) {
               setState(() {
                 clockCheckedIn = true;
-                swipeDirection = 'Geser untuk Keluar';
+                swipeDirection = 'Ketuk untuk Keluar';
               });
             }
           },
@@ -1052,212 +1052,45 @@ class _CheckInCheckOutFormPageState extends State<CheckInCheckOutFormPage> {
         ),
         SizedBox(height: MediaQuery.of(context).size.height * 0.02),
         GestureDetector(
-          onPanUpdate: (details) async {
-            if (!_isProcessingDrag) {
+          // Diubah dari geser (onPanUpdate/onPanEnd) jadi ketuk (onTap) --
+          // permintaan user karena tombol geser terasa tidak nyaman dipakai.
+          // Aksi (check-in/check-out) sekarang ditentukan langsung dari
+          // status saat ini (clockCheckedIn), bukan arah geseran jari.
+          onTap: () async {
+            if (_isProcessingDrag) return;
+            _isProcessingDrag = true;
+            try {
               // Dulu: await SharedPreferences.getInstance() + 2x getBool() DI
               // SINI -- terpanggil ulang di SETIAP event onPanUpdate (bisa
               // puluhan kali per detik selama jari bergerak), penyebab
               // tombol geser terasa lag/macet. Nilainya sudah dibaca sekali
               // & di-cache di _initializeData(), tidak pernah berubah
-              // selama sesi geser berlangsung.
+              // selama sesi berlangsung.
               var face_detection = _cachedFaceDetection;
               var geo_fencing = _cachedGeoFencing;
               if (face_detection == true) {
-                if (details.delta.dx.abs() > details.delta.dy.abs() && details.delta.dx.abs() > 10) {
-                  _isProcessingDrag = true;
-                  if (userLocation == null) {
-                    if (!_locationUnavailableSnackBarShown && geo_fencing == true) {
-                      _locationUnavailableSnackBarShown = true;
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text('Lokasi tidak tersedia. Tidak dapat melanjutkan.')),
-                      );
-                    }
-                    _isProcessingDrag = false;
-                  }
-                  if (details.delta.dx < 0 && clockCheckedIn) {
-                    // Check-out
-                    final result = await Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => FaceScanner(
-                          userLocation: userLocation,
-                          userDetails: arguments,
-                          attendanceState: 'CHECKED_IN',
-                        ),
-                      ),
+                if (userLocation == null) {
+                  if (!_locationUnavailableSnackBarShown && geo_fencing == true) {
+                    _locationUnavailableSnackBarShown = true;
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(content: Text('Lokasi tidak tersedia. Tidak dapat melanjutkan.')),
                     );
-                    if (result != null && result['checkedOut'] == true) {
-                      setState(() {
-                        isCheckIn = false;
-                        clockCheckedIn = false;
-                        stopwatchManager.stopStopwatch();
-                        storeCheckoutTime();
-                        Duration initialElapsedTime = stopwatchManager.elapsed;
-                        workingTime = formatDuration(initialElapsedTime);
-                        clockCheckBool = false;
-                        DateTime now = DateTime.now();
-                        checkOutFormattedTime = DateFormat('h:mm a').format(now);
-                        swipeDirection = 'Geser untuk Masuk';
-                        _saveClockState(
-                            clockCheckedIn, 2, checkOutFormattedTime.toString());
-                      });
-                    }
-                  } else if (details.delta.dx > 0 && !clockCheckedIn) {
-                    // Check-in
-                    final result = await Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => FaceScanner(
-                          userLocation: userLocation,
-                          userDetails: arguments,
-                          attendanceState: 'NOT_CHECKED_IN',
-                        ),
-                      ),
-                    );
-                    if (result != null && result['checkedIn'] == true) {
-                      setState(() {
-                        isCheckIn = true;
-                        clockCheckedIn = true;
-                        clockCheckBool = true;
-                        DateTime now = DateTime.now();
-                        checkInFormattedTime = DateFormat('h:mm a').format(now);
-                        checkInFormattedTimeTopR = DateFormat('h:mm').format(now);
-                        _saveClockState(
-                            clockCheckedIn, 1, checkInFormattedTime.toString());
-
-                        if (duration?.isNotEmpty ?? false) {
-                          String durationString = duration.toString();
-
-                          try {
-                            List<String> parts = durationString.split(':');
-                            if (parts.length == 3) {
-                              int hours = int.parse(parts[0]);
-                              int minutes = int.parse(parts[1]);
-                              int seconds = int.parse(parts[2]);
-                              Duration initialElapsedTime = Duration(
-                                  hours: hours, minutes: minutes, seconds: seconds);
-                              stopwatchManager.startStopwatch(
-                                  initialTime: initialElapsedTime);
-                            }
-                          } catch (e) {}
-                        } else {}
-
-                        swipeDirection = 'Geser untuk Keluar';
-                      });
-                    }
                   }
                 }
-              }
-              else if (geo_fencing == true) {
-                if (details.delta.dx.abs() > details.delta.dy.abs() && details.delta.dx.abs() > 10) {
-                  _isProcessingDrag = true;
-                  if (userLocation == null) {
-                    if (!_locationUnavailableSnackBarShown) {
-                      _locationUnavailableSnackBarShown = true;
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text('Lokasi tidak tersedia. Tidak dapat melanjutkan.')),
-                      );
-                    }
-                    _isProcessingDrag = false;
-                    return;
-                  }
-
-                  if (details.delta.dx < 0 && clockCheckedIn) {
-                    final prefs = await SharedPreferences.getInstance();
-                    var token = prefs.getString("token");
-                    var typedServerUrl = prefs.getString("typed_url");
-                    var geo_fencing = prefs.getBool("geo_fencing");
-                    var uri = Uri.parse('$typedServerUrl/api/attendance/clock-out/');
-                    var response_geofence = await http.post(
-                      uri,
-                      headers: {
-                        "Content-Type": "application/json",
-                        "Authorization": "Bearer $token",
-                      },
-                      body: jsonEncode({
-                        "latitude": userLocation!.latitude,
-                        "longitude": userLocation!.longitude,
-                      }),
-                    );
-
-                    if (response_geofence.statusCode == 200) {
-                      setState(() {
-                        isCheckIn = false;
-                        clockCheckedIn = false;
-                        stopwatchManager.stopStopwatch();
-                        storeCheckoutTime();
-                        clockCheckBool = false;
-                        DateTime now = DateTime.now();
-                        checkOutFormattedTime = DateFormat('h:mm a').format(now);
-                        swipeDirection = 'Geser untuk Masuk';
-                        _saveClockState(clockCheckedIn, 2, checkOutFormattedTime.toString());
-                      });
-                    } else {
-                      String errorMessage = getErrorMessage(response_geofence.body);
-                      showCheckInFailedDialog(context, errorMessage);
-                    }
-                  } else if (details.delta.dx > 0 && !clockCheckedIn) {
-                    final prefs = await SharedPreferences.getInstance();
-                    var token = prefs.getString("token");
-                    var typedServerUrl = prefs.getString("typed_url");
-                    var geo_fencing = prefs.getBool("geo_fencing");
-                    var uri = Uri.parse('$typedServerUrl/api/attendance/clock-in/');
-                    var response_geofence = await http.post(
-                      uri,
-                      headers: {
-                        "Content-Type": "application/json",
-                        "Authorization": "Bearer $token",
-                      },
-                      body: jsonEncode({
-                        "latitude": userLocation!.latitude,
-                        "longitude": userLocation!.longitude,
-                      }),
-                    );
-
-                    if (response_geofence.statusCode == 200) {
-                      setState(() {
-                        isCheckIn = true;
-                        clockCheckedIn = true;
-                        clockCheckBool = true;
-                        DateTime now = DateTime.now();
-                        checkInFormattedTime = DateFormat('h:mm a').format(now);
-                        checkInFormattedTimeTopR = DateFormat('h:mm').format(now);
-                        _saveClockState(
-                            clockCheckedIn, 1, checkInFormattedTime.toString());
-
-                        if (duration?.isNotEmpty ?? false) {
-                          String durationString = duration.toString();
-
-                          try {
-                            List<String> parts = durationString.split(':');
-                            if (parts.length == 3) {
-                              int hours = int.parse(parts[0]);
-                              int minutes = int.parse(parts[1]);
-                              int seconds = int.parse(parts[2]);
-                              Duration initialElapsedTime = Duration(
-                                  hours: hours, minutes: minutes, seconds: seconds);
-                              stopwatchManager.startStopwatch(
-                                  initialTime: initialElapsedTime);
-                            }
-                          } catch (e) {}
-                        } else {}
-
-                        swipeDirection = 'Geser untuk Keluar';
-                      });
-                    } else {
-                      String errorMessage = getErrorMessage(response_geofence.body);
-                      showCheckInFailedDialog(context, errorMessage);
-                    }
-                  }
-                }
-              }
-              else {
-                if (details.delta.dx.abs() > details.delta.dy.abs() &&
-                    details.delta.dx.abs() > 10) {
-                  _isProcessingDrag = true;
-                  if (details.delta.dx < 0) {
+                if (clockCheckedIn) {
+                  // Check-out
+                  final result = await Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => FaceScanner(
+                        userLocation: userLocation,
+                        userDetails: arguments,
+                        attendanceState: 'CHECKED_IN',
+                      ),
+                    ),
+                  );
+                  if (result != null && result['checkedOut'] == true) {
                     setState(() {
-                      postCheckout();
                       isCheckIn = false;
                       clockCheckedIn = false;
                       stopwatchManager.stopStopwatch();
@@ -1267,13 +1100,25 @@ class _CheckInCheckOutFormPageState extends State<CheckInCheckOutFormPage> {
                       clockCheckBool = false;
                       DateTime now = DateTime.now();
                       checkOutFormattedTime = DateFormat('h:mm a').format(now);
-                      swipeDirection = 'Geser untuk Masuk';
+                      swipeDirection = 'Ketuk untuk Masuk';
                       _saveClockState(
                           clockCheckedIn, 2, checkOutFormattedTime.toString());
                     });
-                  } else if (details.delta.dx > 0) {
+                  }
+                } else {
+                  // Check-in
+                  final result = await Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => FaceScanner(
+                        userLocation: userLocation,
+                        userDetails: arguments,
+                        attendanceState: 'NOT_CHECKED_IN',
+                      ),
+                    ),
+                  );
+                  if (result != null && result['checkedIn'] == true) {
                     setState(() {
-                      postCheckIn();
                       isCheckIn = true;
                       clockCheckedIn = true;
                       clockCheckBool = true;
@@ -1300,15 +1145,161 @@ class _CheckInCheckOutFormPageState extends State<CheckInCheckOutFormPage> {
                         } catch (e) {}
                       } else {}
 
-                      swipeDirection = 'Geser untuk Keluar';
+                      swipeDirection = 'Ketuk untuk Keluar';
                     });
                   }
                 }
               }
+              else if (geo_fencing == true) {
+                if (userLocation == null) {
+                  if (!_locationUnavailableSnackBarShown) {
+                    _locationUnavailableSnackBarShown = true;
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(content: Text('Lokasi tidak tersedia. Tidak dapat melanjutkan.')),
+                    );
+                  }
+                  return;
+                }
+
+                if (clockCheckedIn) {
+                  final prefs = await SharedPreferences.getInstance();
+                  var token = prefs.getString("token");
+                  var typedServerUrl = prefs.getString("typed_url");
+                  var uri = Uri.parse('$typedServerUrl/api/attendance/clock-out/');
+                  var response_geofence = await http.post(
+                    uri,
+                    headers: {
+                      "Content-Type": "application/json",
+                      "Authorization": "Bearer $token",
+                    },
+                    body: jsonEncode({
+                      "latitude": userLocation!.latitude,
+                      "longitude": userLocation!.longitude,
+                    }),
+                  );
+
+                  if (response_geofence.statusCode == 200) {
+                    setState(() {
+                      isCheckIn = false;
+                      clockCheckedIn = false;
+                      stopwatchManager.stopStopwatch();
+                      storeCheckoutTime();
+                      clockCheckBool = false;
+                      DateTime now = DateTime.now();
+                      checkOutFormattedTime = DateFormat('h:mm a').format(now);
+                      swipeDirection = 'Ketuk untuk Masuk';
+                      _saveClockState(clockCheckedIn, 2, checkOutFormattedTime.toString());
+                    });
+                  } else {
+                    String errorMessage = getErrorMessage(response_geofence.body);
+                    showCheckInFailedDialog(context, errorMessage);
+                  }
+                } else {
+                  final prefs = await SharedPreferences.getInstance();
+                  var token = prefs.getString("token");
+                  var typedServerUrl = prefs.getString("typed_url");
+                  var uri = Uri.parse('$typedServerUrl/api/attendance/clock-in/');
+                  var response_geofence = await http.post(
+                    uri,
+                    headers: {
+                      "Content-Type": "application/json",
+                      "Authorization": "Bearer $token",
+                    },
+                    body: jsonEncode({
+                      "latitude": userLocation!.latitude,
+                      "longitude": userLocation!.longitude,
+                    }),
+                  );
+
+                  if (response_geofence.statusCode == 200) {
+                    setState(() {
+                      isCheckIn = true;
+                      clockCheckedIn = true;
+                      clockCheckBool = true;
+                      DateTime now = DateTime.now();
+                      checkInFormattedTime = DateFormat('h:mm a').format(now);
+                      checkInFormattedTimeTopR = DateFormat('h:mm').format(now);
+                      _saveClockState(
+                          clockCheckedIn, 1, checkInFormattedTime.toString());
+
+                      if (duration?.isNotEmpty ?? false) {
+                        String durationString = duration.toString();
+
+                        try {
+                          List<String> parts = durationString.split(':');
+                          if (parts.length == 3) {
+                            int hours = int.parse(parts[0]);
+                            int minutes = int.parse(parts[1]);
+                            int seconds = int.parse(parts[2]);
+                            Duration initialElapsedTime = Duration(
+                                hours: hours, minutes: minutes, seconds: seconds);
+                            stopwatchManager.startStopwatch(
+                                initialTime: initialElapsedTime);
+                          }
+                        } catch (e) {}
+                      } else {}
+
+                      swipeDirection = 'Ketuk untuk Keluar';
+                    });
+                  } else {
+                    String errorMessage = getErrorMessage(response_geofence.body);
+                    showCheckInFailedDialog(context, errorMessage);
+                  }
+                }
+              }
+              else {
+                if (clockCheckedIn) {
+                  setState(() {
+                    postCheckout();
+                    isCheckIn = false;
+                    clockCheckedIn = false;
+                    stopwatchManager.stopStopwatch();
+                    storeCheckoutTime();
+                    Duration initialElapsedTime = stopwatchManager.elapsed;
+                    workingTime = formatDuration(initialElapsedTime);
+                    clockCheckBool = false;
+                    DateTime now = DateTime.now();
+                    checkOutFormattedTime = DateFormat('h:mm a').format(now);
+                    swipeDirection = 'Ketuk untuk Masuk';
+                    _saveClockState(
+                        clockCheckedIn, 2, checkOutFormattedTime.toString());
+                  });
+                } else {
+                  setState(() {
+                    postCheckIn();
+                    isCheckIn = true;
+                    clockCheckedIn = true;
+                    clockCheckBool = true;
+                    DateTime now = DateTime.now();
+                    checkInFormattedTime = DateFormat('h:mm a').format(now);
+                    checkInFormattedTimeTopR = DateFormat('h:mm').format(now);
+                    _saveClockState(
+                        clockCheckedIn, 1, checkInFormattedTime.toString());
+
+                    if (duration?.isNotEmpty ?? false) {
+                      String durationString = duration.toString();
+
+                      try {
+                        List<String> parts = durationString.split(':');
+                        if (parts.length == 3) {
+                          int hours = int.parse(parts[0]);
+                          int minutes = int.parse(parts[1]);
+                          int seconds = int.parse(parts[2]);
+                          Duration initialElapsedTime = Duration(
+                              hours: hours, minutes: minutes, seconds: seconds);
+                          stopwatchManager.startStopwatch(
+                              initialTime: initialElapsedTime);
+                        }
+                      } catch (e) {}
+                    } else {}
+
+                    swipeDirection = 'Ketuk untuk Keluar';
+                  });
+                }
+              }
+            } finally {
+              _isProcessingDrag = false;
             }
-          },
-          onPanEnd: (details) {
-            _isProcessingDrag = false;
           },
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20.0),
