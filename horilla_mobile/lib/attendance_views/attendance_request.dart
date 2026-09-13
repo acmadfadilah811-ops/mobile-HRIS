@@ -1468,9 +1468,7 @@ class _AttendanceRequest extends State<AttendanceRequest>
       final responseData = jsonDecode(response.body);
       arguments = {
         'employee_id': responseData['id'],
-        'employee_name': responseData['employee_first_name'] +
-            ' ' +
-            responseData['employee_last_name'],
+        'employee_name': '${responseData['employee_first_name'] ?? ''} ${responseData['employee_last_name'] ?? ''}'.trim(),
         'badge_id': responseData['badge_id'],
         'email': responseData['email'],
         'phone': responseData['phone'],
@@ -3174,9 +3172,7 @@ class _AttendanceRequest extends State<AttendanceRequest>
                         Navigator.pushNamed(context, '/my_attendance_view',
                             arguments: {
                               'id': record['id'],
-                              'employee_name': record['employee_first_name'] +
-                                  ' ' +
-                                  record['employee_last_name'],
+                              'employee_name': '${record['employee_first_name'] ?? ''} ${record['employee_last_name'] ?? ''}'.trim(),
                               'badge_id': record['badge_id'],
                               'shift_name': record['shift_name'],
                               'attendance_date': record['attendance_date'],

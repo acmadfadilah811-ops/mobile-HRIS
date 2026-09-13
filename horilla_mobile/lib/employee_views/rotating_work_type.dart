@@ -201,9 +201,7 @@ class _RotatingWorkTypePageState extends State<RotatingWorkTypePage> {
       final responseData = jsonDecode(response.body);
       arguments = {
         'employee_id': responseData['id'],
-        'employee_name': responseData['employee_first_name'] +
-            ' ' +
-            responseData['employee_last_name'],
+        'employee_name': '${responseData['employee_first_name'] ?? ''} ${responseData['employee_last_name'] ?? ''}'.trim(),
         'badge_id': responseData['badge_id'],
         'email': responseData['email'],
         'phone': responseData['phone'],
@@ -823,7 +821,7 @@ class _RotatingWorkTypePageState extends State<RotatingWorkTypePage> {
                                   maxHeight:
                                   MediaQuery.of(context).size.height *
                                       0.3),
-                              showSearchBox: true,
+                              showSearchBox: false,
                               searchFieldProps: const TextFieldProps(
                                 decoration: InputDecoration(
                                   hintText: 'Cari karyawan',
@@ -876,7 +874,7 @@ class _RotatingWorkTypePageState extends State<RotatingWorkTypePage> {
                                   maxHeight:
                                   MediaQuery.of(context).size.height *
                                       0.3),
-                              showSearchBox: true,
+                              showSearchBox: false,
                               searchFieldProps: const TextFieldProps(
                                 decoration: InputDecoration(
                                   hintText: 'Cari tipe kerja',
@@ -1185,7 +1183,7 @@ class _RotatingWorkTypePageState extends State<RotatingWorkTypePage> {
                                   maxHeight:
                                   MediaQuery.of(context).size.height *
                                       0.3),
-                              showSearchBox: true,
+                              showSearchBox: false,
                               searchFieldProps: const TextFieldProps(
                                 decoration: InputDecoration(
                                   hintText: 'Cari karyawan',
@@ -1242,7 +1240,7 @@ class _RotatingWorkTypePageState extends State<RotatingWorkTypePage> {
                                   maxHeight:
                                   MediaQuery.of(context).size.height *
                                       0.3),
-                              showSearchBox: true,
+                              showSearchBox: false,
                               searchFieldProps: const TextFieldProps(
                                 decoration: InputDecoration(
                                   hintText: 'Cari tipe kerja',
@@ -1839,9 +1837,7 @@ class _RotatingWorkTypePageState extends State<RotatingWorkTypePage> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              employeeDetails['employee_first_name'] +
-                                  ' ' +
-                                  (employeeDetails['employee_last_name'] ?? ''),
+                              '${employeeDetails['employee_first_name'] ?? ''} ${employeeDetails['employee_last_name'] ?? ''}'.trim(),
                               style: const TextStyle(
                                   fontSize: 16.0, fontWeight: FontWeight.bold),
                               maxLines: 2,

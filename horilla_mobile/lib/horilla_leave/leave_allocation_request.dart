@@ -280,9 +280,7 @@ class _LeaveAllocationRequest extends State<LeaveAllocationRequest>
       final responseData = jsonDecode(response.body);
       arguments = {
         'employee_id': responseData['id'],
-        'employee_name': responseData['employee_first_name'] +
-            ' ' +
-            responseData['employee_last_name'],
+        'employee_name': '${responseData['employee_first_name'] ?? ''} ${responseData['employee_last_name'] ?? ''}'.trim(),
         'badge_id': responseData['badge_id'],
         'email': responseData['email'],
         'phone': responseData['phone'],
@@ -1854,9 +1852,7 @@ class _LeaveAllocationRequest extends State<LeaveAllocationRequest>
           jsonDecode(response.body)['results'],
         );
         for (var rec in requestsEmployeesName) {
-          var employees = rec['employee_first_name'] +
-              ' ' +
-              (rec['employee_last_name'] ?? '');
+          var employees = '${rec['employee_first_name'] ?? ''} ${rec['employee_last_name'] ?? ''}'.trim();
           employeeItems.add(employees);
         }
       });

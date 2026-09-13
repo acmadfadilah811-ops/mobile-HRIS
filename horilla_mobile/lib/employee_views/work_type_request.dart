@@ -215,9 +215,7 @@ class _WorkTypeRequestPageState extends State<WorkTypeRequestPage> {
       final responseData = jsonDecode(response.body);
       arguments = {
         'employee_id': responseData['id'],
-        'employee_name': responseData['employee_first_name'] +
-            ' ' +
-            responseData['employee_last_name'],
+        'employee_name': '${responseData['employee_first_name'] ?? ''} ${responseData['employee_last_name'] ?? ''}'.trim(),
         'badge_id': responseData['badge_id'],
         'email': responseData['email'],
         'phone': responseData['phone'],
@@ -2492,9 +2490,7 @@ class _WorkTypeRequestPageState extends State<WorkTypeRequestPage> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              record['employee_first_name'] +
-                                  ' ' +
-                                  (record['employee_last_name'] ?? ''),
+                              '${record['employee_first_name'] ?? ''} ${record['employee_last_name'] ?? ''}'.trim(),
                               style: const TextStyle(
                                   fontSize: 16.0, fontWeight: FontWeight.bold),
                               maxLines: 2,

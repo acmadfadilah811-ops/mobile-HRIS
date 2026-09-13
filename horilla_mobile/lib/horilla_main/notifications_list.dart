@@ -61,9 +61,7 @@ class _NotificationsListState extends State<NotificationsList> {
       setState(() {
         arguments = {
           'employee_id': responseData['id'],
-          'employee_name': responseData['employee_first_name'] +
-              ' ' +
-              responseData['employee_last_name'],
+          'employee_name': '${responseData['employee_first_name'] ?? ''} ${responseData['employee_last_name'] ?? ''}'.trim(),
           'badge_id': responseData['badge_id'],
           'email': responseData['email'],
           'phone': responseData['phone'],
