@@ -76,6 +76,26 @@ void _startNotificationTimer() {
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  // Flutter's default crash fallback is a plain gray box with no text at
+  // all in release builds -- indistinguishable from "still loading" or
+  // "network permission denied," which made several real bugs (a null
+  // field, an unhandled exception) look identical to a stuck spinner and
+  // very hard to diagnose without a debugger attached to the device. Show
+  // the actual exception instead so a screen that fails to render is
+  // visibly a crash, not a silent gray screen.
+  ErrorWidget.builder = (FlutterErrorDetails details) {
+    return Container(
+      color: Colors.red[50],
+      padding: const EdgeInsets.all(16),
+      alignment: Alignment.center,
+      child: Text(
+        'Gagal menampilkan halaman ini.\n\n${details.exceptionAsString()}',
+        style: const TextStyle(color: Colors.red, fontSize: 12),
+        textAlign: TextAlign.center,
+      ),
+    );
+  };
   // await faceSdk.initialize();
 
   const AndroidInitializationSettings initializationSettingsAndroid =
