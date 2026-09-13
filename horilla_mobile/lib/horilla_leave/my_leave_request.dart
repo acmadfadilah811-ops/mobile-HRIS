@@ -2226,8 +2226,14 @@ class _MyLeaveRequest extends State<MyLeaveRequest>
       } else {
         _errorMessage = "An unknown error occurred.";
       }
-      Navigator.of(context).pop(true);
-      _showCreateDialog(context);
+      // TIDAK pop/buka dialog lagi di sini -- pemanggil (di bawah, setelah
+      // await createNewLeaveType(...)) sudah melakukan itu sendiri
+      // berdasarkan _errorMessage. Melakukannya di sini JUGA menyebabkan
+      // dialog di-pop dan dibuka ulang DUA KALI berturut-turut untuk
+      // kasus gagal (mis. "Employee already has a leave request for this
+      // date range" saat tanggal tumpang tindih dengan pengajuan lain) --
+      // dialog kedua langsung ikut ter-pop oleh pemanggil, membuat pesan
+      // errornya nyaris tidak sempat terlihat sebelum tertutup lagi.
     } else {
       var responseBody = await response.stream.bytesToString();
 
