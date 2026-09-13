@@ -23,6 +23,8 @@ import 'horilla_leave/leave_request.dart';
 import 'horilla_leave/leave_types.dart';
 import 'horilla_leave/my_leave_request.dart';
 import 'horilla_leave/selected_leave_type.dart';
+import 'documents/my_documents.dart';
+import 'documents/company_documents.dart';
 import 'horilla_main/login.dart';
 import 'horilla_main/home.dart';
 import 'horilla_main/notifications_list.dart';
@@ -366,6 +368,8 @@ class LoginApp extends StatelessWidget {
         '/all_assigned_leave': (context) => AllAssignedLeave(),
         '/selected_leave_type': (context) => SelectedLeaveType(),
         '/notifications_list': (context) => NotificationsList(),
+        '/my_documents': (context) => const MyDocuments(),
+        '/company_documents': (context) => const CompanyDocuments(),
       },
     );
   }

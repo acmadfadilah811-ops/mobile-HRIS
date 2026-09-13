@@ -1404,6 +1404,20 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                 ),
               ),
             ),
+            Card(
+              child: ListTile(
+                leading: const Icon(Icons.business_outlined),
+                title: const Text('Dokumen Perusahaan'),
+                subtitle: Text(
+                  'SOP, Corporate Guideline, dan Peraturan Perusahaan.',
+                  style: TextStyle(color: Colors.grey.shade700),
+                ),
+                trailing: const Icon(Icons.keyboard_arrow_right),
+                onTap: () {
+                  Navigator.pushNamed(context, '/company_documents');
+                },
+              ),
+            ),
           ],
         ),
       ),

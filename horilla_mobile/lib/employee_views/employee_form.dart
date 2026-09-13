@@ -44,6 +44,10 @@ class _EmployeeFormPageState extends State<EmployeeFormPage>
   final List<Widget> bottomBarPages = [];
   final ScrollController _vertical = ScrollController();
   String empId = '';
+  // "Dokumen Saya" di tab Tentang cuma muncul kalau melihat profil sendiri,
+  // bukan saat admin/manajer membuka profil bawahannya -- dihitung sekali
+  // di getEmployeeDetails() begitu empId diketahui.
+  bool isOwnProfile = false;
   String jobRuleName = '';
   String? _errorMessage;
   String? selectedCreateEmployeeId;
@@ -270,6 +274,11 @@ class _EmployeeFormPageState extends State<EmployeeFormPage>
     final prefs = await SharedPreferences.getInstance();
     var token = prefs.getString("token");
     var typedServerUrl = prefs.getString("typed_url");
+    final ownEmployeeId = prefs.getInt("employee_id");
+    setState(() {
+      isOwnProfile = ownEmployeeId != null &&
+          ownEmployeeId.toString() == empId;
+    });
     var uri = Uri.parse('$typedServerUrl/api/employee/employees/$empId');
     var response = await http.get(uri, headers: {
       "Content-Type": "application/json",
@@ -4603,12 +4612,9 @@ class _EmployeeFormPageState extends State<EmployeeFormPage>
     TextEditingController shiftController = TextEditingController();
     TextEditingController workTypeController = TextEditingController();
     TextEditingController employeeTypeController = TextEditingController();
-    TextEditingController salaryController = TextEditingController();
     TextEditingController reportingManagerController = TextEditingController();
     TextEditingController companyController = TextEditingController();
     TextEditingController locationController = TextEditingController();
-    TextEditingController joiningDateController = TextEditingController();
-    TextEditingController endDateController = TextEditingController();
     TextEditingController tagsController = TextEditingController();
     TextEditingController bankNameController = TextEditingController();
     TextEditingController accountNumberController = TextEditingController();
@@ -4659,16 +4665,10 @@ class _EmployeeFormPageState extends State<EmployeeFormPage>
         employeeWorkInfoRecord['work_type_name'] ?? 'None';
     employeeTypeController.text =
         employeeWorkInfoRecord['employee_type_name'] ?? 'None';
-    salaryController.text =
-        employeeWorkInfoRecord['basic_salary']?.toString() ?? 'None';
     reportingManagerController.text =
         employeeWorkInfoRecord['reporting_manager_first_name'] ?? 'None';
     companyController.text = employeeWorkInfoRecord['company_name'] ?? 'None';
     locationController.text = employeeWorkInfoRecord['location'] ?? 'None';
-    joiningDateController.text =
-        employeeWorkInfoRecord['date_joining'] ?? 'None';
-    endDateController.text =
-        employeeWorkInfoRecord['contract_end_date'] ?? 'None';
     tagsController.text = (employeeWorkInfoRecord['tags'] is List &&
         employeeWorkInfoRecord['tags'].isNotEmpty)
         ? employeeWorkInfoRecord['tags'].join(', ')
@@ -4692,8 +4692,38 @@ class _EmployeeFormPageState extends State<EmployeeFormPage>
               physics: const ClampingScrollPhysics(),
               padding: const EdgeInsets.only(
                   bottom: kBottomNavigationBarHeight + 80.0),
-              itemCount: 3,
+              itemCount: isOwnProfile ? 4 : 3,
               itemBuilder: (context, index) {
+                // Dokumen Saya (Slip Gaji/Kontrak) cuma untuk profil sendiri
+                // -- bukan ExpansionTile seperti 3 lainnya, ini navigasi
+                // langsung, bukan data inline. Kalau admin/manajer membuka
+                // profil bawahannya, entry ini tidak pernah muncul
+                // (isOwnProfile == false -> itemCount cuma 3).
+                if (index == 3) {
+                  return Container(
+                    padding: const EdgeInsets.all(4.0),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(8.0),
+                      child: Container(
+                        color: Colors.red.shade50,
+                        child: ListTile(
+                          leading: Icon(Icons.folder_shared_outlined,
+                              color: Colors.red),
+                          title: const Text(
+                            "Dokumen Saya",
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                          ),
+                          subtitle: const Text(
+                              "Slip gaji dan kontrak kerja Anda."),
+                          trailing: const Icon(Icons.keyboard_arrow_right),
+                          onTap: () {
+                            Navigator.pushNamed(context, '/my_documents');
+                          },
+                        ),
+                      ),
+                    ),
+                  );
+                }
                 String titleText = "";
                 IconData? titleIcon;
                 switch (index) {
@@ -5073,22 +5103,6 @@ class _EmployeeFormPageState extends State<EmployeeFormPage>
                                               style: const TextStyle(
                                                   color: Colors.grey),
                                             ),
-                                            TextField(
-                                              decoration: const InputDecoration(
-                                                labelText: 'Gaji',
-                                                // Original label text
-                                                labelStyle: TextStyle(
-                                                    fontWeight: FontWeight.bold,
-                                                    fontSize: 20,
-                                                    color: Colors.black),
-                                                enabled: false,
-                                                border: InputBorder.none,
-                                              ),
-                                              controller: salaryController,
-                                              maxLines: null,
-                                              style: const TextStyle(
-                                                  color: Colors.grey),
-                                            ),
                                           ],
                                         ),
                                       ),
@@ -5137,36 +5151,6 @@ class _EmployeeFormPageState extends State<EmployeeFormPage>
                                                 border: InputBorder.none,
                                               ),
                                               controller: locationController,
-                                              maxLines: null,
-                                              style: const TextStyle(
-                                                  color: Colors.grey),
-                                            ),
-                                            TextField(
-                                              decoration: const InputDecoration(
-                                                labelText: 'Tanggal Bergabung',
-                                                labelStyle: TextStyle(
-                                                    fontWeight: FontWeight.bold,
-                                                    fontSize: 20,
-                                                    color: Colors.black),
-                                                enabled: false,
-                                                border: InputBorder.none,
-                                              ),
-                                              controller: joiningDateController,
-                                              maxLines: null,
-                                              style: const TextStyle(
-                                                  color: Colors.grey),
-                                            ),
-                                            TextField(
-                                              decoration: const InputDecoration(
-                                                labelText: 'Tanggal Berakhir',
-                                                labelStyle: TextStyle(
-                                                    fontWeight: FontWeight.bold,
-                                                    fontSize: 20,
-                                                    color: Colors.black),
-                                                enabled: false,
-                                                border: InputBorder.none,
-                                              ),
-                                              controller: endDateController,
                                               maxLines: null,
                                               style: const TextStyle(
                                                   color: Colors.grey),

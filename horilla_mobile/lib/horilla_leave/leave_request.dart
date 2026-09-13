@@ -10,6 +10,7 @@ import 'package:dropdown_search/dropdown_search.dart';
 import 'package:animated_notch_bottom_bar/animated_notch_bottom_bar/animated_notch_bottom_bar.dart';
 import 'package:shimmer/shimmer.dart';
 import 'dart:io';
+import '../utils/pdf_opener.dart';
 
 class LeaveRequest extends StatefulWidget {
   const LeaveRequest({super.key});
@@ -1929,7 +1930,7 @@ class _LeaveRequest extends State<LeaveRequest>
                                       style: TextStyle(color: Colors.grey.shade700),
                                     ),
                                     TextButton(
-                                      onPressed: () {
+                                      onPressed: () async {
                                         String pdfPath =
                                         currentLeaveRequests[0]['attachment'];
                                         if (pdfPath.endsWith('.png') ||
@@ -1945,11 +1946,16 @@ class _LeaveRequest extends State<LeaveRequest>
                                             ),
                                           );
                                         } else {
-                                          Navigator.pushNamed(
-                                            context,
-                                            '/attachment_view',
-                                            arguments: pdfPath,
+                                          final error = await openTemporaryPdf(
+                                            pdfPath,
+                                            getToken,
+                                            'leave_attachment_${currentLeaveRequests[0]['id']}',
                                           );
+                                          if (error != null && context.mounted) {
+                                            ScaffoldMessenger.of(context).showSnackBar(
+                                              SnackBar(content: Text(error), backgroundColor: Colors.red),
+                                            );
+                                          }
                                         }
                                       },
                                       child: const Text(
@@ -3845,7 +3851,7 @@ class _LeaveRequest extends State<LeaveRequest>
                                 style: TextStyle(color: Colors.grey.shade700),
                               ),
                               TextButton(
-                                onPressed: () {
+                                onPressed: () async {
                                   String pdfPath =
                                   currentLeaveRequests[0]['attachment'];
                                   if (pdfPath.endsWith('.png') ||
@@ -3861,11 +3867,16 @@ class _LeaveRequest extends State<LeaveRequest>
                                       ),
                                     );
                                   } else {
-                                    Navigator.pushNamed(
-                                      context,
-                                      '/attachment_view',
-                                      arguments: pdfPath,
+                                    final error = await openTemporaryPdf(
+                                      pdfPath,
+                                      getToken,
+                                      'leave_attachment_${currentLeaveRequests[0]['id']}',
                                     );
+                                    if (error != null && context.mounted) {
+                                      ScaffoldMessenger.of(context).showSnackBar(
+                                        SnackBar(content: Text(error), backgroundColor: Colors.red),
+                                      );
+                                    }
                                   }
                                 },
                                 child: const Text(
