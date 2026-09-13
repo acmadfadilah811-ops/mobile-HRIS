@@ -178,7 +178,7 @@ class _AttendanceRequest extends State<AttendanceRequest>
                       style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
-                          color: Colors.red),
+                          color: Colors.lightBlue),
                     ),
                   ],
                 ),
@@ -221,7 +221,7 @@ class _AttendanceRequest extends State<AttendanceRequest>
                       style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
-                          color: Colors.red),
+                          color: Colors.lightBlue),
                     ),
                   ],
                 ),
@@ -264,7 +264,7 @@ class _AttendanceRequest extends State<AttendanceRequest>
                       style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
-                          color: Colors.red),
+                          color: Colors.lightBlue),
                     ),
                   ],
                 ),
@@ -439,7 +439,7 @@ class _AttendanceRequest extends State<AttendanceRequest>
                               child: Text(
                                 _errorMessage ?? '',
                                 style: const TextStyle(
-                                    color: Colors.red,
+                                    color: Colors.lightBlue,
                                     fontWeight: FontWeight.bold),
                               ),
                             ),
@@ -1243,7 +1243,7 @@ class _AttendanceRequest extends State<AttendanceRequest>
                         },
                         style: ButtonStyle(
                           backgroundColor:
-                              MaterialStateProperty.all<Color>(Colors.red),
+                              MaterialStateProperty.all<Color>(Colors.lightBlue),
                           shape:
                               MaterialStateProperty.all<RoundedRectangleBorder>(
                             RoundedRectangleBorder(
@@ -1713,11 +1713,11 @@ class _AttendanceRequest extends State<AttendanceRequest>
                         backgroundColor: Colors.white,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(4.0),
-                          side: const BorderSide(color: Colors.red),
+                          side: const BorderSide(color: Colors.lightBlue),
                         ),
                       ),
                       child: const Text('BUAT',
-                          style: TextStyle(color: Colors.red)),
+                          style: TextStyle(color: Colors.lightBlue)),
                     ),
                   ),
                 ],
@@ -1794,9 +1794,9 @@ class _AttendanceRequest extends State<AttendanceRequest>
             ? AnimatedNotchBottomBar(
                 /// Provide NotchBottomBarController
                 notchBottomBarController: _controller,
-                color: Colors.red,
+                color: Colors.lightBlue,
                 showLabel: true,
-                notchColor: Colors.red,
+                notchColor: Colors.lightBlue,
                 kBottomRadius: 28.0,
                 kIconSize: 24.0,
 
@@ -1911,8 +1911,8 @@ class _AttendanceRequest extends State<AttendanceRequest>
         ),
         SizedBox(height: MediaQuery.of(context).size.height * 0.02),
         TabBar(
-          labelColor: Colors.red,
-          indicatorColor: Colors.red,
+          labelColor: Colors.lightBlue,
+          indicatorColor: Colors.lightBlue,
           unselectedLabelColor: Colors.grey,
           isScrollable: true,
           tabs: [
@@ -2003,8 +2003,8 @@ class _AttendanceRequest extends State<AttendanceRequest>
             ),
             SizedBox(height: MediaQuery.of(context).size.height * 0.02),
             TabBar(
-              indicatorColor: Colors.red,
-              labelColor: Colors.red,
+              indicatorColor: Colors.lightBlue,
+              labelColor: Colors.lightBlue,
               unselectedLabelColor: Colors.grey,
               isScrollable: true,
               tabs: [
@@ -2557,7 +2557,7 @@ class _AttendanceRequest extends State<AttendanceRequest>
                                           style: ButtonStyle(
                                             backgroundColor:
                                                 MaterialStateProperty.all<
-                                                    Color>(Colors.red),
+                                                    Color>(Colors.lightBlue),
                                             shape: MaterialStateProperty.all<
                                                 RoundedRectangleBorder>(
                                               RoundedRectangleBorder(
@@ -2577,7 +2577,7 @@ class _AttendanceRequest extends State<AttendanceRequest>
                               );
                             },
                             style: ElevatedButton.styleFrom(
-                              backgroundColor: Colors.red,
+                              backgroundColor: Colors.lightBlue,
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(8.0),
                               ),
@@ -2885,7 +2885,7 @@ class _AttendanceRequest extends State<AttendanceRequest>
                                             style: ButtonStyle(
                                               backgroundColor:
                                                   MaterialStateProperty.all<
-                                                      Color>(Colors.red),
+                                                      Color>(Colors.lightBlue),
                                               shape: MaterialStateProperty.all<
                                                   RoundedRectangleBorder>(
                                                 RoundedRectangleBorder(
@@ -2906,7 +2906,7 @@ class _AttendanceRequest extends State<AttendanceRequest>
                                 );
                               },
                               style: ElevatedButton.styleFrom(
-                                backgroundColor: Colors.red,
+                                backgroundColor: Colors.lightBlue,
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(8.0),
                                 ),
@@ -3193,7 +3193,7 @@ class _AttendanceRequest extends State<AttendanceRequest>
                             });
                       },
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.red.shade50,
+                        backgroundColor: Colors.lightBlue.shade50,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(8.0),
                         ),
@@ -3205,7 +3205,7 @@ class _AttendanceRequest extends State<AttendanceRequest>
                       ),
                       child: const Text(
                         "Lihat Permintaan",
-                        style: TextStyle(fontSize: 18, color: Colors.red),
+                        style: TextStyle(fontSize: 18, color: Colors.lightBlue),
                       ),
                     ),
                   ],

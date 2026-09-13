@@ -436,9 +436,9 @@ class _AttendanceOverviewState extends State<AttendanceOverview>
           ? AnimatedNotchBottomBar(
               /// Provide NotchBottomBarController
               notchBottomBarController: _controller,
-              color: Colors.red,
+              color: Colors.lightBlue,
               showLabel: true,
-              notchColor: Colors.red,
+              notchColor: Colors.lightBlue,
               kBottomRadius: 28.0,
               kIconSize: 24.0,
 
@@ -596,8 +596,8 @@ class _AttendanceOverviewState extends State<AttendanceOverview>
               children: [
                 TabBar(
                   controller: _tabController,
-                  indicatorColor: Colors.red,
-                  labelColor: Colors.red,
+                  indicatorColor: Colors.lightBlue,
+                  labelColor: Colors.lightBlue,
                   unselectedLabelColor: Colors.grey,
                   isScrollable: true,
                   labelStyle: TextStyle(
@@ -879,8 +879,8 @@ class _AttendanceOverviewState extends State<AttendanceOverview>
               children: [
                 TabBar(
                   controller: _tabController,
-                  labelColor: Colors.red,
-                  indicatorColor: Colors.red,
+                  labelColor: Colors.lightBlue,
+                  indicatorColor: Colors.lightBlue,
                   unselectedLabelColor: Colors.grey,
                   isScrollable: true,
                   labelStyle: const TextStyle(
@@ -986,7 +986,7 @@ Widget _buildGridItem(
               style: TextStyle(
                 fontSize: responsiveFontSize(context, 15.0, 12.0),
                 fontWeight: FontWeight.bold,
-                color: Colors.red,
+                color: Colors.lightBlue,
               ),
             ),
             TextSpan(
@@ -1062,7 +1062,7 @@ Widget buildOfflineEmployeesTile(
                 height: 25,
                 padding: const EdgeInsets.fromLTRB(10.0, 1.0, 10.0, 1.0),
                 decoration: BoxDecoration(
-                  color: Colors.red.withOpacity(0.07),
+                  color: Colors.lightBlue.withOpacity(0.07),
                   borderRadius: BorderRadius.circular(10.0),
                 ),
                 child: Center(
@@ -1070,7 +1070,7 @@ Widget buildOfflineEmployeesTile(
                     leaveStatus,
                     style: const TextStyle(
                       fontSize: 13.0,
-                      color: Colors.red,
+                      color: Colors.lightBlue,
                     ),
                     textAlign: TextAlign.center,
                   ),
@@ -1244,7 +1244,7 @@ void _showEmailDialog(
               TextButton(
                 child: const Text(
                   'Kirim',
-                  style: TextStyle(color: Colors.red),
+                  style: TextStyle(color: Colors.lightBlue),
                 ),
                 onPressed: () async {
                   await sendEmail(

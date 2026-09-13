@@ -520,7 +520,7 @@ class _WorkTypeRequestPageState extends State<WorkTypeRequestPage> {
                       style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
-                          color: Colors.red),
+                          color: Colors.lightBlue),
                     ),
                   ],
                 ),
@@ -563,7 +563,7 @@ class _WorkTypeRequestPageState extends State<WorkTypeRequestPage> {
                       style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
-                          color: Colors.red),
+                          color: Colors.lightBlue),
                     ),
                   ],
                 ),
@@ -606,7 +606,7 @@ class _WorkTypeRequestPageState extends State<WorkTypeRequestPage> {
                       style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
-                          color: Colors.red),
+                          color: Colors.lightBlue),
                     ),
                   ],
                 ),
@@ -780,7 +780,7 @@ class _WorkTypeRequestPageState extends State<WorkTypeRequestPage> {
                       style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
-                          color: Colors.red),
+                          color: Colors.lightBlue),
                     ),
                   ],
                 ),
@@ -823,7 +823,7 @@ class _WorkTypeRequestPageState extends State<WorkTypeRequestPage> {
                       style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
-                          color: Colors.red),
+                          color: Colors.lightBlue),
                     ),
                   ],
                 ),
@@ -866,7 +866,7 @@ class _WorkTypeRequestPageState extends State<WorkTypeRequestPage> {
                       style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
-                          color: Colors.red),
+                          color: Colors.lightBlue),
                     ),
                   ],
                 ),
@@ -965,7 +965,7 @@ class _WorkTypeRequestPageState extends State<WorkTypeRequestPage> {
                               child: Text(
                                 _errorMessage ?? '',
                                 style: const TextStyle(
-                                    color: Colors.red,
+                                    color: Colors.lightBlue,
                                     fontWeight: FontWeight.bold),
                               ),
                             ),
@@ -1263,7 +1263,7 @@ class _WorkTypeRequestPageState extends State<WorkTypeRequestPage> {
                         },
                         style: ButtonStyle(
                           backgroundColor:
-                          MaterialStateProperty.all<Color>(Colors.red),
+                          MaterialStateProperty.all<Color>(Colors.lightBlue),
                           shape:
                           MaterialStateProperty.all<RoundedRectangleBorder>(
                             RoundedRectangleBorder(
@@ -1331,7 +1331,7 @@ class _WorkTypeRequestPageState extends State<WorkTypeRequestPage> {
                               child: Text(
                                 _errorMessage ?? '',
                                 style: const TextStyle(
-                                    color: Colors.red,
+                                    color: Colors.lightBlue,
                                     fontWeight: FontWeight.bold),
                               ),
                             ),
@@ -1683,7 +1683,7 @@ class _WorkTypeRequestPageState extends State<WorkTypeRequestPage> {
                         },
                         style: ButtonStyle(
                           backgroundColor:
-                          MaterialStateProperty.all<Color>(Colors.red),
+                          MaterialStateProperty.all<Color>(Colors.lightBlue),
                           shape:
                           MaterialStateProperty.all<RoundedRectangleBorder>(
                             RoundedRectangleBorder(
@@ -2015,7 +2015,7 @@ class _WorkTypeRequestPageState extends State<WorkTypeRequestPage> {
                                               style: ButtonStyle(
                                                 backgroundColor:
                                                 MaterialStateProperty.all<
-                                                    Color>(Colors.red),
+                                                    Color>(Colors.lightBlue),
                                                 shape:
                                                 MaterialStateProperty.all<
                                                     RoundedRectangleBorder>(
@@ -2041,7 +2041,7 @@ class _WorkTypeRequestPageState extends State<WorkTypeRequestPage> {
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(8.0),
                                 ),
-                                backgroundColor: Colors.red,
+                                backgroundColor: Colors.lightBlue,
                               ),
                               child: const Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
@@ -2263,7 +2263,7 @@ class _WorkTypeRequestPageState extends State<WorkTypeRequestPage> {
                                               style: ButtonStyle(
                                                 backgroundColor:
                                                 MaterialStateProperty.all<
-                                                    Color>(Colors.red),
+                                                    Color>(Colors.lightBlue),
                                                 shape:
                                                 MaterialStateProperty.all<
                                                     RoundedRectangleBorder>(
@@ -2286,7 +2286,7 @@ class _WorkTypeRequestPageState extends State<WorkTypeRequestPage> {
                                 });
                               },
                               style: ElevatedButton.styleFrom(
-                                backgroundColor: Colors.red,
+                                backgroundColor: Colors.lightBlue,
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(8.0),
                                 ),
@@ -2348,7 +2348,7 @@ class _WorkTypeRequestPageState extends State<WorkTypeRequestPage> {
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(8.0),
                                 ),
-                                backgroundColor: Colors.red.withOpacity(0.5),
+                                backgroundColor: Colors.lightBlue.withOpacity(0.5),
                               ),
                               child: const Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
@@ -2545,7 +2545,7 @@ class _WorkTypeRequestPageState extends State<WorkTypeRequestPage> {
                                   topRight: Radius.circular(15.0),
                                   bottomRight: Radius.circular(15.0),
                                 ),
-                                color: Colors.red[100],
+                                color: Colors.lightBlue[100],
                               ),
                               child: Padding(
                                 padding:
@@ -2554,7 +2554,7 @@ class _WorkTypeRequestPageState extends State<WorkTypeRequestPage> {
                                   icon: const Icon(
                                     Icons.delete,
                                     size: 18.0,
-                                    color: Colors.red,
+                                    color: Colors.lightBlue,
                                   ),
                                   onPressed: () async {
                                     setState(() {
@@ -2628,7 +2628,7 @@ class _WorkTypeRequestPageState extends State<WorkTypeRequestPage> {
                                                     backgroundColor:
                                                     MaterialStateProperty
                                                         .all<Color>(
-                                                        Colors.red),
+                                                        Colors.lightBlue),
                                                     shape: MaterialStateProperty
                                                         .all<
                                                         RoundedRectangleBorder>(
@@ -2857,7 +2857,7 @@ class _WorkTypeRequestPageState extends State<WorkTypeRequestPage> {
                                             borderRadius:
                                             BorderRadius.circular(8.0),
                                           ),
-                                          backgroundColor: Colors.red,
+                                          backgroundColor: Colors.lightBlue,
                                         ),
                                         child: Row(
                                           mainAxisAlignment: MainAxisAlignment.center,
@@ -3136,7 +3136,7 @@ class _WorkTypeRequestPageState extends State<WorkTypeRequestPage> {
                                             borderRadius:
                                             BorderRadius.circular(8.0),
                                           ),
-                                          backgroundColor: Colors.red,
+                                          backgroundColor: Colors.lightBlue,
                                         ),
                                         child: const Row(
                                           mainAxisAlignment:
@@ -3208,7 +3208,7 @@ class _WorkTypeRequestPageState extends State<WorkTypeRequestPage> {
                                             BorderRadius.circular(8.0),
                                           ),
                                           backgroundColor:
-                                          Colors.red.withOpacity(0.5),
+                                          Colors.lightBlue.withOpacity(0.5),
                                         ),
                                         child: const Row(
                                           mainAxisAlignment:
@@ -3329,11 +3329,11 @@ class _WorkTypeRequestPageState extends State<WorkTypeRequestPage> {
                         backgroundColor: Colors.white,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(4.0),
-                          side: const BorderSide(color: Colors.red),
+                          side: const BorderSide(color: Colors.lightBlue),
                         ),
                       ),
                       child: const Text('BUAT',
-                          style: TextStyle(color: Colors.red)),
+                          style: TextStyle(color: Colors.lightBlue)),
                     ),
                   ),
                 ),
@@ -3348,9 +3348,9 @@ class _WorkTypeRequestPageState extends State<WorkTypeRequestPage> {
           ? AnimatedNotchBottomBar(
         /// Provide NotchBottomBarController
         notchBottomBarController: _controller,
-        color: Colors.red,
+        color: Colors.lightBlue,
         showLabel: true,
-        notchColor: Colors.red,
+        notchColor: Colors.lightBlue,
         kBottomRadius: 28.0,
         kIconSize: 24.0,
 

@@ -698,9 +698,9 @@ class _LeaveOverview extends State<LeaveOverview>
           ? AnimatedNotchBottomBar(
         /// Provide NotchBottomBarController
         notchBottomBarController: _controller,
-        color: Colors.red,
+        color: Colors.lightBlue,
         showLabel: true,
-        notchColor: Colors.red,
+        notchColor: Colors.lightBlue,
         kBottomRadius: 28.0,
         kIconSize: 24.0,
 
@@ -803,7 +803,7 @@ Widget _buildGridItem(
               style: TextStyle(
                 fontSize: responsiveFontSize(context, 28.0, 20.0),
                 fontWeight: FontWeight.bold,
-                color: Colors.red,
+                color: Colors.lightBlue,
               ),
             ),
             TextSpan(

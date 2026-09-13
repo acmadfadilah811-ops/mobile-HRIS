@@ -25,6 +25,7 @@ import 'horilla_leave/my_leave_request.dart';
 import 'horilla_leave/selected_leave_type.dart';
 import 'documents/my_documents.dart';
 import 'documents/company_documents.dart';
+import 'announcements/announcements.dart';
 import 'horilla_main/login.dart';
 import 'horilla_main/home.dart';
 import 'horilla_main/notifications_list.dart';
@@ -88,12 +89,12 @@ Future<void> main() async {
   // visibly a crash, not a silent gray screen.
   ErrorWidget.builder = (FlutterErrorDetails details) {
     return Container(
-      color: Colors.red[50],
+      color: Colors.lightBlue[50],
       padding: const EdgeInsets.all(16),
       alignment: Alignment.center,
       child: Text(
         'Gagal menampilkan halaman ini.\n\n${details.exceptionAsString()}',
-        style: const TextStyle(color: Colors.red, fontSize: 12),
+        style: const TextStyle(color: Colors.lightBlue, fontSize: 12),
         textAlign: TextAlign.center,
       ),
     );
@@ -370,6 +371,7 @@ class LoginApp extends StatelessWidget {
         '/notifications_list': (context) => NotificationsList(),
         '/my_documents': (context) => const MyDocuments(),
         '/company_documents': (context) => const CompanyDocuments(),
+        '/announcements': (context) => const AnnouncementsPage(),
       },
     );
   }

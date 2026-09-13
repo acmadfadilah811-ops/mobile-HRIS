@@ -176,7 +176,7 @@ class _SelectedLeaveType extends State<SelectedLeaveType> {
                       style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
-                          color: Colors.red),
+                          color: Colors.lightBlue),
                     ),
                   ],
                 ),
@@ -1032,9 +1032,9 @@ class _SelectedLeaveType extends State<SelectedLeaveType> {
           ? AnimatedNotchBottomBar(
         /// Provide NotchBottomBarController
         notchBottomBarController: _controller,
-        color: Colors.red,
+        color: Colors.lightBlue,
         showLabel: true,
-        notchColor: Colors.red,
+        notchColor: Colors.lightBlue,
         kBottomRadius: 28.0,
         kIconSize: 24.0,
 

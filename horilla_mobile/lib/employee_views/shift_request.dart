@@ -550,7 +550,7 @@ class _ShiftRequestPageState extends State<ShiftRequestPage> {
                       style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
-                          color: Colors.red),
+                          color: Colors.lightBlue),
                     ),
                   ],
                 ),
@@ -593,7 +593,7 @@ class _ShiftRequestPageState extends State<ShiftRequestPage> {
                       style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
-                          color: Colors.red),
+                          color: Colors.lightBlue),
                     ),
                   ],
                 ),
@@ -691,7 +691,7 @@ class _ShiftRequestPageState extends State<ShiftRequestPage> {
                       style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
-                          color: Colors.red),
+                          color: Colors.lightBlue),
                     ),
                   ],
                 ),
@@ -734,7 +734,7 @@ class _ShiftRequestPageState extends State<ShiftRequestPage> {
                       style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
-                          color: Colors.red),
+                          color: Colors.lightBlue),
                     ),
                   ],
                 ),
@@ -777,7 +777,7 @@ class _ShiftRequestPageState extends State<ShiftRequestPage> {
                       style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
-                          color: Colors.red),
+                          color: Colors.lightBlue),
                     ),
                   ],
                 ),
@@ -932,7 +932,7 @@ class _ShiftRequestPageState extends State<ShiftRequestPage> {
                               child: Text(
                                 _errorMessage ?? '',
                                 style: const TextStyle(
-                                    color: Colors.red,
+                                    color: Colors.lightBlue,
                                     fontWeight: FontWeight.bold),
                               ),
                             ),
@@ -1228,7 +1228,7 @@ class _ShiftRequestPageState extends State<ShiftRequestPage> {
                         },
                         style: ButtonStyle(
                           backgroundColor:
-                          MaterialStateProperty.all<Color>(Colors.red),
+                          MaterialStateProperty.all<Color>(Colors.lightBlue),
                           shape:
                           MaterialStateProperty.all<RoundedRectangleBorder>(
                             RoundedRectangleBorder(
@@ -1296,7 +1296,7 @@ class _ShiftRequestPageState extends State<ShiftRequestPage> {
                               child: Text(
                                 _errorMessage ?? '',
                                 style: const TextStyle(
-                                    color: Colors.red,
+                                    color: Colors.lightBlue,
                                     fontWeight: FontWeight.bold),
                               ),
                             ),
@@ -1645,7 +1645,7 @@ class _ShiftRequestPageState extends State<ShiftRequestPage> {
                         },
                         style: ButtonStyle(
                           backgroundColor:
-                          MaterialStateProperty.all<Color>(Colors.red),
+                          MaterialStateProperty.all<Color>(Colors.lightBlue),
                           shape:
                           MaterialStateProperty.all<RoundedRectangleBorder>(
                             RoundedRectangleBorder(
@@ -1950,7 +1950,7 @@ class _ShiftRequestPageState extends State<ShiftRequestPage> {
                                                   style: ButtonStyle(
                                                     backgroundColor:
                                                     MaterialStateProperty.all<
-                                                        Color>(Colors.red),
+                                                        Color>(Colors.lightBlue),
                                                     shape:
                                                     MaterialStateProperty.all<
                                                         RoundedRectangleBorder>(
@@ -1975,7 +1975,7 @@ class _ShiftRequestPageState extends State<ShiftRequestPage> {
                                       shape: RoundedRectangleBorder(
                                         borderRadius: BorderRadius.circular(8.0),
                                       ),
-                                      backgroundColor: Colors.red,
+                                      backgroundColor: Colors.lightBlue,
                                     ),
                                     child: const Row(
                                       mainAxisAlignment: MainAxisAlignment.center,
@@ -2173,7 +2173,7 @@ class _ShiftRequestPageState extends State<ShiftRequestPage> {
                                                   style: ButtonStyle(
                                                     backgroundColor:
                                                     MaterialStateProperty.all<
-                                                        Color>(Colors.red),
+                                                        Color>(Colors.lightBlue),
                                                     shape:
                                                     MaterialStateProperty.all<
                                                         RoundedRectangleBorder>(
@@ -2198,7 +2198,7 @@ class _ShiftRequestPageState extends State<ShiftRequestPage> {
                                       shape: RoundedRectangleBorder(
                                         borderRadius: BorderRadius.circular(8.0),
                                       ),
-                                      backgroundColor: Colors.red,
+                                      backgroundColor: Colors.lightBlue,
                                     ),
                                     child: const Row(
                                       mainAxisAlignment: MainAxisAlignment.center,
@@ -2251,7 +2251,7 @@ class _ShiftRequestPageState extends State<ShiftRequestPage> {
                                       shape: RoundedRectangleBorder(
                                         borderRadius: BorderRadius.circular(8.0),
                                       ),
-                                      backgroundColor: Colors.red.withOpacity(0.5),
+                                      backgroundColor: Colors.lightBlue.withOpacity(0.5),
                                     ),
                                     child: const Row(
                                       mainAxisAlignment: MainAxisAlignment.center,
@@ -2433,7 +2433,7 @@ class _ShiftRequestPageState extends State<ShiftRequestPage> {
                               topRight: Radius.circular(15.0),
                               bottomRight: Radius.circular(15.0),
                             ),
-                            color: Colors.red[100],
+                            color: Colors.lightBlue[100],
                           ),
                           child: Padding(
                             padding: const EdgeInsets.symmetric(vertical: 0.0),
@@ -2441,7 +2441,7 @@ class _ShiftRequestPageState extends State<ShiftRequestPage> {
                               icon: const Icon(
                                 Icons.delete,
                                 size: 18.0,
-                                color: Colors.red,
+                                color: Colors.lightBlue,
                               ),
                               onPressed: () async {
                                 isSaveClick = true;
@@ -2506,7 +2506,7 @@ class _ShiftRequestPageState extends State<ShiftRequestPage> {
                                             style: ButtonStyle(
                                               backgroundColor:
                                               MaterialStateProperty.all<
-                                                  Color>(Colors.red),
+                                                  Color>(Colors.lightBlue),
                                               shape: MaterialStateProperty.all<
                                                   RoundedRectangleBorder>(
                                                 RoundedRectangleBorder(
@@ -2682,7 +2682,7 @@ class _ShiftRequestPageState extends State<ShiftRequestPage> {
                                                     backgroundColor:
                                                     MaterialStateProperty
                                                         .all<Color>(
-                                                        Colors.red),
+                                                        Colors.lightBlue),
                                                     shape: MaterialStateProperty
                                                         .all<
                                                         RoundedRectangleBorder>(
@@ -2708,7 +2708,7 @@ class _ShiftRequestPageState extends State<ShiftRequestPage> {
                                         borderRadius:
                                         BorderRadius.circular(8.0),
                                       ),
-                                      backgroundColor: Colors.red,
+                                      backgroundColor: Colors.lightBlue,
                                     ),
                                     child: const Row(
                                       mainAxisAlignment:
@@ -2924,7 +2924,7 @@ class _ShiftRequestPageState extends State<ShiftRequestPage> {
                                                     backgroundColor:
                                                     MaterialStateProperty
                                                         .all<Color>(
-                                                        Colors.red),
+                                                        Colors.lightBlue),
                                                     shape: MaterialStateProperty
                                                         .all<
                                                         RoundedRectangleBorder>(
@@ -2950,7 +2950,7 @@ class _ShiftRequestPageState extends State<ShiftRequestPage> {
                                         borderRadius:
                                         BorderRadius.circular(8.0),
                                       ),
-                                      backgroundColor: Colors.red,
+                                      backgroundColor: Colors.lightBlue,
                                     ),
                                     child: const Row(
                                       mainAxisAlignment:
@@ -3013,7 +3013,7 @@ class _ShiftRequestPageState extends State<ShiftRequestPage> {
                                         BorderRadius.circular(8.0),
                                       ),
                                       backgroundColor:
-                                      Colors.red.withOpacity(0.5),
+                                      Colors.lightBlue.withOpacity(0.5),
                                     ),
                                     child: const Row(
                                       mainAxisAlignment:
@@ -3122,12 +3122,12 @@ class _ShiftRequestPageState extends State<ShiftRequestPage> {
                         backgroundColor: Colors.white,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(4.0),
-                          side: const BorderSide(color: Colors.red),
+                          side: const BorderSide(color: Colors.lightBlue),
                         ),
                       ),
                       child: const Text(
                         'CREATE',
-                        style: TextStyle(color: Colors.red),
+                        style: TextStyle(color: Colors.lightBlue),
                       ),
                     ),
                   )                ),
@@ -3142,9 +3142,9 @@ class _ShiftRequestPageState extends State<ShiftRequestPage> {
           ? AnimatedNotchBottomBar(
         /// Provide NotchBottomBarController
         notchBottomBarController: _controller,
-        color: Colors.red,
+        color: Colors.lightBlue,
         showLabel: true,
-        notchColor: Colors.red,
+        notchColor: Colors.lightBlue,
         kBottomRadius: 28.0,
         kIconSize: 24.0,
 

@@ -603,7 +603,7 @@ class _WorkTypeRequestPageState extends State<RotatingShiftPage> {
                       style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
-                          color: Colors.red),
+                          color: Colors.lightBlue),
                     ),
                   ],
                 ),
@@ -646,7 +646,7 @@ class _WorkTypeRequestPageState extends State<RotatingShiftPage> {
                       style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
-                          color: Colors.red),
+                          color: Colors.lightBlue),
                     ),
                   ],
                 ),
@@ -689,7 +689,7 @@ class _WorkTypeRequestPageState extends State<RotatingShiftPage> {
                       style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
-                          color: Colors.red),
+                          color: Colors.lightBlue),
                     ),
                   ],
                 ),
@@ -791,7 +791,7 @@ class _WorkTypeRequestPageState extends State<RotatingShiftPage> {
                               child: Text(
                                 _errorMessage ?? '',
                                 style: const TextStyle(
-                                    color: Colors.red,
+                                    color: Colors.lightBlue,
                                     fontWeight: FontWeight.bold),
                               ),
                             ),
@@ -1080,7 +1080,7 @@ class _WorkTypeRequestPageState extends State<RotatingShiftPage> {
                         },
                         style: ButtonStyle(
                           backgroundColor:
-                          MaterialStateProperty.all<Color>(Colors.red),
+                          MaterialStateProperty.all<Color>(Colors.lightBlue),
                           shape:
                           MaterialStateProperty.all<RoundedRectangleBorder>(
                             RoundedRectangleBorder(
@@ -1153,7 +1153,7 @@ class _WorkTypeRequestPageState extends State<RotatingShiftPage> {
                               child: Text(
                                 _errorMessage ?? '',
                                 style: const TextStyle(
-                                    color: Colors.red,
+                                    color: Colors.lightBlue,
                                     fontWeight: FontWeight.bold),
                               ),
                             ),
@@ -1528,7 +1528,7 @@ class _WorkTypeRequestPageState extends State<RotatingShiftPage> {
                         },
                         style: ButtonStyle(
                           backgroundColor:
-                          MaterialStateProperty.all<Color>(Colors.red),
+                          MaterialStateProperty.all<Color>(Colors.lightBlue),
                           shape:
                           MaterialStateProperty.all<RoundedRectangleBorder>(
                             RoundedRectangleBorder(
@@ -1899,7 +1899,7 @@ class _WorkTypeRequestPageState extends State<RotatingShiftPage> {
                               topRight: Radius.circular(15.0),
                               bottomRight: Radius.circular(15.0),
                             ),
-                            color: Colors.red[100],
+                            color: Colors.lightBlue[100],
                           ),
                           child: Padding(
                             padding: const EdgeInsets.symmetric(vertical: 0.0),
@@ -1907,7 +1907,7 @@ class _WorkTypeRequestPageState extends State<RotatingShiftPage> {
                               icon: const Icon(
                                 Icons.delete,
                                 size: 18.0,
-                                color: Colors.red,
+                                color: Colors.lightBlue,
                               ),
                               onPressed: () async {
                                 isSaveClick = true;
@@ -1966,7 +1966,7 @@ class _WorkTypeRequestPageState extends State<RotatingShiftPage> {
                                             style: ButtonStyle(
                                               backgroundColor:
                                               MaterialStateProperty.all<
-                                                  Color>(Colors.red),
+                                                  Color>(Colors.lightBlue),
                                               shape: MaterialStateProperty.all<
                                                   RoundedRectangleBorder>(
                                                 RoundedRectangleBorder(
@@ -2111,9 +2111,9 @@ class _WorkTypeRequestPageState extends State<RotatingShiftPage> {
           ? AnimatedNotchBottomBar(
         /// Provide NotchBottomBarController
         notchBottomBarController: _controller,
-        color: Colors.red,
+        color: Colors.lightBlue,
         showLabel: true,
-        notchColor: Colors.red,
+        notchColor: Colors.lightBlue,
         kBottomRadius: 28.0,
         kIconSize: 24.0,
 

@@ -97,7 +97,7 @@ class _LoginPageState extends State<LoginPage> {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
             content: Text('Email atau kata sandi tidak valid'),
-            backgroundColor: Colors.red,
+            backgroundColor: Colors.lightBlue,
           ),
         );
       }
@@ -105,7 +105,7 @@ class _LoginPageState extends State<LoginPage> {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text('Batas waktu koneksi habis'),
-          backgroundColor: Colors.red,
+          backgroundColor: Colors.lightBlue,
         ),
       );
     } catch (e) {
@@ -113,7 +113,7 @@ class _LoginPageState extends State<LoginPage> {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text('Alamat server tidak valid'),
-          backgroundColor: Colors.red,
+          backgroundColor: Colors.lightBlue,
         ),
       );
     }
@@ -155,7 +155,7 @@ class _LoginPageState extends State<LoginPage> {
               child: Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(8.0),
-                  color: Colors.red,
+                  color: Colors.lightBlue,
                 ),
                 alignment: Alignment.bottomCenter,
                 child: Center(
@@ -241,7 +241,7 @@ class _LoginPageState extends State<LoginPage> {
                               onPressed: _login,
                               style: ElevatedButton.styleFrom(
                                 foregroundColor: Colors.white,
-                                backgroundColor: Colors.red,
+                                backgroundColor: Colors.lightBlue,
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(8.0),
                                 ),

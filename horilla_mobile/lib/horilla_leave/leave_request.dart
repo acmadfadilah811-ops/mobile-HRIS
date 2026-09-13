@@ -367,7 +367,7 @@ class _LeaveRequest extends State<LeaveRequest>
                       style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
-                          color: Colors.red),
+                          color: Colors.lightBlue),
                     ),
                   ],
                 ),
@@ -410,7 +410,7 @@ class _LeaveRequest extends State<LeaveRequest>
                       style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
-                          color: Colors.red),
+                          color: Colors.lightBlue),
                     ),
                   ],
                 ),
@@ -453,7 +453,7 @@ class _LeaveRequest extends State<LeaveRequest>
                       style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
-                          color: Colors.red),
+                          color: Colors.lightBlue),
                     ),
                   ],
                 ),
@@ -496,7 +496,7 @@ class _LeaveRequest extends State<LeaveRequest>
                       style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
-                          color: Colors.red),
+                          color: Colors.lightBlue),
                     ),
                   ],
                 ),
@@ -539,7 +539,7 @@ class _LeaveRequest extends State<LeaveRequest>
                       style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
-                          color: Colors.red),
+                          color: Colors.lightBlue),
                     ),
                   ],
                 ),
@@ -650,7 +650,7 @@ class _LeaveRequest extends State<LeaveRequest>
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text('Belum ada gambar dipilih'),
-          backgroundColor: Colors.red,
+          backgroundColor: Colors.lightBlue,
         ),
       );
       return null;
@@ -724,7 +724,7 @@ class _LeaveRequest extends State<LeaveRequest>
                                 child: Text(
                                   _errorMessage ?? '',
                                   style: const TextStyle(
-                                      color: Colors.red,
+                                      color: Colors.lightBlue,
                                       fontWeight: FontWeight.bold),
                                 ),
                               ),
@@ -1067,7 +1067,7 @@ class _LeaveRequest extends State<LeaveRequest>
                                       MediaQuery.of(context).size.height *
                                           0.0168),
                                   icon: const Icon(Icons.close,
-                                      color: Colors.red),
+                                      color: Colors.lightBlue),
                                   onPressed: () {
                                     setState(() {
                                       _fileNameController.clear();
@@ -1220,7 +1220,7 @@ class _LeaveRequest extends State<LeaveRequest>
                           },
                           style: ButtonStyle(
                             backgroundColor:
-                            MaterialStateProperty.all<Color>(Colors.red),
+                            MaterialStateProperty.all<Color>(Colors.lightBlue),
                             shape:
                             MaterialStateProperty.all<RoundedRectangleBorder>(
                               RoundedRectangleBorder(
@@ -1620,7 +1620,7 @@ class _LeaveRequest extends State<LeaveRequest>
                                   child: Text(
                                     _errorMessage ?? '',
                                     style: const TextStyle(
-                                        color: Colors.red,
+                                        color: Colors.lightBlue,
                                         fontWeight: FontWeight.bold),
                                   ),
                                 ),
@@ -1953,7 +1953,7 @@ class _LeaveRequest extends State<LeaveRequest>
                                           );
                                           if (error != null && context.mounted) {
                                             ScaffoldMessenger.of(context).showSnackBar(
-                                              SnackBar(content: Text(error), backgroundColor: Colors.red),
+                                              SnackBar(content: Text(error), backgroundColor: Colors.lightBlue),
                                             );
                                           }
                                         }
@@ -2002,7 +2002,7 @@ class _LeaveRequest extends State<LeaveRequest>
                                             .height *
                                             0.0168),
                                     icon: const Icon(Icons.close,
-                                        color: Colors.red),
+                                        color: Colors.lightBlue),
                                     onPressed: () {
                                       setState(() {
                                         _fileNameController.clear();
@@ -2071,7 +2071,7 @@ class _LeaveRequest extends State<LeaveRequest>
                           },
                           style: ButtonStyle(
                             backgroundColor:
-                            MaterialStateProperty.all<Color>(Colors.red),
+                            MaterialStateProperty.all<Color>(Colors.lightBlue),
                             shape:
                             MaterialStateProperty.all<RoundedRectangleBorder>(
                               RoundedRectangleBorder(
@@ -2649,11 +2649,11 @@ class _LeaveRequest extends State<LeaveRequest>
                         backgroundColor: Colors.white,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(4.0),
-                          side: const BorderSide(color: Colors.red),
+                          side: const BorderSide(color: Colors.lightBlue),
                         ),
                       ),
                       child: const Text('BUAT',
-                          style: TextStyle(color: Colors.red)),
+                          style: TextStyle(color: Colors.lightBlue)),
                     ),
                   ),
                 ],
@@ -2779,9 +2779,9 @@ class _LeaveRequest extends State<LeaveRequest>
             ? AnimatedNotchBottomBar(
           /// Provide NotchBottomBarController
           notchBottomBarController: _controller,
-          color: Colors.red,
+          color: Colors.lightBlue,
           showLabel: true,
-          notchColor: Colors.red,
+          notchColor: Colors.lightBlue,
           kBottomRadius: 28.0,
           kIconSize: 24.0,
 
@@ -2903,8 +2903,8 @@ class _LeaveRequest extends State<LeaveRequest>
               ),
               SizedBox(height: MediaQuery.of(context).size.height * 0.02),
               TabBar(
-                labelColor: Colors.red,
-                indicatorColor: Colors.red,
+                labelColor: Colors.lightBlue,
+                indicatorColor: Colors.lightBlue,
                 unselectedLabelColor: Colors.grey,
                 isScrollable: true,
                 tabs: [
@@ -3062,10 +3062,10 @@ class _LeaveRequest extends State<LeaveRequest>
             ),
             SizedBox(height: MediaQuery.of(context).size.height * 0.02),
             TabBar(
-              labelColor: Colors.red,
+              labelColor: Colors.lightBlue,
               unselectedLabelColor: Colors.grey,
               isScrollable: true,
-              indicatorColor: Colors.red,
+              indicatorColor: Colors.lightBlue,
               tabs: [
                 Tab(text: 'Semua ($allRequestsLength)'),
                 Tab(text: 'Diminta ($requestedLength)'),
@@ -3874,7 +3874,7 @@ class _LeaveRequest extends State<LeaveRequest>
                                     );
                                     if (error != null && context.mounted) {
                                       ScaffoldMessenger.of(context).showSnackBar(
-                                        SnackBar(content: Text(error), backgroundColor: Colors.red),
+                                        SnackBar(content: Text(error), backgroundColor: Colors.lightBlue),
                                       );
                                     }
                                   }
@@ -3964,7 +3964,7 @@ class _LeaveRequest extends State<LeaveRequest>
                                                         content: Text(
                                                             'Gagal menolak permintaan cuti. Coba lagi.'),
                                                         backgroundColor:
-                                                            Colors.red,
+                                                            Colors.lightBlue,
                                                       ),
                                                     );
                                                   }
@@ -3973,7 +3973,7 @@ class _LeaveRequest extends State<LeaveRequest>
                                               style: ButtonStyle(
                                                 backgroundColor:
                                                 MaterialStateProperty.all<
-                                                    Color>(Colors.red),
+                                                    Color>(Colors.lightBlue),
                                                 shape:
                                                 MaterialStateProperty.all<
                                                     RoundedRectangleBorder>(
@@ -3997,7 +3997,7 @@ class _LeaveRequest extends State<LeaveRequest>
                                   );
                                 },
                                 style: ElevatedButton.styleFrom(
-                                  backgroundColor: Colors.red,
+                                  backgroundColor: Colors.lightBlue,
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(8.0),
                                   ),
@@ -4195,7 +4195,7 @@ class _LeaveRequest extends State<LeaveRequest>
                                                         content: Text(
                                                             'Gagal menolak permintaan cuti. Coba lagi.'),
                                                         backgroundColor:
-                                                            Colors.red,
+                                                            Colors.lightBlue,
                                                       ),
                                                     );
                                                   }
@@ -4204,7 +4204,7 @@ class _LeaveRequest extends State<LeaveRequest>
                                               style: ButtonStyle(
                                                 backgroundColor:
                                                 MaterialStateProperty.all<
-                                                    Color>(Colors.red),
+                                                    Color>(Colors.lightBlue),
                                                 shape:
                                                 MaterialStateProperty.all<
                                                     RoundedRectangleBorder>(
@@ -4408,7 +4408,7 @@ class _LeaveRequest extends State<LeaveRequest>
                                 topRight: Radius.circular(15.0),
                                 bottomRight: Radius.circular(15.0),
                               ),
-                              color: Colors.red[100],
+                              color: Colors.lightBlue[100],
                             ),
                             child: Padding(
                               padding:
@@ -4419,7 +4419,7 @@ class _LeaveRequest extends State<LeaveRequest>
                                   icon: const Icon(
                                     Icons.delete,
                                     size: 18.0,
-                                    color: Colors.red,
+                                    color: Colors.lightBlue,
                                   ),
                                   onPressed: () async {
                                     isSaveClick = true;
@@ -4483,7 +4483,7 @@ class _LeaveRequest extends State<LeaveRequest>
                                                 style: ButtonStyle(
                                                   backgroundColor:
                                                   MaterialStateProperty.all<
-                                                      Color>(Colors.red),
+                                                      Color>(Colors.lightBlue),
                                                   shape:
                                                   MaterialStateProperty.all<
                                                       RoundedRectangleBorder>(
@@ -4644,7 +4644,7 @@ class _LeaveRequest extends State<LeaveRequest>
                                                       content: Text(
                                                           'Gagal menolak permintaan cuti. Coba lagi.'),
                                                       backgroundColor:
-                                                          Colors.red,
+                                                          Colors.lightBlue,
                                                     ),
                                                   );
                                                 }
@@ -4653,7 +4653,7 @@ class _LeaveRequest extends State<LeaveRequest>
                                             style: ButtonStyle(
                                               backgroundColor:
                                               MaterialStateProperty.all<
-                                                  Color>(Colors.red),
+                                                  Color>(Colors.lightBlue),
                                               shape: MaterialStateProperty.all<
                                                   RoundedRectangleBorder>(
                                                 RoundedRectangleBorder(
@@ -4676,7 +4676,7 @@ class _LeaveRequest extends State<LeaveRequest>
                                 );
                               },
                               style: ElevatedButton.styleFrom(
-                                backgroundColor: Colors.red,
+                                backgroundColor: Colors.lightBlue,
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(8.0),
                                 ),
@@ -4875,7 +4875,7 @@ class _LeaveRequest extends State<LeaveRequest>
                                                       content: Text(
                                                           'Gagal menolak permintaan cuti. Coba lagi.'),
                                                       backgroundColor:
-                                                          Colors.red,
+                                                          Colors.lightBlue,
                                                     ),
                                                   );
                                                 }
@@ -4884,7 +4884,7 @@ class _LeaveRequest extends State<LeaveRequest>
                                             style: ButtonStyle(
                                               backgroundColor:
                                               MaterialStateProperty.all<
-                                                  Color>(Colors.red),
+                                                  Color>(Colors.lightBlue),
                                               shape: MaterialStateProperty.all<
                                                   RoundedRectangleBorder>(
                                                 RoundedRectangleBorder(
@@ -4958,9 +4958,9 @@ StateInfo _getStateInfo(String state) {
     case 'approved':
       return StateInfo(Colors.green, 'Disetujui');
     case 'cancelled':
-      return StateInfo(Colors.red, 'Dibatalkan');
+      return StateInfo(Colors.lightBlue, 'Dibatalkan');
     case 'rejected':
-      return StateInfo(Colors.orange[700]!, 'Ditolak');
+      return StateInfo(Colors.lightBlue[700]!, 'Ditolak');
     default:
       return StateInfo(Colors.black, 'Tidak Diketahui');
   }
@@ -4996,7 +4996,7 @@ class ImageViewer extends StatelessWidget {
           errorBuilder: (context, error, stackTrace) {
             return const Text(
               'Gagal memuat gambar',
-              style: TextStyle(color: Colors.red),
+              style: TextStyle(color: Colors.lightBlue),
             );
           },
         )
@@ -5006,13 +5006,13 @@ class ImageViewer extends StatelessWidget {
           errorBuilder: (context, error, stackTrace) {
             return const Text(
               'Gagal memuat gambar',
-              style: TextStyle(color: Colors.red),
+              style: TextStyle(color: Colors.lightBlue),
             );
           },
         )
             : const Text(
           'Gambar tidak ditemukan',
-          style: TextStyle(color: Colors.red),
+          style: TextStyle(color: Colors.lightBlue),
         ),
       ),
     );

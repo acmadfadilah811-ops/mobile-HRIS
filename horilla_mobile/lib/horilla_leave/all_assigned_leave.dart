@@ -307,7 +307,7 @@ class _AllAssignedLeave extends State<AllAssignedLeave> {
                       style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
-                          color: Colors.red),
+                          color: Colors.lightBlue),
                     ),
                   ],
                 ),
@@ -392,7 +392,7 @@ class _AllAssignedLeave extends State<AllAssignedLeave> {
                             numberOfItemsLabelToShow: 3,
                             checkboxFillColor: Colors.grey,
                             boxDecoration: BoxDecoration(
-                              border: Border.all(color: Colors.redAccent),
+                              border: Border.all(color: Colors.lightBlueAccent),
                               borderRadius: BorderRadius.circular(10),
                             ),
                           ),
@@ -453,7 +453,7 @@ class _AllAssignedLeave extends State<AllAssignedLeave> {
                             numberOfItemsLabelToShow: 2,
                             checkboxFillColor: Colors.grey,
                             boxDecoration: BoxDecoration(
-                              border: Border.all(color: Colors.redAccent),
+                              border: Border.all(color: Colors.lightBlueAccent),
                               borderRadius: BorderRadius.circular(10),
                             ),
                           ),
@@ -502,7 +502,7 @@ class _AllAssignedLeave extends State<AllAssignedLeave> {
                               style: ButtonStyle(
                                 backgroundColor:
                                 MaterialStateProperty.all<Color>(
-                                    Colors.red),
+                                    Colors.lightBlue),
                                 shape: MaterialStateProperty.all<
                                     RoundedRectangleBorder>(
                                   RoundedRectangleBorder(
@@ -656,15 +656,15 @@ class _AllAssignedLeave extends State<AllAssignedLeave> {
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(4.0),
                 ),
-                textStyle: const TextStyle(color: Colors.red),
+                textStyle: const TextStyle(color: Colors.lightBlue),
                 side: BorderSide(
-                  color: Colors.red,
+                  color: Colors.lightBlue,
                   width: MediaQuery.of(context).size.width * 0.002,
                 ),
               ),
               child: const Text(
                 'BERIKAN',
-                style: TextStyle(color: Colors.red),
+                style: TextStyle(color: Colors.lightBlue),
               ),
             ),
           ),
@@ -785,9 +785,9 @@ class _AllAssignedLeave extends State<AllAssignedLeave> {
           ? AnimatedNotchBottomBar(
         /// Provide NotchBottomBarController
         notchBottomBarController: _controller,
-        color: Colors.red,
+        color: Colors.lightBlue,
         showLabel: true,
-        notchColor: Colors.red,
+        notchColor: Colors.lightBlue,
         kBottomRadius: 28.0,
         kIconSize: 24.0,
 
@@ -1027,8 +1027,8 @@ class _AllAssignedLeave extends State<AllAssignedLeave> {
                         ),
                       )
                           : ExpansionTile(
-                        collapsedBackgroundColor: Colors.red.shade50,
-                        backgroundColor: Colors.red.shade100,
+                        collapsedBackgroundColor: Colors.lightBlue.shade50,
+                        backgroundColor: Colors.lightBlue.shade100,
                         title: Row(
                           children: [
                             Container(

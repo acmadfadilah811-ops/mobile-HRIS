@@ -81,7 +81,7 @@ class _CompanyDocumentsState extends State<CompanyDocuments>
   void _showError(String message) {
     if (!mounted) return;
     ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text(message), backgroundColor: Colors.red),
+      SnackBar(content: Text(message), backgroundColor: Colors.lightBlue),
     );
   }
 
@@ -147,7 +147,7 @@ class _CompanyDocumentsState extends State<CompanyDocuments>
           final isOpening = openingId == doc['id'];
           return Card(
             child: ListTile(
-              leading: const Icon(Icons.description_outlined, color: Colors.red),
+              leading: const Icon(Icons.description_outlined, color: Colors.lightBlue),
               title: Text(doc['title'] ?? '-'),
               trailing: isOpening
                   ? const SizedBox(
@@ -172,8 +172,8 @@ class _CompanyDocumentsState extends State<CompanyDocuments>
         bottom: TabBar(
           controller: _tabController,
           isScrollable: true,
-          labelColor: Colors.red,
-          indicatorColor: Colors.red,
+          labelColor: Colors.lightBlue,
+          indicatorColor: Colors.lightBlue,
           unselectedLabelColor: Colors.grey,
           tabs: _categories.map((c) => Tab(text: c['label'])).toList(),
         ),

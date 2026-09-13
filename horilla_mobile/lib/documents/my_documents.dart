@@ -92,7 +92,7 @@ class _MyDocumentsState extends State<MyDocuments>
   void _showError(String message) {
     if (!mounted) return;
     ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text(message), backgroundColor: Colors.red),
+      SnackBar(content: Text(message), backgroundColor: Colors.lightBlue),
     );
   }
 
@@ -232,7 +232,7 @@ class _MyDocumentsState extends State<MyDocuments>
           final isOpening = openingId == payslip['id'];
           return Card(
             child: ListTile(
-              leading: const Icon(Icons.receipt_long, color: Colors.red),
+              leading: const Icon(Icons.receipt_long, color: Colors.lightBlue),
               title: Text(_formatPeriod(payslip)),
               subtitle: Text(
                 'Status: ${payslip['status'] ?? '-'}',
@@ -299,8 +299,8 @@ class _MyDocumentsState extends State<MyDocuments>
         title: const Text('Dokumen Saya'),
         bottom: TabBar(
           controller: _tabController,
-          labelColor: Colors.red,
-          indicatorColor: Colors.red,
+          labelColor: Colors.lightBlue,
+          indicatorColor: Colors.lightBlue,
           unselectedLabelColor: Colors.grey,
           tabs: const [
             Tab(text: 'Slip Gaji'),

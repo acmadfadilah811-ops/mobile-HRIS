@@ -246,7 +246,7 @@ class _AttendanceAttendance extends State<AttendanceAttendance>
                       style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
-                          color: Colors.red),
+                          color: Colors.lightBlue),
                     ),
                   ],
                 ),
@@ -289,7 +289,7 @@ class _AttendanceAttendance extends State<AttendanceAttendance>
                       style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
-                          color: Colors.red),
+                          color: Colors.lightBlue),
                     ),
                   ],
                 ),
@@ -332,7 +332,7 @@ class _AttendanceAttendance extends State<AttendanceAttendance>
                       style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
-                          color: Colors.red),
+                          color: Colors.lightBlue),
                     ),
                   ],
                 ),
@@ -375,7 +375,7 @@ class _AttendanceAttendance extends State<AttendanceAttendance>
                       style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
-                          color: Colors.red),
+                          color: Colors.lightBlue),
                     ),
                   ],
                 ),
@@ -1202,7 +1202,7 @@ class _AttendanceAttendance extends State<AttendanceAttendance>
                               child: Text(
                                 _errorMessage ?? '',
                                 style: const TextStyle(
-                                    color: Colors.red,
+                                    color: Colors.lightBlue,
                                     fontWeight: FontWeight.bold),
                               ),
                             ),
@@ -1708,7 +1708,7 @@ class _AttendanceAttendance extends State<AttendanceAttendance>
                         },
                         style: ButtonStyle(
                           backgroundColor:
-                          MaterialStateProperty.all<Color>(Colors.red),
+                          MaterialStateProperty.all<Color>(Colors.lightBlue),
                           shape:
                           MaterialStateProperty.all<RoundedRectangleBorder>(
                             RoundedRectangleBorder(
@@ -1795,7 +1795,7 @@ class _AttendanceAttendance extends State<AttendanceAttendance>
                               child: Text(
                                 _errorMessage ?? '',
                                 style: const TextStyle(
-                                    color: Colors.red,
+                                    color: Colors.lightBlue,
                                     fontWeight: FontWeight.bold),
                               ),
                             ),
@@ -2303,7 +2303,7 @@ class _AttendanceAttendance extends State<AttendanceAttendance>
                         },
                         style: ButtonStyle(
                           backgroundColor:
-                          MaterialStateProperty.all<Color>(Colors.red),
+                          MaterialStateProperty.all<Color>(Colors.lightBlue),
                           shape:
                           MaterialStateProperty.all<RoundedRectangleBorder>(
                             RoundedRectangleBorder(
@@ -2368,7 +2368,7 @@ class _AttendanceAttendance extends State<AttendanceAttendance>
                               child: Text(
                                 _errorMessage ?? '',
                                 style: const TextStyle(
-                                    color: Colors.red,
+                                    color: Colors.lightBlue,
                                     fontWeight: FontWeight.bold),
                               ),
                             ),
@@ -3073,7 +3073,7 @@ class _AttendanceAttendance extends State<AttendanceAttendance>
                         },
                         style: ButtonStyle(
                           backgroundColor:
-                          MaterialStateProperty.all<Color>(Colors.red),
+                          MaterialStateProperty.all<Color>(Colors.lightBlue),
                           shape:
                           MaterialStateProperty.all<RoundedRectangleBorder>(
                             RoundedRectangleBorder(
@@ -3158,11 +3158,11 @@ class _AttendanceAttendance extends State<AttendanceAttendance>
                         backgroundColor: Colors.white,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(4.0),
-                          side: const BorderSide(color: Colors.red),
+                          side: const BorderSide(color: Colors.lightBlue),
                         ),
                       ),
                       child: const Text('BUAT',
-                          style: TextStyle(color: Colors.red)),
+                          style: TextStyle(color: Colors.lightBlue)),
                     ),
                   ),
                 ],
@@ -3245,9 +3245,9 @@ class _AttendanceAttendance extends State<AttendanceAttendance>
             ? AnimatedNotchBottomBar(
           /// Provide NotchBottomBarController
           notchBottomBarController: _controller,
-          color: Colors.red,
+          color: Colors.lightBlue,
           showLabel: true,
-          notchColor: Colors.red,
+          notchColor: Colors.lightBlue,
           kBottomRadius: 28.0,
           kIconSize: 24.0,
 
@@ -3472,8 +3472,8 @@ class _AttendanceAttendance extends State<AttendanceAttendance>
             ),
             SizedBox(height: MediaQuery.of(context).size.height * 0.02),
             TabBar(
-              indicatorColor: Colors.red,
-              labelColor: Colors.red,
+              indicatorColor: Colors.lightBlue,
+              labelColor: Colors.lightBlue,
               unselectedLabelColor: Colors.grey,
               isScrollable: true,
               tabs: [
@@ -4886,7 +4886,7 @@ class _AttendanceAttendance extends State<AttendanceAttendance>
                                 topRight: Radius.circular(15.0),
                                 bottomRight: Radius.circular(15.0),
                               ),
-                              color: Colors.red[100],
+                              color: Colors.lightBlue[100],
                             ),
                             child: Padding(
                               padding: const EdgeInsets.symmetric(
@@ -4895,7 +4895,7 @@ class _AttendanceAttendance extends State<AttendanceAttendance>
                                 icon: const Icon(
                                   Icons.delete,
                                   size: 18.0,
-                                  color: Colors.red,
+                                  color: Colors.lightBlue,
                                 ),
                                 onPressed: () async {
                                   isSaveClick = true;
@@ -4966,7 +4966,7 @@ class _AttendanceAttendance extends State<AttendanceAttendance>
                                                 backgroundColor:
                                                 MaterialStateProperty
                                                     .all<Color>(
-                                                    Colors.red),
+                                                    Colors.lightBlue),
                                                 shape: MaterialStateProperty
                                                     .all<
                                                     RoundedRectangleBorder>(
@@ -5630,7 +5630,7 @@ class _AttendanceAttendance extends State<AttendanceAttendance>
                                   topRight: Radius.circular(15.0),
                                   bottomRight: Radius.circular(15.0),
                                 ),
-                                color: Colors.red[100],
+                                color: Colors.lightBlue[100],
                               ),
                               child: Padding(
                                 padding:
@@ -5639,7 +5639,7 @@ class _AttendanceAttendance extends State<AttendanceAttendance>
                                   icon: const Icon(
                                     Icons.delete,
                                     size: 18.0, // Reduce icon size
-                                    color: Colors.red, // Set icon color
+                                    color: Colors.lightBlue, // Set icon color
                                   ),
                                   onPressed: () async {
                                     isSaveClick = true;
@@ -5705,7 +5705,7 @@ class _AttendanceAttendance extends State<AttendanceAttendance>
                                                 style: ButtonStyle(
                                                   backgroundColor:
                                                   MaterialStateProperty.all<
-                                                      Color>(Colors.red),
+                                                      Color>(Colors.lightBlue),
                                                   shape:
                                                   MaterialStateProperty.all<
                                                       RoundedRectangleBorder>(

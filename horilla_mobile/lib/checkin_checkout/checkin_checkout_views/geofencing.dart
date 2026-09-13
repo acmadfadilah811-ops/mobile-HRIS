@@ -299,7 +299,7 @@ class _MapScreenState extends State<MapScreen> with TickerProviderStateMixin {
                       style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
-                          color: Colors.red),
+                          color: Colors.lightBlue),
                     ),
                   ],
                 ),
@@ -355,7 +355,7 @@ class _MapScreenState extends State<MapScreen> with TickerProviderStateMixin {
                       style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
-                          color: Colors.red),
+                          color: Colors.lightBlue),
                     ),
                   ],
                 ),
@@ -405,7 +405,7 @@ class _MapScreenState extends State<MapScreen> with TickerProviderStateMixin {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.red,
+        backgroundColor: Colors.lightBlue,
         automaticallyImplyLeading: false,
         title: const Text('Peta Geofencing', style: TextStyle(color: Colors.white)),
       ),
@@ -508,7 +508,7 @@ class _MapScreenState extends State<MapScreen> with TickerProviderStateMixin {
                         },
                         child: Icon(
                           Icons.location_on,
-                          color: Colors.red,
+                          color: Colors.lightBlue,
                           size: 40.0,
                         ),
                       ),
@@ -578,7 +578,7 @@ class _MapScreenState extends State<MapScreen> with TickerProviderStateMixin {
                             });
                           }
                         },
-                        icon: const Icon(Icons.close, color: Colors.red),
+                        icon: const Icon(Icons.close, color: Colors.lightBlue),
                       ),
                     ],
                   ),
@@ -633,7 +633,7 @@ class _MapScreenState extends State<MapScreen> with TickerProviderStateMixin {
                             }
                           },
                           style: ElevatedButton.styleFrom(
-                              backgroundColor: Colors.red),
+                              backgroundColor: Colors.lightBlue),
                           child: const Text('Hapus'),
                         ),
                       ElevatedButton(

@@ -560,7 +560,7 @@ class _CheckInCheckOutFormPageState extends State<CheckInCheckOutFormPage> {
       backgroundColor: Colors.white,
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        backgroundColor: Colors.red,
+        backgroundColor: Colors.lightBlue,
         actions: [
           IconButton(
             icon: const Icon(Icons.logout, color: Colors.white),
@@ -575,9 +575,9 @@ class _CheckInCheckOutFormPageState extends State<CheckInCheckOutFormPage> {
       body: isLoading ? _buildLoadingWidget() : _buildCheckInCheckoutWidget(getToken),
       bottomNavigationBar: AnimatedNotchBottomBar(
         notchBottomBarController: _controller,
-        color: Colors.red,
+        color: Colors.lightBlue,
         showLabel: true,
-        notchColor: Colors.red,
+        notchColor: Colors.lightBlue,
         kBottomRadius: 28.0,
         kIconSize: 24.0,
         removeMargins: false,
@@ -631,7 +631,7 @@ class _CheckInCheckOutFormPageState extends State<CheckInCheckOutFormPage> {
       children: [
         if (clockCheckBool || clockCheckedIn)
           Container(
-            color: Colors.red,
+            color: Colors.lightBlue,
             height: MediaQuery.of(context).size.height * 0.25,
             child: Padding(
               padding: const EdgeInsets.all(16.0),
@@ -690,7 +690,7 @@ class _CheckInCheckOutFormPageState extends State<CheckInCheckOutFormPage> {
           )
         else
           Container(
-            color: Colors.red,
+            color: Colors.lightBlue,
             height: MediaQuery.of(context).size.height * 0.25,
             child: Padding(
               padding: const EdgeInsets.all(16.0),
@@ -832,7 +832,7 @@ class _CheckInCheckOutFormPageState extends State<CheckInCheckOutFormPage> {
       children: [
         if (clockCheckBool || clockCheckedIn)
           Container(
-            color: Colors.red,
+            color: Colors.lightBlue,
             height: MediaQuery.of(context).size.height * 0.25,
             child: Padding(
               padding: const EdgeInsets.all(16.0),
@@ -900,7 +900,7 @@ class _CheckInCheckOutFormPageState extends State<CheckInCheckOutFormPage> {
           )
         else
           Container(
-            color: Colors.red,
+            color: Colors.lightBlue,
             height: MediaQuery.of(context).size.height * 0.25,
             child: Padding(
               padding: const EdgeInsets.all(16.0),
@@ -1308,7 +1308,7 @@ class _CheckInCheckOutFormPageState extends State<CheckInCheckOutFormPage> {
               height: MediaQuery.of(context).size.height * 0.07,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(8.0),
-                color: clockCheckedIn ? Colors.red : Colors.green,
+                color: clockCheckedIn ? Colors.lightBlue : Colors.green,
               ),
               alignment: Alignment.center,
               child: Row(
@@ -1343,7 +1343,7 @@ class _CheckInCheckOutFormPageState extends State<CheckInCheckOutFormPage> {
                         width: MediaQuery.of(context).size.width * 0.12,
                         height: MediaQuery.of(context).size.height * 0.06,
                         decoration: BoxDecoration(borderRadius: BorderRadius.circular(10.0), color: Colors.white),
-                        child: const Icon(Icons.arrow_back, color: Colors.red, size: 30.0),
+                        child: const Icon(Icons.arrow_back, color: Colors.lightBlue, size: 30.0),
                       ),
                     )
                 ],

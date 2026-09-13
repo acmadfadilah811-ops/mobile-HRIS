@@ -199,7 +199,7 @@ class _CameraSetupPageState extends State<CameraSetupPage> {
                   const SizedBox(height: 16),
                   const Text(
                     "Foto Wajah Berhasil Diunggah",
-                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.red),
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.lightBlue),
                   ),
                 ],
               ),
@@ -265,7 +265,7 @@ class _CameraSetupPageState extends State<CameraSetupPage> {
         appBar: AppBar(
           automaticallyImplyLeading: false,
           title: const Text('Pengambilan Foto Wajah', style: TextStyle(color: Colors.white)),
-          backgroundColor: Colors.red,
+          backgroundColor: Colors.lightBlue,
           elevation: 0,
           actions: [
             IconButton(
@@ -285,7 +285,7 @@ class _CameraSetupPageState extends State<CameraSetupPage> {
                     height: 400,
                     child: Container(
                       decoration: BoxDecoration(
-                         border: Border.all(color: Colors.red[700]!, width: 3),
+                         border: Border.all(color: Colors.lightBlue[700]!, width: 3),
                         borderRadius: BorderRadius.circular(12),
                         boxShadow: [
                           BoxShadow(color: Colors.grey.withOpacity(0.3), spreadRadius: 2, blurRadius: 5),
@@ -303,7 +303,7 @@ class _CameraSetupPageState extends State<CameraSetupPage> {
                               }
                               return CameraPreview(_controller!);
                             } else {
-                              return Center(child: CircularProgressIndicator(color: Colors.red[700]));
+                              return Center(child: CircularProgressIndicator(color: Colors.lightBlue[700]));
                             }
                           },
                         )
@@ -349,11 +349,11 @@ class _CameraSetupPageState extends State<CameraSetupPage> {
                     if (_capturedImage != null) ...[
                       OutlinedButton.icon(
                         onPressed: _retakePicture,
-                        icon: const Icon(Icons.refresh, color: Colors.red),
+                        icon: const Icon(Icons.refresh, color: Colors.lightBlue),
                         label: const Text('Foto Ulang'),
                         style: OutlinedButton.styleFrom(
-                          foregroundColor: Colors.red[700],
-                          side: BorderSide(color: Colors.red!),
+                          foregroundColor: Colors.lightBlue[700],
+                          side: BorderSide(color: Colors.lightBlue!),
                           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
                           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
                         ),

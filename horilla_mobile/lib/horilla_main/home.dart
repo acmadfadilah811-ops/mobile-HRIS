@@ -713,7 +713,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                       style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
-                          color: Colors.red),
+                          color: Colors.lightBlue),
                     ),
                   ],
                 ),
@@ -775,13 +775,13 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                               _showUnreadNotifications(context);
                             },
                             icon: Icon(Icons.done_all,
-                                color: Colors.red,
+                                color: Colors.lightBlue,
                                 size:
                                 MediaQuery.of(context).size.width * 0.0357),
                             label: Text(
                               'Tandai sudah dibaca',
                               style: TextStyle(
-                                  color: Colors.red,
+                                  color: Colors.lightBlue,
                                   fontWeight: FontWeight.bold,
                                   fontSize: MediaQuery.of(context).size.width *
                                       0.0368),
@@ -794,13 +794,13 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                               _showUnreadNotifications(context);
                             },
                             icon: Icon(Icons.clear,
-                                color: Colors.red,
+                                color: Colors.lightBlue,
                                 size:
                                 MediaQuery.of(context).size.width * 0.0357),
                             label: Text(
                               'Hapus semua',
                               style: TextStyle(
-                                  color: Colors.red,
+                                  color: Colors.lightBlue,
                                   fontWeight: FontWeight.bold,
                                   fontSize: MediaQuery.of(context).size.width *
                                       0.0368),
@@ -916,7 +916,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                               MediaQuery.of(context).size.width * 0.0134,
                               vertical:
                               MediaQuery.of(context).size.width * 0.0134),
-                          backgroundColor: Colors.red,
+                          backgroundColor: Colors.lightBlue,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(8.0),
                           ),
@@ -954,9 +954,9 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
         },
         child: Container(
           decoration: BoxDecoration(
-            border: Border.all(color: Colors.red.shade100),
+            border: Border.all(color: Colors.lightBlue.shade100),
             borderRadius: BorderRadius.circular(8.0),
-            color: Colors.red.shade100,
+            color: Colors.lightBlue.shade100,
             boxShadow: [
               BoxShadow(
                 color: Colors.white.withOpacity(0.3),
@@ -970,7 +970,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
             padding: EdgeInsets.symmetric(
                 vertical: MediaQuery.of(context).size.height * 0.0082),
             child: Container(
-              color: Colors.red.shade100,
+              color: Colors.lightBlue.shade100,
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -983,7 +983,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                       height: MediaQuery.of(context).size.width * 0.0223,
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
-                        color: Colors.red.shade500,
+                        color: Colors.lightBlue.shade500,
                         border: Border.all(
                             color: Colors.grey,
                             width: MediaQuery.of(context).size.width * 0.0022),
@@ -1022,7 +1022,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                       },
                       child: Icon(
                         Icons.check,
-                        color: Colors.red.shade500,
+                        color: Colors.lightBlue.shade500,
                         size: 20.0,
                       ),
                     ),
@@ -1221,7 +1221,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                         vertical: MediaQuery.of(context).size.width * 0.004,
                       ),
                       decoration: const BoxDecoration(
-                        color: Colors.red,
+                        color: Colors.lightBlue,
                         shape: BoxShape.circle,
                       ),
                       constraints: BoxConstraints(
@@ -1418,6 +1418,20 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                 },
               ),
             ),
+            Card(
+              child: ListTile(
+                leading: const Icon(Icons.campaign_outlined),
+                title: const Text('Pengumuman'),
+                subtitle: Text(
+                  'Info dan pengumuman dari perusahaan.',
+                  style: TextStyle(color: Colors.grey.shade700),
+                ),
+                trailing: const Icon(Icons.keyboard_arrow_right),
+                onTap: () {
+                  Navigator.pushNamed(context, '/announcements');
+                },
+              ),
+            ),
           ],
         ),
       ),
@@ -1425,9 +1439,9 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
       bottomNavigationBar: (bottomBarPages.length <= maxCount)
           ? AnimatedNotchBottomBar(
         notchBottomBarController: _controller,
-        color: Colors.red,
+        color: Colors.lightBlue,
         showLabel: true,
-        notchColor: Colors.red,
+        notchColor: Colors.lightBlue,
         kBottomRadius: 28.0,
         kIconSize: 24.0,
         removeMargins: false,
@@ -1493,11 +1507,11 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
   void showSnackBar() {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        backgroundColor: Colors.red,
+        backgroundColor: Colors.lightBlue,
         content: const Text('Silakan periksa koneksi internet Anda',
             style: TextStyle(color: Colors.white)),
         action: SnackBarAction(
-          backgroundColor: Colors.red,
+          backgroundColor: Colors.lightBlue,
           label: 'Tutup',
           textColor: Colors.white,
           onPressed: () async {

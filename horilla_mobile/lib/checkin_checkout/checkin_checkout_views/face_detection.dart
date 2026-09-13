@@ -428,7 +428,7 @@ class _FaceScannerState extends State<FaceScanner> with SingleTickerProviderStat
       appBar: AppBar(
         automaticallyImplyLeading: false,
         title: const Text('Deteksi Wajah'),
-        backgroundColor: Colors.red,
+        backgroundColor: Colors.lightBlue,
         elevation: 0,
       ),
       body: Center(

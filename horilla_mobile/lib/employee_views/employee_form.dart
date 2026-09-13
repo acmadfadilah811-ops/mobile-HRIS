@@ -1291,7 +1291,7 @@ class _EmployeeFormPageState extends State<EmployeeFormPage>
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text('Tidak ada gambar yang dipilih'),
-          backgroundColor: Colors.red,
+          backgroundColor: Colors.lightBlue,
         ),
       );
       return null;
@@ -1423,7 +1423,7 @@ class _EmployeeFormPageState extends State<EmployeeFormPage>
                               child: Text(
                                 _errorMessage ?? '',
                                 style: const TextStyle(
-                                    color: Colors.red,
+                                    color: Colors.lightBlue,
                                     fontWeight: FontWeight.bold),
                               ),
                             ),
@@ -2106,7 +2106,7 @@ class _EmployeeFormPageState extends State<EmployeeFormPage>
                         },
                         style: ButtonStyle(
                           backgroundColor:
-                          MaterialStateProperty.all<Color>(Colors.red),
+                          MaterialStateProperty.all<Color>(Colors.lightBlue),
                           shape:
                           MaterialStateProperty.all<RoundedRectangleBorder>(
                             RoundedRectangleBorder(
@@ -2203,7 +2203,7 @@ class _EmployeeFormPageState extends State<EmployeeFormPage>
                               child: Text(
                                 _errorMessage ?? '',
                                 style: const TextStyle(
-                                    color: Colors.red,
+                                    color: Colors.lightBlue,
                                     fontWeight: FontWeight.bold),
                               ),
                             ),
@@ -2993,7 +2993,7 @@ class _EmployeeFormPageState extends State<EmployeeFormPage>
                         },
                         style: ButtonStyle(
                           backgroundColor:
-                          MaterialStateProperty.all<Color>(Colors.red),
+                          MaterialStateProperty.all<Color>(Colors.lightBlue),
                           shape:
                           MaterialStateProperty.all<RoundedRectangleBorder>(
                             RoundedRectangleBorder(
@@ -3060,7 +3060,7 @@ class _EmployeeFormPageState extends State<EmployeeFormPage>
                               child: Text(
                                 _errorMessage ?? '',
                                 style: const TextStyle(
-                                    color: Colors.red,
+                                    color: Colors.lightBlue,
                                     fontWeight: FontWeight.bold),
                               ),
                             ),
@@ -3421,7 +3421,7 @@ class _EmployeeFormPageState extends State<EmployeeFormPage>
                         },
                         style: ButtonStyle(
                           backgroundColor:
-                          MaterialStateProperty.all<Color>(Colors.red),
+                          MaterialStateProperty.all<Color>(Colors.lightBlue),
                           shape:
                           MaterialStateProperty.all<RoundedRectangleBorder>(
                             RoundedRectangleBorder(
@@ -3523,7 +3523,7 @@ class _EmployeeFormPageState extends State<EmployeeFormPage>
       backgroundColor: Colors.white,
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        backgroundColor: Colors.red,
+        backgroundColor: Colors.lightBlue,
         actions: [
           if (checkManager)
             Visibility(
@@ -3561,9 +3561,9 @@ class _EmployeeFormPageState extends State<EmployeeFormPage>
           ? AnimatedNotchBottomBar(
         /// Provide NotchBottomBarController
         notchBottomBarController: _controller,
-        color: Colors.red,
+        color: Colors.lightBlue,
         showLabel: true,
-        notchColor: Colors.red,
+        notchColor: Colors.lightBlue,
         kBottomRadius: 28.0,
         kIconSize: 24.0,
 
@@ -3658,7 +3658,7 @@ class _EmployeeFormPageState extends State<EmployeeFormPage>
                       style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
-                          color: Colors.red),
+                          color: Colors.lightBlue),
                     ),
                   ],
                 ),
@@ -3701,7 +3701,7 @@ class _EmployeeFormPageState extends State<EmployeeFormPage>
                       style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
-                          color: Colors.red),
+                          color: Colors.lightBlue),
                     ),
                   ],
                 ),
@@ -3744,7 +3744,7 @@ class _EmployeeFormPageState extends State<EmployeeFormPage>
                       style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
-                          color: Colors.red),
+                          color: Colors.lightBlue),
                     ),
                   ],
                 ),
@@ -3773,7 +3773,7 @@ class _EmployeeFormPageState extends State<EmployeeFormPage>
             Container(
               height: MediaQuery.of(context).size.height * 0.15,
               alignment: Alignment.topCenter,
-              color: Colors.red,
+              color: Colors.lightBlue,
               child: Padding(
                 padding: const EdgeInsets.only(left: 17.0),
                 child: SingleChildScrollView(
@@ -3925,7 +3925,7 @@ class _EmployeeFormPageState extends State<EmployeeFormPage>
                                                     MainAxisSize.min,
                                                     children: [
                                                       Icon(Icons.phone,
-                                                          color: Colors.red,
+                                                          color: Colors.lightBlue,
                                                           size: 15),
                                                       Text(
                                                         '   Telepon Kerja',
@@ -3991,7 +3991,7 @@ class _EmployeeFormPageState extends State<EmployeeFormPage>
                                                             child: Icon(
                                                                 Icons.email,
                                                                 color:
-                                                                Colors.red,
+                                                                Colors.lightBlue,
                                                                 size: 15),
                                                           ),
                                                           Text(
@@ -4044,7 +4044,7 @@ class _EmployeeFormPageState extends State<EmployeeFormPage>
                                                   MainAxisSize.min,
                                                   children: [
                                                     Icon(Icons.phone,
-                                                        color: Colors.red,
+                                                        color: Colors.lightBlue,
                                                         size: 15),
                                                     Text(
                                                       '   Telepon',
@@ -4099,8 +4099,8 @@ class _EmployeeFormPageState extends State<EmployeeFormPage>
                                 TabBar(
                                   isScrollable: true,
                                   controller: _tabController,
-                                  indicatorColor: Colors.red,
-                                  labelColor: Colors.red,
+                                  indicatorColor: Colors.lightBlue,
+                                  labelColor: Colors.lightBlue,
                                   unselectedLabelColor: Colors.grey,
                                   labelStyle: const TextStyle(
                                     fontWeight: FontWeight.bold,
@@ -4161,7 +4161,7 @@ class _EmployeeFormPageState extends State<EmployeeFormPage>
           Column(
             children: [
               Container(
-                color: Colors.red,
+                color: Colors.lightBlue,
                 alignment: Alignment.topCenter,
                 height: MediaQuery.of(context).size.height * 0.15,
                 child: Padding(
@@ -4226,7 +4226,7 @@ class _EmployeeFormPageState extends State<EmployeeFormPage>
                                     },
                                     child: const CircleAvatar(
                                       radius: 12.0,
-                                      backgroundColor: Colors.red,
+                                      backgroundColor: Colors.lightBlue,
                                       child: Icon(
                                         Icons.camera_alt,
                                         size: 12.0,
@@ -4323,7 +4323,7 @@ class _EmployeeFormPageState extends State<EmployeeFormPage>
                                                               right: 8.0),
                                                           child: Icon(
                                                               Icons.email,
-                                                              color: Colors.red,
+                                                              color: Colors.lightBlue,
                                                               size: 15),
                                                         ),
                                                         Text(
@@ -4371,7 +4371,7 @@ class _EmployeeFormPageState extends State<EmployeeFormPage>
                                                 mainAxisSize: MainAxisSize.min,
                                                 children: [
                                                   Icon(Icons.phone,
-                                                      color: Colors.red,
+                                                      color: Colors.lightBlue,
                                                       size: 15),
                                                   Text(
                                                     '   Telepon Kerja',
@@ -4432,7 +4432,7 @@ class _EmployeeFormPageState extends State<EmployeeFormPage>
                                                         EdgeInsets.only(
                                                             right: 8.0),
                                                         child: Icon(Icons.email,
-                                                            color: Colors.red,
+                                                            color: Colors.lightBlue,
                                                             size: 15),
                                                       ),
                                                       Text(
@@ -4478,7 +4478,7 @@ class _EmployeeFormPageState extends State<EmployeeFormPage>
                                               mainAxisSize: MainAxisSize.min,
                                               children: [
                                                 Icon(Icons.phone,
-                                                    color: Colors.red,
+                                                    color: Colors.lightBlue,
                                                     size: 15),
                                                 Text(
                                                   '   Telepon',
@@ -4528,8 +4528,8 @@ class _EmployeeFormPageState extends State<EmployeeFormPage>
                                 TabBar(
                                   isScrollable: true,
                                   controller: _tabController,
-                                  labelColor: Colors.red,
-                                  indicatorColor: Colors.red,
+                                  labelColor: Colors.lightBlue,
+                                  indicatorColor: Colors.lightBlue,
                                   unselectedLabelColor: Colors.grey,
                                   labelStyle: const TextStyle(
                                     fontWeight: FontWeight.bold,
@@ -4705,10 +4705,10 @@ class _EmployeeFormPageState extends State<EmployeeFormPage>
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(8.0),
                       child: Container(
-                        color: Colors.red.shade50,
+                        color: Colors.lightBlue.shade50,
                         child: ListTile(
                           leading: Icon(Icons.folder_shared_outlined,
-                              color: Colors.red),
+                              color: Colors.lightBlue),
                           title: const Text(
                             "Dokumen Saya",
                             style: TextStyle(fontWeight: FontWeight.bold),
@@ -4745,14 +4745,14 @@ class _EmployeeFormPageState extends State<EmployeeFormPage>
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(8.0),
                     child: ExpansionTile(
-                      backgroundColor: Colors.red.shade100,
-                      collapsedBackgroundColor: Colors.red.shade50,
+                      backgroundColor: Colors.lightBlue.shade100,
+                      collapsedBackgroundColor: Colors.lightBlue.shade50,
                       title: titleIcon != null
                           ? Row(
                         children: [
                           SizedBox(
                             height: MediaQuery.of(context).size.height * 0.0493,
-                            child: Icon(titleIcon, color: Colors.red),
+                            child: Icon(titleIcon, color: Colors.lightBlue),
                           ),
                           const SizedBox(width: 8),
                           Expanded(
@@ -5363,7 +5363,7 @@ class _EmployeeFormPageState extends State<EmployeeFormPage>
             },
             child: Container(
               decoration: BoxDecoration(
-                color: Colors.red.shade50,
+                color: Colors.lightBlue.shade50,
                 borderRadius: BorderRadius.circular(8.0),
               ),
               child: Row(
@@ -5396,7 +5396,7 @@ class _EmployeeFormPageState extends State<EmployeeFormPage>
                             height: MediaQuery.of(context).size.height * 0.03,
                             decoration: const BoxDecoration(
                               shape: BoxShape.circle,
-                              color: Colors.redAccent,
+                              color: Colors.lightBlueAccent,
                             ),
                             child: Center(
                               child: Text(
@@ -5437,7 +5437,7 @@ class _EmployeeFormPageState extends State<EmployeeFormPage>
             },
             child: Container(
               decoration: BoxDecoration(
-                color: Colors.red.shade50,
+                color: Colors.lightBlue.shade50,
                 borderRadius: BorderRadius.circular(8.0),
               ),
               child: Row(
@@ -5470,7 +5470,7 @@ class _EmployeeFormPageState extends State<EmployeeFormPage>
                             height: MediaQuery.of(context).size.height * 0.03,
                             decoration: const BoxDecoration(
                               shape: BoxShape.circle,
-                              color: Colors.redAccent,
+                              color: Colors.lightBlueAccent,
                             ),
                             child: Center(
                               child: Text(
@@ -5511,7 +5511,7 @@ class _EmployeeFormPageState extends State<EmployeeFormPage>
             },
             child: Container(
               decoration: BoxDecoration(
-                color: Colors.red.shade50,
+                color: Colors.lightBlue.shade50,
                 borderRadius: BorderRadius.circular(8.0),
               ),
               child: Row(
@@ -5545,7 +5545,7 @@ class _EmployeeFormPageState extends State<EmployeeFormPage>
                             height: MediaQuery.of(context).size.height * 0.03,
                             decoration: const BoxDecoration(
                               shape: BoxShape.circle,
-                              color: Colors.redAccent,
+                              color: Colors.lightBlueAccent,
                             ),
                             child: Center(
                               child: Text(
@@ -5586,7 +5586,7 @@ class _EmployeeFormPageState extends State<EmployeeFormPage>
             },
             child: Container(
               decoration: BoxDecoration(
-                color: Colors.red.shade50,
+                color: Colors.lightBlue.shade50,
                 borderRadius: BorderRadius.circular(8.0),
               ),
               child: Row(
@@ -5620,7 +5620,7 @@ class _EmployeeFormPageState extends State<EmployeeFormPage>
                             height: MediaQuery.of(context).size.height * 0.03,
                             decoration: const BoxDecoration(
                               shape: BoxShape.circle,
-                              color: Colors.redAccent,
+                              color: Colors.lightBlueAccent,
                             ),
                             child: Center(
                               child: Text(

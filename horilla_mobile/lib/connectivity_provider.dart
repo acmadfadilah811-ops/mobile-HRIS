@@ -29,7 +29,7 @@ class _ConnectivityBannerState extends State<ConnectivityBanner> {
       children: [
         if (_isOffline)
           Container(
-            color: Colors.red,
+            color: Colors.lightBlue,
             width: double.infinity,
             padding: EdgeInsets.all(10),
             child: Text(

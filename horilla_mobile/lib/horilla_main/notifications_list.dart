@@ -216,12 +216,12 @@ class _NotificationsListState extends State<NotificationsList> {
                 backgroundColor: Colors.white,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(4.0),
-                  side: const BorderSide(color: Colors.red),
+                  side: const BorderSide(color: Colors.lightBlue),
                 ),
               ),
               child: const Text(
                 'Hapus semua',
-                style: TextStyle(color: Colors.red),
+                style: TextStyle(color: Colors.lightBlue),
               ),
             ),
           ),
@@ -354,7 +354,7 @@ class _NotificationsListState extends State<NotificationsList> {
                         ),
                         child: const Icon(
                           Icons.circle,
-                          color: Colors.red,
+                          color: Colors.lightBlue,
                           size: 17,
                         ),
                       ),

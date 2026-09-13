@@ -517,7 +517,7 @@ class _HourAccountFormPageState extends State<HourAccountFormPage> {
                       style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
-                          color: Colors.red),
+                          color: Colors.lightBlue),
                     ),
                   ],
                 ),
@@ -560,7 +560,7 @@ class _HourAccountFormPageState extends State<HourAccountFormPage> {
                       style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
-                          color: Colors.red),
+                          color: Colors.lightBlue),
                     ),
                   ],
                 ),
@@ -603,7 +603,7 @@ class _HourAccountFormPageState extends State<HourAccountFormPage> {
                       style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
-                          color: Colors.red),
+                          color: Colors.lightBlue),
                     ),
                   ],
                 ),
@@ -709,7 +709,7 @@ class _HourAccountFormPageState extends State<HourAccountFormPage> {
                             child: Text(
                               _errorMessage ?? '',
                               style: const TextStyle(
-                                  color: Colors.red,
+                                  color: Colors.lightBlue,
                                   fontWeight: FontWeight.bold),
                             ),
                           ),
@@ -991,7 +991,7 @@ class _HourAccountFormPageState extends State<HourAccountFormPage> {
                       },
                       style: ButtonStyle(
                         backgroundColor:
-                            MaterialStateProperty.all<Color>(Colors.red),
+                            MaterialStateProperty.all<Color>(Colors.lightBlue),
                         shape:
                             MaterialStateProperty.all<RoundedRectangleBorder>(
                           RoundedRectangleBorder(
@@ -1057,7 +1057,7 @@ class _HourAccountFormPageState extends State<HourAccountFormPage> {
                             child: Text(
                               _errorMessage ?? '',
                               style: const TextStyle(
-                                  color: Colors.red,
+                                  color: Colors.lightBlue,
                                   fontWeight: FontWeight.bold),
                             ),
                           ),
@@ -1451,7 +1451,7 @@ class _HourAccountFormPageState extends State<HourAccountFormPage> {
                       },
                       style: ButtonStyle(
                         backgroundColor:
-                            MaterialStateProperty.all<Color>(Colors.red),
+                            MaterialStateProperty.all<Color>(Colors.lightBlue),
                         shape:
                             MaterialStateProperty.all<RoundedRectangleBorder>(
                           RoundedRectangleBorder(
@@ -1812,7 +1812,7 @@ class _HourAccountFormPageState extends State<HourAccountFormPage> {
                                   topRight: Radius.circular(15.0),
                                   bottomRight: Radius.circular(15.0),
                                 ),
-                                color: Colors.red[100],
+                                color: Colors.lightBlue[100],
                               ),
                               child: Padding(
                                 padding:
@@ -1821,7 +1821,7 @@ class _HourAccountFormPageState extends State<HourAccountFormPage> {
                                   icon: const Icon(
                                     Icons.delete,
                                     size: 18.0,
-                                    color: Colors.red,
+                                    color: Colors.lightBlue,
                                   ),
                                   onPressed: () async {
                                     isSaveClick = true;
@@ -1885,7 +1885,7 @@ class _HourAccountFormPageState extends State<HourAccountFormPage> {
                                                 style: ButtonStyle(
                                                   backgroundColor:
                                                       MaterialStateProperty.all<
-                                                          Color>(Colors.red),
+                                                          Color>(Colors.lightBlue),
                                                   shape:
                                                       MaterialStateProperty.all<
                                                           RoundedRectangleBorder>(
@@ -2023,11 +2023,11 @@ class _HourAccountFormPageState extends State<HourAccountFormPage> {
                         backgroundColor: Colors.white,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(4.0),
-                          side: const BorderSide(color: Colors.red),
+                          side: const BorderSide(color: Colors.lightBlue),
                         ),
                       ),
                       child: const Text('BUAT',
-                          style: TextStyle(color: Colors.red)),
+                          style: TextStyle(color: Colors.lightBlue)),
                     ),
                   ),
               ],
@@ -2104,9 +2104,9 @@ class _HourAccountFormPageState extends State<HourAccountFormPage> {
       bottomNavigationBar: (bottomBarPages.length <= maxCount)
           ? AnimatedNotchBottomBar(
               notchBottomBarController: _controller,
-              color: Colors.red,
+              color: Colors.lightBlue,
               showLabel: true,
-              notchColor: Colors.red,
+              notchColor: Colors.lightBlue,
               kBottomRadius: 28.0,
               kIconSize: 24.0,
               removeMargins: false,
