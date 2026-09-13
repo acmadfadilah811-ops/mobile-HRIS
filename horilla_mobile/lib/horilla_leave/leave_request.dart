@@ -1441,7 +1441,7 @@ class _LeaveRequest extends State<LeaveRequest>
     }
   }
 
-  Future<void> rejectRequest(int rejectId, String rejectionReason) async {
+  Future<bool> rejectRequest(int rejectId, String rejectionReason) async {
     final prefs = await SharedPreferences.getInstance();
     var token = prefs.getString("token");
     var typedServerUrl = prefs.getString("typed_url");
@@ -1475,9 +1475,11 @@ class _LeaveRequest extends State<LeaveRequest>
           }
         }
       });
+      return true;
     }
     else {
       isSaveClick = true;
+      return false;
     }
   }
 
@@ -3884,7 +3886,9 @@ class _LeaveRequest extends State<LeaveRequest>
                                   record['status'] != 'cancelled' &&
                                   !_isOwnRequest(record),
                               child: ElevatedButton(
-                                onPressed: () {
+                                onPressed: record['status'] == 'approved'
+                                    ? null
+                                    : () {
                                   isSaveClick = true;
                                   showDialog(
                                     context: context,
@@ -3935,10 +3939,24 @@ class _LeaveRequest extends State<LeaveRequest>
                                                   var rejectId = record['id'];
                                                   var description =
                                                       rejectDescription.text;
-                                                  await rejectRequest(
+                                                  bool rejectSuccess =
+                                                      await rejectRequest(
                                                       rejectId, description);
                                                   Navigator.pop(context);
-                                                  showRejectAnimation();
+                                                  if (rejectSuccess) {
+                                                    showRejectAnimation();
+                                                  } else {
+                                                    ScaffoldMessenger.of(
+                                                        context)
+                                                        .showSnackBar(
+                                                      const SnackBar(
+                                                        content: Text(
+                                                            'Gagal menolak permintaan cuti. Coba lagi.'),
+                                                        backgroundColor:
+                                                            Colors.red,
+                                                      ),
+                                                    );
+                                                  }
                                                 }
                                               },
                                               style: ButtonStyle(
@@ -4151,11 +4169,25 @@ class _LeaveRequest extends State<LeaveRequest>
                                                   var rejectId = record['id'];
                                                   var description =
                                                       rejectDescription.text;
-                                                  await rejectRequest(
+                                                  bool rejectSuccess =
+                                                      await rejectRequest(
                                                       rejectId, description);
                                                   // Navigator.pop(context);
                                                   Navigator.pop(context);
-                                                  showRejectAnimation();
+                                                  if (rejectSuccess) {
+                                                    showRejectAnimation();
+                                                  } else {
+                                                    ScaffoldMessenger.of(
+                                                        context)
+                                                        .showSnackBar(
+                                                      const SnackBar(
+                                                        content: Text(
+                                                            'Gagal menolak permintaan cuti. Coba lagi.'),
+                                                        backgroundColor:
+                                                            Colors.red,
+                                                      ),
+                                                    );
+                                                  }
                                                 }
                                               },
                                               style: ButtonStyle(
@@ -4535,7 +4567,9 @@ class _LeaveRequest extends State<LeaveRequest>
                                 record['status'] != 'cancelled' &&
                                 !_isOwnRequest(record),
                             child: ElevatedButton(
-                              onPressed: () {
+                              onPressed: record['status'] == 'approved'
+                                  ? null
+                                  : () {
                                 isSaveClick = true;
                                 showDialog(
                                   context: context,
@@ -4585,10 +4619,24 @@ class _LeaveRequest extends State<LeaveRequest>
                                                 var rejectId = record['id'];
                                                 var description =
                                                     rejectDescription.text;
-                                                await rejectRequest(
+                                                bool rejectSuccess =
+                                                    await rejectRequest(
                                                     rejectId, description);
                                                 Navigator.pop(context);
-                                                showRejectAnimation();
+                                                if (rejectSuccess) {
+                                                  showRejectAnimation();
+                                                } else {
+                                                  ScaffoldMessenger.of(
+                                                      context)
+                                                      .showSnackBar(
+                                                    const SnackBar(
+                                                      content: Text(
+                                                          'Gagal menolak permintaan cuti. Coba lagi.'),
+                                                      backgroundColor:
+                                                          Colors.red,
+                                                    ),
+                                                  );
+                                                }
                                               }
                                             },
                                             style: ButtonStyle(
@@ -4802,10 +4850,24 @@ class _LeaveRequest extends State<LeaveRequest>
                                                 var rejectId = record['id'];
                                                 var description =
                                                     rejectDescription.text;
-                                                await rejectRequest(
+                                                bool rejectSuccess =
+                                                    await rejectRequest(
                                                     rejectId, description);
                                                 Navigator.pop(context);
-                                                showRejectAnimation();
+                                                if (rejectSuccess) {
+                                                  showRejectAnimation();
+                                                } else {
+                                                  ScaffoldMessenger.of(
+                                                      context)
+                                                      .showSnackBar(
+                                                    const SnackBar(
+                                                      content: Text(
+                                                          'Gagal menolak permintaan cuti. Coba lagi.'),
+                                                      backgroundColor:
+                                                          Colors.red,
+                                                    ),
+                                                  );
+                                                }
                                               }
                                             },
                                             style: ButtonStyle(

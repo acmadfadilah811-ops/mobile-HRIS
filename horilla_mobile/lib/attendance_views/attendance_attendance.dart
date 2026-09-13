@@ -1074,8 +1074,16 @@ class _AttendanceAttendance extends State<AttendanceAttendance>
     });
     if (response.statusCode == 200) {
       isSaveClick = false;
-      currentPage = 0;
-      getAllNonValidatedAttendance();
+      // reset: true wajib -- tanpa ini, getAllNonValidatedAttendance()
+      // cuma MENAMBAHKAN hasil baru ke list lama (addAll), tidak pernah
+      // menghapus entri yang baru saja divalidasi dari tampilan "Belum
+      // Divalidasi". Data server sudah benar begitu request ini sukses,
+      // tapi layar tetap menunjukkan entri lama sampai halaman dibuka
+      // ulang dari awal (yang secara tidak sengaja memanggil reset:true
+      // lewat initState). Refresh juga daftar "Sudah Divalidasi" supaya
+      // entrinya langsung muncul di sana, bukan cuma hilang dari sini.
+      await getAllNonValidatedAttendance(reset: true);
+      await getAllValidatedAttendance(reset: true);
       setState(() {});
     }
     else {
@@ -1096,8 +1104,11 @@ class _AttendanceAttendance extends State<AttendanceAttendance>
     });
     if (response.statusCode == 200) {
       isSaveClick = false;
-      currentPage = 0;
-      getAllOvertimeAttendance();
+      // Sama seperti validateAttendance() -- reset:true supaya entri yang
+      // baru disetujui benar-benar hilang dari daftar "Validasi Lembur",
+      // bukan cuma ditambahkan ke list lama yang masih menyimpan entri itu.
+      await getAllOvertimeAttendance(reset: true);
+      await getAllValidatedAttendance(reset: true);
       setState(() {});
     }
     else {
