@@ -253,83 +253,100 @@ class _WorkTypeRequestPageState extends State<RotatingShiftPage> {
     setState(() {
       hasNoRecords = false;
     });
-    if (currentPage != 0) {
-      var uri = Uri.parse(
-          '$typedServerUrl /api/base/individual-rotating-shifts?employee_id=$employeeId&page=$currentPage&search=$searchText');
-      var response = await http.get(uri, headers: {
-        "Content-Type": "application/json",
-        "Authorization": "Bearer $token",
-      });
-      if (response.statusCode == 200) {
-        setState(() {
-          requests.addAll(
-            List<Map<String, dynamic>>.from(
-              jsonDecode(response.body)['results'],
-            ),
-          );
-          requestsCount = jsonDecode(response.body)['count'];
-          String serializeMap(Map<String, dynamic> map) {
-            return jsonEncode(map);
-          }
+    try {
+      if (currentPage != 0) {
+        var uri = Uri.parse(
+            '$typedServerUrl/api/base/individual-rotating-shifts?employee_id=$employeeId&page=$currentPage&search=$searchText');
+        var response = await http.get(uri, headers: {
+          "Content-Type": "application/json",
+          "Authorization": "Bearer $token",
+        });
+        if (response.statusCode == 200) {
+          setState(() {
+            requests.addAll(
+              List<Map<String, dynamic>>.from(
+                jsonDecode(response.body)['results'],
+              ),
+            );
+            requestsCount = jsonDecode(response.body)['count'];
+            String serializeMap(Map<String, dynamic> map) {
+              return jsonEncode(map);
+            }
 
-          Map<String, dynamic> deserializeMap(String jsonString) {
-            return jsonDecode(jsonString);
-          }
+            Map<String, dynamic> deserializeMap(String jsonString) {
+              return jsonDecode(jsonString);
+            }
 
-          List<String> mapStrings = requests.map(serializeMap).toList();
-          Set<String> uniqueMapStrings = mapStrings.toSet();
-          requests = uniqueMapStrings.map(deserializeMap).toList();
-          _isShimmerVisible = false;
+            List<String> mapStrings = requests.map(serializeMap).toList();
+            Set<String> uniqueMapStrings = mapStrings.toSet();
+            requests = uniqueMapStrings.map(deserializeMap).toList();
+            _isShimmerVisible = false;
 
-          filteredRecords = filterRecords(searchText);
+            filteredRecords = filterRecords(searchText);
+            setState(() {
+              isLoading = false;
+            });
+          });
+        } else {
           setState(() {
             isLoading = false;
+            hasNoRecords = true;
+            _isShimmerVisible = false;
           });
-        });
+        }
       } else {
-        setState(() {
-          isLoading = false;
-          hasNoRecords = true;
+        currentPage = 1;
+        var uri = Uri.parse(
+            '$typedServerUrl/api/base/rotating-shift-assigns?employee_id=$employeeId&search=$searchText');
+        var response = await http.get(uri, headers: {
+          "Content-Type": "application/json",
+          "Authorization": "Bearer $token",
         });
+        if (response.statusCode == 200) {
+          setState(() {
+            requests.addAll(
+              List<Map<String, dynamic>>.from(
+                jsonDecode(response.body)['results'],
+              ),
+            );
+            requestsCount = jsonDecode(response.body)['count'];
+            String serializeMap(Map<String, dynamic> map) {
+              return jsonEncode(map);
+            }
+
+            Map<String, dynamic> deserializeMap(String jsonString) {
+              return jsonDecode(jsonString);
+            }
+
+            List<String> mapStrings = requests.map(serializeMap).toList();
+            Set<String> uniqueMapStrings = mapStrings.toSet();
+            requests = uniqueMapStrings.map(deserializeMap).toList();
+            _isShimmerVisible = false;
+
+            filteredRecords = filterRecords(searchText);
+            setState(() {
+              isLoading = false;
+            });
+          });
+        } else {
+          setState(() {
+            isLoading = false;
+            hasNoRecords = true;
+            _isShimmerVisible = false;
+          });
+        }
       }
-    } else {
-      currentPage = 1;
-      var uri = Uri.parse(
-          '$typedServerUrl/api/base/rotating-shift-assigns?employee_id=$employeeId&search=$searchText');
-      var response = await http.get(uri, headers: {
-        "Content-Type": "application/json",
-        "Authorization": "Bearer $token",
-      });
-      if (response.statusCode == 200) {
-        setState(() {
-          requests.addAll(
-            List<Map<String, dynamic>>.from(
-              jsonDecode(response.body)['results'],
-            ),
-          );
-          requestsCount = jsonDecode(response.body)['count'];
-          String serializeMap(Map<String, dynamic> map) {
-            return jsonEncode(map);
-          }
-
-          Map<String, dynamic> deserializeMap(String jsonString) {
-            return jsonDecode(jsonString);
-          }
-
-          List<String> mapStrings = requests.map(serializeMap).toList();
-          Set<String> uniqueMapStrings = mapStrings.toSet();
-          requests = uniqueMapStrings.map(deserializeMap).toList();
-          _isShimmerVisible = false;
-
-          filteredRecords = filterRecords(searchText);
-          setState(() {
-            isLoading = false;
-          });
-        });
-      } else {
+    } catch (e) {
+      // Jaring pengaman -- tanpa ini, error jaringan/parsing apa pun di sini
+      // (koneksi putus, URL salah bentuk, JSON tidak terduga) meninggalkan
+      // _isShimmerVisible tetap true selamanya: layar macet di shimmer tanpa
+      // ada tanda apa pun bahwa sebenarnya ini gagal, bukan sekadar lambat.
+      print('Error fetching rotating shift request: $e');
+      if (mounted) {
         setState(() {
           isLoading = false;
           hasNoRecords = true;
+          _isShimmerVisible = false;
         });
       }
     }
