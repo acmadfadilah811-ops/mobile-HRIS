@@ -151,10 +151,15 @@ class _WorkTypeRequestPageState extends State<RotatingShiftPage> {
   void accessChecks() async {
     final prefs = await SharedPreferences.getInstance();
     var token = prefs.getString("token");
-    var employeeId = prefs.getInt("employee_id");
     var typedServerUrl = prefs.getString("typed_url");
-    var uri =
-    Uri.parse('$typedServerUrl/api/base/rotating-shift-create-permission-check/$employeeId');
+    // Dulu pakai prefs.getInt("employee_id") -- ID diri sendiri, bukan
+    // widget.selectedEmployerId (karyawan yang layar ini sedang tampilkan).
+    // Backend-nya (RotatingShiftPermissionCheck) mengecek "apakah saya
+    // atasan dari employee <id> ini" -- dengan ID diri sendiri, itu selalu
+    // bertanya "apakah saya atasan saya sendiri", yang tidak pernah benar,
+    // jadi tombol edit tidak pernah muncul untuk atasan sungguhan sekalipun.
+    var uri = Uri.parse(
+        '$typedServerUrl/api/base/rotating-shift-create-permission-check/${widget.selectedEmployerId}');
     var response = await http.get(uri, headers: {
       "Content-Type": "application/json",
       "Authorization": "Bearer $token",

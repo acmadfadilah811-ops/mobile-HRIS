@@ -150,10 +150,17 @@ class _RotatingWorkTypePageState extends State<RotatingWorkTypePage> {
   void accessChecks() async {
     final prefs = await SharedPreferences.getInstance();
     var token = prefs.getString("token");
-    var employeeId = prefs.getInt("employee_id");
     var typedServerUrl = prefs.getString("typed_url");
-    var uri =
-    Uri.parse('$typedServerUrl/api/base/rotating-shift-create-permission-check/$employeeId');
+    // Dua bug sekaligus di sini (disalin dari rotating_shift.dart):
+    // 1) memanggil endpoint permission-check ROTATING SHIFT, bukan
+    //    rotating-worktype -- salah fitur sama sekali.
+    // 2) memakai employee_id diri sendiri, bukan widget.selectedEmployerId
+    //    (karyawan yang layar ini sedang tampilkan) -- backend-nya
+    //    mengecek "apakah saya atasan dari employee ini", jadi dengan ID
+    //    diri sendiri itu selalu bertanya "apakah saya atasan saya
+    //    sendiri", tidak pernah benar.
+    var uri = Uri.parse(
+        '$typedServerUrl/api/base/rotating-worktype-create-permission-check/${widget.selectedEmployerId}');
     var response = await http.get(uri, headers: {
       "Content-Type": "application/json",
       "Authorization": "Bearer $token",
