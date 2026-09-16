@@ -44,12 +44,17 @@ Future<String?> _openLocalFile(File file) async {
   return null;
 }
 
-Future<String?> openTemporaryPdf(
+/// Cache-then-refresh lookup shared by [openTemporaryPdf] and
+/// [getCachedPdfFile]: same local file, same "download again after
+/// [maxAge]" rule -- factored out so a caller that wants to render the PDF
+/// itself (an in-app viewer) and a caller that just wants to hand it to the
+/// device's own PDF app don't duplicate the caching logic.
+Future<({File? file, String? error})> _resolveTemporaryPdf(
   String url,
   String token,
-  String cacheKey, {
-  Duration maxAge = const Duration(hours: 12),
-}) async {
+  String cacheKey,
+  Duration maxAge,
+) async {
   try {
     final dir = await getTemporaryDirectory();
     final file = File('${dir.path}/${_sanitizeFileName(cacheKey)}.pdf');
@@ -63,14 +68,38 @@ Future<String?> openTemporaryPdf(
 
     if (!file.existsSync() || !isFresh) {
       final error = await _downloadTo(file, url, token);
-      if (error != null) return error;
+      if (error != null) return (file: null, error: error);
       await prefs.setInt(cacheKeyPref, DateTime.now().millisecondsSinceEpoch);
     }
-
-    return await _openLocalFile(file);
+    return (file: file, error: null);
   } catch (e) {
-    return 'Gagal membuka dokumen: $e';
+    return (file: null, error: 'Gagal mengunduh dokumen: $e');
   }
+}
+
+Future<String?> openTemporaryPdf(
+  String url,
+  String token,
+  String cacheKey, {
+  Duration maxAge = const Duration(hours: 12),
+}) async {
+  final result = await _resolveTemporaryPdf(url, token, cacheKey, maxAge);
+  if (result.error != null) return result.error;
+  return await _openLocalFile(result.file!);
+}
+
+/// Sama seperti [openTemporaryPdf] (cache 12 jam, diunduh ulang setelah
+/// kedaluwarsa), tapi mengembalikan file lokalnya langsung alih-alih
+/// menyerahkannya ke aplikasi PDF eksternal -- dipakai layar viewer PDF
+/// in-app (lihat sop_pdf_viewer_page.dart) yang me-render sendiri lewat
+/// flutter_pdfview.
+Future<({File? file, String? error})> getCachedPdfFile(
+  String url,
+  String token,
+  String cacheKey, {
+  Duration maxAge = const Duration(hours: 12),
+}) {
+  return _resolveTemporaryPdf(url, token, cacheKey, maxAge);
 }
 
 Future<String?> openPersistentPdf(

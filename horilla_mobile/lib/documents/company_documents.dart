@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shimmer/shimmer.dart';
-import '../utils/pdf_opener.dart';
+import 'sop_pdf_viewer_page.dart';
+import 'sop_upload_page.dart';
 
 class CompanyDocuments extends StatefulWidget {
   const CompanyDocuments({super.key});
@@ -25,6 +26,15 @@ class _CompanyDocumentsState extends State<CompanyDocuments>
   String token = '';
   int? openingId;
 
+  // Tombol "Unggah SOP" hanya tampil di tab SOP, dan hanya untuk pengguna
+  // yang lolos permission-check base.add_companydocument -- endpoint
+  // generik yang sudah dipakai fitur lain di app ini (lihat
+  // check-user-level di base/forms.py-nya web, base.add_companydocument
+  // adalah permission yang sama dipakai form upload dashboard web). Server
+  // (POST company-documents/create/) mengecek ulang izin yang sama, jadi
+  // ini murni UX, bukan satu-satunya penjaga.
+  bool _canUploadSop = false;
+
   final Map<String, bool> _isLoading = {
     for (var c in _categories) c['key']!: true,
   };
@@ -36,6 +46,10 @@ class _CompanyDocumentsState extends State<CompanyDocuments>
   void initState() {
     super.initState();
     _tabController = TabController(length: _categories.length, vsync: this);
+    // FAB unggah cuma relevan saat tab SOP aktif -- rebuild saat pindah tab.
+    _tabController.addListener(() {
+      if (!_tabController.indexIsChanging) setState(() {});
+    });
     _init();
   }
 
@@ -53,6 +67,34 @@ class _CompanyDocumentsState extends State<CompanyDocuments>
     });
     for (var c in _categories) {
       _loadCategory(c['key']!);
+    }
+    _checkUploadPermission();
+  }
+
+  Future<void> _checkUploadPermission() async {
+    try {
+      final uri = Uri.parse(
+        '$baseUrl/api/base/check-user-level?perm=base.add_companydocument',
+      );
+      final response = await http.get(uri, headers: {
+        "Authorization": "Bearer $token",
+      });
+      if (!mounted) return;
+      setState(() => _canUploadSop = response.statusCode == 200);
+    } catch (_) {
+      // Diam-diam gagal: tombol unggah tetap tersembunyi, tidak ada dampak
+      // lain -- melihat/membuka dokumen tetap jalan seperti biasa.
+    }
+  }
+
+  Future<void> _openUploadPage() async {
+    final uploaded = await Navigator.of(context).push<bool>(
+      MaterialPageRoute(
+        builder: (_) => SopUploadPage(baseUrl: baseUrl, token: token),
+      ),
+    );
+    if (uploaded == true) {
+      _loadCategory('sop');
     }
   }
 
@@ -107,21 +149,28 @@ class _CompanyDocumentsState extends State<CompanyDocuments>
       return;
     }
 
-    setState(() => openingId = doc['id']);
     final path = doc['file'];
     if (path == null) {
-      setState(() => openingId = null);
       _showError('File dokumen tidak tersedia.');
       return;
     }
     final url = path.toString().startsWith('http') ? path : '$baseUrl$path';
-    final error = await openTemporaryPdf(
-      url,
-      token,
-      'company_document_${doc['id']}',
+    // Dibuka lewat viewer PDF in-app (flutter_pdfview), bukan lagi
+    // diserahkan ke aplikasi PDF eksternal -- lihat SopPdfViewerPage.
+    // openingId hanya dipakai sebagai indikator loading singkat di list
+    // sebelum halaman viewer terbuka (viewer punya loading state sendiri).
+    setState(() => openingId = doc['id']);
+    await Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (_) => SopPdfViewerPage(
+          title: doc['title'] ?? '-',
+          url: url,
+          token: token,
+          cacheKey: 'company_document_${doc['id']}',
+        ),
+      ),
     );
-    setState(() => openingId = null);
-    if (error != null) _showError(error);
+    if (mounted) setState(() => openingId = null);
   }
 
   Widget _shimmerList() {
@@ -143,46 +192,104 @@ class _CompanyDocumentsState extends State<CompanyDocuments>
     );
   }
 
+  Widget _emptyState(String message) {
+    return Center(
+      child: Padding(
+        padding: const EdgeInsets.all(24),
+        child: Text(
+          message,
+          textAlign: TextAlign.center,
+          style: TextStyle(color: Colors.grey.shade600),
+        ),
+      ),
+    );
+  }
+
+  Widget _docCard(Map<String, dynamic> doc) {
+    final isOpening = openingId == doc['id'];
+    final readable = _hasReadableContent(doc);
+    return Card(
+      child: ListTile(
+        leading: Icon(
+          readable ? Icons.menu_book_outlined : Icons.description_outlined,
+          color: Colors.lightBlue,
+        ),
+        title: Text(doc['title'] ?? '-'),
+        trailing: isOpening
+            ? const SizedBox(
+                width: 20,
+                height: 20,
+                child: CircularProgressIndicator(strokeWidth: 2),
+              )
+            : Icon(readable ? Icons.chevron_right : Icons.picture_as_pdf_outlined),
+        onTap: isOpening ? null : () => _openDocument(doc),
+      ),
+    );
+  }
+
+  // Corporate Guideline & Peraturan Perusahaan: satu dokumen company-wide,
+  // daftar datar seperti semula -- tidak berjenjang (lihat CompanyDocument's
+  // docstring di backend).
   Widget _categoryTab(String category) {
     if (_isLoading[category] == true) return _shimmerList();
     final docs = _documents[category] ?? [];
-    if (docs.isEmpty) {
-      return Center(
-        child: Padding(
-          padding: const EdgeInsets.all(24),
-          child: Text(
-            'Belum ada dokumen di kategori ini.',
-            textAlign: TextAlign.center,
-            style: TextStyle(color: Colors.grey.shade600),
-          ),
-        ),
-      );
-    }
+    if (docs.isEmpty) return _emptyState('Belum ada dokumen di kategori ini.');
     return RefreshIndicator(
       onRefresh: () => _loadCategory(category),
       child: ListView.builder(
         padding: const EdgeInsets.all(12),
         itemCount: docs.length,
-        itemBuilder: (context, index) {
-          final doc = docs[index];
-          final isOpening = openingId == doc['id'];
-          final readable = _hasReadableContent(doc);
-          return Card(
-            child: ListTile(
-              leading: Icon(
-                readable ? Icons.menu_book_outlined : Icons.description_outlined,
-                color: Colors.lightBlue,
+        itemBuilder: (context, index) => _docCard(docs[index]),
+      ),
+    );
+  }
+
+  // SOP: berjenjang per divisi (department dari CompanyDocumentSerializer,
+  // lihat backend) -- SOP Finance, SOP HR, SOP Kasir, dst masing-masing
+  // punya bagiannya sendiri. Dokumen tanpa department (SOP umum, berlaku
+  // lintas divisi) dikelompokkan di bagian "Umum" di bagian akhir.
+  Widget _sopTab() {
+    if (_isLoading['sop'] == true) return _shimmerList();
+    final docs = _documents['sop'] ?? [];
+    if (docs.isEmpty) return _emptyState('Belum ada dokumen SOP.');
+
+    final grouped = <String, List<Map<String, dynamic>>>{};
+    for (final doc in docs) {
+      final dept = doc['department'];
+      final label = (dept is Map && dept['name'] != null)
+          ? dept['name'].toString()
+          : 'Umum';
+      grouped.putIfAbsent(label, () => []).add(doc);
+    }
+    final namedSections = grouped.keys.where((k) => k != 'Umum').toList()
+      ..sort();
+    final sections = [...namedSections, if (grouped.containsKey('Umum')) 'Umum'];
+
+    return RefreshIndicator(
+      onRefresh: () => _loadCategory('sop'),
+      child: ListView.builder(
+        padding: const EdgeInsets.fromLTRB(12, 12, 12, 88),
+        itemCount: sections.length,
+        itemBuilder: (context, sectionIndex) {
+          final section = sections[sectionIndex];
+          final sectionDocs = grouped[section]!;
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: const EdgeInsets.fromLTRB(4, 12, 4, 6),
+                child: Text(
+                  section,
+                  style: const TextStyle(
+                    fontSize: 13,
+                    fontWeight: FontWeight.bold,
+                    letterSpacing: 0.3,
+                    color: Colors.black54,
+                  ),
+                ),
               ),
-              title: Text(doc['title'] ?? '-'),
-              trailing: isOpening
-                  ? const SizedBox(
-                      width: 20,
-                      height: 20,
-                      child: CircularProgressIndicator(strokeWidth: 2),
-                    )
-                  : Icon(readable ? Icons.chevron_right : Icons.download_outlined),
-              onTap: isOpening ? null : () => _openDocument(doc),
-            ),
+              ...sectionDocs.map(_docCard),
+            ],
           );
         },
       ),
@@ -191,6 +298,7 @@ class _CompanyDocumentsState extends State<CompanyDocuments>
 
   @override
   Widget build(BuildContext context) {
+    final onSopTab = _tabController.index == 0; // 'sop' is _categories[0]
     return Scaffold(
       appBar: AppBar(
         title: const Text('Dokumen Perusahaan'),
@@ -205,9 +313,18 @@ class _CompanyDocumentsState extends State<CompanyDocuments>
       ),
       body: TabBarView(
         controller: _tabController,
-        children:
-            _categories.map((c) => _categoryTab(c['key']!)).toList(),
+        children: _categories
+            .map((c) => c['key'] == 'sop' ? _sopTab() : _categoryTab(c['key']!))
+            .toList(),
       ),
+      floatingActionButton: (onSopTab && _canUploadSop)
+          ? FloatingActionButton.extended(
+              onPressed: _openUploadPage,
+              backgroundColor: Colors.lightBlue,
+              icon: const Icon(Icons.upload_file),
+              label: const Text('Unggah SOP'),
+            )
+          : null,
     );
   }
 }
