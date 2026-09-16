@@ -382,37 +382,57 @@ class CompanyDocumentDetailPage extends StatelessWidget {
           ),
         );
       case _BlockType.table:
+        // Tabel sederhana (mis. tabel cuti, dua kolom) muat lebar layar dan
+        // dibungkus rapi seperti biasa. Tabel matriks lebar (mis. tabel
+        // pelanggaran & sanksi, bisa 8-10 kolom) akan jadi kolom sempit tak
+        // terbaca kalau dipaksa muat -- jadi lebar kolom dibuat tetap dan
+        // tabelnya di-scroll ke samping, bukan dipepetkan otomatis oleh
+        // Table/Flex bawaan Flutter.
+        final colCount = block.rows!.first.length;
+        final table = Table(
+          border: TableBorder.all(color: Colors.grey.shade300),
+          columnWidths: colCount > 3
+              ? {
+                  for (var c = 0; c < colCount; c++) c: const FixedColumnWidth(150),
+                }
+              : null,
+          children: [
+            for (var r = 0; r < block.rows!.length; r++)
+              TableRow(
+                decoration:
+                    r == 0 ? BoxDecoration(color: Colors.grey.shade100) : null,
+                children: block.rows![r]
+                    .map(
+                      (cell) => Padding(
+                        padding: const EdgeInsets.all(8),
+                        child: Text(
+                          cell,
+                          style: TextStyle(
+                            fontSize: 12.5,
+                            height: 1.35,
+                            fontWeight:
+                                r == 0 ? FontWeight.bold : FontWeight.normal,
+                          ),
+                        ),
+                      ),
+                    )
+                    .toList(),
+              ),
+          ],
+        );
         return Padding(
           padding: const EdgeInsets.only(bottom: 14),
           child: ClipRRect(
             borderRadius: BorderRadius.circular(6),
-            child: Table(
-              border: TableBorder.all(color: Colors.grey.shade300),
-              children: [
-                for (var r = 0; r < block.rows!.length; r++)
-                  TableRow(
-                    decoration: r == 0
-                        ? BoxDecoration(color: Colors.grey.shade100)
-                        : null,
-                    children: block.rows![r]
-                        .map(
-                          (cell) => Padding(
-                            padding: const EdgeInsets.all(8),
-                            child: Text(
-                              cell,
-                              style: TextStyle(
-                                fontSize: 12.5,
-                                height: 1.35,
-                                fontWeight:
-                                    r == 0 ? FontWeight.bold : FontWeight.normal,
-                              ),
-                            ),
-                          ),
-                        )
-                        .toList(),
-                  ),
-              ],
-            ),
+            child: colCount > 3
+                ? Scrollbar(
+                    thumbVisibility: true,
+                    child: SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: table,
+                    ),
+                  )
+                : table,
           ),
         );
       case _BlockType.paragraph:
