@@ -469,7 +469,91 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
     }
   }
 
+  /// Cek ke backend HR (yang meneruskan ke Bintang lewat jembatan server-
+  /// ke-server -- token jembatan TIDAK pernah ada di app mobile ini) apakah
+  /// karyawan masih tercatat "Mulai Kerja" (belum "Selesai Kerja") hari ini
+  /// di Bintang. Dipanggil sebelum Logout supaya karyawan diingatkan --
+  /// GAGAL memanggil (offline, server error, dsb) TIDAK BOLEH menghalangi
+  /// Logout, jadi selalu dianggap "tidak perlu peringatan" kalau error.
+  Future<bool> _bintangSesiKerjaMasihTerbuka() async {
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      final token = prefs.getString("token");
+      final typedServerUrl = prefs.getString("typed_url");
+      if (token == null || typedServerUrl == null) return false;
+
+      final uri = Uri.parse('$typedServerUrl/api/attendance/bintang-status/');
+      final response = await http
+          .get(uri, headers: {"Authorization": "Bearer $token"})
+          .timeout(const Duration(seconds: 5));
+      if (response.statusCode != 200) return false;
+
+      final data = jsonDecode(response.body);
+      if (data['applicable'] != true) return false;
+      return data['has_open_session'] == true;
+    } catch (e) {
+      print('Cek status sesi kerja Bintang gagal (diabaikan): $e');
+      return false;
+    }
+  }
+
+  Future<bool> _konfirmasiSesiKerjaBintangBelumDitutup(
+      BuildContext context) async {
+    final hasil = await showDialog<bool>(
+      context: context,
+      builder: (BuildContext dialogContext) {
+        return AlertDialog(
+          backgroundColor: Colors.white,
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+          title: Row(
+            children: const [
+              Icon(Icons.warning_amber_rounded, color: Colors.orange),
+              SizedBox(width: 10),
+              Expanded(
+                child: Text(
+                  'Sesi Kerja Bintang Belum Ditutup',
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                ),
+              ),
+            ],
+          ),
+          content: const Text(
+            'Anda tercatat masih "Mulai Kerja" di sistem Bintang hari ini dan '
+            'belum menekan "Selesai Kerja". Disarankan menutup sesi kerja '
+            'Anda di Bintang dulu supaya jam kerja tercatat dengan benar '
+            'sebelum keluar dari aplikasi ini.',
+            style: TextStyle(fontSize: 13.5, height: 1.4),
+          ),
+          actionsPadding:
+              const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.of(dialogContext).pop(false),
+              child: const Text('Batal',
+                  style: TextStyle(color: Colors.black54)),
+            ),
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(backgroundColor: Colors.orange),
+              onPressed: () => Navigator.of(dialogContext).pop(true),
+              child: const Text('Tetap Keluar',
+                  style: TextStyle(color: Colors.white)),
+            ),
+          ],
+        );
+      },
+    );
+    return hasil ?? false;
+  }
+
   Future<void> clearToken(BuildContext context) async {
+    final sesiMasihTerbuka = await _bintangSesiKerjaMasihTerbuka();
+    if (sesiMasihTerbuka) {
+      final tetapKeluar =
+          await _konfirmasiSesiKerjaBintangBelumDitutup(context);
+      if (!tetapKeluar) return;
+    }
+
     final prefs = await SharedPreferences.getInstance();
     String? typedServerUrl = prefs.getString("typed_url");
     await prefs.remove('token');
