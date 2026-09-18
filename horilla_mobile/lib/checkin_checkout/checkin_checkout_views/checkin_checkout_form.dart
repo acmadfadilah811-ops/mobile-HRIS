@@ -502,31 +502,45 @@ class _CheckInCheckOutFormPageState extends State<CheckInCheckOutFormPage> {
     }
   }
 
-  Future<void> postCheckout() async {
-    final prefs = await SharedPreferences.getInstance();
-    var token = prefs.getString("token");
-    var typedServerUrl = prefs.getString("typed_url");
-    var uri = Uri.parse('$typedServerUrl/api/attendance/clock-out/');
-    var response = await http.post(uri, headers: {
-      "Content-Type": "application/json",
-      "Authorization": "Bearer $token",
-    });
-    if (response.statusCode == 200) {
-      setState(() {});
+  // Sebelumnya: tidak ada try-catch/timeout SAMA SEKALI, dan dipanggil
+  // TANPA await di dalam setState() -- kalau koneksi lambat/putus,
+  // exception-nya lenyap begitu saja (fire-and-forget), sementara UI
+  // sudah terlanjur berubah ke status "berhasil" secara optimis. Akibatnya
+  // HP karyawan bilang sudah Check-in/Check-out padahal server tidak
+  // pernah menerimanya -- persis skenario "nyangkut" yang dilaporkan
+  // (2026-09-18). Sekarang: return bool sukses/gagal, timeout eksplisit,
+  // dan pemanggilnya WAJIB await + baru ubah UI setelah server konfirmasi.
+  Future<bool> postCheckout() async {
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      var token = prefs.getString("token");
+      var typedServerUrl = prefs.getString("typed_url");
+      var uri = Uri.parse('$typedServerUrl/api/attendance/clock-out/');
+      var response = await http.post(uri, headers: {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer $token",
+      }).timeout(const Duration(seconds: 15));
+      return response.statusCode == 200;
+    } catch (e) {
+      print('postCheckout gagal: $e');
+      return false;
     }
   }
 
-  Future<void> postCheckIn() async {
-    final prefs = await SharedPreferences.getInstance();
-    var token = prefs.getString("token");
-    var typedServerUrl = prefs.getString("typed_url");
-    var uri = Uri.parse('$typedServerUrl/api/attendance/clock-in/');
-    var response = await http.post(uri, headers: {
-      "Content-Type": "application/json",
-      "Authorization": "Bearer $token",
-    });
-    if (response.statusCode == 200) {
-      setState(() {});
+  Future<bool> postCheckIn() async {
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      var token = prefs.getString("token");
+      var typedServerUrl = prefs.getString("typed_url");
+      var uri = Uri.parse('$typedServerUrl/api/attendance/clock-in/');
+      var response = await http.post(uri, headers: {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer $token",
+      }).timeout(const Duration(seconds: 15));
+      return response.statusCode == 200;
+    } catch (e) {
+      print('postCheckIn gagal: $e');
+      return false;
     }
   }
 
@@ -1249,8 +1263,15 @@ class _CheckInCheckOutFormPageState extends State<CheckInCheckOutFormPage> {
               }
               else {
                 if (clockCheckedIn) {
+                  final berhasil = await postCheckout();
+                  if (!berhasil) {
+                    if (context.mounted) {
+                      showCheckInFailedDialog(context,
+                          'Gagal menyimpan Selesai Kerja. Periksa koneksi internet Anda dan coba lagi.');
+                    }
+                    return;
+                  }
                   setState(() {
-                    postCheckout();
                     isCheckIn = false;
                     clockCheckedIn = false;
                     stopwatchManager.stopStopwatch();
@@ -1265,8 +1286,15 @@ class _CheckInCheckOutFormPageState extends State<CheckInCheckOutFormPage> {
                         clockCheckedIn, 2, checkOutFormattedTime.toString());
                   });
                 } else {
+                  final berhasil = await postCheckIn();
+                  if (!berhasil) {
+                    if (context.mounted) {
+                      showCheckInFailedDialog(context,
+                          'Gagal menyimpan Mulai Kerja. Periksa koneksi internet Anda dan coba lagi.');
+                    }
+                    return;
+                  }
                   setState(() {
-                    postCheckIn();
                     isCheckIn = true;
                     clockCheckedIn = true;
                     clockCheckBool = true;
