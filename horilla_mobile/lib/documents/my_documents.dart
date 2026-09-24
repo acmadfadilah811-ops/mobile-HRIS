@@ -114,11 +114,14 @@ class _MyDocumentsState extends State<MyDocuments>
   // Tanda tangan kontrak sepenuhnya di web HR (karyawan dipanggil ke ruang
   // HRD, tanda tangan di komputer HR -- bukan di app mobile). Mobile cuma
   // menampilkan status & mengunduh dokumen final setelah HR menyetujui.
+  // 2026-09-24: berkas kontrak yang diunggah HR langsung bisa dibuka tanpa
+  // menunggu tanda tangan -- server mengirim `document_url` (versi bertanda
+  // tangan diutamakan bila ada).
   Future<void> _openContract(Map<String, dynamic> contract) async {
-    if (contract['is_downloadable'] != true) return;
+    if (contract['document_url'] == null) return;
 
     setState(() => openingId = contract['id']);
-    final path = contract['signed_document'];
+    final path = contract['document_url'];
     if (path == null) {
       setState(() => openingId = null);
       _showError('Dokumen kontrak belum tersedia.');
@@ -136,11 +139,22 @@ class _MyDocumentsState extends State<MyDocuments>
 
   ({IconData icon, Color color, String subtitle, bool tappable})
       _contractStatus(Map<String, dynamic> contract) {
+    if (contract['document_url'] != null) {
+      final signed = contract['document_type'] == 'signed';
+      return (
+        icon: signed ? Icons.verified_outlined : Icons.description_outlined,
+        color: signed ? Colors.green : Colors.lightBlue,
+        subtitle: signed
+            ? 'Kontrak bertanda tangan. Ketuk untuk membuka.'
+            : 'Dokumen kontrak dari HR. Ketuk untuk membuka.',
+        tappable: true,
+      );
+    }
     if (contract['signed_at'] == null) {
       return (
         icon: Icons.hourglass_empty,
         color: Colors.grey,
-        subtitle: 'Menunggu tanda tangan Anda di kantor HR.',
+        subtitle: 'Dokumen kontrak belum diunggah HR.',
         tappable: false,
       );
     }

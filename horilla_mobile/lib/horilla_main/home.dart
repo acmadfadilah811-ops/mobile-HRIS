@@ -1490,6 +1490,20 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
             ),
             Card(
               child: ListTile(
+                leading: const Icon(Icons.more_time),
+                title: const Text('Pengajuan Lembur'),
+                subtitle: Text(
+                  'Ajukan lembur & setujui lembur bawahan.',
+                  style: TextStyle(color: Colors.grey.shade700),
+                ),
+                trailing: const Icon(Icons.keyboard_arrow_right),
+                onTap: () {
+                  Navigator.pushNamed(context, '/overtime_request');
+                },
+              ),
+            ),
+            Card(
+              child: ListTile(
                 leading: const Icon(Icons.business_outlined),
                 title: const Text('Dokumen Perusahaan'),
                 subtitle: Text(

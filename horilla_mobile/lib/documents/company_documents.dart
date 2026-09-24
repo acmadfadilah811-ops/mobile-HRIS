@@ -227,46 +227,31 @@ class _CompanyDocumentsState extends State<CompanyDocuments>
     );
   }
 
-  // Corporate Guideline & Peraturan Perusahaan: satu dokumen company-wide,
-  // daftar datar seperti semula -- tidak berjenjang (lihat CompanyDocument's
-  // docstring di backend).
-  Widget _categoryTab(String category) {
+  // Ketiga kategori (SOP, Corporate Guideline, Peraturan Perusahaan)
+  // dikelompokkan per departemen (keputusan user 2026-09-24; sebelumnya hanya
+  // SOP). Dokumen tanpa departemen = berlaku untuk semua departemen, tampil di
+  // bagian "Semua Departemen" paling atas.
+  static const _semua = 'Semua Departemen';
+
+  Widget _groupedTab(String category, String emptyText) {
     if (_isLoading[category] == true) return _shimmerList();
     final docs = _documents[category] ?? [];
-    if (docs.isEmpty) return _emptyState('Belum ada dokumen di kategori ini.');
-    return RefreshIndicator(
-      onRefresh: () => _loadCategory(category),
-      child: ListView.builder(
-        padding: const EdgeInsets.all(12),
-        itemCount: docs.length,
-        itemBuilder: (context, index) => _docCard(docs[index]),
-      ),
-    );
-  }
-
-  // SOP: berjenjang per divisi (department dari CompanyDocumentSerializer,
-  // lihat backend) -- SOP Finance, SOP HR, SOP Kasir, dst masing-masing
-  // punya bagiannya sendiri. Dokumen tanpa department (SOP umum, berlaku
-  // lintas divisi) dikelompokkan di bagian "Umum" di bagian akhir.
-  Widget _sopTab() {
-    if (_isLoading['sop'] == true) return _shimmerList();
-    final docs = _documents['sop'] ?? [];
-    if (docs.isEmpty) return _emptyState('Belum ada dokumen SOP.');
+    if (docs.isEmpty) return _emptyState(emptyText);
 
     final grouped = <String, List<Map<String, dynamic>>>{};
     for (final doc in docs) {
       final dept = doc['department'];
       final label = (dept is Map && dept['name'] != null)
           ? dept['name'].toString()
-          : 'Umum';
+          : _semua;
       grouped.putIfAbsent(label, () => []).add(doc);
     }
-    final namedSections = grouped.keys.where((k) => k != 'Umum').toList()
+    final namedSections = grouped.keys.where((k) => k != _semua).toList()
       ..sort();
-    final sections = [...namedSections, if (grouped.containsKey('Umum')) 'Umum'];
+    final sections = [if (grouped.containsKey(_semua)) _semua, ...namedSections];
 
     return RefreshIndicator(
-      onRefresh: () => _loadCategory('sop'),
+      onRefresh: () => _loadCategory(category),
       child: ListView.builder(
         padding: const EdgeInsets.fromLTRB(12, 12, 12, 88),
         itemCount: sections.length,
@@ -314,7 +299,7 @@ class _CompanyDocumentsState extends State<CompanyDocuments>
       body: TabBarView(
         controller: _tabController,
         children: _categories
-            .map((c) => c['key'] == 'sop' ? _sopTab() : _categoryTab(c['key']!))
+            .map((c) => _groupedTab(c['key']!, 'Belum ada dokumen di kategori ini.'))
             .toList(),
       ),
       floatingActionButton: (onSopTab && _canUploadSop)

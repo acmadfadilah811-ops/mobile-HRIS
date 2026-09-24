@@ -25,6 +25,7 @@ import 'horilla_leave/my_leave_request.dart';
 import 'horilla_leave/selected_leave_type.dart';
 import 'documents/my_documents.dart';
 import 'documents/company_documents.dart';
+import 'attendance_views/overtime_request.dart';
 import 'announcements/announcements.dart';
 import 'horilla_main/login.dart';
 import 'horilla_main/home.dart';
@@ -371,6 +372,7 @@ class LoginApp extends StatelessWidget {
         '/notifications_list': (context) => NotificationsList(),
         '/my_documents': (context) => const MyDocuments(),
         '/company_documents': (context) => const CompanyDocuments(),
+        '/overtime_request': (context) => const OvertimeRequestPage(),
         '/announcements': (context) => const AnnouncementsPage(),
       },
     );
