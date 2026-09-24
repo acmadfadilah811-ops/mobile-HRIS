@@ -508,9 +508,10 @@ class _CheckInCheckOutFormPageState extends State<CheckInCheckOutFormPage> {
   // sudah terlanjur berubah ke status "berhasil" secara optimis. Akibatnya
   // HP karyawan bilang sudah Check-in/Check-out padahal server tidak
   // pernah menerimanya -- persis skenario "nyangkut" yang dilaporkan
-  // (2026-09-18). Sekarang: return bool sukses/gagal, timeout eksplisit,
-  // dan pemanggilnya WAJIB await + baru ubah UI setelah server konfirmasi.
-  Future<bool> postCheckout() async {
+  // (2026-09-18). Sekarang: return null kalau sukses, atau pesan error
+  // dari server (mis. "belum waktunya absen masuk") kalau ditolak --
+  // pemanggilnya WAJIB await + baru ubah UI setelah server konfirmasi.
+  Future<String?> postCheckout() async {
     try {
       final prefs = await SharedPreferences.getInstance();
       var token = prefs.getString("token");
@@ -520,14 +521,15 @@ class _CheckInCheckOutFormPageState extends State<CheckInCheckOutFormPage> {
         "Content-Type": "application/json",
         "Authorization": "Bearer $token",
       }).timeout(const Duration(seconds: 15));
-      return response.statusCode == 200;
+      if (response.statusCode == 200) return null;
+      return getErrorMessage(response.body);
     } catch (e) {
       print('postCheckout gagal: $e');
-      return false;
+      return 'Gagal menyimpan Selesai Kerja. Periksa koneksi internet Anda dan coba lagi.';
     }
   }
 
-  Future<bool> postCheckIn() async {
+  Future<String?> postCheckIn() async {
     try {
       final prefs = await SharedPreferences.getInstance();
       var token = prefs.getString("token");
@@ -537,10 +539,11 @@ class _CheckInCheckOutFormPageState extends State<CheckInCheckOutFormPage> {
         "Content-Type": "application/json",
         "Authorization": "Bearer $token",
       }).timeout(const Duration(seconds: 15));
-      return response.statusCode == 200;
+      if (response.statusCode == 200) return null;
+      return getErrorMessage(response.body);
     } catch (e) {
       print('postCheckIn gagal: $e');
-      return false;
+      return 'Gagal menyimpan Mulai Kerja. Periksa koneksi internet Anda dan coba lagi.';
     }
   }
 
@@ -1263,11 +1266,10 @@ class _CheckInCheckOutFormPageState extends State<CheckInCheckOutFormPage> {
               }
               else {
                 if (clockCheckedIn) {
-                  final berhasil = await postCheckout();
-                  if (!berhasil) {
+                  final pesanError = await postCheckout();
+                  if (pesanError != null) {
                     if (context.mounted) {
-                      showCheckInFailedDialog(context,
-                          'Gagal menyimpan Selesai Kerja. Periksa koneksi internet Anda dan coba lagi.');
+                      showCheckInFailedDialog(context, pesanError);
                     }
                     return;
                   }
@@ -1286,11 +1288,10 @@ class _CheckInCheckOutFormPageState extends State<CheckInCheckOutFormPage> {
                         clockCheckedIn, 2, checkOutFormattedTime.toString());
                   });
                 } else {
-                  final berhasil = await postCheckIn();
-                  if (!berhasil) {
+                  final pesanError = await postCheckIn();
+                  if (pesanError != null) {
                     if (context.mounted) {
-                      showCheckInFailedDialog(context,
-                          'Gagal menyimpan Mulai Kerja. Periksa koneksi internet Anda dan coba lagi.');
+                      showCheckInFailedDialog(context, pesanError);
                     }
                     return;
                   }
