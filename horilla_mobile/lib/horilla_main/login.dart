@@ -19,8 +19,10 @@ class _LoginPageState extends State<LoginPage> {
   var isDeviceConnected = false;
   bool isAlertSet = false;
   bool _passwordVisible = false;
-  final TextEditingController serverController =
-      TextEditingController(text: 'https://hr.starphotoadvertising.com');
+  // Alamat server tetap -- kolom "Alamat Server" di layar login dihapus.
+  // Tetap disimpan ke SharedPreferences ("typed_url") saat login karena
+  // seluruh layar lain membacanya dari sana.
+  static const String _serverAddress = 'https://hr.starphotoadvertising.com';
   final TextEditingController usernameController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   double horizontalMargin = 0.0;
@@ -56,7 +58,7 @@ class _LoginPageState extends State<LoginPage> {
 
 
   Future<void> _login() async {
-    String serverAddress = serverController.text.trim();
+    const String serverAddress = _serverAddress;
     String username = usernameController.text.trim();
     String password = passwordController.text.trim();
     String url = '$serverAddress/api/auth/login/';
@@ -112,13 +114,117 @@ class _LoginPageState extends State<LoginPage> {
       print(e);
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
-          content: Text('Alamat server tidak valid'),
+          content: Text('Tidak dapat terhubung ke server. Periksa koneksi internet Anda.'),
           backgroundColor: Colors.lightBlue,
         ),
       );
     }
   }
 
+
+  void _snack(String pesan) {
+    if (!mounted) return;
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text(pesan), backgroundColor: Colors.lightBlue),
+    );
+  }
+
+  // Lupa kata sandi: server mengirim tautan ke email terdaftar; kata sandi
+  // baru dibuat di halaman web yang terbuka dari tautan itu. Respons server
+  // sengaja sama untuk akun yang ada maupun tidak (anti-enumerasi).
+  Future<void> _showForgotPassword() async {
+    final controller =
+        TextEditingController(text: usernameController.text.trim());
+    final kirim = await showDialog<bool>(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        backgroundColor: Colors.white,
+        title: const Text(
+          'Lupa kata sandi',
+          style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
+        ),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Text(
+              'Masukkan email Anda. Tautan untuk membuat kata sandi baru '
+              'akan dikirim ke email yang terdaftar.',
+              style: TextStyle(color: Colors.black87),
+            ),
+            const SizedBox(height: 12),
+            TextField(
+              controller: controller,
+              keyboardType: TextInputType.emailAddress,
+              autocorrect: false,
+              decoration: const InputDecoration(
+                border: OutlineInputBorder(),
+                labelText: 'Email',
+              ),
+            ),
+          ],
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(ctx, false),
+            child: const Text('Batal'),
+          ),
+          ElevatedButton(
+            onPressed: () => Navigator.pop(ctx, true),
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.lightBlue,
+              foregroundColor: Colors.white,
+            ),
+            child: const Text('Kirim'),
+          ),
+        ],
+      ),
+    );
+    final username = controller.text.trim();
+    controller.dispose();
+    if (kirim != true) return;
+    if (username.isEmpty) {
+      _snack('Masukkan email Anda terlebih dahulu.');
+      return;
+    }
+    try {
+      final response = await http.post(
+        Uri.parse('$_serverAddress/api/auth/forgot-password/'),
+        body: {'username': username},
+      ).timeout(const Duration(seconds: 20));
+      if (!mounted) return;
+      if (response.statusCode == 200) {
+        await showDialog<void>(
+          context: context,
+          builder: (ctx) => AlertDialog(
+            backgroundColor: Colors.white,
+            title: const Text('Periksa email Anda'),
+            content: const Text(
+              'Jika akun ditemukan, tautan untuk membuat kata sandi baru '
+              'sudah dikirim ke email terdaftar. Buka email itu lalu ikuti '
+              'tautannya. Cek folder Spam bila belum muncul.',
+            ),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.pop(ctx),
+                child: const Text('Mengerti'),
+              ),
+            ],
+          ),
+        );
+      } else if (response.statusCode == 429) {
+        _snack('Terlalu banyak percobaan. Coba lagi beberapa menit lagi.');
+      } else if (response.statusCode == 503) {
+        _snack('Layanan email belum siap. Hubungi HR.');
+      } else {
+        _snack('Gagal mengirim tautan. Coba lagi.');
+      }
+    } on TimeoutException {
+      _snack('Batas waktu koneksi habis. Coba lagi.');
+    } catch (_) {
+      _snack('Tidak dapat terhubung ke server. Periksa koneksi internet Anda.');
+    }
+  }
 
   void getConnectivity() {
     // subscription = InternetConnectionChecker().onStatusChange.listen((status) {
@@ -130,13 +236,6 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    final String? serverAddress =
-    ModalRoute.of(context)?.settings.arguments as String?;
-
-    if (serverAddress != null && serverController.text.isEmpty) {
-      serverController.text = serverAddress;
-    }
-
     return WillPopScope(
       onWillPop: () async {
         SystemNavigator.pop();
@@ -212,12 +311,6 @@ class _LoginPageState extends State<LoginPage> {
                           ),
                           SizedBox(height: MediaQuery.of(context).size.height * 0.02),
                           _buildTextFormField(
-                            'Alamat Server',
-                            serverController,
-                            false,
-                          ),
-                          SizedBox(height: MediaQuery.of(context).size.height * 0.02),
-                          _buildTextFormField(
                             'Email',
                             usernameController,
                             false,
@@ -256,6 +349,14 @@ class _LoginPageState extends State<LoginPage> {
                                   ),
                                 ),
                               ),
+                            ),
+                          ),
+                          const SizedBox(height: 4),
+                          TextButton(
+                            onPressed: _showForgotPassword,
+                            child: const Text(
+                              'Lupa kata sandi?',
+                              style: TextStyle(color: Colors.lightBlue),
                             ),
                           ),
                         ],
