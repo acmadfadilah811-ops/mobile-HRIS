@@ -24,6 +24,32 @@ String _sanitizeFileName(String name) {
   return name.replaceAll(RegExp(r'[^A-Za-z0-9_\-.]'), '_');
 }
 
+/// Ekstensi berkas dari alamat unduhan. Kontrak yang diunggah HR bisa berupa
+/// gambar (JPG/PNG); dulu SEMUA unduhan disimpan dengan akhiran `.pdf`, jadi
+/// gambar tidak bisa dibuka. Alamat tanpa ekstensi (mis. unduhan slip gaji)
+/// dianggap PDF.
+String _extensionFromUrl(String url) {
+  try {
+    final segment = Uri.parse(url).pathSegments.last.toLowerCase();
+    final dot = segment.lastIndexOf('.');
+    if (dot != -1) {
+      final ext = segment.substring(dot + 1);
+      if (const ['pdf', 'jpg', 'jpeg', 'png', 'webp'].contains(ext)) {
+        return ext;
+      }
+    }
+  } catch (_) {}
+  return 'pdf';
+}
+
+String _mimeFor(String path) {
+  final lower = path.toLowerCase();
+  if (lower.endsWith('.jpg') || lower.endsWith('.jpeg')) return 'image/jpeg';
+  if (lower.endsWith('.png')) return 'image/png';
+  if (lower.endsWith('.webp')) return 'image/webp';
+  return 'application/pdf';
+}
+
 Future<String?> _downloadTo(File file, String url, String token) async {
   final response = await http.get(
     Uri.parse(url),
@@ -37,9 +63,9 @@ Future<String?> _downloadTo(File file, String url, String token) async {
 }
 
 Future<String?> _openLocalFile(File file) async {
-  final result = await OpenFile.open(file.path);
+  final result = await OpenFile.open(file.path, type: _mimeFor(file.path));
   if (result.type != ResultType.done) {
-    return 'Tidak ada aplikasi PDF di HP ini untuk membuka dokumen (${result.message}).';
+    return 'Tidak ada aplikasi di HP ini untuk membuka dokumen (${result.message}).';
   }
   return null;
 }
@@ -57,9 +83,10 @@ Future<({File? file, String? error})> _resolveTemporaryPdf(
 ) async {
   try {
     final dir = await getTemporaryDirectory();
-    final file = File('${dir.path}/${_sanitizeFileName(cacheKey)}.pdf');
+    final ext = _extensionFromUrl(url);
+    final file = File('${dir.path}/${_sanitizeFileName(cacheKey)}.$ext');
     final prefs = await SharedPreferences.getInstance();
-    final cacheKeyPref = 'pdf_cached_at_${_sanitizeFileName(cacheKey)}';
+    final cacheKeyPref = 'pdf_cached_at_${_sanitizeFileName(cacheKey)}_$ext';
     final cachedAtMillis = prefs.getInt(cacheKeyPref);
     final isFresh = cachedAtMillis != null &&
         DateTime.now()
