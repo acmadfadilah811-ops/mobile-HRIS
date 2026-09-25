@@ -143,11 +143,25 @@ class _LeaveRequest extends State<LeaveRequest>
   bool hasMoreRejected = true;
   late String getToken = '';
 
+  // ID karyawan sendiri dari SharedPreferences (diisi saat login) -- tidak
+  // bergantung pada request jaringan prefetchData(). Sebelumnya pengecekan
+  // "permintaan milik sendiri" membaca `arguments` yang baru terisi setelah
+  // request itu sukses; kalau belum/gagal, tombol Setujui/Tolak tetap muncul
+  // untuk cuti milik sendiri.
+  String? _myEmployeeId;
 
+  Future<void> _loadMyEmployeeId() async {
+    final prefs = await SharedPreferences.getInstance();
+    final id = prefs.getInt("employee_id");
+    if (mounted) {
+      setState(() => _myEmployeeId = id?.toString());
+    }
+  }
 
   @override
   void initState() {
     super.initState();
+    _loadMyEmployeeId();
     currentPage = 1;
     _scrollController.addListener(_scrollListener);
     _tabController = TabController(length: 5, vsync: this);
@@ -1410,7 +1424,10 @@ class _LeaveRequest extends State<LeaveRequest>
     }
   }
 
-  Future<void> approveRequest(int approveId) async {
+  // Pesan gagal terakhir dari Setujui/Tolak (untuk snackbar di pemanggil).
+  String _pesanGagalTerakhir = '';
+
+  Future<bool> approveRequest(int approveId) async {
     final prefs = await SharedPreferences.getInstance();
     var token = prefs.getString("token");
     var typedServerUrl = prefs.getString("typed_url");
@@ -1422,24 +1439,13 @@ class _LeaveRequest extends State<LeaveRequest>
     if (response.statusCode == 200) {
       setState(() {
         isSaveClick = false;
-        for (var request in myAllRequests) {
-          if (request['id'] == approveId) {
-            request['status'] = 'approved';
-            break;
-          }
-        }
-
-        for (var request in requestedRecords) {
-          if (request['id'] == approveId) {
-            request['status'] = 'approved';
-            break;
-          }
-        }
+        _setStatusEverywhere(approveId, 'approved');
       });
+      return true;
     }
-    else {
-      isSaveClick = true;
-    }
+    isSaveClick = true;
+    _pesanGagalTerakhir = _pesanGagalKeputusan(response, 'menyetujui');
+    return false;
   }
 
   Future<bool> rejectRequest(int rejectId, String rejectionReason) async {
@@ -1456,32 +1462,17 @@ class _LeaveRequest extends State<LeaveRequest>
         isSaveClick = false;
         for (var request in myAllRequests) {
           if (request['id'] == rejectId) {
-            request['status'] = 'rejected';
             request['description'] = rejectionReason;
             break;
           }
         }
-
-        for (var request in requestedRecords) {
-          if (request['id'] == rejectId) {
-            request['status'] = 'rejected';
-            break;
-          }
-        }
-
-        for (var request in approvedRecords) {
-          if (request['id'] == rejectId) {
-            request['status'] = 'rejected';
-            break;
-          }
-        }
+        _setStatusEverywhere(rejectId, 'rejected');
       });
       return true;
     }
-    else {
-      isSaveClick = true;
-      return false;
-    }
+    isSaveClick = true;
+    _pesanGagalTerakhir = _pesanGagalKeputusan(response, 'menolak');
+    return false;
   }
 
   Future<void> deleteRequest(int leaveId) async {
@@ -2281,15 +2272,70 @@ class _LeaveRequest extends State<LeaveRequest>
   // prefetchData(), atau dari record itu sendiri kalau memang sudah
   // employee_id asli -- bukan yang disintesis _withSelfEmployee).
   bool _isOwnRequest(Map<String, dynamic> record) {
+    final recordEmployeeId = record['employee_id']?['id']?.toString();
+    if (recordEmployeeId == null) return false;
+    if (_myEmployeeId != null) return recordEmployeeId == _myEmployeeId;
     try {
-      final recordEmployeeId = record['employee_id']?['id'];
-      final myEmployeeId = arguments['employee_id'];
-      return recordEmployeeId != null &&
-          myEmployeeId != null &&
-          recordEmployeeId == myEmployeeId;
+      // Cadangan kalau SharedPreferences belum sempat terbaca.
+      final fromProfile = arguments['employee_id']?.toString();
+      return fromProfile != null && recordEmployeeId == fromProfile;
     } catch (e) {
       return false;
     }
+  }
+
+  // Ubah status satu permintaan di SEMUA daftar yang menyimpannya. Record di
+  // tiap tab/filter adalah salinan Map yang berbeda; kalau hanya sebagian
+  // yang diperbarui, tombol di salinan lain tetap tampak aktif sampai
+  // halaman dimuat ulang.
+  void _setStatusEverywhere(dynamic id, String status) {
+    final semua = <List<Map<String, dynamic>>>[
+      myAllRequests,
+      requestedRecords,
+      approvedRecords,
+      cancelledRecords,
+      rejectedRecords,
+      filteredRecords,
+      filteredRecordsRequested,
+      filteredRecordsApproved,
+      filteredRecordsCancelled,
+      filteredRecordsRejected,
+      currentRequests,
+      currentLeaveRequests,
+    ];
+    for (final daftar in semua) {
+      for (final r in daftar) {
+        if (r['id'] == id) r['status'] = status;
+      }
+    }
+  }
+
+  // Pesan gagal untuk Setujui/Tolak dari respons server.
+  String _pesanGagalKeputusan(http.Response response, String aksi) {
+    if (response.statusCode == 403) {
+      return 'Anda tidak dapat $aksi permintaan cuti milik sendiri atau '
+          'di luar kewenangan Anda.';
+    }
+    try {
+      final body = jsonDecode(response.body);
+      if (body is List && body.isNotEmpty) return body.first.toString();
+      if (body is Map) {
+        final pesan = body['error'] ?? body['detail'];
+        if (pesan != null) return pesan.toString();
+        final nonField = body['non_field_errors'];
+        if (nonField is List && nonField.isNotEmpty) {
+          return nonField.first.toString();
+        }
+      }
+    } catch (_) {}
+    return 'Gagal $aksi permintaan cuti. Coba lagi.';
+  }
+
+  void _tampilkanGagal(String pesan) {
+    if (!mounted) return;
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text(pesan), backgroundColor: Colors.red[400]),
+    );
   }
 
   Future getAllLeaveRequest({bool reset = false}) async {
@@ -3957,16 +4003,7 @@ class _LeaveRequest extends State<LeaveRequest>
                                                   if (rejectSuccess) {
                                                     showRejectAnimation();
                                                   } else {
-                                                    ScaffoldMessenger.of(
-                                                        context)
-                                                        .showSnackBar(
-                                                      const SnackBar(
-                                                        content: Text(
-                                                            'Gagal menolak permintaan cuti. Coba lagi.'),
-                                                        backgroundColor:
-                                                            Colors.lightBlue,
-                                                      ),
-                                                    );
+                                                    _tampilkanGagal(_pesanGagalTerakhir);
                                                   }
                                                 }
                                               },
@@ -3997,6 +4034,8 @@ class _LeaveRequest extends State<LeaveRequest>
                                   );
                                 },
                                 style: ElevatedButton.styleFrom(
+                                  disabledBackgroundColor: Colors.grey[400],
+                                  disabledForegroundColor: Colors.white,
                                   backgroundColor: Colors.lightBlue,
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(8.0),
@@ -4072,11 +4111,17 @@ class _LeaveRequest extends State<LeaveRequest>
                                                   isSaveClick = false;
                                                   var approveId =
                                                   record['id'];
-                                                  await approveRequest(
-                                                      approveId);
+                                                  final approveSuccess =
+                                                      await approveRequest(
+                                                          approveId);
                                                   Navigator.pop(context);
-                                                  Navigator.pop(context);
-                                                  showApproveAnimation();
+                                                  if (approveSuccess) {
+                                                    Navigator.pop(context);
+                                                    showApproveAnimation();
+                                                  } else {
+                                                    _tampilkanGagal(
+                                                        _pesanGagalTerakhir);
+                                                  }
                                                 }
                                               },
                                               style: ButtonStyle(
@@ -4108,6 +4153,8 @@ class _LeaveRequest extends State<LeaveRequest>
                                   );
                                 },
                                 style: ElevatedButton.styleFrom(
+                                  disabledBackgroundColor: Colors.grey[400],
+                                  disabledForegroundColor: Colors.white,
                                   backgroundColor: record['status'] ==
                                       'approved' ||
                                       record['status'] == 'cancelled' ||
@@ -4127,7 +4174,7 @@ class _LeaveRequest extends State<LeaveRequest>
                               ),
                             ),
                             Visibility(
-                              visible: record['status'] == 'cancelled',
+                              visible: record['status'] == 'cancelled' && !_isOwnRequest(record),
                               child: ElevatedButton(
                                 onPressed: () {
                                   isSaveClick = true;
@@ -4188,16 +4235,7 @@ class _LeaveRequest extends State<LeaveRequest>
                                                   if (rejectSuccess) {
                                                     showRejectAnimation();
                                                   } else {
-                                                    ScaffoldMessenger.of(
-                                                        context)
-                                                        .showSnackBar(
-                                                      const SnackBar(
-                                                        content: Text(
-                                                            'Gagal menolak permintaan cuti. Coba lagi.'),
-                                                        backgroundColor:
-                                                            Colors.lightBlue,
-                                                      ),
-                                                    );
+                                                    _tampilkanGagal(_pesanGagalTerakhir);
                                                   }
                                                 }
                                               },
@@ -4637,16 +4675,7 @@ class _LeaveRequest extends State<LeaveRequest>
                                                 if (rejectSuccess) {
                                                   showRejectAnimation();
                                                 } else {
-                                                  ScaffoldMessenger.of(
-                                                      context)
-                                                      .showSnackBar(
-                                                    const SnackBar(
-                                                      content: Text(
-                                                          'Gagal menolak permintaan cuti. Coba lagi.'),
-                                                      backgroundColor:
-                                                          Colors.lightBlue,
-                                                    ),
-                                                  );
+                                                  _tampilkanGagal(_pesanGagalTerakhir);
                                                 }
                                               }
                                             },
@@ -4676,6 +4705,8 @@ class _LeaveRequest extends State<LeaveRequest>
                                 );
                               },
                               style: ElevatedButton.styleFrom(
+                                  disabledBackgroundColor: Colors.grey[400],
+                                  disabledForegroundColor: Colors.white,
                                 backgroundColor: Colors.lightBlue,
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(8.0),
@@ -4757,9 +4788,14 @@ class _LeaveRequest extends State<LeaveRequest>
                                                 isSaveClick = false;
                                                 var approveId =
                                                 record['id'];
-                                                await approveRequest(
-                                                    approveId);
+                                                final approveSuccess =
+                                                    await approveRequest(
+                                                        approveId);
                                                 Navigator.pop(context);
+                                                if (!approveSuccess) {
+                                                  _tampilkanGagal(
+                                                      _pesanGagalTerakhir);
+                                                }
                                               }
                                             },
                                             style: ButtonStyle(
@@ -4790,6 +4826,8 @@ class _LeaveRequest extends State<LeaveRequest>
                                 );
                               },
                               style: ElevatedButton.styleFrom(
+                                  disabledBackgroundColor: Colors.grey[400],
+                                  disabledForegroundColor: Colors.white,
                                 backgroundColor: Colors.green,
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(8.0),
@@ -4809,7 +4847,7 @@ class _LeaveRequest extends State<LeaveRequest>
                             ),
                           ),
                           Visibility(
-                            visible: record['status'] == 'cancelled',
+                            visible: record['status'] == 'cancelled' && !_isOwnRequest(record),
                             child: ElevatedButton(
                               onPressed: () {
                                 isSaveClick = true;
@@ -4868,16 +4906,7 @@ class _LeaveRequest extends State<LeaveRequest>
                                                 if (rejectSuccess) {
                                                   showRejectAnimation();
                                                 } else {
-                                                  ScaffoldMessenger.of(
-                                                      context)
-                                                      .showSnackBar(
-                                                    const SnackBar(
-                                                      content: Text(
-                                                          'Gagal menolak permintaan cuti. Coba lagi.'),
-                                                      backgroundColor:
-                                                          Colors.lightBlue,
-                                                    ),
-                                                  );
+                                                  _tampilkanGagal(_pesanGagalTerakhir);
                                                 }
                                               }
                                             },

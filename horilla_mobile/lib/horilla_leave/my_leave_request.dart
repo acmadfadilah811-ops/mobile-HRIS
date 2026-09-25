@@ -429,12 +429,28 @@ class _MyLeaveRequest extends State<MyLeaveRequest>
     });
   }
 
+  // Pesan validasi server berbahasa Inggris -> Indonesia untuk kasus yang
+  // paling sering muncul saat mengajukan cuti.
+  String _terjemahkanPesanCuti(String pesan) {
+    if (pesan.contains('is not assigned with leave type')) {
+      return 'Jenis cuti ini belum diberikan kepada Anda. Hubungi HR untuk '
+          'mengatur jatah cuti.';
+    }
+    if (pesan.contains("doesn't have enough leave days")) {
+      return 'Sisa jatah cuti Anda tidak cukup untuk tanggal yang dipilih.';
+    }
+    if (pesan.contains('already has a leave request')) {
+      return 'Anda sudah punya pengajuan cuti pada rentang tanggal ini.';
+    }
+    return pesan;
+  }
+
   Future<void> getAllLeaveTypeName() async {
     ///Fetch all leave types and show my leave availability
     final prefs = await SharedPreferences.getInstance();
     var token = prefs.getString("token");
     var typedServerUrl = prefs.getString("typed_url");
-    var employeeID = prefs.getInt("employeeID");
+    var employeeID = prefs.getInt("employee_id");
     var uri =
     Uri.parse('$typedServerUrl/api/leave/employee-leave-type/$employeeID/');
     var response = await http.get(uri, headers: {
@@ -993,6 +1009,12 @@ class _MyLeaveRequest extends State<MyLeaveRequest>
                                 errorText: _validateLeaveType
                                     ? 'Silakan pilih jenis cuti'
                                     : null,
+                                helperText: leaveItem.isEmpty
+                                    ? 'Jatah cuti Anda belum diatur oleh HR. '
+                                        'Hubungi HR agar jenis dan jatah cuti '
+                                        'diberikan.'
+                                    : null,
+                                helperMaxLines: 3,
                                 border: const OutlineInputBorder(),
                                 labelText: "Pilih Jenis Cuti",
                                 labelStyle: TextStyle(color: Colors.grey[350]),
@@ -2220,7 +2242,9 @@ class _MyLeaveRequest extends State<MyLeaveRequest>
       } else if (errorJson.containsKey("end_date_breakdown")) {
         _errorMessage = errorJson["end_date_breakdown"].join(", ");
       } else if (errorJson.containsKey("non_field_errors")) {
-        _errorMessage = errorJson["non_field_errors"].join(", ");
+        _errorMessage = (errorJson["non_field_errors"] as List)
+            .map((e) => _terjemahkanPesanCuti(e.toString()))
+            .join(", ");
       } else if (errorJson.containsKey("attachment")) {
         _errorMessage = "Kolom lampiran wajib diisi";
       } else {
