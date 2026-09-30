@@ -86,7 +86,7 @@ class _AllAssignedLeave extends State<AllAssignedLeave> {
   }
 
   Future<void> _simulateLoading() async {
-    await Future.delayed(const Duration(seconds: 20));
+    await Future.delayed(const Duration(milliseconds: 300));
     setState(() {
       _isShimmer = false;
     });

@@ -140,7 +140,7 @@ class _ShiftRequestPageState extends State<ShiftRequestPage> {
   }
 
   Future<void> _simulateLoading() async {
-    await Future.delayed(const Duration(seconds: 5));
+    await Future.delayed(const Duration(milliseconds: 300));
     setState(() {});
   }
 

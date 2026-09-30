@@ -67,10 +67,12 @@ Future<void> notificationTapBackground(NotificationResponse notificationResponse
 
 void _startNotificationTimer() {
   _notificationTimer?.cancel();
-  _notificationTimer = Timer.periodic(Duration(seconds: 3), (timer) {
+  // Dulu tiap 3 detik dengan DUA permintaan (daftar + hitungan). fetchNotifications()
+  // sudah membawa jumlah belum-dibaca, jadi cukup satu permintaan tiap 30 detik --
+  // mengurangi beban jaringan/baterai dan tidak lagi berebut dengan permintaan layar.
+  _notificationTimer = Timer.periodic(const Duration(seconds: 30), (timer) {
     if (isAuthenticated) {
       fetchNotifications();
-      unreadNotificationsCount();
     } else {
       timer.cancel();
       _notificationTimer = null;
@@ -424,7 +426,9 @@ class _FutureBuilderPageState extends State<FutureBuilderPage> {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<bool>(
-      future: Future.delayed(const Duration(seconds: 2), () => _futurePath),
+      // Sebelumnya menunggu 2 detik buatan sebelum membuka Beranda/Login; sekarang
+      // langsung begitu status login terbaca dari penyimpanan lokal (milidetik).
+      future: _futurePath,
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return SplashScreen();

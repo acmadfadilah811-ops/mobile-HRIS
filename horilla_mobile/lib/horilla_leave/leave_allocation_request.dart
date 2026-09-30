@@ -163,7 +163,7 @@ class _LeaveAllocationRequest extends State<LeaveAllocationRequest>
   }
 
   Future<void> _simulateLoading() async {
-    await Future.delayed(const Duration(seconds: 5));
+    await Future.delayed(const Duration(milliseconds: 300));
     setState(() {
       _isShimmer = false;
     });

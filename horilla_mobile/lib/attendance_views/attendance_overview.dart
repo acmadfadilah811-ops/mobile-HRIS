@@ -88,7 +88,7 @@ class _AttendanceOverviewState extends State<AttendanceOverview>
   }
 
   Future<void> _simulateLoading() async {
-    await Future.delayed(const Duration(seconds: 10));
+    await Future.delayed(const Duration(milliseconds: 300));
     setState(() {});
   }
 

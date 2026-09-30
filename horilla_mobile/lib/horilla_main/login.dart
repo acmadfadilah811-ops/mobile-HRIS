@@ -44,10 +44,10 @@ class _LoginPageState extends State<LoginPage> {
 
   void _startNotificationTimer() {
     _notificationTimer?.cancel();
-    _notificationTimer = Timer.periodic(Duration(seconds: 3), (timer) {
+    // 30 detik dan satu permintaan (lihat catatan di main.dart).
+    _notificationTimer = Timer.periodic(const Duration(seconds: 30), (timer) {
       if (isAuthenticated) {
         fetchNotifications();
-        unreadNotificationsCount();
       } else {
         timer.cancel();
         _notificationTimer = null;

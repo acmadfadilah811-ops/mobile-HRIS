@@ -111,7 +111,7 @@ class _RotatingWorkTypePageState extends State<RotatingWorkTypePage> {
   }
 
   Future<void> _simulateLoading() async {
-    await Future.delayed(const Duration(seconds: 5));
+    await Future.delayed(const Duration(milliseconds: 300));
     setState(() {});
   }
 

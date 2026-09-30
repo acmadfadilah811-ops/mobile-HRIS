@@ -64,25 +64,40 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
   }
 
 
+  /// Menjalankan satu pemeriksaan/pengambilan data tanpa boleh menahan layar:
+  /// gagal, terputus, atau lebih dari 8 detik = dilewati (sebelumnya satu
+  /// permintaan yang macet membuat Beranda berputar selamanya karena Future.wait
+  /// ikut gagal dan setState tidak pernah dipanggil).
+  Future<void> _aman(Future Function() kerja) async {
+    try {
+      await kerja().timeout(const Duration(seconds: 8));
+    } catch (e) {
+      print('Dilewati (gagal/lambat): $e');
+    }
+  }
+
   Future _initializePermissionsAndData() async {
-    await checkAllPermissions();
+    // Semua pemeriksaan hak akses berjalan BERSAMAAN (dulu checkAllPermissions
+    // menunggu sendiri dulu, lalu 11 permintaan lain termasuk seluruh halaman
+    // notifikasi). Beranda dibuka begitu pemeriksaan hak akses selesai.
     await Future.wait([
-      permissionGeoFencingMapView(),
-      loadGeoFencingPreference(),
-      permissionLeaveOverviewChecks(),
-      permissionLeaveTypeChecks(),
-      permissionLeaveRequestChecks(),
-      permissionLeaveAssignChecks(),
-      permissionWardChecks(),
-      fetchNotifications(),
-      unreadNotificationsCount(),
-      prefetchData(),
-      fetchData(),
+      _aman(() => checkAllPermissions()),
+      _aman(() => permissionGeoFencingMapView()),
+      _aman(() => loadGeoFencingPreference()),
+      _aman(() => permissionLeaveOverviewChecks()),
+      _aman(() => permissionLeaveTypeChecks()),
+      _aman(() => permissionLeaveRequestChecks()),
+      _aman(() => permissionLeaveAssignChecks()),
+      _aman(() => permissionWardChecks()),
+      _aman(() => prefetchData()),
     ]);
+    if (!mounted) return;
     setState(() {
       _isPermissionLoading = false;
       isLoading = false;
     });
+    // Notifikasi dimuat di latar belakang setelah Beranda tampil.
+    _aman(() => fetchNotifications());
   }
 
 
@@ -308,6 +323,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
     List<Map<String, dynamic>> allNotifications = [];
     int page = 1;
     bool hasMore = true;
+    int? totalBelumDibaca;
 
     while (hasMore) {
       var uri = Uri.parse(
@@ -316,7 +332,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
       var response = await http.get(uri, headers: {
         "Content-Type": "application/json",
         "Authorization": "Bearer $token",
-      });
+      }).timeout(const Duration(seconds: 8));
 
       if (response.statusCode == 200) {
         var responseData = jsonDecode(response.body);
@@ -332,12 +348,13 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
 
         allNotifications.addAll(fetched);
 
-        // Check if there's a next page
-        if (responseData['next'] == null) {
-          hasMore = false;
-        } else {
-          page++;
+        // Cukup halaman pertama (notifikasi terbaru) untuk daftar lonceng; jumlah
+        // total belum-dibaca diambil dari 'count'. Dulu SEMUA halaman diambil satu
+        // per satu sebelum Beranda tampil -- lambat bila notifikasi menumpuk.
+        if (responseData['count'] is int) {
+          totalBelumDibaca = responseData['count'] as int;
         }
+        hasMore = false;
       } else {
         print('Failed to fetch notifications: ${response.statusCode}');
         hasMore = false;
@@ -354,7 +371,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
           .map((jsonString) => jsonDecode(jsonString))
           .cast<Map<String, dynamic>>()
           .toList();
-      notificationsCount = notifications.length;
+      notificationsCount = totalBelumDibaca ?? notifications.length;
       isLoading = false;
     });
   }
