@@ -308,6 +308,10 @@ Future<void> fetchNotifications() async {
       } else {
         print("No notifications available.");
       }
+    } else if (response.statusCode == 401) {
+      // Token ditolak server: akun dipakai login di perangkat lain (satu akun =
+      // satu perangkat) atau masa berlaku habis. Keluar dengan pesan yang jelas.
+      await _sesiBerakhir(response.body);
     } else {
       print('Notification fetch failed with status: ${response.statusCode}');
     }
@@ -318,6 +322,47 @@ Future<void> fetchNotifications() async {
   } on Exception catch (e) {
     print('Error fetching notifications: $e');
   }
+}
+
+bool _dialogSesiTampil = false;
+
+/// Server menolak token (HTTP 401). Kode 'sesi_digantikan' = akun ini baru saja
+/// login di perangkat lain; selain itu = sesi habis. Hapus token, hentikan polling,
+/// tampilkan pesan, lalu kembali ke layar login.
+Future<void> _sesiBerakhir(String body) async {
+  if (_dialogSesiTampil || !isAuthenticated) return;
+  _dialogSesiTampil = true;
+  var pesan = 'Sesi login Anda sudah berakhir. Silakan login ulang.';
+  try {
+    final data = jsonDecode(body);
+    if (data is Map && data['code'] == 'sesi_digantikan') {
+      pesan = 'Akun ini sedang dipakai login di perangkat lain. '
+          'Silakan login ulang bila ingin memakai perangkat ini.';
+    }
+  } catch (_) {}
+
+  isAuthenticated = false;
+  _notificationTimer?.cancel();
+  _notificationTimer = null;
+  final prefs = await SharedPreferences.getInstance();
+  await prefs.remove('token');
+
+  final ctx = navigatorKey.currentContext;
+  if (ctx != null) {
+    await showDialog(
+      context: ctx,
+      barrierDismissible: false,
+      builder: (c) => AlertDialog(
+        title: const Text('Sesi berakhir'),
+        content: Text(pesan),
+        actions: [
+          TextButton(onPressed: () => Navigator.of(c).pop(), child: const Text('OK')),
+        ],
+      ),
+    );
+  }
+  _dialogSesiTampil = false;
+  navigatorKey.currentState?.pushNamedAndRemoveUntil('/login', (route) => false);
 }
 
 Future<void> unreadNotificationsCount() async {
