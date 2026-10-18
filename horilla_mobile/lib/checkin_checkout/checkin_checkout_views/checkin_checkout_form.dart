@@ -1141,6 +1141,8 @@ class _CheckInCheckOutFormPageState extends State<CheckInCheckOutFormPage> {
                       clockCheckBool = true;
                       DateTime now = DateTime.now();
                       checkInFormattedTime = DateFormat('h:mm a').format(now);
+                      // Jam masuk dari absen barusan; tanpa ini build berikutnya menimpanya dengan timeDisplay lama (kosong).
+                      timeDisplay = checkInFormattedTime;
                       checkInFormattedTimeTopR = DateFormat('h:mm').format(now);
                       _saveClockState(
                           clockCheckedIn, 1, checkInFormattedTime.toString());
@@ -1235,6 +1237,8 @@ class _CheckInCheckOutFormPageState extends State<CheckInCheckOutFormPage> {
                       clockCheckBool = true;
                       DateTime now = DateTime.now();
                       checkInFormattedTime = DateFormat('h:mm a').format(now);
+                      // Jam masuk dari absen barusan; tanpa ini build berikutnya menimpanya dengan timeDisplay lama (kosong).
+                      timeDisplay = checkInFormattedTime;
                       checkInFormattedTimeTopR = DateFormat('h:mm').format(now);
                       _saveClockState(
                           clockCheckedIn, 1, checkInFormattedTime.toString());
@@ -1301,6 +1305,8 @@ class _CheckInCheckOutFormPageState extends State<CheckInCheckOutFormPage> {
                     clockCheckBool = true;
                     DateTime now = DateTime.now();
                     checkInFormattedTime = DateFormat('h:mm a').format(now);
+                    // Jam masuk dari absen barusan; tanpa ini build berikutnya menimpanya dengan timeDisplay lama (kosong).
+                    timeDisplay = checkInFormattedTime;
                     checkInFormattedTimeTopR = DateFormat('h:mm').format(now);
                     _saveClockState(
                         clockCheckedIn, 1, checkInFormattedTime.toString());
