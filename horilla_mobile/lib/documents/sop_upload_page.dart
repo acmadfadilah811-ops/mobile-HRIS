@@ -226,7 +226,7 @@ class _SopUploadPageState extends State<SopUploadPage> {
             const SizedBox(height: 24),
             FilledButton(
               onPressed: _submitting ? null : _submit,
-              style: FilledButton.styleFrom(backgroundColor: Colors.lightBlue),
+              style: FilledButton.styleFrom(backgroundColor: const Color(0xFF1F2A55), minimumSize: const Size.fromHeight(50), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14))),
               child: _submitting
                   ? const SizedBox(
                       width: 20,

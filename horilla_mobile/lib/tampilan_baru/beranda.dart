@@ -6,6 +6,7 @@ import '../ui/tema.dart';
 import 'ajukan_cuti.dart';
 import 'halaman_utama.dart';
 import 'persetujuan.dart';
+import 'tim.dart';
 
 class Beranda extends StatefulWidget {
   final HalamanUtamaState induk;
@@ -407,7 +408,10 @@ class BerandaState extends State<Beranda> with MuatDenganCache {
       item(Icons.campaign_outlined, 'Pengumuman', () => Navigator.pushNamed(context, '/announcements')),
       item(Icons.notifications_none_rounded, 'Notifikasi', () => Navigator.pushNamed(context, '/notifications_list')),
       item(Icons.history_rounded, 'Riwayat Absen', () => widget.induk.pindahTab(1)),
-      item(Icons.apps_rounded, 'Modul Lain', () => Navigator.pushNamed(context, '/modul')),
+      if (_d['punya_tim'] == true)
+        item(Icons.groups_outlined, 'Tim Saya', () => Navigator.push(context, MaterialPageRoute(builder: (_) => const TimSaya())))
+      else
+        item(Icons.person_outline_rounded, 'Profil', () => widget.induk.pindahTab(3)),
     ];
     return Kartu(
       padding: const EdgeInsets.fromLTRB(8, 10, 8, 10),

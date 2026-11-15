@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:shimmer/shimmer.dart';
+import '../ui/tema.dart';
 import 'sop_pdf_viewer_page.dart';
 import 'sop_upload_page.dart';
 
@@ -123,7 +123,7 @@ class _CompanyDocumentsState extends State<CompanyDocuments>
   void _showError(String message) {
     if (!mounted) return;
     ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text(message), backgroundColor: Colors.lightBlue),
+      SnackBar(content: Text(message), behavior: SnackBarBehavior.floating, backgroundColor: const Color(0xFF7F1D1D)),
     );
   }
 
@@ -173,56 +173,38 @@ class _CompanyDocumentsState extends State<CompanyDocuments>
     if (mounted) setState(() => openingId = null);
   }
 
-  Widget _shimmerList() {
-    return ListView.builder(
-      padding: const EdgeInsets.all(12),
-      itemCount: 4,
-      itemBuilder: (context, index) => Shimmer.fromColors(
-        baseColor: Colors.grey.shade300,
-        highlightColor: Colors.grey.shade100,
-        child: Container(
-          height: 72,
-          margin: const EdgeInsets.only(bottom: 12),
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(8),
-          ),
-        ),
-      ),
-    );
-  }
+  Widget _shimmerList() => ListView(
+        padding: const EdgeInsets.all(18),
+        children: const [Kerangka(tinggi: 220, radius: 16)],
+      );
 
-  Widget _emptyState(String message) {
-    return Center(
-      child: Padding(
-        padding: const EdgeInsets.all(24),
-        child: Text(
-          message,
-          textAlign: TextAlign.center,
-          style: TextStyle(color: Colors.grey.shade600),
-        ),
-      ),
-    );
-  }
+  Widget _emptyState(String message) => ListView(
+        padding: const EdgeInsets.all(18),
+        children: [Kartu(child: PesanKosong(ikon: Icons.folder_open_outlined, judul: message))],
+      );
 
-  Widget _docCard(Map<String, dynamic> doc) {
+  Widget _docCard(Map<String, dynamic> doc, bool terakhir) {
     final isOpening = openingId == doc['id'];
     final readable = _hasReadableContent(doc);
-    return Card(
-      child: ListTile(
-        leading: Icon(
-          readable ? Icons.menu_book_outlined : Icons.description_outlined,
-          color: Colors.lightBlue,
-        ),
-        title: Text(doc['title'] ?? '-'),
-        trailing: isOpening
-            ? const SizedBox(
-                width: 20,
-                height: 20,
-                child: CircularProgressIndicator(strokeWidth: 2),
-              )
-            : Icon(readable ? Icons.chevron_right : Icons.picture_as_pdf_outlined),
-        onTap: isOpening ? null : () => _openDocument(doc),
+    return InkWell(
+      onTap: isOpening ? null : () => _openDocument(doc),
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
+        decoration: BoxDecoration(border: terakhir ? null : const Border(bottom: BorderSide(color: Warna.garis))),
+        child: Row(children: [
+          Container(
+            width: 38,
+            height: 38,
+            decoration: BoxDecoration(color: Warna.latar, borderRadius: BorderRadius.circular(12)),
+            child: Icon(readable ? Icons.menu_book_outlined : Icons.picture_as_pdf_outlined, size: 20, color: Warna.ink2),
+          ),
+          const SizedBox(width: 12),
+          Expanded(child: Text('${doc['title'] ?? '-'}', style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w700))),
+          if (isOpening)
+            const SizedBox(width: 18, height: 18, child: CircularProgressIndicator(strokeWidth: 2, color: Warna.muted))
+          else
+            const Icon(Icons.chevron_right_rounded, color: Warna.faint),
+        ]),
       ),
     );
   }
@@ -241,42 +223,29 @@ class _CompanyDocumentsState extends State<CompanyDocuments>
     final grouped = <String, List<Map<String, dynamic>>>{};
     for (final doc in docs) {
       final dept = doc['department'];
-      final label = (dept is Map && dept['name'] != null)
-          ? dept['name'].toString()
-          : _semua;
+      final label = (dept is Map && dept['name'] != null) ? dept['name'].toString() : _semua;
       grouped.putIfAbsent(label, () => []).add(doc);
     }
-    final namedSections = grouped.keys.where((k) => k != _semua).toList()
-      ..sort();
+    final namedSections = grouped.keys.where((k) => k != _semua).toList()..sort();
     final sections = [if (grouped.containsKey(_semua)) _semua, ...namedSections];
 
     return RefreshIndicator(
+      color: Warna.navy,
       onRefresh: () => _loadCategory(category),
-      child: ListView.builder(
-        padding: const EdgeInsets.fromLTRB(12, 12, 12, 88),
-        itemCount: sections.length,
-        itemBuilder: (context, sectionIndex) {
-          final section = sections[sectionIndex];
-          final sectionDocs = grouped[section]!;
-          return Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Padding(
-                padding: const EdgeInsets.fromLTRB(4, 12, 4, 6),
-                child: Text(
-                  section,
-                  style: const TextStyle(
-                    fontSize: 13,
-                    fontWeight: FontWeight.bold,
-                    letterSpacing: 0.3,
-                    color: Colors.black54,
-                  ),
-                ),
-              ),
-              ...sectionDocs.map(_docCard),
-            ],
-          );
-        },
+      child: ListView(
+        padding: const EdgeInsets.fromLTRB(18, 0, 18, 88),
+        children: [
+          for (final section in sections) ...[
+            JudulBagian(section),
+            Kartu(
+              padding: EdgeInsets.zero,
+              child: Column(children: [
+                for (var i = 0; i < grouped[section]!.length; i++)
+                  _docCard(grouped[section]![i], i == grouped[section]!.length - 1),
+              ]),
+            ),
+          ],
+        ],
       ),
     );
   }
@@ -290,24 +259,25 @@ class _CompanyDocumentsState extends State<CompanyDocuments>
         bottom: TabBar(
           controller: _tabController,
           isScrollable: true,
-          labelColor: Colors.lightBlue,
-          indicatorColor: Colors.lightBlue,
-          unselectedLabelColor: Colors.grey,
+          tabAlignment: TabAlignment.start,
+          labelColor: Warna.ink,
+          indicatorColor: Warna.navy,
+          unselectedLabelColor: Warna.muted,
+          labelStyle: const TextStyle(fontWeight: FontWeight.w700, fontSize: 13),
           tabs: _categories.map((c) => Tab(text: c['label'])).toList(),
         ),
       ),
       body: TabBarView(
         controller: _tabController,
-        children: _categories
-            .map((c) => _groupedTab(c['key']!, 'Belum ada dokumen di kategori ini.'))
-            .toList(),
+        children: _categories.map((c) => _groupedTab(c['key']!, 'Belum ada dokumen di kategori ini.')).toList(),
       ),
       floatingActionButton: (onSopTab && _canUploadSop)
           ? FloatingActionButton.extended(
               onPressed: _openUploadPage,
-              backgroundColor: Colors.lightBlue,
-              icon: const Icon(Icons.upload_file),
-              label: const Text('Unggah SOP'),
+              backgroundColor: Warna.navy,
+              foregroundColor: Colors.white,
+              icon: const Icon(Icons.upload_file_rounded),
+              label: const Text('Unggah SOP', style: TextStyle(fontWeight: FontWeight.w700)),
             )
           : null,
     );

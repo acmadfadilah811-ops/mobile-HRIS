@@ -2,12 +2,10 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
-import 'package:horilla/horilla_main/home.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import 'package:image_picker/image_picker.dart';
 
-import 'checkin_checkout_form.dart';
 
 class CameraSetupPage extends StatefulWidget {
   final List<CameraDescription> cameras;
@@ -199,7 +197,7 @@ class _CameraSetupPageState extends State<CameraSetupPage> {
                   const SizedBox(height: 16),
                   const Text(
                     "Foto Wajah Berhasil Diunggah",
-                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.lightBlue),
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Color(0xFF0F172A)),
                   ),
                 ],
               ),
@@ -209,8 +207,11 @@ class _CameraSetupPageState extends State<CameraSetupPage> {
       },
     );
 
+    // 2026-11-15: kembali ke layar absen baru (dulu ke layar absen lama).
     Future.delayed(const Duration(seconds: 2), () {
-      Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => CheckInCheckOutFormPage()));
+      if (!mounted) return;
+      Navigator.of(context).pop(); // tutup dialog berhasil
+      Navigator.of(context).pop(); // kembali ke pemanggil
     });
   }
 
@@ -256,16 +257,13 @@ class _CameraSetupPageState extends State<CameraSetupPage> {
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
-      onWillPop: () async {
-        Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => CheckInCheckOutFormPage()));
-        return false;
-      },
+      onWillPop: () async => true,
       child: Scaffold(
-        backgroundColor: Colors.grey[200],
+        backgroundColor: const Color(0xFFF4F5F8),
         appBar: AppBar(
-          automaticallyImplyLeading: false,
-          title: const Text('Pengambilan Foto Wajah', style: TextStyle(color: Colors.white)),
-          backgroundColor: Colors.lightBlue,
+          title: const Text('Daftarkan Foto Wajah', style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w700)),
+          backgroundColor: const Color(0xFF1F2A55),
+          foregroundColor: Colors.white,
           elevation: 0,
           actions: [
             IconButton(
@@ -285,7 +283,7 @@ class _CameraSetupPageState extends State<CameraSetupPage> {
                     height: 400,
                     child: Container(
                       decoration: BoxDecoration(
-                         border: Border.all(color: Colors.lightBlue[700]!, width: 3),
+                         border: Border.all(color: const Color(0xFF1F2A55), width: 3),
                         borderRadius: BorderRadius.circular(12),
                         boxShadow: [
                           BoxShadow(color: Colors.grey.withOpacity(0.3), spreadRadius: 2, blurRadius: 5),
@@ -303,7 +301,7 @@ class _CameraSetupPageState extends State<CameraSetupPage> {
                               }
                               return CameraPreview(_controller!);
                             } else {
-                              return Center(child: CircularProgressIndicator(color: Colors.lightBlue[700]));
+                              return Center(child: CircularProgressIndicator(color: const Color(0xFF1F2A55)));
                             }
                           },
                         )
@@ -330,7 +328,7 @@ class _CameraSetupPageState extends State<CameraSetupPage> {
                         icon: const Icon(Icons.camera_alt, color: Colors.white),
                         label: const Text('Ambil Foto', style: TextStyle(color: Colors.white)),
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.green,
+                          backgroundColor: const Color(0xFF1F2A55),
                           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
                           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
                         ),
@@ -340,7 +338,7 @@ class _CameraSetupPageState extends State<CameraSetupPage> {
                         icon: const Icon(Icons.photo_library, color: Colors.white),
                         label: const Text('Galeri', style: TextStyle(color: Colors.white)),
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.blue,
+                          backgroundColor: const Color(0xFF334155),
                           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
                           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
                         ),
@@ -349,11 +347,11 @@ class _CameraSetupPageState extends State<CameraSetupPage> {
                     if (_capturedImage != null) ...[
                       OutlinedButton.icon(
                         onPressed: _retakePicture,
-                        icon: const Icon(Icons.refresh, color: Colors.lightBlue),
+                        icon: const Icon(Icons.refresh, color: Color(0xFF1F2A55)),
                         label: const Text('Foto Ulang'),
                         style: OutlinedButton.styleFrom(
-                          foregroundColor: Colors.lightBlue[700],
-                          side: BorderSide(color: Colors.lightBlue!),
+                          foregroundColor: const Color(0xFF1F2A55),
+                          side: const BorderSide(color: Color(0xFFE5E7EB)),
                           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
                           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
                         ),

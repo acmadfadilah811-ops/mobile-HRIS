@@ -7,6 +7,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../data/api_mobile.dart';
 import '../ui/tema.dart';
+import 'data_diri.dart';
+import 'tim.dart';
 
 class Profil extends StatefulWidget {
   const Profil({super.key});
@@ -73,14 +75,6 @@ class _ProfilState extends State<Profil> with MuatDenganCache {
   Widget build(BuildContext context) {
     final ada = muat.data != null;
     final p = _p;
-    final argumen = {
-      'employee_id': p['id'],
-      'employee_name': p['nama'],
-      'badge_id': p['badge_id'],
-      'email': p['email'],
-      'employee_profile': p['foto'],
-      'job_position_name': p['jabatan'],
-    };
     return Scaffold(
       appBar: AppBar(title: const Text('Profil'), automaticallyImplyLeading: false),
       body: RefreshIndicator(
@@ -107,16 +101,17 @@ class _ProfilState extends State<Profil> with MuatDenganCache {
             ],
             const SizedBox(height: 18),
             _grup([
-              _menu(Icons.badge_outlined, 'Data diri & pekerjaan', 'Alamat, kontak, jabatan, rekening, kontrak',
-                  ada ? () => _buka('/employees_form', argumen: argumen) : null),
+              _menu(Icons.badge_outlined, 'Data diri & pekerjaan', 'Kontak, alamat, jabatan, atasan, rekening',
+                  () => Navigator.push(context, MaterialPageRoute(builder: (_) => const DataDiri()))),
+              if ((muat.data as Map?)?['punya_tim'] == true)
+                _menu(Icons.groups_outlined, 'Tim saya', 'Status absen tim hari ini',
+                    () => Navigator.push(context, MaterialPageRoute(builder: (_) => const TimSaya()))),
               _menu(Icons.description_outlined, 'Dokumen saya', 'Unggah dan lihat dokumen pribadi', () => _buka('/my_documents')),
               _menu(Icons.folder_open_outlined, 'Dokumen perusahaan', 'SOP dan peraturan', () => _buka('/company_documents')),
               _menu(Icons.notifications_none_rounded, 'Notifikasi', null, () => _buka('/notifications_list')),
             ]),
             const SizedBox(height: 12),
             _grup([
-              _menu(Icons.apps_rounded, 'Modul lain', 'Menu karyawan, kehadiran, dan persetujuan untuk atasan/HR',
-                  () => _buka('/modul')),
               _menu(Icons.logout_rounded, 'Keluar', null, _keluar),
             ]),
           ],

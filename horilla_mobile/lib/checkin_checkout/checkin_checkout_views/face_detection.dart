@@ -3,12 +3,12 @@ import 'dart:io';
 import 'dart:math' as math;
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
+import '../../ui/tema.dart';
 import 'package:horilla/checkin_checkout/checkin_checkout_views/setup_imageface.dart';
 import 'package:http/http.dart' as http;
 import 'package:http/io_client.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:geolocator/geolocator.dart';
-import 'checkin_checkout_form.dart';
 import '../controllers/face_detection_controller.dart';
 
 class FaceScanner extends StatefulWidget {
@@ -239,20 +239,20 @@ class _FaceScannerState extends State<FaceScanner> with SingleTickerProviderStat
       context: context,
       barrierDismissible: false,
       builder: (ctx) => AlertDialog(
-        title: const Text("Wajah Tidak Cocok"),
-        content: const Text("Wajah yang terdeteksi tidak cocok. Silakan coba lagi."),
+        title: const Text("Wajah tidak cocok", style: TextStyle(fontSize: 17, fontWeight: FontWeight.w800)),
+        content: const Text("Pastikan wajah terlihat jelas, cukup cahaya, dan tanpa masker, lalu coba lagi."),
         actions: [
+          // 2026-11-15: dulu kembali ke layar absen lama; sekarang pilih coba lagi di sini atau batal.
           TextButton(
             onPressed: () {
               Navigator.of(ctx).pop();
-              if (mounted) {
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(builder: (_) => CheckInCheckOutFormPage()),
-                );
-              }
+              if (mounted) Navigator.pop(context);
             },
-            child: const Text("OK"),
+            child: const Text("Batal", style: TextStyle(color: Warna.muted)),
+          ),
+          TextButton(
+            onPressed: () => Navigator.of(ctx).pop(),
+            child: const Text("Coba lagi", style: TextStyle(color: Warna.ink, fontWeight: FontWeight.w700)),
           ),
         ],
       ),
@@ -350,86 +350,79 @@ class _FaceScannerState extends State<FaceScanner> with SingleTickerProviderStat
     super.dispose();
   }
 
-  Widget _buildImageContainer(double screenHeight, double screenWidth) {
-    return Stack(
-      alignment: Alignment.center,
-      children: [
-        AnimatedBuilder(
-          animation: _scaleAnimation,
-          builder: (context, child) {
-            return Transform.scale(
-              scale: _isComparing ? _scaleAnimation.value : 1.0,
+  // Tampilan baru 2026-11-15: latar navy, bingkai oval, keterangan status. Logika deteksi tidak berubah.
+  @override
+  Widget build(BuildContext context) {
+    final lebar = MediaQuery.of(context).size.width;
+    final siap = _isCameraInitialized && _controller.cameraController.value.isInitialized;
+    final keterangan = _isFetchingImage
+        ? 'Menyiapkan foto acuan...'
+        : !siap
+            ? 'Menyalakan kamera...'
+            : _isComparing
+                ? 'Mencocokkan wajah...'
+                : 'Arahkan wajah ke dalam bingkai';
+    return Scaffold(
+      backgroundColor: Warna.navy,
+      appBar: AppBar(
+        backgroundColor: Warna.navy,
+        foregroundColor: Colors.white,
+        title: Text(widget.attendanceState == 'NOT_CHECKED_IN' ? 'Pindai wajah - absen masuk' : 'Pindai wajah - absen pulang',
+            style: const TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w700)),
+      ),
+      body: SafeArea(
+        child: Column(children: [
+          const SizedBox(height: 24),
+          Center(
+            child: AnimatedBuilder(
+              animation: _scaleAnimation,
+              builder: (context, child) => Transform.scale(scale: _isComparing ? (0.97 + 0.03 * _scaleAnimation.value) : 1.0, child: child),
               child: Container(
-                height: screenHeight * 0.4,
-                width: screenWidth * 0.7,
+                width: lebar * 0.72,
+                height: lebar * 0.92,
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20),
-                  border: Border.all(color: Colors.grey.shade300, width: 2),
+                  borderRadius: BorderRadius.all(Radius.elliptical(lebar * 0.36, lebar * 0.46)),
+                  border: Border.all(color: Colors.white, width: 3),
                 ),
                 child: ClipRRect(
-                  borderRadius: BorderRadius.circular(20),
-                  child: _isCameraInitialized && _controller.cameraController.value.isInitialized
-                      ? CameraPreview(_controller.cameraController)
-                      : const Center(child: CircularProgressIndicator()),
+                  borderRadius: BorderRadius.all(Radius.elliptical(lebar * 0.36, lebar * 0.46)),
+                  child: siap
+                      ? FittedBox(
+                          fit: BoxFit.cover,
+                          child: SizedBox(
+                            width: _controller.cameraController.value.previewSize?.height ?? lebar,
+                            height: _controller.cameraController.value.previewSize?.width ?? lebar,
+                            child: CameraPreview(_controller.cameraController),
+                          ),
+                        )
+                      : const Center(child: CircularProgressIndicator(color: Colors.white, strokeWidth: 2.4)),
                 ),
-              ),
-            );
-          },
-        ),
-        if (_isComparing)
-          Positioned.fill(
-            child: Container(
-              decoration: BoxDecoration(
-                color: Colors.black.withOpacity(0.5),
-                borderRadius: BorderRadius.circular(20),
-              ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  AnimatedBuilder(
-                    animation: _rotationAnimation,
-                    builder: (context, child) {
-                      return Transform.rotate(
-                        angle: _rotationAnimation.value,
-                        child: const Icon(Icons.face_retouching_natural, color: Colors.white, size: 50),
-                      );
-                    },
-                  ),
-                  const SizedBox(height: 20),
-                  const Text(
-                    'Mendeteksi Wajah...',
-                    style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold),
-                  ),
-                ],
               ),
             ),
           ),
-      ],
-    );
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    final screenWidth = MediaQuery.of(context).size.width;
-    final screenHeight = MediaQuery.of(context).size.height;
-
-    return Scaffold(
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        title: const Text('Deteksi Wajah'),
-        backgroundColor: Colors.lightBlue,
-        elevation: 0,
-      ),
-      body: Center(
-        child: Column(
-          children: [
-            SizedBox(height: screenHeight * 0.1),
-            _buildImageContainer(screenHeight, screenWidth),
-            SizedBox(height: screenHeight * 0.05),
-            if (_isFetchingImage)
-              const CircularProgressIndicator(),
-          ],
-        ),
+          const SizedBox(height: 24),
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
+            decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(99)),
+            child: Row(mainAxisSize: MainAxisSize.min, children: [
+              if (_isComparing || !siap)
+                const SizedBox(width: 14, height: 14, child: CircularProgressIndicator(strokeWidth: 2, color: Warna.ink2))
+              else
+                const Icon(Icons.center_focus_strong_rounded, size: 16, color: Warna.ink2),
+              const SizedBox(width: 8),
+              Text(keterangan, style: const TextStyle(fontSize: 12.5, fontWeight: FontWeight.w700, color: Warna.ink)),
+            ]),
+          ),
+          const Spacer(),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(24, 0, 24, 18),
+            child: Text(
+              'Wajah dicocokkan dengan foto acuan di HR. Absen terkirim otomatis begitu cocok.',
+              textAlign: TextAlign.center,
+              style: TextStyle(color: Colors.white.withOpacity(.7), fontSize: 12),
+            ),
+          ),
+        ]),
       ),
     );
   }

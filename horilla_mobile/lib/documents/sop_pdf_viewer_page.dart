@@ -63,7 +63,7 @@ class _SopPdfViewerPageState extends State<SopPdfViewerPage> {
                   padding: const EdgeInsets.only(bottom: 6),
                   child: Text(
                     'Halaman ${_currentPage + 1} / $_pageCount',
-                    style: const TextStyle(fontSize: 12, color: Colors.white70),
+                    style: const TextStyle(fontSize: 12, color: Color(0xFF64748B)),
                   ),
                 ),
               )

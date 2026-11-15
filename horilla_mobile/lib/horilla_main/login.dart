@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import '../ui/tema.dart';
 import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 import 'package:internet_connection_checker/internet_connection_checker.dart';
@@ -172,7 +173,7 @@ class _LoginPageState extends State<LoginPage> {
           ElevatedButton(
             onPressed: () => Navigator.pop(ctx, true),
             style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.lightBlue,
+              backgroundColor: Warna.navy,
               foregroundColor: Colors.white,
             ),
             child: const Text('Kirim'),
@@ -234,188 +235,114 @@ class _LoginPageState extends State<LoginPage> {
     // });
   }
 
+  bool _memproses = false;
+
+  Future<void> _masuk() async {
+    if (_memproses) return;
+    setState(() => _memproses = true);
+    try {
+      await _login();
+    } finally {
+      if (mounted) setState(() => _memproses = false);
+    }
+  }
+
+  // Tampilan baru 2026-11-15 (navy, kartu putih, teks netral). Logika login tidak berubah.
   @override
   Widget build(BuildContext context) {
+    final atas = MediaQuery.of(context).padding.top;
     return WillPopScope(
       onWillPop: () async {
         SystemNavigator.pop();
         return false;
       },
       child: Scaffold(
-        backgroundColor: Colors.white,
+        backgroundColor: Warna.latar,
         resizeToAvoidBottomInset: true,
-        body: Stack(
-          children: [
-            Positioned(
-              top: 0,
-              left: 0,
-              right: 0,
-              height: MediaQuery.of(context).size.height * 0.42,
-              child: Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(8.0),
-                  color: Colors.lightBlue,
+        body: SingleChildScrollView(
+          physics: const ClampingScrollPhysics(),
+          child: Column(children: [
+            Container(
+              width: double.infinity,
+              color: Warna.navy,
+              padding: EdgeInsets.fromLTRB(24, atas + 36, 24, 90),
+              child: Column(children: [
+                Container(
+                  padding: const EdgeInsets.all(14),
+                  decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(24)),
+                  child: Image.asset('Assets/horilla-logo.png', height: 64, width: 64, fit: BoxFit.contain),
                 ),
-                alignment: Alignment.bottomCenter,
-                child: Center(
-                  child: ClipOval(
-                    child: Container(
-                      color: Colors.white,
-                      padding: const EdgeInsets.fromLTRB(10, 5, 10, 15),
-                      child: Image.asset(
-                        'Assets/horilla-logo.png',
-                        height: MediaQuery.of(context).size.height * 0.11,
-                        width: MediaQuery.of(context).size.height * 0.11,
-                        fit: BoxFit.contain,
-                      ),
-                    ),
-                  ),
-                ),
-              ),
+                const SizedBox(height: 16),
+                const Text('StarFoto HR', style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.w800)),
+                const SizedBox(height: 4),
+                Text('Absensi, cuti, dan lembur dalam satu aplikasi',
+                    style: TextStyle(color: Colors.white.withOpacity(.75), fontSize: 12.5)),
+              ]),
             ),
-            SingleChildScrollView(
-              physics: ClampingScrollPhysics(),
+            Transform.translate(
+              offset: const Offset(0, -56),
               child: Padding(
-                padding: EdgeInsets.only(
-                  top: MediaQuery.of(context).size.height * 0.3,
-                  left: horizontalMargin,
-                  right: horizontalMargin,
-                ),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Container(
-                      padding: const EdgeInsets.all(10.0),
-                      decoration: BoxDecoration(
-                        border: Border.all(color: Colors.grey[300]!),
-                        borderRadius: BorderRadius.circular(20.0),
-                        color: Colors.white,
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black.withOpacity(0.1),
-                            spreadRadius: 2,
-                            blurRadius: 5,
-                            offset: const Offset(0, 3),
-                          ),
-                        ],
-                      ),
-                      child: Column(
-                        children: <Widget>[
-                          const Text(
-                            'Masuk',
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 20,
-                            ),
-                          ),
-                          SizedBox(height: MediaQuery.of(context).size.height * 0.02),
-                          _buildTextFormField(
-                            'Email',
-                            usernameController,
-                            false,
-                          ),
-                          SizedBox(height: MediaQuery.of(context).size.height * 0.02),
-                          _buildTextFormField(
-                            'Kata Sandi',
-                            passwordController,
-                            true,
-                            _passwordVisible,
-                                () {
-                              setState(() {
-                                _passwordVisible = !_passwordVisible;
-                              });
-                            },
-                          ),
-                          SizedBox(height: MediaQuery.of(context).size.height * 0.04),
-                          SizedBox(
-                            width: double.infinity,
-                            child: ElevatedButton(
-                              onPressed: _login,
-                              style: ElevatedButton.styleFrom(
-                                foregroundColor: Colors.white,
-                                backgroundColor: Colors.lightBlue,
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(8.0),
-                                ),
-                              ),
-                              child: const Padding(
-                                padding: EdgeInsets.symmetric(vertical: 10.0),
-                                child: Text(
-                                  'Masuk',
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 20,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                          const SizedBox(height: 4),
-                          TextButton(
-                            onPressed: _showForgotPassword,
-                            child: const Text(
-                              'Lupa kata sandi?',
-                              style: TextStyle(color: Colors.lightBlue),
-                            ),
-                          ),
-                        ],
-                      ),
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: Kartu(
+                  padding: const EdgeInsets.fromLTRB(18, 20, 18, 12),
+                  child: Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
+                    const Text('Masuk', style: TextStyle(fontSize: 18, fontWeight: FontWeight.w800)),
+                    const SizedBox(height: 4),
+                    const Text('Gunakan email dan kata sandi akun HR Anda.', style: Teks.kecil),
+                    const SizedBox(height: 18),
+                    _buildTextFormField('Email', usernameController, false),
+                    const SizedBox(height: 14),
+                    _buildTextFormField('Kata sandi', passwordController, true, _passwordVisible,
+                        () => setState(() => _passwordVisible = !_passwordVisible)),
+                    const SizedBox(height: 20),
+                    TombolUtama('Masuk', ikon: Icons.login_rounded, proses: _memproses, onPressed: _masuk),
+                    const SizedBox(height: 4),
+                    TextButton(
+                      onPressed: _showForgotPassword,
+                      child: const Text('Lupa kata sandi?', style: TextStyle(color: Warna.ink2, fontWeight: FontWeight.w700)),
                     ),
-                    SizedBox(height: MediaQuery.of(context).size.height * 0.03),
-                  ],
+                  ]),
                 ),
               ),
             ),
-          ],
+          ]),
         ),
       ),
     );
   }
 
   Widget _buildTextFormField(
-      String label,
-      TextEditingController controller,
-      bool isPassword, [
-        bool? passwordVisible,
-        VoidCallback? togglePasswordVisibility,
-      ]) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          label,
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
-            color: Colors.grey[600],
-          ),
+    String label,
+    TextEditingController controller,
+    bool isPassword, [
+    bool? passwordVisible,
+    VoidCallback? togglePasswordVisibility,
+  ]) {
+    return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+      Text(label, style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w700, color: Warna.ink2)),
+      const SizedBox(height: 6),
+      TextFormField(
+        controller: controller,
+        obscureText: isPassword ? !(passwordVisible ?? false) : false,
+        keyboardType: isPassword ? TextInputType.visiblePassword : TextInputType.emailAddress,
+        textInputAction: isPassword ? TextInputAction.done : TextInputAction.next,
+        onFieldSubmitted: isPassword ? (_) => _masuk() : null,
+        decoration: InputDecoration(
+          filled: true,
+          fillColor: Colors.white,
+          contentPadding: const EdgeInsets.symmetric(horizontal: 14, vertical: 14),
+          prefixIcon: Icon(isPassword ? Icons.lock_outline_rounded : Icons.mail_outline_rounded, color: Warna.muted, size: 20),
+          enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(12), borderSide: const BorderSide(color: Warna.garis)),
+          focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(12), borderSide: const BorderSide(color: Warna.navy)),
+          suffixIcon: isPassword
+              ? IconButton(
+                  icon: Icon(passwordVisible! ? Icons.visibility_outlined : Icons.visibility_off_outlined, color: Warna.muted),
+                  onPressed: togglePasswordVisibility,
+                )
+              : null,
         ),
-        SizedBox(height: MediaQuery.of(context).size.height * 0.005),
-        TextFormField(
-          controller: controller,
-          obscureText: isPassword ? !(passwordVisible ?? false) : false,
-          decoration: InputDecoration(
-            border: OutlineInputBorder(
-              borderSide: const BorderSide(width: 1),
-              borderRadius: BorderRadius.circular(8.0),
-            ),
-            contentPadding: EdgeInsets.symmetric(
-              vertical: MediaQuery.of(context).size.height * 0.015,
-              horizontal: controller.text.isNotEmpty ? 16.0 : 12.0,
-            ),
-            suffixIcon: isPassword
-                ? IconButton(
-              icon: Icon(
-                passwordVisible! ? Icons.visibility : Icons.visibility_off,
-                color: Colors.grey,
-              ),
-              onPressed: togglePasswordVisibility,
-            )
-                : null,
-          ),
-        ),
-      ],
-    );
+      ),
+    ]);
   }
 
   @override

@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 
 import '../ui/tema.dart';
+import 'absen.dart';
 import 'absensi_saya.dart';
 import 'beranda.dart';
 import 'cuti_saya.dart';
@@ -27,7 +28,7 @@ class HalamanUtamaState extends State<HalamanUtama> {
 
   /// Buka layar absen; setelah kembali, Beranda dan Absensi disegarkan.
   Future<void> bukaAbsen() async {
-    await Navigator.pushNamed(context, '/employee_checkin_checkout');
+    await Navigator.push(context, MaterialPageRoute(builder: (_) => const Absen()));
     _kunciBeranda.currentState?.segarkan();
     _kunciAbsensi.currentState?.segarkan();
   }
