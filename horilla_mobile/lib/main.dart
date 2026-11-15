@@ -30,6 +30,9 @@ import 'announcements/announcements.dart';
 import 'horilla_main/login.dart';
 import 'horilla_main/home.dart';
 import 'horilla_main/notifications_list.dart';
+import 'data/api_mobile.dart';
+import 'tampilan_baru/halaman_utama.dart';
+import 'ui/tema.dart';
 import 'package:http/http.dart' as http;
 
 final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
@@ -425,13 +428,18 @@ void _playNotificationSound() {
 class LoginApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    ApiMobile.pasangNavigator(navigatorKey);
     return MaterialApp(
       title: 'StarFoto HR',
       navigatorKey: navigatorKey,
+      theme: temaAplikasi(),
       home: FutureBuilderPage(),
       routes: {
         '/login': (context) => LoginPage(),
-        '/home': (context) => HomePage(),
+        // Tampilan baru 2026-11-15: Beranda/Absensi/Cuti/Profil dengan navigasi bawah.
+        // Beranda lama (daftar modul + pengaturan wajah/geofencing untuk admin) tetap di /modul.
+        '/home': (context) => const HalamanUtama(),
+        '/modul': (context) => HomePage(),
         '/employees_list': (context) => EmployeeListPage(),
         '/employees_form': (context) => EmployeeFormPage(),
         '/attendance_overview': (context) => AttendanceOverview(),
@@ -512,7 +520,7 @@ class _FutureBuilderPageState extends State<FutureBuilderPage> {
 
         if (snapshot.connectionState == ConnectionState.done) {
           if (snapshot.hasData && snapshot.data == true) {
-            return const HomePage();
+            return const HalamanUtama();
           } else {
             return LoginPage();
           }
