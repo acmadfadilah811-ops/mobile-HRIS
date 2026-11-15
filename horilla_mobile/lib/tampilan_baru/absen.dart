@@ -24,6 +24,7 @@ class Absen extends StatefulWidget {
 
 class _AbsenState extends State<Absen> {
   bool? _sedangMasuk; // null = belum diketahui
+  bool _sudahPulang = false;
   String? _jamMasuk;
   String? _shift;
   bool _wajah = false;
@@ -51,7 +52,12 @@ class _AbsenState extends State<Absen> {
   Future<void> _mulai() async {
     final prefs = await SharedPreferences.getInstance();
     final beranda = await ApiMobile.bacaCache('/api/mobile/beranda/');
-    final hariIni = (beranda as Map?)?['hari_ini'] as Map?;
+    // Cache Beranda bisa berasal dari hari sebelumnya; pakai hanya bila tanggalnya hari ini.
+    final kini = DateTime.now();
+    final iso = '${kini.year}-${kini.month.toString().padLeft(2, '0')}-${kini.day.toString().padLeft(2, '0')}';
+    final cache = (beranda as Map?)?['hari_ini'] as Map?;
+    final hariIni = cache != null && '${cache['tanggal']}' == iso ? cache : null;
+    _sudahPulang = hariIni?['status'] == 'pulang';
     if (!mounted) return;
     setState(() {
       _wajah = prefs.getBool('face_detection') ?? false;
@@ -74,8 +80,11 @@ class _AbsenState extends State<Absen> {
       if (!mounted || d is! Map) return;
       setState(() {
         _sedangMasuk = d['status'] == true;
-        if (_sedangMasuk == true && d['clock_in_time'] != null && d['clock_in_time'] != '-') {
-          _jamMasuk ??= '${d['clock_in_time']}';
+        final jam = d['clock_in_time'];
+        if (_sedangMasuk == true) {
+          if (jam != null && jam != '-' && '$jam'.isNotEmpty) _jamMasuk ??= '$jam';
+        } else if (!_sudahPulang) {
+          _jamMasuk = null; // belum absen hari ini: jangan tampilkan jam dari data lama
         }
       });
     } on ApiGagal {
