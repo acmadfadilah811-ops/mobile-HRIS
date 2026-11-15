@@ -104,6 +104,12 @@ class ApiMobile {
     return _kirim(() => http.put(u, headers: h, body: data == null ? null : jsonEncode(data)));
   }
 
+  static Future<dynamic> postJson(String path, Map<String, dynamic> data) async {
+    final u = await uri(path);
+    final h = await _header();
+    return _kirim(() => http.post(u, headers: h, body: jsonEncode(data)));
+  }
+
   static Future<dynamic> delete(String path) async {
     final u = await uri(path);
     final h = await _header();

@@ -5,6 +5,7 @@ import '../data/api_mobile.dart';
 import '../ui/tema.dart';
 import 'ajukan_cuti.dart';
 import 'halaman_utama.dart';
+import 'persetujuan.dart';
 
 class Beranda extends StatefulWidget {
   final HalamanUtamaState induk;
@@ -53,6 +54,7 @@ class BerandaState extends State<Beranda> with MuatDenganCache {
               child: Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
                 _kartuAbsen(ada),
                 if (muat.galat != null) _pitaGalat(),
+                _kartuPersetujuan(),
                 JudulBagian('Ringkasan bulan ini', aksi: 'Riwayat absensi', onAksi: () => widget.induk.pindahTab(1)),
                 _ringkasan(ada),
                 const JudulBagian('Pengajuan'),
@@ -182,6 +184,47 @@ class BerandaState extends State<Beranda> with MuatDenganCache {
         }),
       ]),
     );
+  }
+
+  /// Hanya untuk atasan/HR (server mengirim null untuk karyawan biasa).
+  Widget _kartuPersetujuan() {
+    final p = _d['persetujuan'] as Map?;
+    if (p == null) return const SizedBox.shrink();
+    final total = (p['total'] as num?)?.toInt() ?? 0;
+    Widget angka(String label, dynamic n, int tab) => Expanded(
+          child: InkWell(
+            onTap: () => _bukaPersetujuan(tab),
+            child: Column(children: [
+              Text('${n ?? 0}', style: Teks.angka),
+              Text(label, style: Teks.label),
+            ]),
+          ),
+        );
+    return Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
+      JudulBagian('Menunggu persetujuan', aksi: total > 0 ? 'Buka' : null, onAksi: () => _bukaPersetujuan(0)),
+      Kartu(
+        aksen: Warna.oranye,
+        onTap: () => _bukaPersetujuan(0),
+        padding: const EdgeInsets.symmetric(vertical: 14),
+        child: total == 0
+            ? const Padding(
+                padding: EdgeInsets.symmetric(horizontal: 14),
+                child: Text('Tidak ada pengajuan bawahan yang menunggu.', style: Teks.isi),
+              )
+            : Row(children: [
+                angka('Cuti', p['cuti'], 0),
+                Container(width: 1, height: 34, color: Warna.garis),
+                angka('Lembur', p['lembur'], 1),
+                Container(width: 1, height: 34, color: Warna.garis),
+                angka('Koreksi absen', p['koreksi'], 2),
+              ]),
+      ),
+    ]);
+  }
+
+  Future<void> _bukaPersetujuan(int tab) async {
+    await Navigator.push(context, MaterialPageRoute(builder: (_) => Persetujuan(tabAwal: tab)));
+    segarkan();
   }
 
   Widget _jam(String label, dynamic jam) {

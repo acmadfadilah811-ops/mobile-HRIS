@@ -1,5 +1,6 @@
 // Cuti (2026-11-15): saldo per jenis + pengajuan dari /api/mobile/cuti/, hapus dan batal langsung dari daftar.
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../data/api_mobile.dart';
 import '../ui/tema.dart';
@@ -268,7 +269,12 @@ class CutiSayaState extends State<CutiSaya> with MuatDenganCache {
             _info('Lama', '${angkaHari(p['hari'])} hari'),
             _info('Alasan', '${p['alasan'] ?? '-'}'),
             if (p['alasan_tolak'] != null) _info('Alasan ditolak', '${p['alasan_tolak']}'),
-            if (p['lampiran'] != null) _info('Lampiran', 'Ada'),
+            if (p['lampiran'] != null)
+              TextButton.icon(
+                onPressed: () => launchUrl(Uri.parse('${p['lampiran']}'), mode: LaunchMode.externalApplication),
+                icon: const Icon(Icons.attach_file_rounded, size: 18, color: Warna.ink2),
+                label: const Text('Lihat lampiran', style: TextStyle(color: Warna.ink2, fontWeight: FontWeight.w700)),
+              ),
           ]),
         ),
       ),
