@@ -99,37 +99,26 @@ class _FaceScannerState extends State<FaceScanner> with SingleTickerProviderStat
     final prefs = await SharedPreferences.getInstance();
     final token = prefs.getString("token");
     final typedServerUrl = prefs.getString("typed_url");
+    // Foto wajah acuan disimpan di server dan dikirim saat login ('face_detection_image').
+    // Jangan bergantung pada penanda lokal (mis. 'imagePath'): hilang setelah logout/ganti HP,
+    // padahal foto sudah ada di server, sehingga karyawan dipaksa upload ulang.
     final faceDetectionImage = prefs.getString("face_detection_image");
-    final imagePath = prefs.getString("imagePath");
 
-    if (token == null || typedServerUrl == null || faceDetectionImage == '' || imagePath == null) {
+    if (token == null || typedServerUrl == null || faceDetectionImage == null || faceDetectionImage.isEmpty) {
       if (mounted) showImageAlertDialog(context);
       return;
     }
 
     try {
       // --- Build image URL ---
-      String? imageUrl;
       final cleanedServerUrl = typedServerUrl.endsWith('/')
           ? typedServerUrl.substring(0, typedServerUrl.length - 1)
           : typedServerUrl;
 
-      if (faceDetectionImage != null) {
-        final cleanedPath = faceDetectionImage.startsWith('/')
-            ? faceDetectionImage.substring(1)
-            : faceDetectionImage;
-        imageUrl = '$cleanedServerUrl/$cleanedPath';
-      } else if (imagePath != null) {
-        final cleanedPath = imagePath.startsWith('/')
-            ? imagePath.substring(1)
-            : imagePath;
-        imageUrl = '$cleanedServerUrl/media/$cleanedPath';
-      }
-
-      if (imageUrl == null) {
-        if (mounted) showImageAlertDialog(context);
-        return;
-      }
+      final cleanedPath = faceDetectionImage.startsWith('/')
+          ? faceDetectionImage.substring(1)
+          : faceDetectionImage;
+      final imageUrl = '$cleanedServerUrl/$cleanedPath';
 
       debugPrint("🔎 Fetching biometric image: $imageUrl");
 

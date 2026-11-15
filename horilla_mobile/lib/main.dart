@@ -65,6 +65,32 @@ Future<void> notificationTapBackground(NotificationResponse notificationResponse
   }
 }
 
+/// Masa berlaku token (klaim `exp` pada JWT) sudah lewat. Token yang tidak bisa dibaca dianggap
+/// belum habis -- biar server yang memutuskan (HTTP 401 ditangani _sesiBerakhir).
+bool _tokenKedaluwarsa(String? token) {
+  if (token == null) return false;
+  try {
+    final bagian = token.split('.');
+    if (bagian.length != 3) return false;
+    final payload = jsonDecode(utf8.decode(base64Url.decode(base64Url.normalize(bagian[1]))));
+    final exp = payload is Map ? payload['exp'] : null;
+    if (exp is! num) return false;
+    // Toleransi 30 detik supaya selisih jam HP tidak memicu keluar terlalu dini.
+    return DateTime.now().millisecondsSinceEpoch ~/ 1000 >= exp.toInt() - 30;
+  } catch (_) {
+    return false;
+  }
+}
+
+/// Dipanggil berkala: keluar otomatis begitu masa berlaku token habis, tanpa menunggu server menolak.
+Future<void> _periksaMasaBerlakuToken() async {
+  if (!isAuthenticated) return;
+  final prefs = await SharedPreferences.getInstance();
+  if (_tokenKedaluwarsa(prefs.getString('token'))) {
+    await _sesiBerakhir('{}');
+  }
+}
+
 void _startNotificationTimer() {
   _notificationTimer?.cancel();
   // Dulu tiap 3 detik dengan DUA permintaan (daftar + hitungan). fetchNotifications()
@@ -72,6 +98,7 @@ void _startNotificationTimer() {
   // mengurangi beban jaringan/baterai dan tidak lagi berebut dengan permintaan layar.
   _notificationTimer = Timer.periodic(const Duration(seconds: 30), (timer) {
     if (isAuthenticated) {
+      _periksaMasaBerlakuToken();
       fetchNotifications();
     } else {
       timer.cancel();
@@ -131,6 +158,10 @@ Future<void> main() async {
   );
 
   final prefs = await SharedPreferences.getInstance();
+  // Token yang masa berlakunya sudah habis dibuang saat aplikasi dibuka: langsung ke layar login.
+  if (_tokenKedaluwarsa(prefs.getString('token'))) {
+    await prefs.remove('token');
+  }
   isAuthenticated = prefs.getString('token') != null;
 
   if (isAuthenticated) {

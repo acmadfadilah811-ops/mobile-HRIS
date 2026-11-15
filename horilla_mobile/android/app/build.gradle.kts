@@ -32,8 +32,10 @@ android {
         // For more information, see: https://flutter.dev/to/review-gradle-config.
         minSdk = flutter.minSdkVersion
         targetSdk = 35
-        versionCode = 9
-        versionName = "1.0.3"
+        // Ikut versi di pubspec.yaml (version: x.y.z+n). Sebelumnya dikunci 9 / "1.0.3" sehingga
+        // semua APK punya versionCode sama dan HP bisa menolak update.
+        versionCode = flutter.versionCode
+        versionName = flutter.versionName
     }
 
     buildTypes {
